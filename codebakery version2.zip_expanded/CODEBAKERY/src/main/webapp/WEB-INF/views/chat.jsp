@@ -9,7 +9,7 @@
    	<style type="text/css">
    		#chat {
    			padding-left: 20%;
-   		}
+   		} 
 		#chat_box {
 		    width: 800px;
 		    min-width: 800px;
