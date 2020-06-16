@@ -17,16 +17,16 @@ public class MailController {
  
  
  
-  // mailSending ÄÚµå
+  // mailSending ì½”ë“œ
   @RequestMapping(value = "/mypage_apply.do")
   public String mailSending(HttpServletRequest request) {
    
     String setfrom = "jusu2529@gmail.com";         
-    String tomail  = request.getParameter("tomail");     // ¹Ş´Â »ç¶÷ ÀÌ¸ŞÀÏ
-    String applicant  = request.getParameter("applicant");     // ¹Ş´Â »ç¶÷ ÀÌ¸ŞÀÏ
-    String title   = request.getParameter("title");      // Á¦¸ñ
-    String content = request.getParameter("content");    // ³»¿ë
-    String content1 = request.getParameter("content1");    // ³»¿ë
+    String tomail  = request.getParameter("tomail");     // ë°›ëŠ” ì‚¬ëŒ ì´ë©”ì¼
+    String applicant  = request.getParameter("applicant");     // ë°›ëŠ” ì‚¬ëŒ ì´ë©”ì¼
+    String title   = request.getParameter("title");      // ì œëª©
+    String content = request.getParameter("content");    // ë‚´ìš©
+    String content1 = request.getParameter("content1");    // ë‚´ìš©
    
     System.out.println("content"+content);
     try {
@@ -34,11 +34,11 @@ public class MailController {
       MimeMessageHelper messageHelper 
                         = new MimeMessageHelper(message, true, "UTF-8");
  
-      messageHelper.setFrom(setfrom);  // º¸³»´Â»ç¶÷ »ı·«ÇÏ°Å³ª ÇÏ¸é Á¤»óÀÛµ¿À» ¾ÈÇÔ
-      messageHelper.setTo(tomail);     // ¹Ş´Â»ç¶÷ ÀÌ¸ŞÀÏ
-      messageHelper.setSubject(title); // ¸ŞÀÏÁ¦¸ñÀº »ı·«ÀÌ °¡´ÉÇÏ´Ù
-      messageHelper.setText("½ÅÃ»ÀÚ: "+applicant+"\n"+"¸àÅä °æ·Â: "+content+"\n"+"¸àÅä ¼Ò°³: "+content1);  // ¸ŞÀÏ ³»¿ë
-//    					 +"\n"+content1 Ãß°¡ÇØº¸±â
+      messageHelper.setFrom(setfrom);  // ë³´ë‚´ëŠ”ì‚¬ëŒ ìƒëµí•˜ê±°ë‚˜ í•˜ë©´ ì •ìƒì‘ë™ì„ ì•ˆí•¨
+      messageHelper.setTo(tomail);     // ë°›ëŠ”ì‚¬ëŒ ì´ë©”ì¼
+      messageHelper.setSubject(title); // ë©”ì¼ì œëª©ì€ ìƒëµì´ ê°€ëŠ¥í•˜ë‹¤
+      messageHelper.setText("ì‹ ì²­ì: "+applicant+"\n"+"ë©˜í†  ê²½ë ¥: "+content+"\n"+"ë©˜í†  ì†Œê°œ: "+content1);  // ë©”ì¼ ë‚´ìš©
+//                    +"\n"+content1 ì¶”ê°€í•´ë³´ê¸°
       mailSender.send(message);
     } catch(Exception e){
       System.out.println(e);
