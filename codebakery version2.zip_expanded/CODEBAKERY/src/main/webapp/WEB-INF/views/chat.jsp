@@ -9,13 +9,13 @@
    	<style type="text/css">
    		#chat {
    			padding-left: 20%;
-   		} 
+   		}
 		#chat_box {
 		    width: 800px;
 		    min-width: 800px;
 		    height: 400px;
 		    min-height: 400px;
-		    border: 1px solid black; 
+		    border: 1px solid black;
 		}
 		#msg {
 		    width: 700px;
