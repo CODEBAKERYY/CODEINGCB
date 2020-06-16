@@ -142,6 +142,8 @@ CREATE TABLE QNA_COMMENT (
 );
 
 
+DROP TABLE QUIZ;
+SELECT * FROM QUIZ;
 -- 문제게시판
 CREATE TABLE QUIZ (
 	QUIZ_NO	NUMBER CONSTRAINT PK_QUIZ_NO PRIMARY KEY,          -- 문제번호
@@ -152,6 +154,10 @@ CREATE TABLE QUIZ (
 	TRY_USER NUMBER,                                           -- 시도한사람
 	CORRECT_RATE NUMBER,                                       -- 정답률
 	QUIZ_VIEWS NUMBER,                                         -- 문제조회수
+	INPUT_EXPLANATION VARCHAR2(4000),						   -- 입력 설명
+	OUTPUT_EXPLANATION VARCHAR2(4000),						   -- 출력 설명
+	INPUT_SAMPLE VARCHAR2(4000),							   -- 입력 예시 
+	OUTPUT_SAMPLE VARCHAR2(4000),							   -- 출력 예시
 	USER_ID	VARCHAR2(20) NOT NULL,          
     CONSTRAINT FK_QUIZ_USER_ID FOREIGN KEY(USER_ID) REFERENCES USER_TB(USER_ID) ON DELETE CASCADE
 );

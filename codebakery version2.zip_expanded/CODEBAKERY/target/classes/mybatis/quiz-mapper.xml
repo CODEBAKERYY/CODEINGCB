@@ -18,6 +18,12 @@
   		<result property="user_Id" column="USER_ID"/>  		
   	</resultMap>
   	
+  	<select id="selectList" resultMap="quizMap">
+  		SELECT *
+  		FROM QUIZ
+  		ORDER BY QUIZ_NO DESC
+  	</select>
+  	
   	<insert id="insert" parameterType="quizDto">
   		INSERT INTO QUIZ
   		VALUES(QUIZSEQ.NEXTVAL, #{quiz_Title}, #{quiz_Content}, SYSDATE, 0, 0, 0, 0, #{input_Sample}, #{output_Sample}, #{user_Id})
