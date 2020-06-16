@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!--
 Design by TEMPLATED
 http://templated.co
@@ -65,32 +64,66 @@ Released   : 20130811
                     </tr>
                     </thead>
                 <tbody>
-                    <c:choose>
-						<c:when test="${empty list }">
-							<tr>
-								<td colspan="7" align="center">--- 공지사항이 없습니다. ----</td>
-							</tr>
-						</c:when>
-						<c:otherwise>
-							<c:forEach items="${ list }" var="list" begin="${ count }" end="${ count + 9 }">
-								<tbody class="tbody">
-									<tr>
-										<td>${ list.notice_No }</td>
-										<td><a href="notice_view.do?notice_No=${list.notice_No }">${ list.notice_Title }</a></td>
-										<td>${ list.user_Id }</td>
-										<td>${ list.notice_Date }</td>
-										<td>${ list.notice_Views }</td>
-									</tr>
-								</tbody>
-							</c:forEach>
-						</c:otherwise>
-					</c:choose>
-    				<c:set var="count" value="${ count + 10 }" />
+                    <tr>
+                        <td>7</td>
+                        <td><a href="notice_view.jsp" style="cursor: pointer;">아아 공지사항 입니다.</a></td>
+                        <td>Admin</td>
+                        <td>2020/05/01</td>
+                        <td>3</td>
+                    </tr>
+    
+                    <tr>
+                        <td>6</td>
+                        <td><a href="#" style="cursor: pointer;">알려드립니다</a></td>
+                        <td>Admin</td>
+                        <td>2020/05/01</td>
+                        <td>50</td>
+                    </tr>
+    
+                    <tr>
+                        <td >5</td>
+                        <td><a href="#" style="cursor: pointer;">**사이트 업데이트 공지</a></td>
+                        <td>Admin</td>
+                        <td>2020/04/30</td>
+                        <td>0</td>
+                    </tr>
+    
+                    <tr>
+                        <td >4</td>
+                        <td><a href="#" style="cursor: pointer;">공지공지</a></td>
+                        <td>Admin</td>
+                        <td>2020/04/01</td>
+                        <td>1</td>
+                    </tr>
+    
+                    <tr>
+                        <td >3</td>
+                        <td><a href="#" style="cursor: pointer;">**사이트 업데이트 공지</a></td>
+                        <td>Admin</td>
+                        <td>2020/04/07</td>
+                        <td>222</td>
+                    </tr>
+     
+                    <tr>
+                        <td >2</td>
+                        <td><a href="#" style="cursor: pointer;">공공지지</a></td>
+                        <td>Admin</td>
+                        <td>2020/04/02</td>
+                        <td>12</td>
+                    </tr>
+    
+                    <tr>
+                        <td >1</td>
+                        <td><a href="#" style="cursor: pointer;">안녕하세요</a></td>
+                        <td>Admin</td>
+                        <td>2020/01/01</td>
+                        <td>0</td>
+                    </tr>
                     </tbody>
             </table>
                 <br><br>
                 <div class="text-right">
-                    <button type="button" class="btn btn-secondary pull-right" onclick="location.href='notice_write.do'" style="width: 8%;" >글쓰기</button>
+                    <button type="button" class="btn btn-secondary pull-right" onclick="location.href='notice_write.jsp'" style="width: 8%;" >글쓰기</button>
                 </div>
 				<br><br>
 			<!--============== 공지사항 게시글 리스트 END ==============-->

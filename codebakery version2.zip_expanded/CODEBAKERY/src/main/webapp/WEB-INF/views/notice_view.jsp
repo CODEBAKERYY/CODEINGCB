@@ -21,9 +21,9 @@ Released   : 20130811
 <!--bootstrap css  -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
-<link href="resources/css/default.css" rel="stylesheet" type="text/css" media="all" />
-<link href="resources/css/fonts/fonts.css" rel="stylesheet" type="text/css" media="all" />
-<link href="resources/css/boardstyle.css" rel="stylesheet" type="text/css" media="all" />
+<link href="./css/default.css" rel="stylesheet" type="text/css" media="all" />
+<link href="./fonts/fonts.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/boardstyle.css" rel="stylesheet" type="text/css" media="all" />
 
 
 <!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
@@ -60,22 +60,22 @@ Released   : 20130811
                         <table style="margin: 0px auto;">
                             <tr>
                                 <th>제목</th>
-                                <td style="padding:10px;"><input style="width: 821px; height: 35px;" type="text" value="${detail.notice_Title }" readonly/></td>
+                                <td style="padding:10px;"><input style="width: 821px; height: 35px;" type="text" value="안녕하세요" readonly/></td>
                             </tr>
                             <tr>
                                 <th>작성자</th>
-                                <td style="padding:10px;"><input style="width: 821px; height: 35px;" type="text" value="${detail.user_Id }" readonly/></td>
+                                <td style="padding:10px;"><input style="width: 821px; height: 35px;" type="text" value="user1" readonly/></td>
                             </tr>
                             <tr>
                                 <th style="display: table-cell; vertical-align: middle;">내용</th>
-                                <td style="padding:10px;"><textarea style="resize: none;" rows="15" cols="100" readonly>${detail.notice_Content }</textarea></td>
+                                <td style="padding:10px;"><textarea style="resize: none;" rows="15" cols="100" readonly>안녕하세요 공지사항입니다.</textarea></td>
                             </tr>
                         </table>
                         
                         <div style="width: 850px; margin: 0 auto; text-align: right;" >
-                            <button type="button" class="btn btn-light pull-right" id="btnUpdate" onclick="location.href='notice_edit.do?notice_No=${detail.notice_No}'">수정</button>
-                            <button type="button" class="btn btn-light pull-right" id="btnDelete" onclick="location.href='notice_delete.do?notice_No=${detail.notice_No}'">삭제</button>
-                            <button type="button" class="btn btn-light pull-right" id="btnList" onclick="location.href='notice.do'">목록</button>
+                            <button type="button" class="btn btn-light pull-right" id="btnUpdate" onclick="location.href='notice_edit.jsp'">수정</button>
+                            <button type="button" class="btn btn-light pull-right" id="btnDelete">삭제</button>
+                            <button type="button" class="btn btn-light pull-right" id="btnList" onclick="location.href='notice.jsp'">목록</button>
                         </div>
                     </div>
                 </div>
