@@ -147,8 +147,8 @@ background-color: white;
 				<h2>자랑스러운 멘토</h2>
 				<span class="byline">국내 최고의 멘토진들을 소개합니다</span>
 			</div>
-			<c:forEach items="${mentor }" var="dto">
-				<div class="column">
+			<c:forEach items="${mentor }" var="dto" begin="1" end="4" varStatus="i" step="1">
+				<div class="column${i.index} ">
 					<a href="#" class="image image-full"><img
 						src="resources/images/pic01.jpg" height="150" alt="" /></a>
 					<div class="box">
