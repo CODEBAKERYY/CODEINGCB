@@ -21,7 +21,7 @@ public class QuizController {
 	@RequestMapping(value= "/quiz.do")
 	public String quizList(Model model) {
 		logger.info("QUIZ SELECT LIST");
-		model.addAttribute("quizList", quizBiz.selectList());
+//		model.addAttribute("quizList", quizBiz.selectList());
 		
 		return "quiz";
 	}
