@@ -152,7 +152,7 @@ background-color: white;
 					<a href="#" class="image image-full"><img
 						src="resources/images/pic01.jpg" height="150" alt="" /></a>
 					<div class="box">
-						<p>${dto.user_Id}</p>
+						<p>${dto.mentor_Content}</p>
 						<a href="#" class="button">리뷰보기</a>
 					</div>
 				</div>
