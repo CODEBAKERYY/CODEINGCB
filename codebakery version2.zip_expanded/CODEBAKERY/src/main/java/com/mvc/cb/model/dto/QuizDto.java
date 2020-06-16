@@ -12,8 +12,6 @@ public class QuizDto {
 	private int try_User;
 	private double correct_Rate;
 	private int quiz_Views;
-	private String input_Explanation;
-	private String output_Explanation;
 	private String input_Sample;
 	private String output_Sample;
 	private String user_Id;
@@ -23,7 +21,7 @@ public class QuizDto {
 	}
 
 	public QuizDto(int quiz_No, String quiz_Title, String quiz_Content, Date quiz_Date, int correct_User, int try_User,
-			double correct_Rate, int quiz_Views, String input_Explanation, String output_Explanation, String input_Sample, String output_Sample, String user_Id) {
+			double correct_Rate, int quiz_Views, String input_Sample, String output_Sample, String user_Id) {
 		super();
 		this.quiz_No = quiz_No;
 		this.quiz_Title = quiz_Title;
@@ -33,8 +31,6 @@ public class QuizDto {
 		this.try_User = try_User;
 		this.correct_Rate = correct_Rate;
 		this.quiz_Views = quiz_Views;
-		this.input_Explanation = input_Explanation;
-		this.output_Explanation  = output_Explanation;
 		this.input_Sample = input_Sample;
 		this.output_Sample = output_Sample;
 		this.user_Id = user_Id;
@@ -126,22 +122,6 @@ public class QuizDto {
 
 	public void setOutput_Sample(String output_Sample) {
 		this.output_Sample = output_Sample;
-	}
-
-	public String getInput_Explanation() {
-		return input_Explanation;
-	}
-
-	public void setInput_Explanation(String input_Explanation) {
-		this.input_Explanation = input_Explanation;
-	}
-
-	public String getOutput_Explanation() {
-		return output_Explanation;
-	}
-
-	public void setOutput_Explanation(String output_Explanation) {
-		this.output_Explanation = output_Explanation;
 	}
 
 	@Override

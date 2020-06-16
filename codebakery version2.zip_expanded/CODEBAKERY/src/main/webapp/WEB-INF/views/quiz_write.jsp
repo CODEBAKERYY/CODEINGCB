@@ -56,7 +56,7 @@
 				<h2>입력</h2>
 			</div>
 			<p>
-				<input type="text" name="input_Explanation"/>
+				<input type="text" name="input"/>
 			</p>
 		</section>
 	</div>
@@ -67,7 +67,7 @@
 				<h2>출력</h2>
 			</div>
 			<p>
-				<input type="text" name="output_Explanation"/>
+				<input type="text" name="output"/>
 			</p>
 		</section>
 	</div>
