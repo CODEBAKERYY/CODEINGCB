@@ -5,7 +5,7 @@
   
   <mapper namespace="question">
   
-  	<resultMap type="questionDto" id="questionMap">
+  	<resultMap type="QuestionDto" id="questionMap">
   		<result property="question_No" column="QUESTION_NO" />
   		<result property="question_Title" column="QUESTION_TITLE"/>
   		<result property="question_Content" column="QUESTION_CONTENT" />
@@ -14,5 +14,17 @@
   		<result property="question_Tag" column="QUESTION_TAG" />
   		<result property="user_Id" column="USER_ID" />
   	</resultMap>
+  	
+  	<select id="selectList" resultMap="questionMap">
+  		SELECT *
+  		FROM QUESTION
+  		ORDER BY QUESTION_NO DESC
+  	</select>
+  	
+  	<select id="selectOne" parameterType="int" resultType="QuestionDto">
+  		SELECT *
+  		FROM QUESTION
+  		WHERE QUESTION_NO=#{question_No}
+  	</select>
  
  </mapper>
