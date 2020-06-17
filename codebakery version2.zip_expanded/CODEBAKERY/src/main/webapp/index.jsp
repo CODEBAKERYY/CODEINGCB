@@ -9,7 +9,7 @@
 <body>
 	<script type="text/javascript">
 		window.onload = function(){
-			location.href="main.do"
+			location.href="mypage_modify.do"
 		}
 </script>
 </body>
