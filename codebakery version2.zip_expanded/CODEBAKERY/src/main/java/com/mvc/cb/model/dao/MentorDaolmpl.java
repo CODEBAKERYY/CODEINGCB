@@ -33,12 +33,12 @@ public class MentorDaolmpl implements MentorDao {
 	}
 
 	@Override
-	public MentorDto selectOne() {
+	public MentorDto selectOne(int mentor_No) {
 
 		MentorDto dto = null;
 
 		try {
-			dto = sqlSession.selectOne(NAMESPACE + "selectOne");
+			dto = sqlSession.selectOne(NAMESPACE + "selectOne", mentor_No);
 		} catch (Exception e) {
 			System.out.println("[error] : mentor selectOne");
 			e.printStackTrace();

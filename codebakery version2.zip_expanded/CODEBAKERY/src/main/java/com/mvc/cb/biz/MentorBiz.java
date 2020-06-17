@@ -8,5 +8,5 @@ public interface MentorBiz {
 
 	public List<MentorDto> selectList();
 
-	public MentorDto selectOne(int MENTOR_NO);
+	public MentorDto selectOne(int mentor_No);
 }

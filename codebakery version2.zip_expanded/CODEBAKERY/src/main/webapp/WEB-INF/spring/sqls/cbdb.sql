@@ -204,7 +204,7 @@ CREATE TABLE NOTICE_COMMENT (
 INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'구글 10년 경력','모든것을 한번에 해결해드립니다.','admin');
 INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'구글 1년 경력','모든것을 한번에 해결해드립니다.','admin');
 INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'구글 3년 경력','모든것을 한번에 해결해드립니다.','admin');
-INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'구글 5년 경력','모든것을 한번에 해결해드립니다.','admin');
+INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'구글 99년 경력','모든것을 한번에 해결해드립니다.','admin');
 
 
 

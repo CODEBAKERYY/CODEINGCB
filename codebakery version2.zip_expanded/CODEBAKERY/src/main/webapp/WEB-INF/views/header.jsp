@@ -54,7 +54,7 @@
 			<ul>
 				<li class="current_page_item"><a href="main.do" accesskey="1"
 					title="">Home</a></li>
-				<li><a href="mentor_detail.do" accesskey="1" title="">멘토소개</a></li>
+				<li><a href="mentor_detailAll.do" accesskey="1" title="">멘토소개</a></li>
 				<li><a href="qna.do" accesskey="2" title="">질의응답</a></li>
 				<li><a href="quiz.do" accesskey="3" title="">퀴즈</a></li>
 				<li><a href="notice.do" accesskey="4" title="">공지사항</a></li>
