@@ -8,5 +8,15 @@ public interface QuestionBiz {
 	
 	public List<QuestionDto> selectList();
 	public QuestionDto selectOne(int question_No);
+	public int insert(QuestionDto dto);
+	public int delete(int question_No);
+	public int update(QuestionDto dto);
 
+	public void plusCnt(int question_No);
+	
+//	//게시물 총 갯수
+//	public int countBoard();
+//		
+//	//페이징 처리 게시글 조회
+//	public List<QuestionDto> selectBoard(QnAPagingDto dto);
 }

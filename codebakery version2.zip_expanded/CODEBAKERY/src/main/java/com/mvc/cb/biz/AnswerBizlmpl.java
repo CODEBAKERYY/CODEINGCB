@@ -18,6 +18,21 @@ public class AnswerBizlmpl implements AnswerBiz{
 	public List<AnswerDto> selectList(int question_No) {
 		return dao.selectList(question_No);
 	}
+
+	@Override
+	public int delete(int answer_No) {
+		return dao.delete(answer_No);
+	}
+
+	@Override
+	public int update(AnswerDto dto) {
+		return dao.update(dto);
+	}
+
+	@Override
+	public int insert(AnswerDto dto) {
+		return dao.insert(dto);
+	}
 	
 
 }
