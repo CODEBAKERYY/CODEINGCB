@@ -59,7 +59,8 @@ Released   : 20130811
 	<div id="page" class="container">
 		<div id="content">
 			<div class="title">
-				<h2>이창진 멘토</h2>&nbsp;&nbsp;<input type="button" class="button" style="float: right;" value="1:1채팅" /> 
+				<h2>이창진 멘토</h2>&nbsp;&nbsp;<input type="button" class="button" style="float: right;" value="1:1채팅" 
+					onclick="location.href = 'chat.do'"/>  
 					<span class="byline">최고를 자부합니다.</span>
 			</div>
 			<p>
