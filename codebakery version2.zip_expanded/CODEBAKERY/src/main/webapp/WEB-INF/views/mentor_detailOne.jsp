@@ -77,6 +77,20 @@
 			</tr>
 		</table>
 	</div>
+	<!-- 	<table class="type03">
+		<tr>
+			<th scope="row">항목명</th>
+			<td>내용이 들어갑니다.</td>
+		</tr>
+		<tr>
+			<th scope="row">항목명</th>
+			<td>내용이 들어갑니다.</td>
+		</tr>
+		<tr>
+			<th scope="row">항목명</th>
+			<td>내용이 들어갑니다.</td>
+		</tr>
+	</table> -->
 	<%@ include file="footer.jsp"%>
 </body>
 </html>
