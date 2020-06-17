@@ -19,7 +19,7 @@
 		<result property="user_Lang" column="USER_LANG" />
 	</resultMap>
 
-	<select id="mentorAll" resultMap="MentorMap">
+	<select id="mentorselectAll" resultMap="MentorMap">
 		SELECT * FROM MENTOR_INTRO
 		JOIN
 		USER_TB USING(USER_ID)
