@@ -12,7 +12,7 @@ public class MypageController {
 	
 	@RequestMapping(value = "/mypage_modify.do")
 	public String QnABoard() {
-		return "login";
+		return "mypage_apply";
 	}
 
 }
