@@ -68,18 +68,20 @@
 			</div>
 		</div>
 	</c:forEach>
-	<div class="container">
-		<table class='table'>
-			<tr>
-				<span style="font-size: 18px;">user3</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<span style="color: grey; font-size: 14px;">2020.04.23 17:16</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<hr></hr>
-			</tr>
-			<tr>
-				<td>공지사항 댓글입니다.333333</td>
-			</tr>
-		</table>
-	</div>
+	<c:forEach items="${mentorreview }" var="review">
+		<div class="container">
+			<table class='table'>
+				<tr>
+					<span style="font-size: 18px;">${review.user_Id }</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<span style="color: grey; font-size: 14px;">${review.review_Date }</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<hr></hr>
+				</tr>
+				<tr>
+					<td>${review.review_Content }</td>
+				</tr>
+			</table>
+		</div>
+	</c:forEach>
 	<!-- 	<table class="type03">
 		<tr>
 			<th scope="row">항목명</th>
