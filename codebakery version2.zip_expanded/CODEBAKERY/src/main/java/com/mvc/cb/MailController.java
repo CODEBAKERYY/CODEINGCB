@@ -17,16 +17,28 @@ public class MailController {
  
  
  
+<<<<<<< HEAD
   // mailSending �ڵ�
+=======
+  // mailSending 코드
+>>>>>>> master
   @RequestMapping(value = "/mypage_apply.do")
   public String mailSending(HttpServletRequest request) {
    
     String setfrom = "jusu2529@gmail.com";         
+<<<<<<< HEAD
     String tomail  = request.getParameter("tomail");     // �޴� ��� �̸���
     String applicant  = request.getParameter("applicant");     // �޴� ��� �̸���
     String title   = request.getParameter("title");      // ����
     String content = request.getParameter("content");    // ����
     String content1 = request.getParameter("content1");    // ����
+=======
+    String tomail  = request.getParameter("tomail");     // 받는 사람 이메일
+    String applicant  = request.getParameter("applicant");     // 받는 사람 이메일
+    String title   = request.getParameter("title");      // 제목
+    String content = request.getParameter("content");    // 내용
+    String content1 = request.getParameter("content1");    // 내용
+>>>>>>> master
    
     System.out.println("content"+content);
     try {
@@ -34,11 +46,19 @@ public class MailController {
       MimeMessageHelper messageHelper 
                         = new MimeMessageHelper(message, true, "UTF-8");
  
+<<<<<<< HEAD
       messageHelper.setFrom(setfrom);  // �����»�� �����ϰų� �ϸ� �����۵��� ����
       messageHelper.setTo(tomail);     // �޴»�� �̸���
       messageHelper.setSubject(title); // ���������� ������ �����ϴ�
       messageHelper.setText("��û��: "+applicant+"\n"+"���� ���: "+content+"\n"+"���� �Ұ�: "+content1);  // ���� ����
 //    					 +"\n"+content1 �߰��غ���
+=======
+      messageHelper.setFrom(setfrom);  // 보내는사람 생략하거나 하면 정상작동을 안함
+      messageHelper.setTo(tomail);     // 받는사람 이메일
+      messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
+      messageHelper.setText("신청자: "+applicant+"\n"+"멘토 경력: "+content+"\n"+"멘토 소개: "+content1);  // 메일 내용
+//                    +"\n"+content1 추가해보기
+>>>>>>> master
       mailSender.send(message);
     } catch(Exception e){
       System.out.println(e);

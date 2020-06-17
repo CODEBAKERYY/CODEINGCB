@@ -6,13 +6,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class MypageController {
+public class ChatController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 	
-	@RequestMapping(value = "/mypage_modify.do")
-	public String QnABoard() {
-		return "mypage_apply";
+	@RequestMapping(value = "/chat.do")
+	public String chat() {
+		return "chat";
 	}
 
 }

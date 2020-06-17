@@ -1,9 +1,10 @@
 package com.mvc.cb;
-
+	
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mvc.cb.biz.QuizBiz;
@@ -17,8 +18,11 @@ public class QuizController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 	
-	@RequestMapping(value = "/quiz.do")
-	public String QnABoard() {
+	@RequestMapping(value= "/quiz.do")
+	public String quizList(Model model) {
+		logger.info("QUIZ SELECT LIST");
+//		model.addAttribute("quizList", quizBiz.selectList());
+		
 		return "quiz";
 	}
 

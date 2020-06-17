@@ -1,7 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+Design by TEMPLATED
+http://templated.co
+Released for free under the Creative Commons Attribution License
+
+Name       : TwoColours 
+Description: A two-column, fixed-width design with dark color scheme.
+Version    : 1.0
+Released   : 20130811
+
+-->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -36,7 +48,108 @@
 
   <link href="resources/csss/style.css" rel="stylesheet" />
   <link href="resources/csss/board-detail.css" rel="stylesheet" />
- 
+  
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+		
+	// 답변수정
+	function modifyAnswer(question_No, answer_No, answer_Title, answer_Content){
+		var a = '';
+		
+		a += '<div class="input-group">';
+	    a += '<input type="text" name="answer_Title" style="width:400px; height:40px;" value="'+answer_Title+'"/>';
+	   	a += '<textarea class="answer" name="answer_Content" style="width:600px; height:150px; resize:none;"/>answer_Content';
+	    a += '<span class="input-group-btn">'
+	    a += '<button class="btn btn-default" type="button" onclick="saveAnswer('+question_No+','+answer_No+',\"'+answer_Title+'\", \"'+answer_Content+'\");">저장</button> </span>';
+	    a += '</div>';
+	    
+	    $('.commentContent').html(a);
+
+
+	}
+	
+	
+	
+	// 수정된 답변 저장
+	function saveAnswer(question_No, answer_No, answer_Title, answer_Content){
+		alert(question_No+" : "+answer_No+" : "+answer_Title+" : "+answer_Content);
+		
+		$.ajax({
+			url: "answer_modify.do",
+			type: 'POST',
+			data: {"question_No":question_No, "answer_No":answer_No, "answer_Title":answer_Title, "answer_Content":answer_Content},
+			success:function(data){
+				if(data == "ture"){
+					alert("답변이 수정되었습니다.")
+					location.reload();
+				} else{
+					alert("답변 수정을 실패하였습니다.")
+				}
+			},
+			error: function(request,status,error){
+				alert("ajax 통신 실패!");
+		        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+		       
+			}
+			
+		});
+	}
+
+
+
+	// 답변삭제
+	function deleteAnswer(answer_No, question_No){
+		
+		//alert(answer_No+" : "+question_No)
+		var msg = confirm("해당 답변을 삭제하시겠습니까?");
+		
+		if(msg){
+			
+			$.ajax({
+				url: "answer_delete.do",
+				type: 'POST',
+				data:{"answer_No":answer_No, "question_No":question_No},
+				success:function(data){
+						alert("답변이 삭제되었습니다.")
+						location.reload();
+				},
+				error: function(request, status, error){
+					alert("ajax 통신 실패!");
+			        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+				}
+			});
+		} else{
+			return false;
+		} 
+	}
+	
+	// 답변쓰기
+	function writeAnswer(){
+		
+		
+		var answer_Title = $("#answer_Title").val();
+		var answer_Content = $("textarea#answer_Content").val();
+		
+		 $.ajax({
+			url: "answer_write.do",
+			type: 'POST',
+			data: {"answer_Title":answer_Title, "answer_Content":answer_Content},
+			success: function(data){
+				alert("답변이 작성 완료되었습니다.")
+				location.reload();
+			},
+			error: function(request, status, error){
+				alert("ajax 통신 실패!");
+		        //alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+		        location.reload();
+			}
+		}); 
+		
+	}
+
+</script>
 
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
@@ -56,15 +169,17 @@
 				<span class="title">${qlist.question_Title }</span>
 				<div class="post-meta">
 								<span class="author">${qlist.user_Id }</span>
-								<span class="date">${qlist.question_Date }</span>
-								<!-- 자신의 글일때
-								<span><a href="#">수정</a></span>
-								<span><a href="#" onclick="#">삭제</a></span> -->
+								<span class="date"><fmt:formatDate value="${qlist.question_Date }" pattern="yyyy.MM.dd"/></span>
 				</div>
 				<hr />
 				<p class="lead">${qlist.question_Content }</p>
 				<div class="pt-5">
-					<p> Tags: <a href="#">#html</a>, <a href="#">#trends</a></p>
+					<p> Tags: <a href="#">${qlist.question_Tag }</a>, <a href="#">#trends</a></p>
+				</div>
+				<div style="text-align: right;">
+					<input type="button" value="수정" onclick="location.href='qna_update.do?question_No=${qlist.question_No}'"/>
+					<input type="button" value="삭제" onclick="location.href='qna_delete.do?question_No=${qlist.question_No}'"/>
+					<input type="button" value="목록" onclick="location.href='qna.do'"/>
 				</div>
 			<!--------- 질문글 End ----------->	
 				
@@ -84,10 +199,10 @@
 									</div>
 									<div class="comment-body">
 										<h3>${dto.user_Id }</h3>
-										<div class="meta">${dto.comment_Date }</div>
+										<div class="meta"><fmt:formatDate value="${dto.comment_Date }" pattern="yyyy.MM.dd HH:mm:ss"/></div>
 										<p>${dto.comment_Content }</p>
 										<p>
-											<a href="#" onclick="#" class="reply">Reply</a>
+											<a href="#" class="reply">Reply</a>
 											<br/>
 											<textarea class="form-control" style="width:80%; display:none;" placeholder="댓글을 입력해주세요."></textarea>
 										</p>
@@ -112,10 +227,12 @@
 								<span class="title">RE: ${dto.answer_Title }</span>
 								<div class="post-meta">
 									<span class="author">${dto.user_Id }</span>
-									<span class="date">${dto.answer_Date }</span>
-									<!-- 자신의 글일때
-									<span><a href="#">수정</a></span>
-									<span><a href="#" onclick="#">삭제</a></span> -->
+									<span class="date"><fmt:formatDate value="${dto.answer_Date }" pattern="yyyy.MM.dd HH:mm"/></span>
+									<input type="button" value="수정" onclick="modifyAnswer(${qlist.question_No }, ${dto.answer_No}, '${dto.answer_Title }', '${dto.answer_Content }');"/>
+									<input type="button" value="삭제" onclick="deleteAnswer(${dto.answer_No}, ${qlist.question_No });"/>
+								</div>
+								<div class="container">
+									<div class="commentContent"></div>
 								</div>
 								<hr />
 								<p class="lead">${dto.answer_Content }</p>
@@ -129,9 +246,22 @@
 				<!--------- 답글작성칸 START ----------->
 				<div class="pt-5">
 					<h3 class="mb-5">Your Answer</h3>
-					<textarea class="answer" style="width:100%"></textarea>
-					<button type="button" class="btn btn-secondary btn-sm">Post Your Answer</button>			
-				</div>
+						<table>
+							<tr>
+								<th>TITLE</th>
+								<td><input type="text" id="answer_Title" style="width:400px; height:40px;"/></td>
+							</tr>
+							<tr>
+								<th>CONTENT</th>
+								<td><textarea class="answer" id="answer_Content" style="width:600px; height:150px; resize:none;" ></textarea></td>
+							</tr>
+							<tr style="text-align: right;">
+								<td>
+									<input type="button" class="btn btn-secondary btn-sm" value="Post Your Answer" onclick="writeAnswer();"/>		
+								</td>
+							</tr>
+						</table>
+					</div>
 				<hr />
 				<!--------- 답글작성칸 END ----------->
 				

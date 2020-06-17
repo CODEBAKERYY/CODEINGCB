@@ -22,14 +22,13 @@
 
 	<select id="mentorAll" resultMap="MentorMap">
 		SELECT * FROM MENTOR_INTRO
-		JOIN USER_TB USING(USER_ID)
+		JOIN
+		USER_TB USING(USER_ID)
 	</select>
 
 	<select id="selectOne" parameterType="int"
 		resultType="MentorDto">
-		SELECT *
-		FROM MENTOR_INTRO
-		WHERE MENTOR_NO = #{mentor_no}
+		SELECT * FROM MENTOR_INTRO JOIN USER_TB USING(USER_ID) WHERE MENTOR_NO = #{mentor_no}
 	</select>
 
 </mapper>
