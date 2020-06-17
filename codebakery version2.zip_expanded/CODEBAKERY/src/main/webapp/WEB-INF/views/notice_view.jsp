@@ -97,7 +97,7 @@ Released   : 20130811
                            <tr>
                                <td>
                                    <textarea style="resize: none;" rows="5" cols="140" placeholder="댓글을 입력하세요."></textarea>
-                                   <div style="text-align:right;"><button class="btn btn-primary pull-right" style="width:70px; height:35px;">등록</button></div>
+                                   <div style="text-align:right;"><button class="btn btn-primary pull-right" style="width:70px; height:35px;" onclick="notice_comment.do">등록</button></div>
                                </td>
                            </tr>
                        </table>
@@ -123,34 +123,6 @@ Released   : 20130811
                                   	 </tr>
                                   	 <tr>
                                        <td>공지사항 댓글입니다.333333</td>
-                                   </tr>
-                               </table>
-                           </div>
-                       </div>
-                       <div>
-                           <div>
-                               <table class='table'>
-                               	<tr>
-                                   	<span style="font-size: 18px;">user2</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                       <span style="color:grey; font-size: 14px;">2020.04.23 17:16</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                       <a href="#" style="width:45px; height:30px; font-size: 15px;">답글</a>
-                                   </tr>
-                                   <tr>
-                                       <td>공지사항 댓글입니다.222222</td>
-                                   </tr>
-                               </table>
-                           </div>
-                       </div>
-                       <div>
-                           <div>
-                               <table class='table'>
-                               	<tr>
-                                   	<span style="font-size: 18px;">user1</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                       <span style="color:grey; font-size: 14px;">2020.04.23 17:16</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                       <a href="#" style="width:45px; height:30px; font-size: 15px;">답글</a>
-                                   </tr>    
-                                   <tr>
-                                       <td>공지사항 댓글입니다.111111</td>
                                    </tr>
                                </table>
                            </div>

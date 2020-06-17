@@ -33,9 +33,9 @@ public class NoticeController {
 		int res = biz.viewUpdate(notice_No);
 		
 		if( res > 0 ) {
-			System.out.println(notice_No+ "번 게시글 조회수 업데이트 성공" );
+			logger.info(notice_No+ "번 게시글 조회수 업데이트 성공");
 		} else {
-			System.out.println(notice_No+ "번 게시글 조회수 업데이트 실패" );
+			logger.info(notice_No+ "번 게시글 조회수 업데이트 실패");
 		}
 		
 		return "notice_view";

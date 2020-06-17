@@ -27,7 +27,7 @@
   	
   	<insert id="insert" parameterType="NoticeDto">
   		INSERT INTO NOTICE 
-  		VALUES(NOTICESEQ.NEXTVAL, #{notice_Title}, #{notice_Content}, SYSDATE, 0, 'qwewq')
+  		VALUES(NOTICESEQ.NEXTVAL, #{notice_Title}, #{notice_Content}, SYSDATE, 0, '시스템관리자')
   	</insert>
   	
   	<delete id="delete" parameterType="int">

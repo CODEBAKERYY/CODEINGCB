@@ -63,7 +63,7 @@ Released   : 20130811
                             <br><br>
                             <tr>
                                 <th>작성자</th>
-                                <td style="padding:10px;"><input style="width: 821px; height: 35px;" type="text" id="writer" name="user_Id"/></td>
+                                <td style="padding:10px;"><input style="width: 821px; height: 35px;" type="text" id="writer" name="user_Id" value="시스템관리자" readonly="readonly"/></td>
                             </tr>
                             <tr>
                                 <th style="display: table-cell; vertical-align: middle;">내용</th>

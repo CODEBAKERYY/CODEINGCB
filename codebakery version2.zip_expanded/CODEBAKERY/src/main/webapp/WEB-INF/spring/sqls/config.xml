@@ -19,6 +19,8 @@
 			alias="QnACommentDto" />
 		<typeAlias type="com.mvc.cb.model.dto.MentorDto"
 			alias="MentorDto" />
+		<typeAlias type="com.mvc.cb.model.dto.NoticeDto" 
+			alias="NoticeDto"/>
 	</typeAliases>
 
 	<mappers>
@@ -29,5 +31,6 @@
 		<mapper resource="/mybatis/answer-mapper.xml" />
 		<mapper resource="/mybatis/qcomment-mapper.xml" />
 		<mapper resource="/mybatis/mentor-mapper.xml" />
+		<mapper resource="/mybatis/notice-mapper.xml" />
 	</mappers>
 </configuration>
