@@ -21,7 +21,7 @@ public class MentorReviewDaolmpl implements MentorReviewDao {
 		List<MentorReviewDto> list = new ArrayList<MentorReviewDto>();
 
 		try {
-			list = sqlSession.selectList(NAMESPACE + "selectList");
+			list = sqlSession.selectList(NAMESPACE + "ReviewAll");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
