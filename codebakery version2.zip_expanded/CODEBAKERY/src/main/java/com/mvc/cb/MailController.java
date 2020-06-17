@@ -17,16 +17,16 @@ public class MailController {
  
  
  
-  // mailSending ÄÚµå
+  // mailSending ï¿½Úµï¿½
   @RequestMapping(value = "/mypage_apply.do")
   public String mailSending(HttpServletRequest request) {
    
     String setfrom = "jusu2529@gmail.com";         
-    String tomail  = request.getParameter("tomail");     // ¹Þ´Â »ç¶÷ ÀÌ¸ÞÀÏ
-    String applicant  = request.getParameter("applicant");     // ¹Þ´Â »ç¶÷ ÀÌ¸ÞÀÏ
-    String title   = request.getParameter("title");      // Á¦¸ñ
-    String content = request.getParameter("content");    // ³»¿ë
-    String content1 = request.getParameter("content1");    // ³»¿ë
+    String tomail  = request.getParameter("tomail");     // ï¿½Þ´ï¿½ ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½
+    String applicant  = request.getParameter("applicant");     // ï¿½Þ´ï¿½ ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½
+    String title   = request.getParameter("title");      // ï¿½ï¿½ï¿½ï¿½
+    String content = request.getParameter("content");    // ï¿½ï¿½ï¿½ï¿½
+    String content1 = request.getParameter("content1");    // ï¿½ï¿½ï¿½ï¿½
    
     System.out.println("content"+content);
     try {
@@ -34,11 +34,11 @@ public class MailController {
       MimeMessageHelper messageHelper 
                         = new MimeMessageHelper(message, true, "UTF-8");
  
-      messageHelper.setFrom(setfrom);  // º¸³»´Â»ç¶÷ »ý·«ÇÏ°Å³ª ÇÏ¸é Á¤»óÀÛµ¿À» ¾ÈÇÔ
-      messageHelper.setTo(tomail);     // ¹Þ´Â»ç¶÷ ÀÌ¸ÞÀÏ
-      messageHelper.setSubject(title); // ¸ÞÀÏÁ¦¸ñÀº »ý·«ÀÌ °¡´ÉÇÏ´Ù
-      messageHelper.setText("½ÅÃ»ÀÚ: "+applicant+"\n"+"¸àÅä °æ·Â: "+content+"\n"+"¸àÅä ¼Ò°³: "+content1);  // ¸ÞÀÏ ³»¿ë
-//    					 +"\n"+content1 Ãß°¡ÇØº¸±â
+      messageHelper.setFrom(setfrom);  // ï¿½ï¿½ï¿½ï¿½ï¿½Â»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°Å³ï¿½ ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ûµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+      messageHelper.setTo(tomail);     // ï¿½Þ´Â»ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½
+      messageHelper.setSubject(title); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½
+      messageHelper.setText("ï¿½ï¿½Ã»ï¿½ï¿½: "+applicant+"\n"+"ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½: "+content+"\n"+"ï¿½ï¿½ï¿½ï¿½ ï¿½Ò°ï¿½: "+content1);  // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+//    					 +"\n"+content1 ï¿½ß°ï¿½ï¿½Øºï¿½ï¿½ï¿½
       mailSender.send(message);
     } catch(Exception e){
       System.out.println(e);
