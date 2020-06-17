@@ -35,7 +35,7 @@ public class UserController {
 		model.addAttribute("mentor", m_biz.selectList());
 		System.out.println(m_biz.selectList());
 		logger.info("mentorReview selectAll");
-//		model.addAttribute("mentorreview", mr_biz.selectList());
+		model.addAttribute("mentorreview", mr_biz.selectList());
 		return "main";
 	}
 

@@ -5,7 +5,7 @@
 
 <mapper namespace="mentorreview">
 
-	<resultMap type="MentorReviewDto" id="MentorReivewMap">
+	<resultMap type="MentorReviewSDto" id="MentorReivewMap">
 		<result property="review_No" column="REVIEW_NO" />
 		<result property="review_Content" column="REVIEW_CONTENT" />
 		<result property="review_Date" column="REVIEW_DATE" />
