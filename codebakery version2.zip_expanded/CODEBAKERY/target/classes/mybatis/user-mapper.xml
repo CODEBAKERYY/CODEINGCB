@@ -25,19 +25,4 @@
 	SELECT * FROM USER_TB WHERE USER_ID = #{user_Id} and USER_PW = #{user_Pw}
 	</select>
 	
-	<update id="memberUpdate" parameterType="memberDto" >
-  			UPDATE USER_TB
-  			SET
-  				USER_PW = #{user_Pw},
-  				USER_NAME = #{user_Name},
-  				USER_PHONE = #{user_Phone},
-  				USER_MAIL = #{user_Mail}
-  				<!-- ,USER_LANG = #{user_Lang} -->
-  			WHERE
-  				USER_ID = #{user_Id}
-  		
-  		</update>
-	
-	
-	
 </mapper>

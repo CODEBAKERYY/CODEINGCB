@@ -4,7 +4,6 @@ public class UserDto {
 
 	private String user_Id;
 	private String user_Pw;
-	private String user_Pwchk;
 	private String user_Grade;
 	private String user_Name;
 	private String user_Phone;
@@ -57,14 +56,6 @@ public class UserDto {
 		this.user_Pw = user_Pw;
 	}
 
-	public String getUser_Pwchk() {
-		return user_Pwchk;
-	}
-
-
-	public void setUser_Pwchk(String user_Pwchk) {
-		this.user_Pwchk = user_Pwchk;
-	}
 
 
 	public String getUser_Grade() {
