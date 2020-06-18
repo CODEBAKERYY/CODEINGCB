@@ -21,4 +21,26 @@
   		ORDER BY ANSWER_NO DESC
   	</select>
   
+  	<delete id="delete" parameterType="int">
+  		DELETE FROM ANSWER
+  		WHERE ANSWER_NO=#{answer_No}
+  	</delete>
+  
+  	<update id="update" parameterType="AnswerDto">
+  		UPDATE ANSWER
+  		SET ANSWER_TITLE=#{answer_Title}, ANSWER_CONTENT=#{answer_Content}
+  		WHERE ANSWER_NO=#{answer_No}
+  	</update>
+  
+  	<insert id="insert" parameterType="AnswerDto">
+  		INSERT INTO ANSWER
+  		VALUES(ANSWERSEQ.NEXTVAL, #{answer_Title}, #{answer_Content}, SYSDATE, #{question_No}, #{user_Id})
+  	</insert>
+  	
+  	<select id="cntAnswer" parameterType="int">
+  		SELECT COUNT(*)
+  		FROM ANSWER
+  		WHERE QUESTION_NO = #{question_No}
+  	</select>
+  
   </mapper>

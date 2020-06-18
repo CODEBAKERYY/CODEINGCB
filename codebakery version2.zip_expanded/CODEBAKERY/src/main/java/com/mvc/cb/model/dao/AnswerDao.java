@@ -10,4 +10,13 @@ public interface AnswerDao {
 	
 	public List<AnswerDto> selectList(int question_No);
 
+	public int delete(int answer_No);
+
+	public int update(AnswerDto dto);
+
+	public int insert(AnswerDto dto);
+
+	public int cntAnswer(Integer question_No);
+
+
 }

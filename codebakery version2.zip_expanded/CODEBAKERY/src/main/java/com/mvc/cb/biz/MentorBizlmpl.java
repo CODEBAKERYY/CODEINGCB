@@ -20,8 +20,8 @@ public class MentorBizlmpl implements MentorBiz {
 	}
 
 	@Override
-	public MentorDto selectOne(int MENTOR_NO) {
-		return dao.selectOne();
+	public MentorDto selectOne(int mentor_No) {
+		return dao.selectOne(mentor_No);
 	}
 
 }
