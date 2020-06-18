@@ -73,4 +73,18 @@ public class AnswerDaolmpl implements AnswerDao{
 		return res;
 	}
 
+	public int cntAnswer(Integer question_No) {
+		
+		int res = 0;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE+"cntAnswer", question_No);
+		} catch (Exception e) {
+			System.out.println("[error] : count Answer");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
 }

@@ -16,4 +16,7 @@ public interface AnswerDao {
 
 	public int insert(AnswerDto dto);
 
+	public int cntAnswer(Integer question_No);
+
+
 }

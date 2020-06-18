@@ -31,7 +31,6 @@ Released   : 20130811
 <!------- 페이징 효과때문에 추가 ------>
 
 <!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
-
 <style type="text/css">
 	
 	#notice>table>thead>tr { text-align: center; }
@@ -100,7 +99,7 @@ Released   : 20130811
                 <div style="margin: 0 auto; display: inline-block;">
 	                <div class="container">
 						<ul class="pagination">
-				              <li><a href="#">«</a></li>
+							  <li><a href="#">«</a></li>
 				              <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
 				              <li><a href="#">2</a></li>
 				              <li><a href="#">3</a></li>

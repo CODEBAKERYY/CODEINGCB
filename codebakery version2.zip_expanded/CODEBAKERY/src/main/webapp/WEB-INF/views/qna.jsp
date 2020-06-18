@@ -43,6 +43,7 @@ Released   : 20130811
 </style>
 </head>
 <body >
+
 	<%@ include file="header.jsp"%>
 	<div id="logo" class="container">
 		<h1>
@@ -72,7 +73,10 @@ Released   : 20130811
 											</div>
 										</div>
 									<div class="status answered-accepted">
-										<strong style="font-size: 20px">17</strong><br /> answers
+										<%-- <form method="post" action="">
+											<input type="hidden" name="question_No" value="${dto.question_No }"/>
+										</form> --%>
+										<strong style="font-size: 20px">${list.size() }</strong><br /> answers
 									</div>
 									</div>
 								</div>
@@ -82,9 +86,7 @@ Released   : 20130811
 									<div class="excerpt">${dto.question_Content }</div>
 									
 									<div class="tags user-tags t-android t-eclipse t-certificate">
-										<a href="#" class="post-tag" title="" rel="tag">android</a> 
-										<a href="#" class="post-tag" title="" rel="tag">eclipse</a> 
-										<a href="#" class="post-tag" title="" rel="tag">certificate</a>
+										<a href="#" class="post-tag" title="" rel="tag">${dto.question_Tag }</a> 
 									</div>
 									
 									<div class="started fr">

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.mvc.cb.model.dto.NoticeDto;
+import com.mvc.cb.model.dto.Pagination;
 
 @Repository
 public class NoticeDaolmpl implements NoticeDao{
@@ -16,12 +17,12 @@ public class NoticeDaolmpl implements NoticeDao{
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
-	public List<NoticeDto> selectAll() {
+	public List<NoticeDto> selectAll(Pagination pagination) {
 		
 		List<NoticeDto> list = new ArrayList<NoticeDto>();
 		
 		try {
-			list = sqlSession.selectList(NAMESPACE + "selectList");
+			list = sqlSession.selectList(NAMESPACE + "selectList",pagination);
 			} catch(Exception e) {
 				System.out.println("[error] : select list");
 				e.printStackTrace();
@@ -96,6 +97,21 @@ public class NoticeDaolmpl implements NoticeDao{
 		}
 		
 		return res;
+	}
+
+	@Override
+	public int pageCnt(Pagination pagination) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE + "pageCnt", pagination);
+		} catch( Exception e ) {
+			System.out.println("[error] : pageCnt");
+			e.printStackTrace();
+		}
+		
+		return res;
+		
 	}
 
 	

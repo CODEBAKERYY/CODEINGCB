@@ -1,6 +1,7 @@
 package com.mvc.cb.model.dao;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -53,6 +54,8 @@ public class QuestionDaolmpl implements QuestionDao{
 		
 		try {
 			res = sqlSession.insert(NAMESPACE+"insert", dto);
+			
+			
 		} catch(Exception e) {
 			System.out.println("[error] : Question insert");
 			e.printStackTrace();
