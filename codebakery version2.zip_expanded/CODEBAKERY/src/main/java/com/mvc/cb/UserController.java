@@ -1,5 +1,12 @@
 package com.mvc.cb;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -7,10 +14,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.util.WebUtils;
 
 import com.mvc.cb.biz.MentorBiz;
-import com.mvc.cb.biz.MentorReviewBiz;
 import com.mvc.cb.biz.UserBiz;
 import com.mvc.cb.model.dto.UserDto;
 
@@ -62,9 +71,8 @@ public class UserController {
 		} else {
 			return "redirect:signup.do";
 		}
-
 	}
-
+	
 	// 로그인 폼 이동
 	@RequestMapping("login.do")
 	public String login() {
