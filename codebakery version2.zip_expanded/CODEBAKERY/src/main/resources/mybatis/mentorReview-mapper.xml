@@ -11,9 +11,14 @@
 		<result property="user_Id" column="USER_ID" />
 		<result property="mentor_No" column="MENTOR_NO" />
 	</resultMap>
-	
+
 	<select id="mentorReviewAll" resultMap="MentorReviewMap">
-		SELECT * FROM MENTOR_REVIEW
+		SELECT * FROM
+		MENTOR_REVIEW
 		ORDER BY REVIEW_NO DESC
+	</select>
+
+	<select id="selectOne" resultType="MentorReviewDto">
+
 	</select>
 </mapper>
