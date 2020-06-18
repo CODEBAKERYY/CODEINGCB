@@ -15,4 +15,7 @@ public interface AnswerBiz {
 	public int update(AnswerDto dto);
 
 	public int insert(AnswerDto dto);
+
+	public int cntAnswer(Integer question_No);
+
 }

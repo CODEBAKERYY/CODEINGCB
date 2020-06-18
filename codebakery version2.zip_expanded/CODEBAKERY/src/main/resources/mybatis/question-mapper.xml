@@ -13,6 +13,7 @@
   		<result property="question_Views" column="QUESTION_VIEWS" />
   		<result property="question_Tag" column="QUESTION_TAG" />
   		<result property="user_Id" column="USER_ID" />
+  		
   	</resultMap>
   	
   	<select id="selectList" resultMap="questionMap">

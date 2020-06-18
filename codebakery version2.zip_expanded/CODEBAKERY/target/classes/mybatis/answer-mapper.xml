@@ -34,7 +34,13 @@
   
   	<insert id="insert" parameterType="AnswerDto">
   		INSERT INTO ANSWER
-  		VALUES(ANSWERSEQ.NEXTVAL, #{answer_Title}, #{answer_Content}, SYSDATE, 17, 'USER01')
+  		VALUES(ANSWERSEQ.NEXTVAL, #{answer_Title}, #{answer_Content}, SYSDATE, #{question_No}, #{user_Id})
   	</insert>
+  	
+  	<select id="cntAnswer" parameterType="int">
+  		SELECT COUNT(*)
+  		FROM ANSWER
+  		WHERE QUESTION_NO = #{question_No}
+  	</select>
   
   </mapper>
