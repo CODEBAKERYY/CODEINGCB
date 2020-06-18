@@ -96,8 +96,8 @@ Released   : 20130811
                        <table>                    
                            <tr>
                                <td>
-                                   <textarea style="resize: none;" rows="5" cols="140" placeholder="댓글을 입력하세요."></textarea>
-                                   <div style="text-align:right;"><button class="btn btn-primary pull-right" style="width:70px; height:35px;" onclick="notice_comment.do">등록</button></div>
+                                   <textarea style="resize: none;" rows="5" cols="140" placeholder="댓글을 입력하세요." name="comment_Content"></textarea>
+                                   <div style="text-align:right;"><button class="btn btn-primary pull-right" style="width:70px; height:35px;" onclick="location.href='comment_write.do?notice_No=${detail.notice_No}'">등록</button></div>
                                </td>
                            </tr>
                        </table>
@@ -119,7 +119,6 @@ Released   : 20130811
                                	<tr>
                                    	<span style="font-size: 18px;">user3</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                        <span style="color:grey; font-size: 14px;">2020.04.23 17:16</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                       <a href="#" style="width:45px; height:30px; font-size: 15px;">답글</a>
                                   	 </tr>
                                   	 <tr>
                                        <td>공지사항 댓글입니다.333333</td>

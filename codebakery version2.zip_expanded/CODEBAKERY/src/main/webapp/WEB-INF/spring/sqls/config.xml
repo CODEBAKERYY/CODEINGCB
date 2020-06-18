@@ -11,14 +11,14 @@
 			alias="quizDto" />
 		<typeAlias type="com.mvc.cb.model.dto.MentorDto"
 			alias="MentorDto" />
-<<<<<<< HEAD
 		<typeAlias type="com.mvc.cb.model.dto.NoticeDto" 
 			alias="NoticeDto"/>
-=======
+		<typeAlias type="com.mvc.cb.model.dto.NoticeCommentDto" 
+			alias="NoticeCommentDto"/>
 		<typeAlias type="com.mvc.cb.model.dto.QuestionDto" alias="QuestionDto"/>
 		<typeAlias type="com.mvc.cb.model.dto.AnswerDto" alias="AnswerDto" />
 		<typeAlias type="com.mvc.cb.model.dto.QnACommentDto" alias="QnACommentDto"/>
->>>>>>> master
+		<typeAlias type="com.mvc.cb.model.dto.Pagination" alias="Pagination"/>
 	</typeAliases>
 
 	<mappers>
@@ -28,10 +28,8 @@
 		<mapper resource="/mybatis/question-mapper.xml"/>
 		<mapper resource="/mybatis/answer-mapper.xml" />
 		<mapper resource="/mybatis/qcomment-mapper.xml" />
-<<<<<<< HEAD
 		<mapper resource="/mybatis/mentor-mapper.xml" />
 		<mapper resource="/mybatis/notice-mapper.xml" />
-=======
->>>>>>> master
+		<mapper resource="/mybatis/notice_comment-mapper.xml" />
 	</mappers>
 </configuration>
