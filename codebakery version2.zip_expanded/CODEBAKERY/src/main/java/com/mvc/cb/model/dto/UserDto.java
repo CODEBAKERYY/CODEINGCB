@@ -4,6 +4,7 @@ public class UserDto {
 
 	private String user_Id;
 	private String user_Pw;
+	private String user_Pwchk;
 	private String user_Grade;
 	private String user_Name;
 	private String user_Phone;
@@ -15,6 +16,33 @@ public class UserDto {
 	
 	public UserDto() {
 		super();
+	}
+
+
+	public UserDto(String user_Id, String user_Pw, String user_Pwchk, String user_Name, String user_Phone,
+			String user_Mail, int user_Point, String user_Lang) {
+		super();
+		this.user_Id = user_Id;
+		this.user_Pw = user_Pw;
+		this.user_Pwchk = user_Pwchk;
+		this.user_Name = user_Name;
+		this.user_Phone = user_Phone;
+		this.user_Mail = user_Mail;
+		this.user_Point = user_Point;
+		this.user_Lang = user_Lang;
+	}
+
+
+	public UserDto(String user_Id, String user_Pw, String user_Name, String user_Phone, String user_Mail,
+			int user_Point, String user_Lang) {
+		super();
+		this.user_Id = user_Id;
+		this.user_Pw = user_Pw;
+		this.user_Name = user_Name;
+		this.user_Phone = user_Phone;
+		this.user_Mail = user_Mail;
+		this.user_Point = user_Point;
+		this.user_Lang = user_Lang;
 	}
 
 
@@ -32,7 +60,7 @@ public class UserDto {
 		this.user_Lang = user_Lang;
 	}
 
-
+	
 
 	public String getUser_Id() {
 		return user_Id;
@@ -56,7 +84,14 @@ public class UserDto {
 		this.user_Pw = user_Pw;
 	}
 
+	public String getUser_Pwchk() {
+		return user_Pwchk;
+	}
 
+
+	public void setUser_Pwchk(String user_Pwchk) {
+		this.user_Pwchk = user_Pwchk;
+	}
 
 	public String getUser_Grade() {
 		return user_Grade;
