@@ -1,5 +1,7 @@
 package com.mvc.cb.model.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -16,7 +18,7 @@ public class MyPageDaolmpl {
 		
 		@Override
 		public UserDto login(UserDto dto) {
-			MemberDto res = null;
+			UserDto res = null;
 			try {
 				res = sqlSession.selectOne(NAMESPACE+"login",dto);
 				
@@ -52,6 +54,30 @@ public class MyPageDaolmpl {
 		@Override
 		public int update_ajax(UserDto dto) {
 			return sqlSession.update(NAMESPACE+"update_ajax",dto);
+		}
+
+		@Override
+		public List<UserDto> selectList() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public UserDto getInfo(UserDto dto) {
+			UserDto res = null;
+			try {
+				res = sqlSession.selectOne(NAMESPACE+"getInfo",dto);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			return res;
+		}
+
+		@Override
+		public int member_delete(UserDto dto) {
+			return sqlSession.delete(NAMESPACE+"member_delete",dto);
 		}
 		
    }

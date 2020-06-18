@@ -11,4 +11,6 @@ public interface MyPageDao {
 	public int non_pw_update(UserDto dto);
 	public int update_ajax(UserDto dto);
 	public List<UserDto> selectList();
+	public UserDto getInfo(UserDto dto);
+	public int member_delete(UserDto dto);
 }

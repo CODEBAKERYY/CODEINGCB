@@ -38,10 +38,6 @@ public class MyPageBizlmpl implements MyPageBiz{
 
 
 
-	@Override
-	public int update_ajax(UserDto dto) {
-		return dao.update_ajax(dto);
-	}
 	
 	@Override
 	public List<UserDto> selectList() {
@@ -71,5 +67,37 @@ public class MyPageBizlmpl implements MyPageBiz{
 	public int delete(int myno) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+
+
+	@Override
+	public int update_ajax(UserDto dto) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+
+	@Override
+	public UserDto getInfo(UserDto dto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public UserDto selectone(String user_id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public int member_delete(UserDto dto) {
+		// TODO Auto-generated method stub
+		return dao.member_delete(dto);
 	}
 }
