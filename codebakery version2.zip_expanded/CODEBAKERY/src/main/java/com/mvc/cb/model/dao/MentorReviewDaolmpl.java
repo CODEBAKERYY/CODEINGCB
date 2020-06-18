@@ -33,4 +33,19 @@ public class MentorReviewDaolmpl implements MentorReviewDao {
 		return list;
 	}
 
+	@Override
+	public MentorReviewDto selectOne(int mentor_No) {
+
+		MentorReviewDto dto = null;
+
+		try {
+			dto = sqlSession.selectOne(NAMESPACE + "selectOne");
+			System.out.println("리뷰selectOne 성공");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return dto;
+	}
+
 }

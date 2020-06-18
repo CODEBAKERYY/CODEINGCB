@@ -14,19 +14,18 @@ public class MailController {
  
   @Autowired
   private JavaMailSender mailSender;
- 
- 
- 
-  // mailSending 코드
+
   @RequestMapping(value = "/mypage_apply.do")
   public String mailSending(HttpServletRequest request) {
    
     String setfrom = "jusu2529@gmail.com";         
-    String tomail  = request.getParameter("tomail");     // 받는 사람 이메일
-    String applicant  = request.getParameter("applicant");     // 받는 사람 이메일
-    String title   = request.getParameter("title");      // 제목
-    String content = request.getParameter("content");    // 내용
-    String content1 = request.getParameter("content1");    // 내용
+
+    String tomail  = request.getParameter("tomail");     // 占쌨댐옙 占쏙옙占� 占싱몌옙占쏙옙
+    String applicant  = request.getParameter("applicant");     // 占쌨댐옙 占쏙옙占� 占싱몌옙占쏙옙
+    String title   = request.getParameter("title");      // 占쏙옙占쏙옙
+    String content = request.getParameter("content");    // 占쏙옙占쏙옙
+    String content1 = request.getParameter("content1");    // 占쏙옙占쏙옙
+
    
     System.out.println("content"+content);
     try {
@@ -34,11 +33,14 @@ public class MailController {
       MimeMessageHelper messageHelper 
                         = new MimeMessageHelper(message, true, "UTF-8");
  
-      messageHelper.setFrom(setfrom);  // 보내는사람 생략하거나 하면 정상작동을 안함
-      messageHelper.setTo(tomail);     // 받는사람 이메일
-      messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
-      messageHelper.setText("신청자: "+applicant+"\n"+"멘토 경력: "+content+"\n"+"멘토 소개: "+content1);  // 메일 내용
-//                    +"\n"+content1 추가해보기
+
+      messageHelper.setFrom(setfrom);  
+      messageHelper.setTo(tomail);     
+      messageHelper.setSubject(title); 
+      messageHelper.setText("신청자: "+applicant+"\n"+"경력사항: "+content+"\n"+"자기 소개: "+content1);  // 占쏙옙占쏙옙 占쏙옙占쏙옙
+
+
+
       mailSender.send(message);
     } catch(Exception e){
       System.out.println(e);
