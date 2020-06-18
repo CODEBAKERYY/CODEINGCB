@@ -149,7 +149,7 @@ background-color: white;
 			</div>
 			<c:forEach items="${mentor }" var="dto" begin="1" end="4" varStatus="i" step="1">
 				<div class="column${i.index} ">
-					<a href="#" class="image image-full"><img
+					<a href="mentor_detail.do?mentor_No=${dto.mentor_No}" class="image image-full"><img
 						src="resources/images/pic01.jpg" height="150" alt="" /></a>
 					<div class="box">
 						<p>${dto.mentor_Content}</p>
@@ -157,8 +157,10 @@ background-color: white;
 					</div>
 				</div>
 			</c:forEach>
+		</div>
+	</div>
 
-			<!-- <div class="column2">
+	<!-- <div class="column2">
 				<a href="#" class="image image-full"><img
 					src="resources/images/pic02.jpg" height="150" alt="" /></a>
 				<div class="box">
@@ -183,8 +185,7 @@ background-color: white;
 				</div>
 			</div> -->
 
-		</div>
-	</div>
+
 
 	<div id="reviewclass">
 		<div class="slideWrap">

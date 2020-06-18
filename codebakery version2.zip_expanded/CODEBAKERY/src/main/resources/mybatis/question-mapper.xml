@@ -26,5 +26,37 @@
   		FROM QUESTION
   		WHERE QUESTION_NO=#{question_No}
   	</select>
+  	
+  	<insert id="insert" parameterType="QuestionDto">
+  		INSERT INTO QUESTION
+  		VALUES(QUESTIONSEQ.NEXTVAL, #{question_Title}, #{question_Content}, SYSDATE, 0, #{question_Tag}, #{user_Id})
+  	</insert>
  
+	<delete id="delete" parameterType="int">
+		DELETE FROM QUESTION
+		WHERE QUESTION_NO=#{question_No}
+	</delete> 
+	
+	<update id="update" parameterType="QuestionDto">
+		UPDATE QUESTION
+		SET QUESTION_TITLE=#{question_Title}, QUESTION_CONTENT=#{question_Content}
+		WHERE QUESTION_NO=#{question_No}
+	</update>
+	
+	<!-- 조회수 증가 -->
+	<update id="plusCnt" parameterType="int">
+		UPDATE QUESTION
+		SET QUESTION_VIEWS = QUESTION_VIEWS + 1
+		WHERE QUESTION_NO=#{question_No}
+	</update>
+	
+	
+	<!-- 페이징 START -->
+	
+	<select id="selectCount" resultType="int">
+		SELECT COUNT(QUESTIONSEQ)
+		FROM QUESTION
+	</select>
+	
+	<!-- 페이징 END -->
  </mapper>

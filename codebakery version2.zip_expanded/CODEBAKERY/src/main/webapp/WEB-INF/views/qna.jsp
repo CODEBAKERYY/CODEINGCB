@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!--
 Design by TEMPLATED
@@ -28,21 +29,33 @@ Released   : 20130811
 <link href="resources/css/fonts/fonts.css" rel="stylesheet" type="text/css" media="all" />
 <link href="resources/csss/boardstyle.css" rel="stylesheet" type="text/css" media="all" />
 <!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
-
+<style type="text/css">
+	.writebtn{
+		  background-color: #555555; 
+		  border: none;
+		  color: white;
+		  padding: 12px 28px;
+		  text-align: center;
+		  text-decoration: none;
+		  display: inline-block;
+		  font-size: 13px;
+	}
+</style>
 </head>
 <body >
 	<%@ include file="header.jsp"%>
 	<div id="logo" class="container">
 		<h1>
-			<a href="qna.do"><span>질문 게시판</span></a>
+			<a href="qna.do" class="icon icon-tasks"><span>질문 게시판</span></a>
 		</h1>
 	</div>
-
 	<div id="mainbar">
 		<div id="page" class="container">
+				<div style="text-align: right;"><button class="writebtn" onclick="location.href='qna_write.do'">글쓰기</button></div>
+				<br />
 			<div class="flush-left js-search-results">
 				<div>
-					<!-- 게시물 시작 -->
+					<!------------ 게시글 START -------------->
 					<c:choose>
 						<c:when test="${empty list }">
 							<a href="qna_detail.do">------------- 작성된 글이 없습니다. -------------</a>
@@ -54,8 +67,8 @@ Released   : 20130811
 									<div class="stats">
 										<div class="vote">
 											<div class="votes ">
-												<span class="vote-count-post " style="font-size: 20px"><strong>1898</strong></span>
-												<div class="viewcount">votes</div>
+												<span class="vote-count-post " style="font-size: 20px"><strong>${dto.question_Views }</strong></span>
+												<div class="viewcount">views</div>
 											</div>
 										</div>
 									<div class="status answered-accepted">
@@ -75,7 +88,7 @@ Released   : 20130811
 									</div>
 									
 									<div class="started fr">
-									<span title="" class="relativetime">${dto.question_Date }</span> 
+									<span class="relativetime"><fmt:formatDate value="${dto.question_Date }" pattern="yyyy.MM.dd HH:mm"/></span><br></br> 
 									Asked By <a href="#">${dto.user_Id }</a>
 									</div>
 								</div>
@@ -85,36 +98,33 @@ Released   : 20130811
 						</c:forEach>
 					</c:otherwise>
 				</c:choose>
+				<!------------ 게시글 END -------------->
 							
-					<!-- 페이징 -->
-					<nav aria-label="Page navigation example">
-					  <ul class="pagination justify-content-center">
-					    <li class="page-item">
-					      <a class="page-link" href="#" aria-label="Previous">
-					        <span aria-hidden="true">&laquo;</span>
-					      </a>
-					    </li>
-					    <li class="page-item"><a class="page-link" href="#">1</a></li>
-					    <li class="page-item"><a class="page-link" href="#">2</a></li>
-					    <li class="page-item"><a class="page-link" href="#">3</a></li>
-					    <li class="page-item">
-					      <a class="page-link" href="#" aria-label="Next">
-					        <span aria-hidden="true">&raquo;</span>
-					      </a>
-					    </li>
-					  </ul>
-					</nav>
+				<!------------ 페이징 START -------------->
+				<nav aria-label="Page navigation example">
+				  <ul class="pagination justify-content-center">
+				    <li class="page-item">
+				      <a class="page-link" href="#" aria-label="Previous">
+				        <span aria-hidden="true">&laquo;</span>
+				      </a>
+				    </li>
+				    <li class="page-item"><a class="page-link" href="#">1</a></li>
+				    <li class="page-item"><a class="page-link" href="#">2</a></li>
+				    <li class="page-item"><a class="page-link" href="#">3</a></li>
+				    <li class="page-item">
+				      <a class="page-link" href="#" aria-label="Next">
+				        <span aria-hidden="true">&raquo;</span>
+				      </a>
+				    </li>
+				  </ul>
+				</nav>
+				<!------------ 페이징 END -------------->
 				</div>
 			</div>
 		</div>
 
 		<div id="content"></div>
 	</div>
-
-
-
-
-
 
 
 	<%@ include file="footer.jsp"%>

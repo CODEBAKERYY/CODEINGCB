@@ -50,24 +50,21 @@
 </head>
 <body>
 	<%@ include file="header.jsp"%>
-	<c:forEach items="${mentor }" var="dto" begin="1" end="4" varStatus="i"
-		step="1">
-		<div id="page" class="container">
-			<div id="content">
-				<div class="title">
-					<h2>${dto.user_Name}</h2>
-					&nbsp;&nbsp;<input type="button" class="button"
-						style="float: right;" value="1:1채팅"
-						onclick="location.href = 'chat.do'" /> <span class="byline">${dto.mentor_Career}</span>
-				</div>
-				<p>${dto.mentor_Content}</p>
+	<div id="page" class="container">
+		<div id="content">
+			<div class="title">
+				<h2>${mentor.user_Name}</h2>
+				&nbsp;&nbsp;<input type="button" class="button"
+					style="float: right;" value="1:1채팅"
+					onclick="location.href = 'chat.do'" /> <span class="byline">${mentor.mentor_Career}</span>
 			</div>
-			<div id="sidebar">
-				<a href="#" class="image image-full"><img src="images/pic05.jpg"
-					alt="" /></a>
-			</div>
+			<p>${mentor.mentor_Content}</p>
 		</div>
-	</c:forEach>
+		<div id="sidebar">
+			<a href="#" class="image image-full"><img src="images/pic05.jpg"
+				alt="" /></a>
+		</div>
+	</div>
 	<div class="container">
 		<table class='table'>
 			<tr>

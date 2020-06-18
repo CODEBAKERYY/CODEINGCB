@@ -156,24 +156,14 @@ CREATE TABLE QUIZ (
     CONSTRAINT FK_QUIZ_USER_ID FOREIGN KEY(USER_ID) REFERENCES USER_TB(USER_ID) ON DELETE CASCADE
 );
 
-DROP TABLE QUIZ;
-SELECT * FROM QUIZ;
--- 문제게시판
-CREATE TABLE QUIZ (
-	QUIZ_NO	NUMBER CONSTRAINT PK_QUIZ_NO PRIMARY KEY,          -- 문제번호
-	QUIZ_TITLE VARCHAR2(50) NOT NULL,                          -- 문제제목
-	QUIZ_CONTENT VARCHAR2(4000)	NOT NULL,                      -- 문제설명
-	QUIZ_DATE DATE NOT NULL,                                   -- 문제등록시간
-	CORRECT_USER NUMBER,                                       -- 맞춘사람
-	TRY_USER NUMBER,                                           -- 시도한사람
-	CORRECT_RATE NUMBER,                                       -- 정답률
-	QUIZ_VIEWS NUMBER,                                         -- 문제조회수
-	INPUT_EXPLANATION VARCHAR2(4000),						   -- 입력 설명
-	OUTPUT_EXPLANATION VARCHAR2(4000),						   -- 출력 설명
-	INPUT_SAMPLE VARCHAR2(4000),							   -- 입력 예시 
-	OUTPUT_SAMPLE VARCHAR2(4000),							   -- 출력 예시
-	USER_ID	VARCHAR2(20) NOT NULL,          
-    CONSTRAINT FK_QUIZ_USER_ID FOREIGN KEY(USER_ID) REFERENCES USER_TB(USER_ID) ON DELETE CASCADE
+-- 문제풀기
+CREATE TABLE TRY_QUIZ (
+	QUIZ_NO	NUMBER CONSTRAINT PK_TQUIZ_NO PRIMARY KEY,          -- 문제번호
+	CODE_CONTENT VARCHAR2(4000)	NOT NULL,                       -- 작성코드내용
+	EX_RESULT VARCHAR2(300)	NOT NULL,                           -- 출력예시
+    PRINT_REULT VARCHAR2(300) NOT NULL,                         -- 출력결과
+	USER_ID	VARCHAR2(20) NOT NULL,                             
+    CONSTRAINT FK_TQUIZ_USER_ID FOREIGN KEY(USER_ID) REFERENCES USER_TB(USER_ID) ON DELETE CASCADE
 );
 
 -- 채점결과
@@ -214,7 +204,7 @@ CREATE TABLE NOTICE_COMMENT (
 INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'구글 10년 경력','모든것을 한번에 해결해드립니다.','admin');
 INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'구글 1년 경력','모든것을 한번에 해결해드립니다.','admin');
 INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'구글 3년 경력','모든것을 한번에 해결해드립니다.','admin');
-INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'구글 5년 경력','모든것을 한번에 해결해드립니다.','admin');
+INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'구글 99년 경력','모든것을 한번에 해결해드립니다.','admin');
 
 
 
@@ -223,5 +213,10 @@ SELECT * FROM MENTOR_INTRO
 		
 		SELECT * FROM MENTOR_REVIEW
 		ORDER BY REVIEW_NO DESC;
+
+
+		
+		
+		
 COMMIT;
 

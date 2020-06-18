@@ -46,4 +46,72 @@ public class QuestionDaolmpl implements QuestionDao{
 		return dto;
 	}
 
+	@Override
+	public int insert(QuestionDto dto) {
+		
+		int res = 0;
+		
+		try {
+			res = sqlSession.insert(NAMESPACE+"insert", dto);
+		} catch(Exception e) {
+			System.out.println("[error] : Question insert");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
+	@Override
+	public int delete(int question_No) {
+		
+		int res = 0;
+		
+		try {
+			res = sqlSession.delete(NAMESPACE+"delete", question_No);
+		} catch(Exception e) {
+			System.out.println("[error] : Question delete");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
+	@Override
+	public int update(QuestionDto dto) {
+		
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"update", dto);
+		} catch(Exception e) {
+			System.out.println("[error] : Question update");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+//	@Override
+//	public int countBoard() {
+//		return 0;
+//	}
+
+	@Override
+	public void plusCnt(int question_No) {
+		
+		
+		sqlSession.update(NAMESPACE+"plusCnt", question_No);
+		
+	}
+
+//	@Override
+//	public List<QuestionDto> selectBoard(QnAPagingDto dto) {
+//		return null;
+//	}
+//
+//	@Override
+//	public boolean plusCnt(int question_No) {
+//		// TODO Auto-generated method stub
+//		return false;
+//	}
+
 }

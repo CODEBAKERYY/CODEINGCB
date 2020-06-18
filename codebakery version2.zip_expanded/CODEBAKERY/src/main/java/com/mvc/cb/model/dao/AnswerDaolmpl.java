@@ -29,4 +29,48 @@ public class AnswerDaolmpl implements AnswerDao{
 		return list;
 	}
 
+	@Override
+	public int delete(int answer_No) {
+		
+		int res = 0;
+		
+		try {
+			res = sqlSession.delete(NAMESPACE+"delete", answer_No);
+		} catch(Exception e) {
+			System.out.println("[error] : Answer delete");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
+	@Override
+	public int update(AnswerDto dto) {
+		
+		int res  = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"update", dto);
+		} catch(Exception e) {
+			System.out.println("[error] : Answer update");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
+	@Override
+	public int insert(AnswerDto dto) {
+		
+		int res = 0;
+		
+		try {
+			res = sqlSession.insert(NAMESPACE+"insert", dto);
+		} catch(Exception e) {
+			System.out.println("[error] : Answer insert");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
 }
