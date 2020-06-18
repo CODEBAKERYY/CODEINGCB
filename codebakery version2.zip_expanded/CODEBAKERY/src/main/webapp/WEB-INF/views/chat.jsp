@@ -3,7 +3,7 @@
 <html>
 <head>
    	<meta charset="UTF-8">
-    <script src="http://localhost:82/socket.io/socket.io.js"></script>
+    <script src="http://192.168.130.43:82/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
    	<title>socket server</title>
    	<style type="text/css">
