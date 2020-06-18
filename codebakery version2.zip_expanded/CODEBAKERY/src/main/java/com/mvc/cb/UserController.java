@@ -25,17 +25,23 @@ public class UserController {
 	@Autowired
 	private MentorBiz m_biz;
 
-	@Autowired
-	private MentorReviewBiz mr_biz;
-
 	// 메인으로 이동시 해당 정보
 	@RequestMapping(value = "/main.do")
 	public String main(Model model) {
 		logger.info("mentor selectAll");
 		model.addAttribute("mentor", m_biz.selectList());
 		System.out.println(m_biz.selectList());
-		logger.info("mentorReview selectAll");
-//		model.addAttribute("mentorreview", mr_biz.selectList());
+		return "main";
+	}
+	
+	// selectOne
+	@RequestMapping(value = "/mentor_review.do")
+	public String mentorReviewOne(Model model, int mentor_No) {
+
+		logger.info("mentor selectOne");
+		model.addAttribute("review", m_biz.selectOne(mentor_No));
+		System.out.println(m_biz.selectOne(mentor_No));
+
 		return "main";
 	}
 

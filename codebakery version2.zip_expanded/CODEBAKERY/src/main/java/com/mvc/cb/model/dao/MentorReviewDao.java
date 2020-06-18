@@ -6,7 +6,7 @@ import com.mvc.cb.model.dto.MentorReviewDto;
 
 public interface MentorReviewDao {
 	
-	String NAMESPACE = "mentorreview.";
+	String NAMESPACE = "mentorReview.";
 
 	List<MentorReviewDto> selectList();
 
