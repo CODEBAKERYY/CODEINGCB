@@ -201,54 +201,37 @@ CREATE TABLE NOTICE_COMMENT (
 
 --------------------------- DATA INSERT ----------------------------
 
-CREATE TABLE USER_TB (
-	USER_ID	VARCHAR2(20) CONSTRAINT PK_USER_ID PRIMARY KEY,     -- 유저아이디
-	USER_PW	VARCHAR2(50) NOT NULL,                              -- 유저비밀번호
-    USER_GRADE VARCHAR2(20) DEFAULT '일반회원' NOT NULL,                           -- 유저등급
-	USER_NAME VARCHAR2(20) NOT NULL,                            -- 유저이름
-	USER_PHONE VARCHAR2(100) NOT NULL,                          -- 유저폰번호
-	USER_MAIL VARCHAR2(100) NOT NULL,                           -- 유저메일
-	USER_POINT NUMBER,                                          -- 유저 이메일
-	USER_PIC VARCHAR2(100),                                     -- 유저사진
-	USER_LANG VARCHAR2(200) NOT NULL,                           -- 유저선호언어
-    CONSTRAINT CHK_USER_GRADE CHECK (USER_GRADE IN('일반회원','멘토','관리자'))
-);
+INSERT INTO USER_TB VALUES('user1','1234','일반회원','김건영','010-2342-1234','kky@kh.or.kr','userpic','java');
+INSERT INTO USER_TB VALUES('user2','1234','일반회원','박주혁','010-6787-1234','pjyy@kh.or.kr','userpic','java');
+INSERT INTO USER_TB VALUES('user3','1234','일반회원','권민석','010-7942-1234','kms@kh.or.kr','userpic','java');
+INSERT INTO USER_TB VALUES('user4','1234','일반회원','정승연','010-3782-1234','jsy@kh.or.kr','userpic','java');
+INSERT INTO USER_TB VALUES('user5','1234','일반회원','주수현','010-1782-1234','jsh@kh.or.kr','userpic','java');
+INSERT INTO USER_TB VALUES('user6','1234','일반회원','이재익','010-94562-1234','ljl@kh.or.kr','userpic','java');
 
 
-SELECT * FROM USER_TB;
 
-INSERT INTO USER_TB VALUES('user1','1234','일반회원','김건영','010-2342-1234','kky@kh.or.kr',0,'userpic','java');
-INSERT INTO USER_TB VALUES('user2','1234','일반회원','박주혁','010-6787-1234','pjyy@kh.or.kr',0,'userpic','java');
-INSERT INTO USER_TB VALUES('user3','1234','일반회원','권민석','010-7942-1234','kms@kh.or.kr',0,'userpic','java');
-INSERT INTO USER_TB VALUES('user4','1234','일반회원','정승연','010-3782-1234','jsy@kh.or.kr',0,'userpic','java');
-INSERT INTO USER_TB VALUES('user5','1234','일반회원','주수현','010-1782-1234','jsh@kh.or.kr',0,'userpic','java');
-INSERT INTO USER_TB VALUES('user6','1234','일반회원','이재익','010-94562-1234','ljl@kh.or.kr',0,'userpic','java');
+
+SELECT * FROM QUIZ;
 
 INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'삼성 1위 입사자','모든것을 한번에 해결해드립니다.','user1');
 INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'구글 1년 경력','모든것을 한번에 해결해드립니다.','user2');
 INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'애플에서 냄새맡음','모든것을 한번에 해결해드립니다.','user3');
 INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'화웨이출신','모든것을 한번에 해결해드립니다.','user4');
-INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'샤오미출신','모든것을 한번에 해결해드립니다.','user5');
-INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'짱개출신','모든것을 한번에 해결해드립니다.','user6');
-
-INSERT INTO MENTOR_REVIEW VALUES(REIVEWSEQ.NEXTVAL,'별로에요',SYSDATE,'user1',6);
-INSERT INTO MENTOR_REVIEW VALUES(REIVEWSEQ.NEXTVAL,'좋아요',SYSDATE,'user2',6);
-INSERT INTO MENTOR_REVIEW VALUES(REIVEWSEQ.NEXTVAL,'간지나요',SYSDATE,'user3',6);
-INSERT INTO MENTOR_REVIEW VALUES(REIVEWSEQ.NEXTVAL,'배고파요',SYSDATE,'user4',6);
 
 
 
-
---멘토 ALL
-SELECT * FROM MENTOR_INTRO JOIN USER_TB USING(USER_ID);
-
---멘토리뷰 ALL
-SELECT * FROM MENTOR_REVIEW ORDER BY REVIEW_NO DESC;
-
-SELECT * FROM MENTOR_REVIEW WHERE MENTOR_NO = 6;
-
+SELECT * FROM MENTOR_INTRO
+		JOIN USER_TB USING(USER_ID);
 		
-	
+		SELECT * FROM MENTOR_REVIEW
+		ORDER BY REVIEW_NO DESC;
+
+	SELECT * FROM MENTOR_REVIEW
+		ORDER BY REVIEW_NO DESC
+		
+	INSERT INTO MENTOR_REVIEW VALUES(
+	REIVEWSEQ.NEXTVAL,'별로에요',SYSDATE,'admin',6
+	);
 		
 		
 		CREATE TABLE MENTOR_REVIEW (

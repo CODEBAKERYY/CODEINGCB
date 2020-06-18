@@ -19,9 +19,4 @@ public class MentorReviewBizlmpl implements MentorReviewBiz {
 		return dao.selectList();
 	}
 
-	@Override
-	public MentorReviewDto selectOne(int mentor_No) {
-		return dao.selectOne(mentor_No);
-	}
-
 }
