@@ -10,5 +10,11 @@ public interface QuestionDao {
 	
 	public List<QuestionDto> selectList();
 	public QuestionDto selectOne(int question_No);
-
+	public int insert(QuestionDto dto);
+	public int delete(int question_No);
+	public int update(QuestionDto dto);
+	
+	public void plusCnt(int question_No);
+	
+	//public ArrayList<QuestionDto> selectAllQuestion
 }

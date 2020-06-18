@@ -10,6 +10,6 @@ public interface MentorDao {
 
 	List<MentorDto> selectList();
 
-	MentorDto selectOne();
+	MentorDto selectOne(int mentor_No);
 
 }

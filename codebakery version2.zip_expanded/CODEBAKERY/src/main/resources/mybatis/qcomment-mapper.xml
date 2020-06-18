@@ -23,5 +23,21 @@
   		WHERE QUESTION_NO=#{question_No}
   		ORDER BY QCOMMENT_NO DESC
   	</select>
+  	
+  	<insert id="insertQuestion" parameterType="QnACommentDto">
+  		INSERT INTO QNA_COMMENT
+  		VALUES(QCOMMENTSEQ.NEXTVAL, #{question_No}, 0, #{comment_Content}, SYSDATE, 0, NULL, #{user_Id}, NULL)
+  	</insert>
+  	
+  	<delete id="delete" parameterType="int">
+  		DELETE FROM QNA_COMMENT
+  		WHERE QCOMMENT_NO=#{qcomment_No}
+  	</delete>
+  	
+  	<update id="update" parameterType="QnACommentDto">
+  		UPDATE QNA_COMMENT
+  		SET COMMNET_CONTENT = #{comment_Content}, COMMENT_DATE=NOW()
+  		WHERE COMMENT_NO = #{comment_No}
+  	</update>
   
   </mapper>

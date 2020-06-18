@@ -78,24 +78,30 @@
 			감사합니다.<br>
 		</div>
 			
+		
+		<form action="mypage_apply.do" method="post">	
 		<div style="text-align:center;">
 			<div style="padding: 2%;">신청자 &nbsp;&nbsp;
-				<input type="text" style="width:200px; height: 20px;"/><br>
+				<input type="text" name ="applicant" style="width:200px; height: 20px;"/><br>
+				<input type="hidden" name="tomail" size="120" style="width:100%" value="jusu2529@gmail.com" class="form-control" >
 			</div>
 			<div >멘토경력&nbsp;&nbsp;
-				<textarea rows="5" cols="70" style="text-align: center; resize:none;"></textarea>
+				<input type="hidden" name="title" size="120" style="width:100%" value="멘토 신청합니다." class="form-control" >
+				<textarea name="content" rows="5" cols="70" style="text-align: center; resize:none;"></textarea>
+				
 			</div>	
 			<div style="padding: 2%;">멘토소개&nbsp;&nbsp;
-				<textarea rows="15" cols="70" style="text-align: center; resize:none;"></textarea>
+				<textarea  name="content1" rows="15" cols="70" style="text-align: center; resize:none;"></textarea>
 			</div>	
 			<div>
 				<br>
-				<button>신청하기</button>
+			<!-- 	<button>신청하기</button> -->
+				<input type="submit" value="신청하기">
 				<button>취소</button>
 			</div>
 		</div>
+		 </form>
 	</div>
-	
 	<br><br><br><br><br>
 <%@ include file="footer.jsp"%>
 </body>
