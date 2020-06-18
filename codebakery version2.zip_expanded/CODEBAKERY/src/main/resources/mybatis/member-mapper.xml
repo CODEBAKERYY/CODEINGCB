@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="mymember">
+  	<resultMap type="memberDto" id="memberMap">
+  		<result property="user_id" column="USER_ID"/>
+  		<result property="user_pw" column="USER_PW"/>
+  		<result property="user_name" column="USER_NAME"/>
+  		<result property="user_phone" column="USER_PHONE"/>
+  		<result property="user_mail" column="USER_MAIL"/>
+  		<result property="user_point" column="USER_POINT"/>
+  		<result property="user_lang" column="USER_LANG"/>
+  	</resultMap>
+  
+  
+  
+  <!-- parameterType으로 받아서 resultType 타입으로 보내주겠다. -->
+  		<select id="login" parameterType="memberDto" resultType="memberDto">
+  			SELECT USER_ID, USER_PW, USER_NAME, USER_PHONE, USER_MAIL, USER_POINT, USER_LANG
+  			FROM USER_TB
+  			WHERE USER_ID=#{user_id}
+  			AND USER_PW=#{user_pw}
+  		</select>
+  		<!-- 비밀번호가 없는 경우 아이디 많으로 회원의 정보를 가져오는 부분 -->
+  		<select id="getInfo" parameterType="memberDto" resultType="memberDto">
+  			SELECT USER_ID, USER_PW, USER_NAME, USER_PHONE, USER_MAIL, USER_POINT, USER_LANG
+  			FROM USER_TB
+  			WHERE USER_ID=#{user_id}
+  		</select>
+  		
+  		
+  		<delete id="member_delete" parameterType="memberDto" >
+   		    WHERE search-condition
+  			DELETE FROM USER_TB
+  			WHERE USER_ID = ${user_id} AND USER_PW = ${user_pw}
+  	
+  		</delete>
+  		
+  		<update id="memberUpdate" parameterType="memberDto" >
+  			UPDATE USER_TB
+  			SET
+  				USER_PW = #{user_pw},
+  				USER_NAME = #{user_name},
+  				USER_PHONE = #{user_phone},
+  				USER_MAIL = #{user_mail}
+  				<!-- ,USER_LANG = #{user_lang} -->
+  			WHERE
+  				USER_ID = #{user_id}
+  		
+  		</update>
+  		<update id="update_nonpw" parameterType="memberDto" >
+  			UPDATE USER_TB
+  			SET  			
+  				USER_NAME = #{user_name},
+  				USER_PHONE = #{user_phone},
+  				USER_MAIL = #{user_mail}
+  				<!-- ,USER_LANG = #{user_lang} -->
+  			WHERE
+  				USER_ID = #{user_id}
+  		
+  		</update>
+  		
+  		<update id="update_ajax" parameterType="memberDto" >
+  			UPDATE USER_TB
+  			SET
+  				USER_PW = #{user_pw},
+  				USER_NAME = #{user_name},
+  				USER_PHONE = #{user_phone},
+  				USER_MAIL = #{user_mail}
+  				<!-- ,USER_LANG = #{user_lang} -->
+  			WHERE
+  				USER_ID = #{user_id}
+  		
+  		</update>
+  		
+  		
+  		
+  		
+  		
+  		
+  		
+  		
+  		
+  		
+  		
+  		
+  		
+  
+  </mapper>
