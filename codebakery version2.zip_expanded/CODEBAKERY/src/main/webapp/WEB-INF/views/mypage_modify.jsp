@@ -1,4 +1,3 @@
-<%-- <%@page import="com.mvc.cb.model.dto.UserDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -13,9 +12,10 @@
 <link href="resources/fonts.css" rel="stylesheet" type="text/css" media="all" />
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
-<% UserDto user = (UserDto)session.getAttribute("login"); %> 
+<% MemberDto user = (MemberDto)session.getAttribute("login"); %> 
 
 <script type="text/javascript">
+	
 	  $("input:checkbox[id='java']").prop("checked", true);
 
 </script>
@@ -108,7 +108,7 @@ function deactivate(){
 			<tr>
 				<td colspan="2">
 				
-		그냥 수정 <input type="submit" class="button" value="수정" onclick="location.href='modify.do?user_id=${dto.user_id}'">
+		<%-- 그냥 수정 <input type="submit" class="button" value="수정" onclick="location.href='modify.do?user_id=${dto.user_id}'"> --%>
 		<!-- ajax -->
 					<input type="submit" class="button" value="수정" onclick="passwordCheckk();">
 					<input type="button" class="button" value="취소" onclick="#">
@@ -122,4 +122,4 @@ function deactivate(){
 		
 <jsp:include page="footer.jsp"></jsp:include>
 </body>
-</html> --%>
+</html>
