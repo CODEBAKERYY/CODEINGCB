@@ -19,4 +19,20 @@ public class QCommentBizlmpl implements QCommentBiz{
 		return dao.selectList(question_No);
 	}
 
+	@Override
+	public int insert(QnACommentDto dto) {
+		return dao.insert(dto);
+	}
+
+	@Override
+	public int update(QnACommentDto dto) {
+		return dao.update(dto);
+	}
+
+	@Override
+	public int delete(int comment_No) {
+		return dao.delete(comment_No);
+	}
+
+
 }

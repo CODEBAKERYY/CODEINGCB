@@ -41,6 +41,25 @@ Released   : 20130811
 		  font-size: 16px;
 		}
 </style>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+	var list = [];
+	
+	function addTag(){
+		var tag = $("#tag").val();
+		
+		// 글쓰기 내에 태그 추가해주기
+		var a = '<span>'+tag+'</span>&nbsp;&nbsp;';
+		$(".one_tag").append(a);
+		
+		list.push(tag);
+	
+		document.getElementById("tags").innerHTML = list;
+	} 
+</script>
 </head>
 
 <body>
@@ -69,7 +88,9 @@ Released   : 20130811
 				</div>
 				<div class="mb-3">
 					<label for="tag">TAG</label>
-					<input type="text" class="form-control" name="question_Tag" placeholder="태그를 입력해 주세요" >
+					<span><input type="text" class="form-control" id="tag" name="question_Tag"/></span>
+					<input type="button" value="추가" onclick="addTag();"/>
+					<div class="one_tag" id="tags">${dto.question_Tag }</div>
 				</div>
 			<div >
 				<input type="submit" id="btnSave" value="수정완료" />

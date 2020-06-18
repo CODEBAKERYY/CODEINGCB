@@ -33,6 +33,10 @@ public class AnswerBizlmpl implements AnswerBiz{
 	public int insert(AnswerDto dto) {
 		return dao.insert(dto);
 	}
-	
+
+	public int cntAnswer(Integer question_No) {
+		return dao.cntAnswer(question_No);
+	}
+
 
 }
