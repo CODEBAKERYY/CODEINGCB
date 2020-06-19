@@ -25,4 +25,39 @@
 	SELECT * FROM USER_TB WHERE USER_ID = #{user_Id} and USER_PW = #{user_Pw}
 	</select>
 	
+	<select id="getInfo" parameterType="UserDto" resultType="UserDto">
+  			SELECT USER_ID, USER_PW, USER_NAME, USER_PHONE, USER_MAIL, USER_POINT, USER_LANG
+  			FROM USER_TB
+  			WHERE USER_ID=#{user_Id}
+  		</select>
+  		
+  		
+  		<delete id="member_delete" parameterType="UserDto" >
+   		    WHERE USER_TB
+  			DELETE FROM USER_TB
+  			WHERE USER_ID = ${user_Id} AND USER_PW = ${user_Pw}
+  	
+  		</delete>
+  		
+  		<update id="memberUpdate" parameterType="UserDto" >
+  			UPDATE USER_TB
+  			SET
+  				USER_PW = #{user_Pw},
+  				USER_NAME = #{user_Name},
+  				USER_PHONE = #{user_Phone},
+  				USER_MAIL = #{user_Mail}
+  			WHERE
+  				USER_ID = #{user_Id}
+  		
+  		</update>
+  		<update id="update_nonpw" parameterType="UserDto" >
+  			UPDATE USER_TB
+  			SET  			
+  				USER_NAME = #{user_Name},
+  				USER_PHONE = #{user_Phone},
+  				USER_MAIL = #{user_Mail}
+  			WHERE
+  				USER_ID = #{user_Id}
+  		
+  		</update>
 </mapper>
