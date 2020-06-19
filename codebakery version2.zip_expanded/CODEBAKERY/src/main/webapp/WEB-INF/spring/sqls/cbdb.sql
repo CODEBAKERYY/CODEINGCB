@@ -137,9 +137,6 @@ CREATE TABLE QNA_COMMENT (
 	NUSER_ID VARCHAR2(20)
 );
 
-
-DROP TABLE QUIZ;
-SELECT * FROM QUIZ;
 -- 문제게시판
 CREATE TABLE QUIZ (
 	QUIZ_NO	NUMBER CONSTRAINT PK_QUIZ_NO PRIMARY KEY,          -- 문제번호
@@ -201,6 +198,8 @@ CREATE TABLE NOTICE_COMMENT (
 
 --------------------------- DATA INSERT ----------------------------
 
+
+
 INSERT INTO USER_TB VALUES('user1','1234','일반회원','김건영','010-2342-1234','kky@kh.or.kr','userpic','java');
 INSERT INTO USER_TB VALUES('user2','1234','일반회원','박주혁','010-6787-1234','pjyy@kh.or.kr','userpic','java');
 INSERT INTO USER_TB VALUES('user3','1234','일반회원','권민석','010-7942-1234','kms@kh.or.kr','userpic','java');
@@ -211,12 +210,12 @@ INSERT INTO USER_TB VALUES('user6','1234','일반회원','이재익','010-94562-
 
 
 
-SELECT * FROM QUIZ;
 
-INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'삼성 1위 입사자','모든것을 한번에 해결해드립니다.','user1');
-INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'구글 1년 경력','모든것을 한번에 해결해드립니다.','user2');
-INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'애플에서 냄새맡음','모든것을 한번에 해결해드립니다.','user3');
-INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'화웨이출신','모든것을 한번에 해결해드립니다.','user4');
+INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'삼성 1위 입사자','모든것을 한번에 해결해드립니다.','mentor1');
+INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'구글 1년 경력','모든것을 한번에 해결해드립니다.','mentor2');
+INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'애플에서 냄새맡음','모든것을 한번에 해결해드립니다.','mentor3');
+INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'화웨이출신','모든것을 한번에 해결해드립니다.','mentor4');
+INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'화웨이출신','모든것을 한번에 해결해드립니다.','mentor5');
 
 
 
