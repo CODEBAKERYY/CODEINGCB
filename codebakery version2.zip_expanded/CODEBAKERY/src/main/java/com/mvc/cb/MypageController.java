@@ -31,27 +31,36 @@ public class MypageController {
 	
 	@RequestMapping("/modify.do")
 	public String memberUpdate(UserDto dto, HttpSession session,HttpServletResponse response) {
-		System.out.println("user_id = " +dto.getUser_Id());
+		System.out.println("user_id 여기까지= " +dto.getUser_Id());
 		System.out.println("user_name = " +dto.getUser_Name());
 		System.out.println("user_phone = " +dto.getUser_Phone());
 		System.out.println("user_mail = " +dto.getUser_Mail());
 		
-		biz.update_nonpw(dto);
-		session.removeAttribute("login");
-		UserDto res = biz.getInfo(dto);
-		UserDto reres = u_biz.login(res);
 		
-		
-		if(reres!=null) {
-			session.setAttribute("login", res);
+		if(dto.getUser_Pw() == null || dto.getUser_Pw() == "") {
+			biz.update_nonpw(dto);
+			session.removeAttribute("User");
+			UserDto res = biz.getInfo(dto);
+			System.out.println("getInfo "+res);
+			UserDto reres = u_biz.login(res);
+			
+			if(reres!=null) {
+				session.setAttribute("User", res);
+			}else {
+				System.out.println("수정 실패!!");
+			}			
+			
+			return "mypage_modify";
 		}else {
-			System.out.println("수정 실패!!");
-		}
-		
-		
-		
-		
-		return "mypage_modify";
+			
+			biz.updateMember(dto);
+			session.removeAttribute("User");
+			UserDto res = u_biz.login(dto);
+			session.setAttribute("User", res);
+			
+			return "mypage_modify";
+			
+		}		
 	}
 	
 	
