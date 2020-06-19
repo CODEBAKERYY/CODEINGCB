@@ -23,7 +23,7 @@
 	</header>
 		
 	<form action="insertQuiz.do" method="post">
-	<input type="hidden" name="user_Id" value="admin">
+	<input type="hidden" name="user_Id" value="${User.user_Id }">
 	<div id="contact" class="container">
 		<section id="description">
 			<div class="headline">

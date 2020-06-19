@@ -38,6 +38,7 @@ public class MentorController {
 		logger.info("mentor selectOne");
 		model.addAttribute("mentor", m_biz.selectOne(mentor_No));
 		System.out.println(m_biz.selectOne(mentor_No));
+		model.addAttribute("review", mr_biz.selectOne(mentor_No));
 
 		return "mentor_detailOne";
 	}

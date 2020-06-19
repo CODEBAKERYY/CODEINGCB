@@ -63,7 +63,7 @@ CREATE TABLE USER_TB (
 	USER_PHONE VARCHAR2(100) NOT NULL,                          -- 유저폰번호
 	USER_MAIL VARCHAR2(100) NOT NULL,                           -- 유저메일
 	USER_POINT NUMBER,                                          -- 유저 이메일
-	USER_PIC VARCHAR2(100),                                     -- 유저사진
+	USER_PIC VARCHAR2(1000),                                     -- 유저사진
 	USER_LANG VARCHAR2(200) NOT NULL,                           -- 유저선호언어
     CONSTRAINT CHK_USER_GRADE CHECK (USER_GRADE IN('일반회원','멘토','관리자'))
 );
@@ -246,5 +246,7 @@ SELECT * FROM MENTOR_INTRO
 		
 		
 SELECT * FROM NOTICE;
+
+SELECT * FROM USER_TB;
 COMMIT;
 
