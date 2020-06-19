@@ -198,7 +198,6 @@ background-color: white;
 			</ul>
 		</div>
 	</div>
-
 	<div id="featured-wrapper">
 		<div id="featured" class="container">
 			<div class="major">

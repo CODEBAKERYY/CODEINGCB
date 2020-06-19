@@ -58,9 +58,7 @@
 					<input type="text" name="user_Mail"> <span></span> <label>email</label>
 				</div>
 				<div class="txt_field">
-					<input type="file" id="photo" name="user_Pic" value="classpath"
-						style="display: none"> <input type="text" id="phototext"
-						required> <span></span> <label>photo</label>
+					<input type="file" id="photo" name="pic"><span></span> 
 				</div>
 				<div class="language">
 					<div>Preferred language</div>

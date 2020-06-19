@@ -5,8 +5,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -14,9 +17,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.util.WebUtils;
 
 import com.mvc.cb.biz.MentorBiz;
@@ -42,7 +48,7 @@ public class UserController {
 		System.out.println(m_biz.selectList());
 		return "main";
 	}
-	
+
 	// selectOne
 	@RequestMapping(value = "/mentor_review.do")
 	public String mentorReviewOne(Model model, int mentor_No) {
@@ -62,17 +68,60 @@ public class UserController {
 
 	// 회원가입 폼 이동
 	@RequestMapping("/signup.do")
-	public String insertRes(UserDto dto) {
+	public String insertRes(UserDto dto, MultipartFile pic, HttpServletRequest request, HttpServletResponse response) {
 		logger.info("signup");
 		System.out.println(dto);
+		String originalFile = pic.getOriginalFilename();
+//		String uploadPath = request.getSession().getServletContext().getRealPath("./upload"); // 업로드 경로
+
+		InputStream inputStream = null;
+		OutputStream outputStream = null;
+
+		try {
+			inputStream = pic.getInputStream();
+			String path = WebUtils.getRealPath(request.getSession().getServletContext(), "/upload");
+			System.out.println("업로드 될 실제 경로 : " + path);
+
+			File storage = new File(path);
+			if (!storage.exists()) { // 경로 존재 여부
+				storage.mkdirs(); // 디렉토리 생성
+			}
+			File newfile = new File(path + "/" + originalFile);
+			if (!newfile.exists()) {
+				newfile.createNewFile();
+			}
+
+			outputStream = new FileOutputStream(newfile);
+
+			int read = 0;
+			byte[] b = new byte[(int) pic.getSize()];
+
+			//
+			while ((read = inputStream.read(b)) != -1) {
+				outputStream.write(b, 0, read);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				inputStream.close();
+				outputStream.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		String user_Pic = "/" + originalFile;
+		dto.setUser_Pic(user_Pic);
 		int res = u_biz.signup(dto);
+
 		if (res > 0) {
 			return "redirect:main.do";
 		} else {
 			return "redirect:signup.do";
 		}
 	}
-	
+
 	// 로그인 폼 이동
 	@RequestMapping("login.do")
 	public String login() {
@@ -90,4 +139,5 @@ public class UserController {
 		}
 		return "redirect:main.do";
 	}
+
 }
