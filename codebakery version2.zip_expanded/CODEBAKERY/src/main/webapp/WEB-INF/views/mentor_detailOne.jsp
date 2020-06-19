@@ -63,7 +63,7 @@
                 </c:if>
                 <script type="text/javascript">
                 	function apply(){
-                   		alert('회원만 이용할 수 있습니다.');
+                   		alert('로그인 후 이용할 수 있습니다.');
                    	}
                 </script>
                     
