@@ -151,14 +151,11 @@ background-color: white;
 				varStatus="i" step="1">
 				<div class="column${i.index} ">
 					<a href="mentor_detail.do?mentor_No=${dto.mentor_No}"
-						class="image image-full"> <img
-						src="${pageContext.request.contextPath}/upload${dto.user_Pic}"
-						height="150" alt="" />
-					</a>
+						class="image image-full"><img src="resources/images/pic01.jpg"
+						height="150" alt="" /></a>
 					<div class="box">
 						<p>${dto.mentor_Content}</p>
-						<a href="mentor_review.do?mentor_No=${dto.mentor_No}"
-							class="button">리뷰보기</a>
+						<a href="mentor_review.do?mentor_No=${dto.mentor_No}" class="button">리뷰보기</a>
 					</div>
 				</div>
 			</c:forEach>
