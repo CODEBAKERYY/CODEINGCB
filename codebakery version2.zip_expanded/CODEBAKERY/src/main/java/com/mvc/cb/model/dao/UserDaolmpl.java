@@ -29,13 +29,27 @@ public class UserDaolmpl implements UserDao {
 
 	@Override
 	public UserDto login(UserDto dto) {
-		
+
 		System.out.println("로그인 왔다");
 		UserDto res = null;
 
 		try {
 			res = sqlSession.selectOne(NAMESPACE + "login", dto);
 			System.out.println("로그인 가져왔다");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	@Override
+	public UserDto idchk(String user_Id) {
+
+		UserDto res = null;
+
+		try {
+			res = sqlSession.selectOne(NAMESPACE + "idcheck", user_Id);
+			System.out.println("idcheck했다");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

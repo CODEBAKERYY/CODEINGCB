@@ -20,9 +20,13 @@
 		INSERT INTO USER_TB
 		VALUES(#{user_Id},#{user_Pw},'일반회원',#{user_Name},#{user_Phone},#{user_Mail},#{user_Point},#{user_Pic},#{user_Lang})
 	</insert>
-	
+
 	<select id="login" parameterType="UserDto" resultType="UserDto">
-	SELECT * FROM USER_TB WHERE USER_ID = #{user_Id} and USER_PW = #{user_Pw}
+		SELECT * FROM USER_TB WHERE USER_ID = #{user_Id} and USER_PW = #{user_Pw}
 	</select>
-	
+
+	<select id="idcheck" parameterType="String" resultType="UserDto">
+		SELECT * FROM USER_TB WHERE USER_ID = #{user_Id}
+	</select>
+
 </mapper>
