@@ -42,5 +42,7 @@
   		FROM ANSWER
   		WHERE QUESTION_NO = #{question_No}
   	</select>
+  	
+ 
   
   </mapper>
