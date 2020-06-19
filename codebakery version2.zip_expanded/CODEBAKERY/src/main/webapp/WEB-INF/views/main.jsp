@@ -147,11 +147,10 @@ background-color: white;
 				<h2>자랑스러운 멘토</h2>
 				<span class="byline">국내 최고의 멘토진들을 소개합니다</span>
 			</div>
-			<c:forEach items="${mentor }" var="dto" begin="1" end="4"
-				varStatus="i" step="1">
-				<div class="column${i.index} ">
+			<c:forEach items="${mentor }" var="dto" begin="0" end="3" varStatus="i" step="1">
+				<div class="column${i.index+1} ">
 					<a href="mentor_detail.do?mentor_No=${dto.mentor_No}"
-						class="image image-full"><img src="resources/images/pic01.jpg"
+						class="image image-full"><img src="${pageContext.request.contextPath}/upload${dto.user_Pic }"
 						height="150" alt="" /></a>
 					<div class="box">
 						<p>${dto.mentor_Content}</p>
@@ -161,7 +160,6 @@ background-color: white;
 			</c:forEach>
 		</div>
 	</div>
-
 	<!-- <div class="column2">
 				<a href="#" class="image image-full"><img
 					src="resources/images/pic02.jpg" height="150" alt="" /></a>
