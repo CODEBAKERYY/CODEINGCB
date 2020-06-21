@@ -50,7 +50,7 @@
 </head>
 <body>
 	<%@ include file="header.jsp"%>
-	<c:forEach items="${mentor }" var="dto" begin="1" end="4" varStatus="i"
+	<c:forEach items="${mentor }" var="dto" begin="0" end="4" varStatus="i"
 		step="1">
 		<div id="page" class="container">
 			<div id="content">
@@ -63,7 +63,7 @@
 				<p>${dto.mentor_Content}</p>
 			</div>
 			<div id="sidebar">
-				<a href="#" class="image image-full"><img src="images/pic05.jpg"
+				<a href="#" class="image image-full"><img src="${pageContext.request.contextPath}/upload${dto.user_Pic}"
 					alt="" /></a>
 			</div>
 		</div>
