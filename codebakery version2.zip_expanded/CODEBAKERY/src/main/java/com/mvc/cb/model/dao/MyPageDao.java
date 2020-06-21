@@ -4,7 +4,7 @@ import com.mvc.cb.model.dto.UserDto;
 
 public interface MyPageDao {
 
-	String NAMESPACE = "myuser";
+	String NAMESPACE = "myuser.";
 	
 	public int updateMember(UserDto dto);
 
