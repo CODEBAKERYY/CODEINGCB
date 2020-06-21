@@ -17,12 +17,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.util.WebUtils;
 
 import com.mvc.cb.biz.MentorBiz;
@@ -138,6 +137,24 @@ public class UserController {
 			session.setAttribute("User", res);
 		}
 		return "redirect:main.do";
+	}
+
+	// 아이디 체크
+	@RequestMapping(value = "idcheck.do", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, UserDto> idchk(@RequestBody UserDto dto) {
+
+		System.out.println("ajax넘어왔다");
+		System.out.println(dto.getUser_Id());
+
+		logger.info("ID CHECK");
+		String user_Id = dto.getUser_Id();
+		System.out.println(user_Id);
+		UserDto res = u_biz.idcheck(user_Id);
+		System.out.println("ajax: res : "+res);
+		Map<String, UserDto> map = new HashMap<String, UserDto>();
+		map.put("code", res);
+		return map;
 	}
 
 }
