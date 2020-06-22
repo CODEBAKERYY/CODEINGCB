@@ -21,16 +21,14 @@ public class MyPageBizlmpl implements MyPageBiz{
 		return dao.non_pw_update(dto);
 	}
 
-
+	@Override
+	public int member_delete(UserDto dto) {
+		return dao.member_delete(dto);
+	}
 
 	@Override
 	public UserDto getInfo(UserDto dto) {
 		return dao.getInfo(dto);
-	}
-
-	@Override
-	public int deactivate(UserDto dto) {
-		return dao.deactivate(dto);
 	}
 
 }
