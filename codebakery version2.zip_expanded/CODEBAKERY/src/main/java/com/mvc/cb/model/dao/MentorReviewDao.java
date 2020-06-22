@@ -12,4 +12,6 @@ public interface MentorReviewDao {
 
 	MentorReviewDto selectOne(int mentor_No);
 
+	List<MentorReviewDto> reviewAll(int mentor_No);
+
 }

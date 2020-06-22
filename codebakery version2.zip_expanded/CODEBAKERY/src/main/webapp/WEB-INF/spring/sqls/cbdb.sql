@@ -195,6 +195,7 @@ CREATE TABLE NOTICE_COMMENT (
 
 --------------------------- DATA INSERT ----------------------------
 
+<<<<<<< HEAD
 -- USER_TB
 INSERT INTO USER_TB VALUES('ADMIN','1234','관리자', '관리자','010-2345-6767', 'admin@kh.or.kr', 0, NULL, NULL);
 INSERT INTO USER_TB VALUES('user1','1234','일반회원','김건영','010-2342-1234','kky@kh.or.kr', 0,'userpic','java');
@@ -247,6 +248,18 @@ INSERT INTO QUIZ
 VALUES(QUIZSEQ.NEXTVAL, '퀴즈 제목01', '퀴즈 내용01', SYSDATE, 0, 0, 0, 0,'인풋 설명01', '인풋 설명01', '인풋 샘플01', '아웃풋 샘플01','user3');
 INSERT INTO QUIZ
 VALUES(QUIZSEQ.NEXTVAL, '퀴즈 제목02', '퀴즈 내용02', SYSDATE, 0, 0, 0, 0,'인풋 설명02', '인풋 설명02' , '인풋 샘플02', '아웃풋 샘플02', 'user4');		
+=======
+INSERT INTO USER_TB VALUES('user1','1234','일반회원','김건영','010-2342-1234','kky@kh.or.kr','userpic','java');
+INSERT INTO USER_TB VALUES('user2','1234','일반회원','박주혁','010-6787-1234','pjyy@kh.or.kr','userpic','java');
+INSERT INTO USER_TB VALUES('user3','1234','일반회원','권민석','010-7942-1234','kms@kh.or.kr','userpic','java');
+INSERT INTO USER_TB VALUES('user4','1234','일반회원','정승연','010-3782-1234','jsy@kh.or.kr','userpic','java');
+INSERT INTO USER_TB VALUES('user5','1234','일반회원','주수현','010-1782-1234','jsh@kh.or.kr','userpic','java');
+INSERT INTO USER_TB VALUES('user6','1234','일반회원','이재익','010-94562-1234','ljl@kh.or.kr','userpic','java');
+INSERT INTO USER_TB VALUES('user6','1234','일반회원','이재익','010-94562-1234','ljl@kh.or.kr','userpic','java');
+
+SELECT * FROM USER_TB;
+UPDATE USER_TB SET USER_GRADE ='관리자' WHERE USER_ID = 'muser';
+>>>>>>> master
 
 SELECT * FROM QUIZ;
 
@@ -291,9 +304,20 @@ SELECT * FROM MENTOR_INTRO
 		ORDER BY REVIEW_NO DESC
 		
 	INSERT INTO MENTOR_REVIEW VALUES(
-	REIVEWSEQ.NEXTVAL,'별로에요',SYSDATE,'admin',6
+	REIVEWSEQ.NEXTVAL,'별로에요',SYSDATE,'mentor2',1
 	);
+	INSERT INTO MENTOR_REVIEW VALUES(
+	REIVEWSEQ.NEXTVAL,'좋아요',SYSDATE,'mentor2',1
+	);
+	INSERT INTO MENTOR_REVIEW VALUES(
+	REIVEWSEQ.NEXTVAL,'굿이에요',SYSDATE,'mentor2',1
+	);
+	SELECT * FROM MENTOR_REVIEW WHERE MENTOR_NO = 1;
 		
 
 COMMIT;
+SELECT COUNT(*) FROM QNA_COMMENT;
 
+SELECT * FROM
+		MENTOR_REVIEW
+		WHERE MENTOR_NO = 1;

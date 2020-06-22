@@ -60,4 +60,7 @@
 	</select>
 	
 	<!-- 페이징 END -->
+	<select id="count" resultType="int">
+	SELECT COUNT(*) FROM QUESTION
+	</select>
  </mapper>

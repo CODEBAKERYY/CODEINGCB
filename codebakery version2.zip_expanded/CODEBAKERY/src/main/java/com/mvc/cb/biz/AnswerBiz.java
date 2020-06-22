@@ -18,4 +18,6 @@ public interface AnswerBiz {
 
 	public int cntAnswer(Integer question_No);
 
+	public int count();
+
 }

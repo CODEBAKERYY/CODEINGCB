@@ -15,6 +15,7 @@ public interface QuestionDao {
 	public int update(QuestionDto dto);
 	
 	public void plusCnt(int question_No);
+	public int count();
 	
 	//public ArrayList<QuestionDto> selectAllQuestion
 }

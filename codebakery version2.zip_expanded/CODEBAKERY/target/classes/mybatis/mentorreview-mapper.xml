@@ -18,7 +18,9 @@
 		ORDER BY REVIEW_NO DESC
 	</select>
 
-	<select id="selectOne" resultType="MentorReviewDto">
-
+	<select id="mentorReview" resultMap="MentorReviewMap" parameterType="int">
+		SELECT * FROM
+		MENTOR_REVIEW
+		WHERE MENTOR_NO = #{mentor_No}
 	</select>
 </mapper>

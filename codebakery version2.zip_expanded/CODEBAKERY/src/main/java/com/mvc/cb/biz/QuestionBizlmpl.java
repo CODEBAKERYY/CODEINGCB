@@ -44,6 +44,11 @@ public class QuestionBizlmpl implements QuestionBiz{
 		dao.plusCnt(question_No);
 	}
 
+	@Override
+	public int count() {
+		return dao.count();
+	}
+
 
 //	@Override
 //	public int countBoard() {

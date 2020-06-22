@@ -9,8 +9,8 @@ import com.mvc.cb.model.dao.QCommentDao;
 import com.mvc.cb.model.dto.QnACommentDto;
 
 @Service
-public class QCommentBizlmpl implements QCommentBiz{
-	
+public class QCommentBizlmpl implements QCommentBiz {
+
 	@Autowired
 	private QCommentDao dao;
 
@@ -33,6 +33,5 @@ public class QCommentBizlmpl implements QCommentBiz{
 	public int delete(int comment_No) {
 		return dao.delete(comment_No);
 	}
-
 
 }
