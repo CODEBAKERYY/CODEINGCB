@@ -207,7 +207,9 @@ INSERT INTO USER_TB VALUES('user3','1234','일반회원','권민석','010-7942-1
 INSERT INTO USER_TB VALUES('user4','1234','일반회원','정승연','010-3782-1234','jsy@kh.or.kr','userpic','java');
 INSERT INTO USER_TB VALUES('user5','1234','일반회원','주수현','010-1782-1234','jsh@kh.or.kr','userpic','java');
 INSERT INTO USER_TB VALUES('user6','1234','일반회원','이재익','010-94562-1234','ljl@kh.or.kr','userpic','java');
+INSERT INTO USER_TB VALUES('user7','1234','일반회원','홍길동','010-94562-1234','ljl@kh.or.kr',100,'userpic','java');
 
+select * from user_tb;
 
 
 
