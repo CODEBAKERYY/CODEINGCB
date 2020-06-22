@@ -29,6 +29,11 @@ public class MypageController {
 		return "mypage_modify";
 	}
 	
+	@RequestMapping("admin.do")
+	public String Admin() {
+		return "admin_mypage";
+	}
+	
 	@RequestMapping("/modify.do")
 	public String memberUpdate(UserDto dto, HttpSession session,HttpServletResponse response) {
 		System.out.println("user_id = " +dto.getUser_Id());

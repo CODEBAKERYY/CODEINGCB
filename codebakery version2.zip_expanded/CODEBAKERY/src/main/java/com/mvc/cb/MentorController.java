@@ -27,7 +27,8 @@ public class MentorController {
 		logger.info("mentor selectAll");
 		model.addAttribute("mentor", m_biz.selectList());
 		logger.info("mentorReview SelectAll");
-		model.addAttribute("mentorReview", mr_biz.selectList());
+		model.addAttribute("review", mr_biz.selectList());
+		System.out.println(mr_biz.selectList());
 		return "mentor_detail";
 	}
 
@@ -38,7 +39,7 @@ public class MentorController {
 		logger.info("mentor selectOne");
 		model.addAttribute("mentor", m_biz.selectOne(mentor_No));
 		System.out.println(m_biz.selectOne(mentor_No));
-		model.addAttribute("review", mr_biz.selectOne(mentor_No));
+		model.addAttribute("review", mr_biz.reviewAll(mentor_No));
 
 		return "mentor_detailOne";
 	}

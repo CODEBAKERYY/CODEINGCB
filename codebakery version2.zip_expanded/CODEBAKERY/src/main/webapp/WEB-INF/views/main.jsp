@@ -123,9 +123,9 @@ background-color: white;
 					}
 				};
 
-				new numberCounter("counter1", 300);
-				new numberCounter("counter2", 25);
-				new numberCounter("counter3", 23);
+				new numberCounter("counter1", ${answer});
+				new numberCounter("counter2", ${quiz});
+				new numberCounter("counter3", ${question});
 				new numberCounter("counter4", 5);
 			});
 </script>
@@ -147,14 +147,18 @@ background-color: white;
 				<h2>자랑스러운 멘토</h2>
 				<span class="byline">국내 최고의 멘토진들을 소개합니다</span>
 			</div>
-			<c:forEach items="${mentor }" var="dto" begin="0" end="3" varStatus="i" step="1">
+			<c:forEach items="${mentor }" var="dto" begin="0" end="3"
+				varStatus="i" step="1">
 				<div class="column${i.index+1} ">
 					<a href="mentor_detail.do?mentor_No=${dto.mentor_No}"
-						class="image image-full"><img src="${pageContext.request.contextPath}/upload${dto.user_Pic }"
+						class="image image-full"><img
+						src="${pageContext.request.contextPath}/upload${dto.user_Pic }"
 						height="150" alt="" /></a>
 					<div class="box">
 						<p>${dto.mentor_Content}</p>
-						<a href="mentor_review.do?mentor_No=${dto.mentor_No}" class="button">리뷰보기</a>
+						<p>mentor No : ${dto.mentor_No }</p>
+						<a href="mentor_review.do?mentor_No=${dto.mentor_No}"
+							class="button">리뷰보기</a>
 					</div>
 				</div>
 			</c:forEach>
@@ -190,8 +194,9 @@ background-color: white;
 	<div id="reviewclass">
 		<div class="slideWrap">
 			<ul class="slideUl">
-				<c:forEach items="${review }" var="review" varStatus="i" step="1">
-					<li class="banner${i.index}">${review.review_Content}</li>
+				<c:forEach items="${review }" var="review" varStatus="i" begin="0"
+					end="5" step="1">
+					<li class="banner${i.index+1}">${review.review_Content}</li>
 				</c:forEach>
 			</ul>
 		</div>

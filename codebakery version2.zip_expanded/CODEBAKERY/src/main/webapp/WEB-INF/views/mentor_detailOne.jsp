@@ -66,16 +66,29 @@
 		</div>
 	</div>
 	<div class="container">
-		<table class='table'>
-			<tr>
-				<span style="font-size: 18px;">user3</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<span style="color: grey; font-size: 14px;">2020.04.23 17:16</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<hr></hr>
-			</tr>
-			<tr>
-				<td>공지사항 댓글입니다.333333</td>
-			</tr>
-		</table>
+		<c:choose>
+			<c:when test="${empty review }">
+				<tr>
+					<td colspan="4" align="center">------------- 작성된 글이 없습니다.
+						-------------</td>
+				</tr>
+			</c:when>
+			<c:otherwise>
+				<c:forEach items="${review }" var="dto" begin="0" end="3"
+					varStatus="i" step="1">
+					<table class='table'>
+						<tr>
+							<span style="font-size: 18px;">${dto.user_Id }</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<span style="color: grey; font-size: 14px;">${dto.review_Date }</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<hr></hr>
+						</tr>
+						<tr>
+							<td>${dto.review_Content }</td>
+						</tr>
+					</table>
+				</c:forEach>
+			</c:otherwise>
+		</c:choose>
 	</div>
 	<!-- 	<table class="type03">
 		<tr>
