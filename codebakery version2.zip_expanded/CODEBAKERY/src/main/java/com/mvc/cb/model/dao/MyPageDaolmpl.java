@@ -21,13 +21,11 @@ public class MyPageDaolmpl implements MyPageDao{
 	@Override
 	public int non_pw_update(UserDto dto) {
 		System.out.println("non_pw_update안돌아?");
+		//수정할 부분
 		return sqlSession.update(NAMESPACE+"update_nonpw",dto);
 	}
 
-	@Override
-	public int member_delete(UserDto dto) {
-		return sqlSession.delete(NAMESPACE+"member_delete",dto);
-	}
+
 
 	@Override
 	public UserDto getInfo(UserDto dto) {
@@ -38,6 +36,13 @@ public class MyPageDaolmpl implements MyPageDao{
 				e.printStackTrace();
 			}
 			
+		return res;
+	}
+
+	@Override
+	public int deactivate(UserDto dto) {
+		System.out.println("탈퇴 진행중"); 
+		int res = sqlSession.delete(NAMESPACE+"member_delete", dto);
 		return res;
 	}
 

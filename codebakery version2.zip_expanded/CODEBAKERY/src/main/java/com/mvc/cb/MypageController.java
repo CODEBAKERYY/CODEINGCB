@@ -1,5 +1,8 @@
 package com.mvc.cb;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -62,7 +65,40 @@ public class MypageController {
 			
 		}		
 	}
+	@RequestMapping("deactivatepopup.do")
+	public String deactivatePopup() {
+		return "deactivate";
+	}
 	
+	@RequestMapping("deactivate.do")
+	public String deactivate(UserDto dto,HttpSession session, HttpServletResponse response) throws IOException {
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+				//비밀번호 불일 치 시 알림
+		UserDto res = biz.getInfo(dto);
+		System.out.println(dto.getUser_Pw()+"/"+res.getUser_Pw());
+		
+		if( !dto.getUser_Pw().equals( res.getUser_Pw()) ) {
+			
+			out.println("<script>alert('비밀번호가 일치하지 않습니다.');</script>");
+			out.flush();
+			return "mypage_modify";
+			
+		}else if( dto.getUser_Pw().equals( res.getUser_Pw())){
+				biz.deactivate(dto);
+				System.out.println("탈퇴 진행 마무리 메인으로 이동");
+				
+				session.removeAttribute("User");
+				
+				
+				out.println("<script>alert('계정이 삭제되었습니다.'); window.close();</script>");
+			
+		}
+		
+		out.flush();
+		return "main";
+		 
+	}
 	
 	
 

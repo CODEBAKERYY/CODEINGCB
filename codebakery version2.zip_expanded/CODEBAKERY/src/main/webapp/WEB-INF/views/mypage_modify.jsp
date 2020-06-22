@@ -31,10 +31,15 @@ function passwordCheckk(){
     }
     
  }
-
+var openPop1;
 function deactivate(){
-	var url="deactivatepopup.do";
-	window.open(url,"","width=400,height=300,left=400,top=100");
+	//팝업 창으로 user_id 전달하는 부분
+	window.name="deactivate";
+	openWin = window.open("deactivatepopup.do",
+            "", "width=570, height=350, resizable = no, scrollbars = no"); 
+
+    openWin.document.getElementById("user_Id").value = document.getElementById("user_Id").value;
+
 }
 
 </script>
