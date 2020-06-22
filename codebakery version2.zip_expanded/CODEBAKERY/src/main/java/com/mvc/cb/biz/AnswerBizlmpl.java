@@ -38,5 +38,10 @@ public class AnswerBizlmpl implements AnswerBiz{
 		return dao.cntAnswer(question_No);
 	}
 
+	@Override
+	public int count() {
+		return dao.count();
+	}
+
 
 }

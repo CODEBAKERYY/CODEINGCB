@@ -47,4 +47,16 @@ public class QuizDaolmpl implements QuizDao{
 		
 		return quizList;
 	}
+
+	@Override
+	public int count() {
+		int res = 0;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE+"count");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
 }
