@@ -20,13 +20,17 @@ function passwordCheckk(){
     alert("값 잘 받아옴"+password+"/"+passwordCheck);
    
     if( (passwordCheck =="" && password=="") || (passwordCheck == null && password == null)){
-       alert("수정되었습니다.");
-       return true;
+          alert("수정 진행중.");
+    	
+       form.action="modify.do";
        
     }else if(password != passwordCheck){
-          alert("비밀번호가 일치하지 않습니다.")
-          return false;
+          alert("비밀번호가 일치하지 않습니다.");
+          
+          form.action="mypage_modify";
+          
     }else{
+    	
   	  return true;
     }
     
@@ -50,7 +54,7 @@ function deactivate(){
 		<div class="title" style="margin-bottom: 20px; margin-top: 20px">
 			<h2>마이페이지 수정</h2>
 		</div>
-		<form action="modify.do" method="post">
+		<form method="post">
 		<table class="tableForm" style="margin: auto; width: 60%; height: 800px; text-align: center; font-size: 22px">
 			<tr>
 				<th>ID</th>
