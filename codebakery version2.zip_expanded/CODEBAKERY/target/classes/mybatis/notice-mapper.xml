@@ -14,9 +14,9 @@
   		<result property="user_Id" column="USER_ID"/>
   	</resultMap>
 	
-	<select id="selectList" resultMap="NoticeMap" parameterType="java.util.HashMap">
-  		SELECT * FROM (SELECT ROWNUM RN, A.* FROM (SELECT * FROM NOTICE ORDER BY NOTICE_NO DESC ) A)
-		WHERE RN BETWEEN #{start} AND #{end}
+	<select id="selectList" parameterType="Pagination" resultMap="NoticeMap">
+  		SELECT NOTICE_NO, NOTICE_TITLE, NOTICE_CONTENT, NOTICE_DATE, NOTICE_VIEWS, USER_ID FROM NOTICE
+  		ORDER BY NOTICE_NO
   	</select>
   	
   	<select id="selectOne" parameterType="int" resultType="NoticeDto">
@@ -48,7 +48,8 @@
 	</update>
 	
 	<select id="pageCnt" resultType="int">
-		SELECT count(NOTICE_NO) FROM NOTICE
+		SELECT count(*) as listCnt
+		FROM NOTICE
 	</select>
 	
 

@@ -2,90 +2,137 @@ package com.mvc.cb.model.dto;
 
 public class PageNavigator {
 	
-	   private int page; // 페이지 번호 : 현재 몇 페이지 인지 << [1] [2] [3] [4] [5] >> 이런 식의 페이지 번호를 나타내는 것.
-	   private int totalPage; // 페이지 갯수 :  << [1] [2] [3] [4] [5] >> 총 5개의 페이지
-	   private int pageSize = 10; // 한 페이지 게시글 개수 : 한 페이지에 출력 될 개시글 개수
-	   private int totalArticle; //전체 게시글 개수
-	   private int startRow; // 한 페이지에 게시글 시작 행
-	   private int endRow; // 한 페이지에 게시글 끝 행
-	   // -----> 한 페이지 내에 출력되는 게시글의 개수가 10개라면, startRow + endRow 합쳐서 한 페이지 당 총 10개 보여주기. (startRow(1) + endRow(10))
-	   
-	   public PageNavigator() {
-	      super();
-	   }
-	      
-	   
-	   // 페이지 번호 설정
-	   public void setPage(int page) {
-	      // 페이지 번호가 없을 때 1로 맞춰줌
-	      if (page <= 0) {
-	         this.page = 1;
-	         return;
-	      }
-	      this.page = page;
-	   }
+	private int countPerPage; //페이지당 글 목록수
+	//한페이지의 청원 갯수
+	private int pagePerGroup; //그룹당 페이지 수
+	//<1 2 3 4 5> 그룹당 페이지의 갯수 => 5
+	private int currentPage; //현재 페이지(최근 글이 1부터 시작)
+	//client가 보고있는 현재 페이지
+	private int totalRecordsCount; //전체 글 수
+	//데이터베이스에 데이터가 몇개가 들어가 있냐
+	private int totalPageCount; //전체 페이지수
+	//최대 100페이지면 100을 의미한다. 
+	private int currentGroup;  //현재 그룹
+	//<123><456> 5를 선택했으면 첫번쨰 ,그룹 0부터시작 <123>은 0 <456>은 1
+	private int startPageGroup;  //현재 그룹의 첫 페이지
+	private int endPageGroup;  //현재 그룹의 마지막 페이지
+	private int startRecord;  //전체 레코드 중 현재 페이지 첫 글의 위치(0부터 시작)
+	//select할 때 어디서 어디까지 가져와야하는지 알아야하기 때문에 쓰인다.
+	//페이지를 클릭했을 때 맨첫번째 나오는 리스트 
+	
+	public PageNavigator(int countPerPage, int pagePerGroup, int currentPage, int totalRecordsCount) {
+		//페이지당 글 수 , 그룹당 페이지 수 , 현재 페이지 , 전체 글 수를 전달받음
+		this.countPerPage = countPerPage;
+		this.pagePerGroup = pagePerGroup;
+		this.totalRecordsCount = totalRecordsCount;
+		
+		//전체 페이지 수
+		totalPageCount = (totalRecordsCount + countPerPage-1) / countPerPage;
+		
+		//전달된 현재 페이지가 1보다 작으면 현재페이지를 1페이지로 고정
+		if(currentPage < 1) currentPage = 1;
+		
+		//전달된 현재 페이지가 마지막 페이지보다 크면 현재페이지를 마지막 페이지로 고정
+		if(currentPage > totalPageCount) currentPage = totalPageCount;
+		
+		this.currentPage = currentPage;
+		
+		//현재 그룹
+		currentGroup = (currentPage -1 ) / pagePerGroup;
+		
+		//현재 그룹의 첫 페이지
+		startPageGroup = currentGroup * pagePerGroup + 1;
+		//현재 그룹의 첫 페이지가 1보다 작으면 1로 처리
+		startPageGroup = startPageGroup < 1 ? 1 : startPageGroup;
+		//현재 그룹의 마지막 페이지
+		endPageGroup = startPageGroup + pagePerGroup - 1;
+		//현재 그룹의 마지막 페이지가 전체 페이지 수보다 작으면 전체 페이지 수를 마지막으로
+		endPageGroup = endPageGroup < totalPageCount ? endPageGroup : totalPageCount;
+		
+		//전체 레코드 중 현재 페이지 첫 글의 위치
+		startRecord = (currentPage -1 )* countPerPage;
 
-	   public void setPageSize(int pageSize) {
-	      this.pageSize = pageSize;
-	   }
+	}
 
+	public int getCountPerPage() {
+		return countPerPage;
+	}
 
-	   // 전체 게시글 갯수
-	   public void setTotalArticle(int totalArticle) {
-	      this.totalArticle = totalArticle;
-	   }
-	   
-	   // 페이지 갯수
-	   public void setTotalPage(int totalArticle) {
-	      this.totalPage = this.totalArticle/this.pageSize + (this.totalArticle%this.pageSize==0?0:1);
-	      
-	      // 유효성 검사
-	      if(this.page <=0 || this.page > totalPage){
-	         this.page = 1;
-	      }
-	   }
-	   
-	   // 게시글 시작 행 설정
-	   public void setStartRow() {
-	      this.startRow = (this.page - 1) * this.pageSize + 1;
-	   }
-	   
-	   // 게시글 끝 행 설정
-	   public void setEndRow() {
-	      this.endRow = page * pageSize;
-	      if(endRow > this.totalArticle) endRow = this.totalArticle;   
-	   }
+	public void setCountPerPage(int countPerPage) {
+		this.countPerPage = countPerPage;
+	}
 
-	   public int getPage() {
-	      return page;
-	   }
+	public int getPagePerGroup() {
+		return pagePerGroup;
+	}
 
-	   public int getTotalPage() {
-	      return totalPage;
-	   }
+	public void setPagePerGroup(int pagePerGroup) {
+		this.pagePerGroup = pagePerGroup;
+	}
 
-	   public int getPageSize() {
-	      return pageSize;
-	   }
+	public int getCurrentPage() {
+		return currentPage;
+	}
 
-	   public int getTotalArticle() {
-	      return totalArticle;
-	   }
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
 
-	   public int getStartRow() {
-	      return startRow;
-	   }
+	public int getTotalRecordsCount() {
+		return totalRecordsCount;
+	}
 
-	   public int getEndRow() {
-	      return endRow;
-	   }
+	public void setTotalRecordsCount(int totalRecordsCount) {
+		this.totalRecordsCount = totalRecordsCount;
+	}
 
+	public int getTotalPageCount() {
+		return totalPageCount;
+	}
 
-	   @Override
-	   public String toString() {
-	      return "Paging [page=" + page + ", totalPage=" + totalPage + ", pageSize=" + pageSize + ", totalArticle="
-	            + totalArticle + ", startRow=" + startRow + ", endRow=" + endRow + "]";
-	   }
+	public void setTotalPageCount(int totalPageCount) {
+		this.totalPageCount = totalPageCount;
+	}
+
+	public int getCurrentGroup() {
+		return currentGroup;
+	}
+
+	public void setCurrentGroup(int currentGroup) {
+		this.currentGroup = currentGroup;
+	}
+
+	public int getStartPageGroup() {
+		return startPageGroup;
+	}
+
+	public void setStartPageGroup(int startPageGroup) {
+		this.startPageGroup = startPageGroup;
+	}
+
+	public int getEndPageGroup() {
+		return endPageGroup;
+	}
+
+	public void setEndPageGroup(int endPageGroup) {
+		this.endPageGroup = endPageGroup;
+	}
+
+	public int getStartRecord() {
+		return startRecord;
+	}
+
+	public void setStartRecord(int startRecord) {
+		this.startRecord = startRecord;
+	}
+
+	@Override
+	public String toString() {
+		return "PageNavigator [countPerPage=" + countPerPage + ", pagePerGroup=" + pagePerGroup + ", currentPage="
+				+ currentPage + ", totalRecordsCount=" + totalRecordsCount + ", totalPageCount=" + totalPageCount
+				+ ", currentGroup=" + currentGroup + ", startPageGroup=" + startPageGroup + ", endPageGroup="
+				+ endPageGroup + ", startRecord=" + startRecord + "]";
+	}
 	
 	
-}
+}	

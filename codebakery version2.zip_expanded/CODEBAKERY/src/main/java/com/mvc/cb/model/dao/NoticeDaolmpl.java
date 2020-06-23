@@ -1,16 +1,14 @@
 package com.mvc.cb.model.dao;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.mvc.cb.model.dto.NoticeDto;
-import com.mvc.cb.model.dto.PageNavigator;
+import com.mvc.cb.model.dto.Pagination;
 
 @Repository
 public class NoticeDaolmpl implements NoticeDao{
@@ -19,18 +17,12 @@ public class NoticeDaolmpl implements NoticeDao{
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
-	public List<NoticeDto> selectAll(PageNavigator paging) {
+	public List<NoticeDto> selectAll(Pagination pagination) {
 		
 		List<NoticeDto> list = new ArrayList<NoticeDto>();
 		
-		int start = paging.getStartRow();
-		int end = paging.getEndRow();
-		
-		HashMap<String, Object> param = new HashMap<String, Object>();
-		param.put("start", start);
-		param.put("end", end);
 		try {
-			list = sqlSession.selectList(NAMESPACE + "selectList", param);
+			list = sqlSession.selectList(NAMESPACE + "selectList",pagination);
 			} catch(Exception e) {
 				System.out.println("[error] : select list");
 				e.printStackTrace();
@@ -108,11 +100,11 @@ public class NoticeDaolmpl implements NoticeDao{
 	}
 
 	@Override
-	public int pageCnt() {
+	public int pageCnt(Pagination pagination) {
 		int res = 0;
 		
 		try {
-			res = sqlSession.selectOne(NAMESPACE + "pageCnt");
+			res = sqlSession.update(NAMESPACE + "pageCnt", pagination);
 		} catch( Exception e ) {
 			System.out.println("[error] : pageCnt");
 			e.printStackTrace();
