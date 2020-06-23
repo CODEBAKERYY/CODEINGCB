@@ -6,7 +6,7 @@ import com.mvc.cb.model.dto.MentorReviewDto;
 
 public interface MentorReviewBiz {
 
-	public List<MentorReviewDto> selectList();
+	public List<MentorReviewDto> selectList(int mentor_No);
 
 	public MentorReviewDto selectOne(int mentor_No);
 
