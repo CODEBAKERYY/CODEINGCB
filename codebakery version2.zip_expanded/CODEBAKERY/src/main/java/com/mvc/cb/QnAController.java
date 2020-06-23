@@ -1,6 +1,6 @@
 package com.mvc.cb;
 
-
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +16,9 @@ import com.mvc.cb.biz.AnswerBiz;
 import com.mvc.cb.biz.QCommentBiz;
 import com.mvc.cb.biz.QuestionBiz;
 import com.mvc.cb.model.dto.AnswerDto;
+import com.mvc.cb.model.dto.PageMaker;
 import com.mvc.cb.model.dto.QnACommentDto;
+import com.mvc.cb.model.dto.QnAPagingDto;
 import com.mvc.cb.model.dto.QuestionDto;
 
 @Controller
@@ -35,18 +37,77 @@ public class QnAController {
 	
 	
 	// 메뉴에서 '질의응답'을 누르면 들어오는 요청
-	@RequestMapping(value = "/qna.do")
-	public String QnAList(Model model) {
+	@RequestMapping("/qna.do")
+	public String QnAList(Model model,Integer question_No ,
+						 @RequestParam(value="page",required = false) Integer page) {
+		
 		logger.info("QnAList");
-		model.addAttribute("list", q_biz.selectList());
 		
-		System.out.println();
+		//페이지가 넘어오지 않았을 경우 1페이지로 설정
+		if( page == null ) {
+			page = 1;
+		}
 		
-		//model.addAttribute("cnt", a_biz.cntAnswer(question_No));
+		int total = q_biz.countBoard();
+		
+		QnAPagingDto paging = new QnAPagingDto();
+		paging.setPage(page);
+		paging.setTotalArticle(total);
+		paging.setTotalPage(total);
+		paging.setStartRow();
+		paging.setEndRow();
+		
+		// 한 페이지에 출력 될  질문 게시글 리스트
+		List<QuestionDto> qList = q_biz.selectList(paging); 
+
+		// 한 페이지에 출력될 질문 게시글(qList)에 맞춰서 답변 수를 가져온다.
+		List<Integer> cntList = a_biz.getCntAnswer(qList); 
+		
+		PageMaker maker = new PageMaker();
+		maker.setPaging(paging);
+		
+		model.addAttribute("list", qList);
+		model.addAttribute("cntList",cntList);
+		model.addAttribute("pageMaker",maker);
 		
 		return "qna";
 	}
 	
+	//태그를 눌렀을때 보여지는 리스트
+	@RequestMapping( value="/tagList.do" )
+	public String tagList(Model model, String question_Tag,
+							@RequestParam(value="page",required = false) Integer page) {
+		logger.info("tagList");
+		
+		//페이지가 넘어오지 않았을 경우 1페이지로 설정
+		if( page == null ) {
+			page = 1;
+		}
+		
+		List<QuestionDto> list = q_biz.selectTagList(question_Tag);
+		
+		QnAPagingDto paging = new QnAPagingDto();
+		paging.setPage(page);
+		paging.setTotalArticle(list.size());
+		paging.setTotalPage(list.size());
+		paging.setStartRow();
+		paging.setEndRow();
+		
+		// 한 페이지에 출력될 질문 게시글(qList)에 맞춰서 답변 수를 가져온다.
+		List<Integer> cntList = a_biz.getCntAnswer(list);
+		
+		
+		PageMaker maker = new PageMaker();
+		maker.setPaging(paging);
+		
+		model.addAttribute("pageMaker",maker);
+		model.addAttribute("cntList",cntList);
+		model.addAttribute("list", list);
+		
+		return "qna";
+	}
+	
+
 	// 질문제목을 클릭했을때 들어오는 요청
 	@RequestMapping( value = "/qna_detail.do")
 	public String QnADetail(Model model, Integer question_No) {
@@ -79,7 +140,6 @@ public class QnAController {
 		
 		int res = q_biz.insert(dto);
 		
-		
 		if(res>0) {
 			return  "redirect:qna.do";
 		} else {
@@ -103,21 +163,6 @@ public class QnAController {
 		logger.info("update_Question");
 		int res = q_biz.update(dto);
 		
-//		String str = dto.getQuestion_Tag();
-//		
-//		String[] split =  str.split(",");
-//		
-//		System.out.println(split.length);
-//		System.out.println(Arrays.toString(split));
-//		
-//		String tags = "";
-//		
-//		for(int i=0; i<split.length; i++) {
-//			tags += split[i];
-//			System.out.println(tags);
-//		}
-//		
-//		model.addAttribute("tag", tags);
 		
 		if(res>0) {
 			return "redirect:qna_detail.do?question_No="+dto.getQuestion_No();
@@ -139,9 +184,10 @@ public class QnAController {
 			return "redirect:qna_detail.do?question_No="+question_No;
 		}
 		}
-		// ------------------------ 질문글 수정/삭제 END-------------------------
-		
-		// ------------------------ 답변 직성/수정/삭제 START-------------------------
+	// ------------------------ 질문글 수정/삭제 END-------------------------
+	
+
+	// ------------------------ 답변 직성/수정/삭제 START-------------------------
 	
 		// 답변삭제
 		@RequestMapping( value="/answer_delete.do" )
@@ -174,6 +220,7 @@ public class QnAController {
 			
 			
 			int res = a_biz.update(dto);
+			System.out.println(dto.getAnswer_Content());
 			
 			
 			return "redirect:qna_detail.do?question_No="+dto.getQuestion_No();
@@ -194,9 +241,9 @@ public class QnAController {
 			}
 		}
 		
-		// ------------------------ 답변 등록/수정/삭제 END -------------------------
-		
-		// ------------------------ 댓글 등록/수정/삭제 START-------------------------
+	// ------------------------ 답변 등록/수정/삭제 END -------------------------
+	
+	// ------------------------ 댓글 등록/수정/삭제 START-------------------------
 		
 		
 		// 질문글에 댓글 작성
@@ -253,8 +300,22 @@ public class QnAController {
 			}
 		}
 		
+		// 대댓글 등록
+		@RequestMapping( value="/writeReply.do" )
+		public String insertReply(QnACommentDto dto) {
+			
+			logger.info("insertBody");
+			
+			int res = c_biz.insertReply(dto);
+			
+			
+			return "redirect:qna_detail.do?question_No="+dto.getQuestion_No();
+		}
 		
 		
-		// ------------------------ 답변 등록/수정/삭제 END -------------------------
+		
+	// ------------------------ 답변 등록/수정/삭제 END -------------------------
+		
+		
 
 }
