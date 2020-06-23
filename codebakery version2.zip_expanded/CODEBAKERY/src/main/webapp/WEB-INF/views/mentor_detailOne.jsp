@@ -50,6 +50,11 @@
 </head>
 <body>
 	<%@ include file="header.jsp"%>
+	<div id="logo" class="container">
+		<h1>
+			<span>멘토 게시판</span>
+		</h1>
+	</div>
 	<div id="page" class="container">
 		<div id="content">
 			<div class="title">

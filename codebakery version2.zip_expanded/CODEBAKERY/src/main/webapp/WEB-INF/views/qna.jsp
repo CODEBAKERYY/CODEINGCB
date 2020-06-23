@@ -47,7 +47,7 @@ Released   : 20130811
 	<%@ include file="header.jsp"%>
 	<div id="logo" class="container">
 		<h1>
-			<a href="qna.do" class="icon icon-tasks"><span>질문 게시판</span></a>
+			<span>질문 게시판</span>
 		</h1>
 	</div>
 	<div id="mainbar">

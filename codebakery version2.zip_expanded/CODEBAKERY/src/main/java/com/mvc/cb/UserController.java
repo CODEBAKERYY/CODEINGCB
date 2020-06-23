@@ -156,6 +156,8 @@ public class UserController {
 		UserDto res = u_biz.login(dto);
 		if (res != null) {
 			session.setAttribute("User", res);
+		}else {
+			return "redirect:login";
 		}
 		return "redirect:main.do";
 	}

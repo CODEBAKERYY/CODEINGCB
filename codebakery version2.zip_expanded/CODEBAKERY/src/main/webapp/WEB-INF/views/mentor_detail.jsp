@@ -50,6 +50,11 @@
 </head>
 <body>
 	<%@ include file="header.jsp"%>
+	<div id="logo" class="container">
+		<h1>
+			<span>멘토 게시판</span>
+		</h1>
+	</div>
 	<c:forEach items="${mentor }" var="dto" begin="0" end="4" varStatus="i"
 		step="1">
 		<div id="page" class="container">
