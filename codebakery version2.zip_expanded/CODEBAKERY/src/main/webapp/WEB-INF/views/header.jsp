@@ -48,6 +48,50 @@
 .alrimdiv {
 	z-index: 10;
 }
+/* 드롭 다운 버튼 CSS */
+.dropbtn {
+  background-color: #3F3F3F;
+  color: white;
+  padding: 16px;
+  border: none;
+  display: block;
+  letter-spacing: 1px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 1em;
+  font-weight: 700;
+  color: #FFF;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #3F3F3F;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+/* 드롭 다운 버튼 CSS  끝*/
+
 </style>
 </head>
 <body>
@@ -68,8 +112,18 @@
 				<%
 					} else {
 				%>
-				<li><a href="mypage_modify.do" accesskey="5" title="">마이페이지</a></li>
+				<!-- 수정한 부분!! -->
+				<li><div class="dropdown">
+					 <button class="dropbtn">마이페이지</button>
+					  <div class="dropdown-content">
+					    <a href="mypoint.do">나의 포인트</a>
+					    <a href="mypage_modify.do">회원정보</a>
+					    <a href="apply.do">멘토 신청</a>
+					  </div>
+					</div>
+				</li>
 				<li><a href="logout.do">로그아웃</a></li>
+				<!-- 수정한 부분!! -->
 				<%
 					}
 
