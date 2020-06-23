@@ -25,6 +25,7 @@
 		<typeAlias type="com.mvc.cb.model.dto.QnACommentDto" alias="QnACommentDto"/>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		<typeAlias type="com.mvc.cb.model.dto.Pagination" alias="Pagination"/>
 =======
 =======
@@ -52,6 +53,9 @@
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
 =======
 >>>>>>> parent of 3d4349c... ㅈㄷㄹ
+=======
+		<typeAlias type="com.mvc.cb.model.dto.Pagination" alias="Pagination"/>
+>>>>>>> parent of a6d3f1c... 미완성
 =======
 		<typeAlias type="com.mvc.cb.model.dto.Pagination" alias="Pagination"/>
 >>>>>>> parent of a6d3f1c... 미완성
