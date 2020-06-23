@@ -2,6 +2,10 @@ package com.mvc.cb.model.dao;
 
 import java.util.ArrayList;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+import java.util.Arrays;
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
 =======
 import java.util.Arrays;
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
@@ -22,6 +26,7 @@ public class QuestionDaolmpl implements QuestionDao {
 	@Override
 	public List<QuestionDto> selectList() {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		
 		List<QuestionDto> list = new ArrayList<QuestionDto>();
 		
@@ -34,6 +39,19 @@ public class QuestionDaolmpl implements QuestionDao {
 		}
 		
 		
+=======
+
+		List<QuestionDto> list = new ArrayList<QuestionDto>();
+
+		try {
+			list = sqlSession.selectList(NAMESPACE + "selectList");
+
+		} catch (Exception e) {
+			System.out.println("[error] : Question selectList");
+			e.printStackTrace();
+		}
+
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
 =======
 
 		List<QuestionDto> list = new ArrayList<QuestionDto>();
@@ -71,8 +89,14 @@ public class QuestionDaolmpl implements QuestionDao {
 
 		try {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			res = sqlSession.insert(NAMESPACE+"insert", dto);
 		} catch(Exception e) {
+=======
+			res = sqlSession.insert(NAMESPACE + "insert", dto);
+
+		} catch (Exception e) {
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
 =======
 			res = sqlSession.insert(NAMESPACE + "insert", dto);
 
@@ -122,10 +146,16 @@ public class QuestionDaolmpl implements QuestionDao {
 	@Override
 	public void plusCnt(int question_No) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		
 		
 		sqlSession.update(NAMESPACE+"plusCnt", question_No);
 		
+=======
+
+		sqlSession.update(NAMESPACE + "plusCnt", question_No);
+
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
 	}
 
 =======
@@ -148,6 +178,9 @@ public class QuestionDaolmpl implements QuestionDao {
 		return res;
 	}
 
+<<<<<<< HEAD
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
+=======
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
 //	@Override
 //	public List<QuestionDto> selectBoard(QnAPagingDto dto) {

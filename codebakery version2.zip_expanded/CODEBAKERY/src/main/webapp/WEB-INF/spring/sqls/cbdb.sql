@@ -201,8 +201,11 @@ CREATE TABLE NOTICE_COMMENT (
 --------------------------- DATA INSERT ----------------------------
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
 INSERT INTO USER_TB VALUES('user1','1234','일반회원','김건영','010-2342-1234','kky@kh.or.kr','userpic','java');
 INSERT INTO USER_TB VALUES('user2','1234','일반회원','박주혁','010-6787-1234','pjyy@kh.or.kr','userpic','java');
 INSERT INTO USER_TB VALUES('user3','1234','일반회원','권민석','010-7942-1234','kms@kh.or.kr','userpic','java');

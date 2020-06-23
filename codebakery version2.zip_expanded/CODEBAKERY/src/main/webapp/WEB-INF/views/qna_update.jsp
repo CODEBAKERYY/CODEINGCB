@@ -112,7 +112,13 @@ Released   : 20130811
 				<div class="mb-3">
 					<label for="tag">TAG</label>
 <<<<<<< HEAD
+<<<<<<< HEAD
 					<input type="text" class="form-control" name="question_Tag" placeholder="태그를 입력해 주세요" >
+=======
+					<span><input type="text" class="form-control" id="tag" name="question_Tag"/ value="#"></span>
+					<input type="button" value="추가" onclick="addTag();"/>
+					<div class="one_tag" id="tags">${dto.question_Tag }</div>
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
 =======
 					<span><input type="text" class="form-control" id="tag" name="question_Tag"/ value="#"></span>
 					<input type="button" value="추가" onclick="addTag();"/>

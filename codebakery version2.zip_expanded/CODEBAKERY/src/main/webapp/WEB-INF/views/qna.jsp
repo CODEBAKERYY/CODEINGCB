@@ -47,7 +47,11 @@ Released   : 20130811
 	<div id="logo" class="container">
 		<h1>
 <<<<<<< HEAD
+<<<<<<< HEAD
 			<a href="qna.do" class="icon icon-tasks"><span>질문 게시판</span></a>
+=======
+			<span>질문 게시판</span>
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
 =======
 			<span>질문 게시판</span>
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
@@ -77,12 +81,18 @@ Released   : 20130811
 										</div>
 									<div class="status answered-accepted">
 <<<<<<< HEAD
+<<<<<<< HEAD
 										<strong style="font-size: 20px">17</strong><br /> answers
 =======
+=======
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
 										<%-- <form method="post" action="">
 											<input type="hidden" name="question_No" value="${dto.question_No }"/>
 										</form>  --%>
 										<strong style="font-size: 20px">${list.size() }</strong><br /> answers
+<<<<<<< HEAD
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
+=======
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
 									</div>
 									</div>
@@ -94,9 +104,13 @@ Released   : 20130811
 									
 									<div class="tags user-tags t-android t-eclipse t-certificate">
 <<<<<<< HEAD
+<<<<<<< HEAD
 										<a href="#" class="post-tag" title="" rel="tag">android</a> 
 										<a href="#" class="post-tag" title="" rel="tag">eclipse</a> 
 										<a href="#" class="post-tag" title="" rel="tag">certificate</a>
+=======
+										<a href="#" class="post-tag" title="" rel="tag">${dto.question_Tag }</a> 
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
 =======
 										<a href="#" class="post-tag" title="" rel="tag">${dto.question_Tag }</a> 
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가

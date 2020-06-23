@@ -45,12 +45,25 @@ public class QuestionBizlmpl implements QuestionBiz{
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
 	@Override
 	public int count() {
 		return dao.count();
 	}
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
+
+//	@Override
+//	public int countBoard() {
+//		return dao.countBoard();
+//	}
+//
+//	@Override
+//	public List<QuestionDto> selectBoard(QnAPagingDto dto) {
+//		return dao.selectBoard(dto);
+//	}
 
 //	@Override
 //	public int countBoard() {

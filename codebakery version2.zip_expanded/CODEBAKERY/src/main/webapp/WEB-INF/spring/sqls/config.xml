@@ -12,6 +12,7 @@
 		<typeAlias type="com.mvc.cb.model.dto.MentorDto"
 			alias="MentorDto" />
 <<<<<<< HEAD
+<<<<<<< HEAD
 		<typeAlias type="com.mvc.cb.model.dto.NoticeDto" 
 			alias="NoticeDto"/>
 		<typeAlias type="com.mvc.cb.model.dto.NoticeCommentDto" 
@@ -21,6 +22,8 @@
 		<typeAlias type="com.mvc.cb.model.dto.QnACommentDto" alias="QnACommentDto"/>
 		<typeAlias type="com.mvc.cb.model.dto.Pagination" alias="Pagination"/>
 =======
+=======
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
 		<typeAlias type="com.mvc.cb.model.dto.MentorReviewDto"
 			alias="MentorReviewDto" />
 		<typeAlias type="com.mvc.cb.model.dto.UserDto"
@@ -49,8 +52,11 @@
 		<mapper resource="/mybatis/quiz-mapper.xml" />
 		<mapper resource="/mybatis/mentor-mapper.xml" />
 <<<<<<< HEAD
+<<<<<<< HEAD
 		<mapper resource="/mybatis/question-mapper.xml"/>
 =======
+=======
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
 		<mapper resource="/mybatis/mentorReview-mapper.xml" />
 		<mapper resource="/mybatis/question-mapper.xml" />
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가

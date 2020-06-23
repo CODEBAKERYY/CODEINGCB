@@ -14,11 +14,19 @@ public interface AnswerBiz {
 
 	public int update(AnswerDto dto);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
 
 	public int insert(AnswerDto dto);
 
 	public int cntAnswer(Integer question_No);
+<<<<<<< HEAD
+=======
+
+	public int count();
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
 
 	public int count();
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가

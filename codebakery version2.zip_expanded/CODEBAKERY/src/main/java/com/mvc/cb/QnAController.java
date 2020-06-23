@@ -15,6 +15,10 @@ import com.mvc.cb.biz.QCommentBiz;
 import com.mvc.cb.biz.QuestionBiz;
 import com.mvc.cb.model.dto.AnswerDto;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+import com.mvc.cb.model.dto.QnACommentDto;
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
 =======
 import com.mvc.cb.model.dto.QnACommentDto;
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
@@ -38,6 +42,7 @@ public class QnAController {
 	// 메뉴에서 '질의응답'을 누르면 들어오는 요청
 	@RequestMapping(value = "/qna.do")
 <<<<<<< HEAD
+<<<<<<< HEAD
 	public String QnAList(Model model)
 			//, QnAPagingDto dto 
 //						@RequestParam(value="nowPage", required=false)String nowPage,
@@ -57,18 +62,29 @@ public class QnAController {
 	public String QnAList(Model model) {
 		logger.info("QnAList");
 		model.addAttribute("list", q_biz.selectList());
+=======
+	public String QnAList(Model model) {
+		logger.info("QnAList");
+		model.addAttribute("list", q_biz.selectList());
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
 		
 		System.out.println();
 		
 		//model.addAttribute("cnt", a_biz.cntAnswer(question_No));
+<<<<<<< HEAD
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
+=======
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
 		
 		return "qna";
 	}
 	
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// 하나의 질문제목을 클릭했을때 들어오는 요청
 =======
+=======
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
 	// 질문제목을 클릭했을때 들어오는 요청
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
 	@RequestMapping( value = "/qna_detail.do")
@@ -139,7 +155,10 @@ public class QnAController {
 		int res = q_biz.update(dto);
 		
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
 //		String str = dto.getQuestion_Tag();
 //		
 //		String[] split =  str.split(",");
@@ -156,6 +175,9 @@ public class QnAController {
 //		
 //		model.addAttribute("tag", tags);
 		
+<<<<<<< HEAD
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
+=======
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
 		if(res>0) {
 			return "redirect:qna_detail.do?question_No="+dto.getQuestion_No();
@@ -181,6 +203,35 @@ public class QnAController {
 =======
 		}
 		// ------------------------ 질문글 수정/삭제 END-------------------------
+<<<<<<< HEAD
+=======
+		
+		// ------------------------ 답변 직성/수정/삭제 START-------------------------
+	
+		// 답변삭제
+		@RequestMapping( value="/answer_delete.do" )
+		public String deleteAnswer(Integer answer_No, Integer question_No) {
+			logger.info("Delete Answer");
+			
+			int res = a_biz.delete(answer_No);
+			
+			if(res>0) {
+				return "redirect:qna_detail.do?question_No="+question_No;
+			} else {
+				return "redirect:qna_detail.do?question_No="+question_No;
+			}
+		}
+		
+		//답변수정 -> 팝업창으로 넘김
+		@RequestMapping( value="/answer_modify.do" )
+		public String modifyAnswer(Model model, AnswerDto dto) {
+			logger.info("Modify Answer");
+			
+			model.addAttribute("ans", dto);
+			
+			return "modifyAnswer";
+			}
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
 		
 		// ------------------------ 답변 직성/수정/삭제 START-------------------------
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
@@ -216,6 +267,7 @@ public class QnAController {
 			return "redirect:qna_detail.do?question_No="+question_No;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 	
 	// 답변 작성시 들어오는 요청
@@ -223,6 +275,8 @@ public class QnAController {
 	public String insertAnswer(String answer_Title, String answer_Content) {
 		logger.info("Insert Answer");
 =======
+=======
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
 		
 		// ------------------------ 답변 등록/수정/삭제 END -------------------------
 		
@@ -272,6 +326,9 @@ public class QnAController {
 		
 		
 		// ------------------------ 답변 등록/수정/삭제 END -------------------------
+<<<<<<< HEAD
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
+=======
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
 
 }

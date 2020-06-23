@@ -29,7 +29,10 @@ public class AnswerDaolmpl implements AnswerDao {
 		return list;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
 
 	@Override
 	public int delete(int answer_No) {
@@ -77,6 +80,7 @@ public class AnswerDaolmpl implements AnswerDao {
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	@Override
 	public int insert(AnswerDto dto) {
 		
@@ -97,6 +101,13 @@ public class AnswerDaolmpl implements AnswerDao {
 	}
 
 =======
+=======
+	public int cntAnswer(Integer question_No) {
+
+		int res = 0;
+
+		try {
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
 			res = sqlSession.selectOne(NAMESPACE + "cntAnswer", question_No);
 		} catch (Exception e) {
 			System.out.println("[error] : count Answer");
@@ -119,5 +130,8 @@ public class AnswerDaolmpl implements AnswerDao {
 		return res;
 	}
 
+<<<<<<< HEAD
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
+=======
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
 }

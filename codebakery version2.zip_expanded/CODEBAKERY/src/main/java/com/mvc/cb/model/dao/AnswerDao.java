@@ -16,7 +16,10 @@ public interface AnswerDao {
 
 	public int insert(AnswerDto dto);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
 
 	public int cntAnswer(Integer question_No);
 

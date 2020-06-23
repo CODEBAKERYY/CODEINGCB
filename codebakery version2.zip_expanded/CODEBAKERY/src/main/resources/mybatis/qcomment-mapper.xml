@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <<<<<<< HEAD
+<<<<<<< HEAD
   
   <mapper namespace="qcomment">
   
@@ -27,6 +28,8 @@
   
   </mapper>
 =======
+=======
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
 <mapper namespace="qcomment">
 
 	<resultMap type="QnACommentDto" id="QnACommentMap">
@@ -71,4 +74,7 @@
 		COMMENT_NO = #{comment_No}
 	</update>
 </mapper>
+<<<<<<< HEAD
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
+=======
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가

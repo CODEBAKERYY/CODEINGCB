@@ -14,12 +14,17 @@ public interface QuestionBiz {
 
 	public void plusCnt(int question_No);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 //	//게시물 총 갯수
 //	public int countBoard();
 //		
 //	//페이징 처리 게시글 조회
 //	public List<QuestionDto> selectBoard(QnAPagingDto dto);
+=======
+	public int count();
+	
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
 =======
 	public int count();
 	

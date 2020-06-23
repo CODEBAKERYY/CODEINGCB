@@ -37,8 +37,11 @@
   <link href="resources/csss/style.css" rel="stylesheet" />
   <link href="resources/csss/board-detail.css" rel="stylesheet" />
 <<<<<<< HEAD
+<<<<<<< HEAD
  
 =======
+=======
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
   
 <style type="text/css">
 	.comment-list{
@@ -298,6 +301,7 @@
 				<p class="lead">${qlist.question_Content }</p>
 				<div class="pt-5">
 <<<<<<< HEAD
+<<<<<<< HEAD
 					<p> Tags: <a href="#">#html</a>, <a href="#">#trends</a></p>
 				</div>
 			<!--------- 질문글 End ----------->	
@@ -306,6 +310,8 @@
 				<div class="pt-5">
 					<h3 class="mb-5">${clist.size() } Comments</h3>
 =======
+=======
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
 					<p> Tags: <a href="#">${qlist.question_Tag }</a></p>
 				</div>
 				<div style="text-align: right;">
@@ -350,7 +356,11 @@
 							<c:otherwise>
 								<c:forEach items="${clist }" var="dto">
 <<<<<<< HEAD
+<<<<<<< HEAD
 								<li class="comment">
+=======
+								<li class="comment" id="onecomm">
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
 =======
 								<li class="comment" id="onecomm">
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
@@ -360,6 +370,7 @@
 									<div class="comment-body">
 										<h3>${dto.user_Id }</h3>
 <<<<<<< HEAD
+<<<<<<< HEAD
 										<div class="meta">${dto.comment_Date }</div>
 										<p>${dto.comment_Content }</p>
 										<p>
@@ -367,6 +378,8 @@
 											<br/>
 											<textarea class="form-control" style="width:80%; display:none;" placeholder="댓글을 입력해주세요."></textarea>
 =======
+=======
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
 										<span class="meta"><fmt:formatDate value="${dto.comment_Date }" pattern="yyyy.MM.dd HH:mm:ss"/></span>&nbsp;&nbsp;
 										<c:if test="${!empty User && (User.user_Id eq dto.user_Id) }">
 										<input type="button" value="수정" onclick="modifyComment(${dto.comment_No}, '${dto.comment_Content }');"/>
@@ -375,6 +388,9 @@
 										<p>${dto.comment_Content }</p>
 										<p>
 											<a href="#" class="reply">Reply</a>
+<<<<<<< HEAD
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
+=======
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
 										</p>
 									</div>
@@ -392,6 +408,9 @@
                 <div id="result"></div> 
 				<!--------- 댓글 END ----------->
 				
+<<<<<<< HEAD
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
+=======
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
 				
 				<!--------- 답글 START ----------->

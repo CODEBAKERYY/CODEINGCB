@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <<<<<<< HEAD
+<<<<<<< HEAD
   
   <mapper namespace="answer">
   
@@ -40,6 +41,8 @@
   
   </mapper>
 =======
+=======
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
 <mapper namespace="answer">
 
 	<resultMap type="AnswerDto" id="answerMap">
@@ -89,5 +92,9 @@
 	<select id="count" resultType="int">
 		SELECT COUNT(*) FROM ANSWER
 	</select>
+<<<<<<< HEAD
+</mapper>
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
+=======
 </mapper>
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가

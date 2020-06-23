@@ -36,5 +36,8 @@ public class QCommentBizlmpl implements QCommentBiz {
 		return dao.delete(comment_No);
 	}
 
+<<<<<<< HEAD
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
+=======
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
 }
