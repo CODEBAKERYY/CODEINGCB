@@ -6,23 +6,18 @@ import com.mvc.cb.model.dto.QnACommentDto;
 
 public interface QCommentBiz {
 	
+	// 댓글 몰록
 	public List<QnACommentDto> selectList(int question_No);
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
 	
+	// 댓글 작성
 	public int insert(QnACommentDto dto);
 	
+	// 댓글 수정
 	public int update(QnACommentDto dto);
 	
+	// 댓글 삭제
 	public int delete(int comment_No);
-	
-<<<<<<< HEAD
->>>>>>> parent of 4d88b8a... 승연이꺼 추가
-=======
->>>>>>> parent of 4d88b8a... 승연이꺼 추가
-=======
 
->>>>>>> parent of 3d4349c... ㅈㄷㄹ
+	// 대댓글 작성
+	public int insertReply(QnACommentDto dto);
 }

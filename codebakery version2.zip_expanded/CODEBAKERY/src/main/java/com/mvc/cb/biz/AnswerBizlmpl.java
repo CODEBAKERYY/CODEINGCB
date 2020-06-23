@@ -1,12 +1,16 @@
 package com.mvc.cb.biz;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.mybatis.logging.LoggerFactory;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mvc.cb.model.dao.AnswerDao;
 import com.mvc.cb.model.dto.AnswerDto;
+import com.mvc.cb.model.dto.QuestionDto;
 
 @Service
 public class AnswerBizlmpl implements AnswerBiz{
@@ -17,6 +21,11 @@ public class AnswerBizlmpl implements AnswerBiz{
 	@Override
 	public List<AnswerDto> selectList(int question_No) {
 		return dao.selectList(question_No);
+	}
+	
+	@Override
+	public int insert(AnswerDto dto) {
+		return dao.insert(dto);
 	}
 
 	@Override
@@ -30,28 +39,22 @@ public class AnswerBizlmpl implements AnswerBiz{
 	}
 
 	@Override
-	public int insert(AnswerDto dto) {
-		return dao.insert(dto);
+	public List<Integer> getCntAnswer(List<QuestionDto> qList) {
+		
+		List<Integer> answerList = new ArrayList<Integer>(); // 답변 개수가 담길 List
+		
+		for(QuestionDto dto : qList) {
+			
+			answerList.add(dao.cntAnswer(dto.getQuestion_No()));
+			
+		}
+		return answerList;
 	}
-<<<<<<< HEAD
-<<<<<<< HEAD
 	
-<<<<<<< HEAD
-=======
-=======
->>>>>>> parent of 4d88b8a... 승연이꺼 추가
-
-	public int cntAnswer(Integer question_No) {
-		return dao.cntAnswer(question_No);
-	}
-
 	@Override
 	public int count() {
 		return dao.count();
 	}
 
->>>>>>> parent of 4d88b8a... 승연이꺼 추가
-=======
->>>>>>> parent of 3d4349c... ㅈㄷㄹ
 
 }

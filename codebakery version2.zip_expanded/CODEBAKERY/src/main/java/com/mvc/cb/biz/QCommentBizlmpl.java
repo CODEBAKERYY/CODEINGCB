@@ -9,8 +9,8 @@ import com.mvc.cb.model.dao.QCommentDao;
 import com.mvc.cb.model.dto.QnACommentDto;
 
 @Service
-public class QCommentBizlmpl implements QCommentBiz {
-
+public class QCommentBizlmpl implements QCommentBiz{
+	
 	@Autowired
 	private QCommentDao dao;
 
@@ -19,9 +19,6 @@ public class QCommentBizlmpl implements QCommentBiz {
 		return dao.selectList(question_No);
 	}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 	@Override
 	public int insert(QnACommentDto dto) {
 		return dao.insert(dto);
@@ -37,10 +34,10 @@ public class QCommentBizlmpl implements QCommentBiz {
 		return dao.delete(comment_No);
 	}
 
-<<<<<<< HEAD
->>>>>>> parent of 4d88b8a... 승연이꺼 추가
-=======
->>>>>>> parent of 4d88b8a... 승연이꺼 추가
-=======
->>>>>>> parent of 3d4349c... ㅈㄷㄹ
+	@Override
+	public int insertReply(QnACommentDto dto) {
+		return dao.insertReply(dto);
+	}
+
+
 }

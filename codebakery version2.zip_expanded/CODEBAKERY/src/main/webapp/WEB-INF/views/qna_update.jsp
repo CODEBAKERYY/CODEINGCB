@@ -16,11 +16,12 @@ Released   : 20130811
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title></title>
+<title>CODEBAKERY</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <!--bootstrap css  -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link rel="shortcut icon" type="image/x-icon" href="resources/images/favicon.png" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
 <link
 	href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900"
 	rel="stylesheet" />
@@ -41,9 +42,6 @@ Released   : 20130811
 		  font-size: 16px;
 		}
 </style>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -63,7 +61,7 @@ Released   : 20130811
 		document.getElementById("tags").innerHTML = list;
 	} 
 	
-	
+	// 글 수정 유효성 검사
 	$(function(){
 		$("#form").submit(function(){
 			var titleChk = document.getElementsByName("question_Title")[0].value;
@@ -83,16 +81,13 @@ Released   : 20130811
 		});
 	});
 </script>
->>>>>>> parent of 4d88b8a... 승연이꺼 추가
-=======
->>>>>>> parent of 3d4349c... ㅈㄷㄹ
 </head>
 
 <body>
 	<%@ include file="header.jsp"%>
 	
 	<div id="logo" class="container">
-		<h1><a class="icon icon-tasks"><span>질문 수정하기</span></a></h1>
+		<h1><p class="icon icon-tasks"><span>질문 수정하기</span></p></h1>
 	</div>
 	
 	<article>
@@ -101,7 +96,7 @@ Released   : 20130811
 			<input type="hidden" name="question_No" value="${dto.question_No }" />
 				<div class="mb-3">
 					<label for="title">제목</label>
-					<input type="text" class="form-control" name="question_Title" value="${dto.question_Title }">
+					<input type="text" class="form-control" name="question_Title" value="${dto.question_Title }" />
 				</div>
 				<div class="mb-3">
 					<label for="reg_id">작성자</label>
@@ -114,23 +109,12 @@ Released   : 20130811
 				</div>
 				<div class="mb-3">
 					<label for="tag">TAG</label>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-					<input type="text" class="form-control" name="question_Tag" placeholder="태그를 입력해 주세요" >
-=======
-					<span><input type="text" class="form-control" id="tag" name="question_Tag"/ value="#"></span>
+					<span><input type="text" class="form-control" id="tag" name="question_Tag" value="#" /></span>
 					<input type="button" value="추가" onclick="addTag();"/>
-					<div class="one_tag" id="tags">${dto.question_Tag }</div>
->>>>>>> parent of 4d88b8a... 승연이꺼 추가
-=======
-					<span><input type="text" class="form-control" id="tag" name="question_Tag"/ value="#"></span>
-					<input type="button" value="추가" onclick="addTag();"/>
-					<div class="one_tag" id="tags">${dto.question_Tag }</div>
->>>>>>> parent of 4d88b8a... 승연이꺼 추가
-=======
-					<input type="text" class="form-control" name="question_Tag" placeholder="태그를 입력해 주세요" >
->>>>>>> parent of 3d4349c... ㅈㄷㄹ
+					<br /><br /> 
+					<c:forTokens items="${dto.question_Tag }" delims="#" var="item">
+						<span class="one_tag" id="tags">#&nbsp;${item }</span>
+					</c:forTokens>
 				</div>
 			<div >
 				<input type="submit" id="btnSave" value="수정완료" />

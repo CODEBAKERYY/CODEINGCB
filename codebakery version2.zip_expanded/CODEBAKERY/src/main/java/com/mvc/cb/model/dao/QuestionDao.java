@@ -2,29 +2,40 @@ package com.mvc.cb.model.dao;
 
 import java.util.List;
 
+import com.mvc.cb.model.dto.QnAPagingDto;
 import com.mvc.cb.model.dto.QuestionDto;
 
 public interface QuestionDao {
 	
 	String NAMESPACE = "question.";
 	
-	public List<QuestionDto> selectList();
+	
+	
+	// 게시글 목록
+	public List<QuestionDto> selectList(QnAPagingDto dto);
+	
+	// 게시글 질문 제목 클릭시 해당 글 정보만 가져옴
 	public QuestionDto selectOne(int question_No);
+	
+	// 글 작성
 	public int insert(QuestionDto dto);
+	
+	// 글 삭제
 	public int delete(int question_No);
+	
+	// 글 수정
 	public int update(QuestionDto dto);
 	
-	public void plusCnt(int question_No);
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> parent of 4d88b8a... 승연이꺼 추가
-	public int count();
->>>>>>> parent of 4d88b8a... 승연이꺼 추가
-=======
->>>>>>> parent of 3d4349c... ㅈㄷㄹ
+	// 게시물 총 갯수
+	public int countBoard();
 	
-	//public ArrayList<QuestionDto> selectAllQuestion
+	// 태그 값에 대한 게시글 목록
+	public List<QuestionDto> selectTagList(String question_Tag);
+	
+	// 질문글에 대한 조회수
+	public void plusCnt(int question_No);
+	
+	//메인화면에 보여지는 질문글 갯수
+	public int count();
+	
 }

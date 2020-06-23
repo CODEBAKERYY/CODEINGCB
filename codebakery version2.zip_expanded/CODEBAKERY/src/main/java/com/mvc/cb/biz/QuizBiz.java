@@ -1,9 +1,16 @@
 package com.mvc.cb.biz;
 
+import java.util.List;
+
 import com.mvc.cb.model.dto.QuizDto;
 
 public interface QuizBiz {
 
-	int insert(QuizDto dto);
+	public int insert(QuizDto dto);
 
+	public List<QuizDto> selectList();
+
+	public int count();
+
+	public QuizDto selectOne(int quiz_No);
 }

@@ -53,6 +53,11 @@
 			<c:otherwise>
 				<c:forEach items="${list }" var="dto">
 					<tr>
+<<<<<<< HEAD
+						<td>${dto.quiz_No }</td>
+						<td><a href="quiz_detail.do?quiz_No=${dto.quiz_No}">${dto.quiz_Title }</a></td>
+=======
+>>>>>>> origin/parkjuhyeok
 						<td></td>
 						<td></td>
 						<td></td>

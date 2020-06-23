@@ -1,13 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page import="java.lang.String.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+Design by TEMPLATED
+http://templated.co
+Released for free under the Creative Commons Attribution License
+
+Name       : TwoColours 
+Description: A two-column, fixed-width design with dark color scheme.
+Version    : 1.0
+Released   : 20130811
+
+-->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title></title>
+<title>CODEBAKERY</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
+<link rel="shortcut icon" type="image/x-icon" href="resources/images/favicon.png" />
+<link rel="shortcut icon" type="image/x-icon" href="resources/images/favicon.png" />
 <link
 	href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900"
 	rel="stylesheet" />
@@ -36,19 +52,17 @@
 
   <link href="resources/csss/style.css" rel="stylesheet" />
   <link href="resources/csss/board-detail.css" rel="stylesheet" />
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
- 
-=======
-=======
->>>>>>> parent of 4d88b8a... 승연이꺼 추가
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
   
 <style type="text/css">
+
+	/* 댓글 목록 default -> 숨기기 */
 	.comment-list{
 		display: none;
 	}
-</style>
+</style> 
   
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -67,16 +81,9 @@
 			} 
 		}
 		
-		
-
-
 
 
 	// ------------------------ 답변 -------------------------------
-	
-	
-	
-	
 	
 		//답변쓰기
 		function writeAnswer(){
@@ -86,20 +93,25 @@
 			var answer_Title = $("#answer_Title").val();
 			var answer_Content = $("textarea#answer_Content").val();
 			
+			
+			// 답변 유효성 검사
+			if(user_Id == "" || user_Id == null){
+				alert("로그인 후 이용가능합니다.");
+				location.href="login.do";
+				return false;
+			}
+			
 			if(answer_Title == "" || answer_Title == null){
-				alert("제목을 작성해주세요!");
+				alert("제목을 작성해주세요.");
 			 	return false;
 			}
 			
 			if(answer_Content == "" || answer_Content == null){
-				alert("내용을 작성해 주세요!");
+				alert("내용을 작성해 주세요.");
 				return false;
 			}
 			
-			if(user_Id == "" || user_Id == null){
-				alert("로그인후 이용가능합니다");
-				return false;
-			}
+			
 			
 			
 			 $.ajax({
@@ -112,7 +124,6 @@
 				},
 				error: function(request, status, error){
 					alert("ajax 통신 실패!");
-			        //alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
 				}
 			}); 
 			
@@ -130,23 +141,7 @@
 		window.open(url, "", setting);
 		window.close();
 		
-		
-		  /* $.ajax({
-			url: "answer_modify.do",
-			type: 'POST',
-			data: {"question_No":question_No, "answer_No":answer_No, "answer_Title":answer_Title, "answer_Content":answer_Content},
-			success: function(data){
-				window.close();
-				window.opener.location.reload();
-			},
-			error: function(request, status, error){
-				alert("ajax 통신 실패!");
-		        //alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
-			}
-		});   */ 
-		
-
-	} 
+		} 
 	
 
 
@@ -181,6 +176,7 @@
 	// ------------------------ 댓글 ------------------------------
 	
 	
+		//댓글 입력창
 		$(function(){
 			$("#commentForm").submit(function(){
 				var user_Id = document.getElementsByName("user_Id")[0].value;
@@ -228,18 +224,24 @@
 			} 
 		}
 		
-		//댓글수정 폼열기
-		function modifyComment(comment_No, comment_Content){
-			//alert(comment_No + ": "+comment_Content);
+		//댓글수정 -> input 폼 추가
+		function modifyComment(comment_No, comment_Content ,i){
 			
 				var a = "";
 				
 				a += '<div class="input-group">';
 			    a += '<input type="text" class="form-control" name="comm_Content" value="'+comment_Content+'"/>';
-			    a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="commentUpdate('+comment_No+','+comment_Content+');">수정</button> </span>';
+			    a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="commentUpdate('+comment_No+',\''+comment_Content+'\');">수정</button>';
+			    a += '<button class="btn btn-default" type="button" onclick="commentReset('+i+',\''+comment_Content+'\');">취소</button> </span>'
 			    a += '</div>';
 			
-			$("#result").html(a);
+			$(".result").eq(i).html(a);
+			
+		}
+		
+		//댓글 수정 취소 버튼 
+		function commentReset(index, comment_Content){
+			$(".result").eq(index).html(comment_Content);
 		}
 		
 		//댓글수정
@@ -265,25 +267,55 @@
 			});
 			
 		}
+		
+		//대댓글 창 열기
+		function Reply(comment_No, depth, group_Id, i){
+			
+			//alert(comment_No + " : "+depth + " : "+group_Id);
+			
+			var a = '';
+			
+			a += '<form action="writeReply.do" id="commentForm" method="post">';
+			a += '<input type="hidden" name="user_Id" value="${User.user_Id }" />';
+			a += '<input type="hidden" name="question_No" value="${qlist.question_No }" />';
+			a += '<input type="hidden" name="comment_No" value="'+comment_No+'" />';
+			a += '<input type="hidden" name="depth" value="'+depth+'" />'; 
+			a += '<input type="hidden" name="group_Id" value="'+group_Id+'" />'; 
+           	a += '<div>';
+            a += '<div>';
+            a += '<table> ';                   
+            a += '<tr>';
+            a += '<td>';
+            a += '<svg class="bi bi-arrow-return-right" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">';
+            a += '<path fill-rule="evenodd" d="M10.146 5.646a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L12.793 9l-2.647-2.646a.5.5 0 0 1 0-.708z"/>';
+            a += '<path fill-rule="evenodd" d="M3 2.5a.5.5 0 0 0-.5.5v4A2.5 2.5 0 0 0 5 9.5h8.5a.5.5 0 0 0 0-1H5A1.5 1.5 0 0 1 3.5 7V3a.5.5 0 0 0-.5-.5z"/>';
+            a += '</svg></td>';
+            a += '<td><input type="text" style="width:700px;" class="form-control" id="inputComment" name="comment_Content" placeholder="댓글을 입력하세요." />';
+            a += '</td>';
+            a += '<td style="text-align: right; mdisplay:table-cell; vertical-align:middle;">';
+            a += '<input type="submit" class="btn btn-primary" value="등록" style="width: 60px; height: 37px;"/>';
+           	a += '</td>';
+           	a += '</tr>';
+           	a += '</table>';
+           	a += '</div>';
+           	a += '</div>';  
+           	a += '</form>'; 
+           	
+           	$(".reply_result").eq(i).html(a);
+		}
 	
 		
 	// ------------------------ 댓글 ------------------------------
 
         
-
-	
 </script>
->>>>>>> parent of 4d88b8a... 승연이꺼 추가
-=======
- 
->>>>>>> parent of 3d4349c... ㅈㄷㄹ
 
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 <%@ include file="header.jsp" %>  
 	<div id="logo" class="container">
 		<h1>
-			<a href="#" class="icon icon-tasks"><span>질문 게시판</span></a>
+			<p class="icon icon-tasks"><span>질문 게시판</span></p>
 		</h1>
 	</div>
 
@@ -293,41 +325,33 @@
 			<div class="col-md-12 blog-content">
 			
 			<!--------- 질문글 START ----------->
-				<span class="title">${qlist.question_Title }</span>
+				<span class="title" style="font-weight: bold; font-size: 30px;">${qlist.question_Title }</span>
 				<div class="post-meta">
 								<span class="author">${qlist.user_Id }</span>
-								<span class="date">${qlist.question_Date }</span>
-								<!-- 자신의 글일때
-								<span><a href="#">수정</a></span>
-								<span><a href="#" onclick="#">삭제</a></span> -->
+								<span class="date"><fmt:formatDate value="${qlist.question_Date }" pattern="yyyy.MM.dd"/></span>
 				</div>
 				<hr />
 				<p class="lead">${qlist.question_Content }</p>
 				<div class="pt-5">
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-					<p> Tags: <a href="#">#html</a>, <a href="#">#trends</a></p>
-				</div>
-			<!--------- 질문글 End ----------->	
-				
-			<!--------- 리뷰 START ----------->
-				<div class="pt-5">
-					<h3 class="mb-5">${clist.size() } Comments</h3>
-=======
-=======
->>>>>>> parent of 4d88b8a... 승연이꺼 추가
-					<p> Tags: <a href="#">${qlist.question_Tag }</a></p>
+					<p> Tags:&nbsp;&nbsp; 
+						<c:forTokens items="${qlist.question_Tag }" delims="#" var="item">
+							<span >#${item }</span>
+						</c:forTokens>
+					</p>
 				</div>
 				<div style="text-align: right;">
 					<c:if test="${!empty User && (User.user_Id eq qlist.user_Id) }">
-					<input type="button" value="수정" onclick="location.href='qna_update.do?question_No=${qlist.question_No}'"/>
-					<input type="button" value="삭제" onclick="location.href='qna_delete.do?question_No=${qlist.question_No}'"/>
+					<input type="button" class="btn btn-secondary" value="수정" onclick="location.href='qna_update.do?question_No=${qlist.question_No}'"/>
+					<input type="button" class="btn btn-secondary" value="삭제" onclick="location.href='qna_delete.do?question_No=${qlist.question_No}'"/>
 					</c:if>
-					<input type="button" value="목록" onclick="location.href='qna.do'"/>
+					<input type="button" class="btn btn-secondary" value="목록" onclick="location.href='qna.do'"/>
 				</div>
 			<!--------- 질문글 End ----------->	
+			
+			
 					<br></br><br></br>
+					
+					
 			<!--------- 댓글 START ----------->
 					<form action="writeComment.do" id="commentForm" method="post">
 						<input type="hidden" name="user_Id" value="${User.user_Id }" />
@@ -352,98 +376,72 @@
 	                    </div>  
 	                </form>
 	                <br></br>
->>>>>>> parent of 4d88b8a... 승연이꺼 추가
-=======
-					<p> Tags: <a href="#">#html</a>, <a href="#">#trends</a></p>
-				</div>
-			<!--------- 질문글 End ----------->	
-				
-			<!--------- 리뷰 START ----------->
-				<div class="pt-5">
-					<h3 class="mb-5">${clist.size() } Comments</h3>
->>>>>>> parent of 3d4349c... ㅈㄷㄹ
 					<ul class="comment-list">
 						<c:choose>
 							<c:when test="${empty clist }">
 								<li>---------- 작성된 댓글이 없습니다. ----------</li>
 							</c:when>
 							<c:otherwise>
-								<c:forEach items="${clist }" var="dto">
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-								<li class="comment">
-=======
-								<li class="comment" id="onecomm">
->>>>>>> parent of 4d88b8a... 승연이꺼 추가
-=======
-								<li class="comment" id="onecomm">
->>>>>>> parent of 4d88b8a... 승연이꺼 추가
-=======
-								<li class="comment">
->>>>>>> parent of 3d4349c... ㅈㄷㄹ
-									<div class="vcard bio">
-										<img src="resources/csss/images/person_4_sq.jpg" alt="Image placeholder">
-									</div>
-									<div class="comment-body">
-										<h3>${dto.user_Id }</h3>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> parent of 3d4349c... ㅈㄷㄹ
-										<div class="meta">${dto.comment_Date }</div>
-										<p>${dto.comment_Content }</p>
-										<p>
-											<a href="#" onclick="#" class="reply">Reply</a>
-											<br/>
-											<textarea class="form-control" style="width:80%; display:none;" placeholder="댓글을 입력해주세요."></textarea>
-<<<<<<< HEAD
-=======
-=======
->>>>>>> parent of 4d88b8a... 승연이꺼 추가
-										<span class="meta"><fmt:formatDate value="${dto.comment_Date }" pattern="yyyy.MM.dd HH:mm:ss"/></span>&nbsp;&nbsp;
-										<c:if test="${!empty User && (User.user_Id eq dto.user_Id) }">
-										<input type="button" value="수정" onclick="modifyComment(${dto.comment_No}, '${dto.comment_Content }');"/>
-										<input type="button" value="삭제" onclick="deleteComment(${dto.comment_No}, ${qlist.question_No });"/>
-										</c:if>
-										<p>${dto.comment_Content }</p>
-										<p>
-											<a href="#" class="reply">Reply</a>
-<<<<<<< HEAD
->>>>>>> parent of 4d88b8a... 승연이꺼 추가
-=======
->>>>>>> parent of 4d88b8a... 승연이꺼 추가
-=======
->>>>>>> parent of 3d4349c... ㅈㄷㄹ
-										</p>
-									</div>
-								</li>
+								<c:forEach items="${clist }" var="dto" varStatus="i">
+								
+								<c:choose>
+									<c:when test="${dto.parent_No eq 0 }">
+										<li class="comment" id="onecomm">
+											<div class="vcard bio">
+												<img src="resources/csss/images/person_4_sq.jpg" alt="Image placeholder" />
+											</div>
+											<div class="comment-body">
+												<span style="font-size:20px; font-family: initial;">${dto.user_Id }</span>
+												<button class="btn btn-link" onclick="Reply(${dto.comment_No}, ${dto.depth }, ${dto.group_Id }, ${i.index });">Reply</button>
+												<span class="meta"><fmt:formatDate value="${dto.comment_Date }" pattern="yyyy.MM.dd HH:mm:ss"/></span>&nbsp;&nbsp;
+												<c:if test="${!empty User && (User.user_Id eq dto.user_Id) }">
+												<input type="button" class="btn btn-link" value="수정" onclick="modifyComment(${dto.comment_No}, '${dto.comment_Content }',${i.index });"/>
+												<input type="button" class="btn btn-link" value="삭제" onclick="deleteComment(${dto.comment_No}, ${qlist.question_No });"/>
+												</c:if>
+												<p class="result">${dto.comment_Content }</p>
+												<p class="reply_result"></p>
+											</div>
+										</li>
+									</c:when>
+									<c:otherwise>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;							
+									<svg class="bi bi-arrow-down-right" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+									  <path fill-rule="evenodd" d="M12 7.5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-.5.5H7a.5.5 0 0 1 0-1h4.5V8a.5.5 0 0 1 .5-.5z"/>
+									  <path fill-rule="evenodd" d="M2.646 3.646a.5.5 0 0 1 .708 0l9 9a.5.5 0 0 1-.708.708l-9-9a.5.5 0 0 1 0-.708z"/>
+									</svg>
+										<div style="margin-left: 40px;"> <span></span>
+										<li class="comment" id="onecomm">
+										<div class="vcard bio">
+											<img src="resources/csss/images/person_4_sq.jpg" alt="Image placeholder" />
+										</div>
+										<div class="comment-body">
+											<span style="font-size:20px; font-family: initial;">${dto.user_Id }</span>
+											<button class="btn btn-link" onclick="Reply(${dto.comment_No}, ${dto.depth }, ${dto.group_Id }, ${i.index });">Reply</button>
+											<span class="meta"><fmt:formatDate value="${dto.comment_Date }" pattern="yyyy.MM.dd HH:mm:ss"/></span>&nbsp;&nbsp;
+											<c:if test="${!empty User && (User.user_Id eq dto.user_Id) }">
+											<input type="button" class="btn btn-link" value="수정" onclick="modifyComment(${dto.comment_No}, '${dto.comment_Content }',${i.index });"/>
+											<input type="button" class="btn btn-link" value="삭제" onclick="deleteComment(${dto.comment_No}, ${qlist.question_No });"/>
+											</c:if>
+											<p class="result">${dto.comment_Content }</p>
+											<p class="reply_result"></p>
+										</div>
+										</li>
+										</div>
+								</c:otherwise>
+								</c:choose>
+								
 								</c:forEach>
 							</c:otherwise>
 						</c:choose>
 					</ul>
 				</div>
-<<<<<<< HEAD
-<<<<<<< HEAD
-				<!--------- 리뷰 END ----------->
-=======
 				<br />
-            	<div class="container" style="margin-bottom: 70px;">
-                <div id="result"></div> 
 				<!--------- 댓글 END ----------->
 				
-<<<<<<< HEAD
->>>>>>> parent of 4d88b8a... 승연이꺼 추가
-=======
->>>>>>> parent of 4d88b8a... 승연이꺼 추가
-=======
-				<!--------- 리뷰 END ----------->
->>>>>>> parent of 3d4349c... ㅈㄷㄹ
+				
 				
 				<!--------- 답글 START ----------->
 				<div class="pt-5">
-					<h3 class="mb-5">${alist.size()} Answers</h3>
+					<div><h3 class="mb-5">${alist.size()} Answers</h3></div>
 					<c:choose>
 						<c:when test="${empty alist }">
 							<p>------------------- 작성된 리뷰가 없습니다. -------------------</p>
@@ -453,27 +451,18 @@
 								<span class="title">RE: ${dto.answer_Title }</span>
 								<div class="post-meta">
 									<span class="author">${dto.user_Id }</span>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> parent of 3d4349c... ㅈㄷㄹ
-									<span class="date">${dto.answer_Date }</span>
-									<!-- 자신의 글일때
-									<span><a href="#">수정</a></span>
-									<span><a href="#" onclick="#">삭제</a></span> -->
-<<<<<<< HEAD
-=======
 									<span class="date"><fmt:formatDate value="${dto.answer_Date }" pattern="yyyy.MM.dd HH:mm"/></span>
 									<c:if test="${!empty User && (User.user_Id eq dto.user_Id) }">
-									<input type="button" value="수정" onclick="modifyAnswer(${qlist.question_No }, ${dto.answer_No}, '${dto.answer_Title }', '${dto.answer_Content }');"/>
-									<input type="button" value="삭제" onclick="deleteAnswer(${dto.answer_No}, ${qlist.question_No });"/>
+									<input type="button" class="btn btn-link" value="수정" onclick="modifyAnswer(${qlist.question_No }, ${dto.answer_No}, '${dto.answer_Title }', '${dto.answer_Content }');"/>
+									<input type="button" class="btn btn-link" value="삭제" onclick="deleteAnswer(${dto.answer_No}, ${qlist.question_No });"/>
 									</c:if>
->>>>>>> parent of 4d88b8a... 승연이꺼 추가
-=======
->>>>>>> parent of 3d4349c... ㅈㄷㄹ
 								</div>
 								<hr />
-								<p class="lead">${dto.answer_Content }</p>
+								<p class="lead" id="comm">${dto.answer_Content }</p>
+								<div class="container">
+									<div class="commentContent" ></div>
+								</div>
+								<br></br>
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
@@ -484,9 +473,23 @@
 				<!--------- 답글작성칸 START ----------->
 				<div class="pt-5">
 					<h3 class="mb-5">Your Answer</h3>
-					<textarea class="answer" style="width:100%"></textarea>
-					<button type="button" class="btn btn-secondary btn-sm">Post Your Answer</button>			
-				</div>
+						<table>
+							<tr>
+								<th style="text-align: center">TITLE</th>
+								<td><input type="text" id="answer_Title" style="width:400px; height:40px;"/></td>
+							</tr>
+							<tr>
+								<th style="text-align: center">CONTENT&nbsp;&nbsp;&nbsp;</th>
+								<td><textarea class="answer" id="answer_Content" style="width:600px; height:150px; resize:none;" ></textarea></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td>
+									<input type="button" class="btn btn-secondary btn-sm" value="Post Your Answer" onclick="writeAnswer();"/>	
+								</td>
+							</tr>
+						</table>
+					</div>
 				<hr />
 				<!--------- 답글작성칸 END ----------->
 				

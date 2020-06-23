@@ -3,36 +3,28 @@ package com.mvc.cb.biz;
 import java.util.List;
 
 import com.mvc.cb.model.dto.AnswerDto;
+import com.mvc.cb.model.dto.QuestionDto;
 
 public interface AnswerBiz {
 	
 	
-	// 답변리스트 불러오기
+	// 답변목록 불러오기
 	public List<AnswerDto> selectList(int question_No);
+	
+	// 답변 작성
+	public int insert(AnswerDto dto);
 
+	// 답변 삭제
 	public int delete(int answer_No);
 
+	// 답변 수정
 	public int update(AnswerDto dto);
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> parent of 4d88b8a... 승연이꺼 추가
-
-	public int insert(AnswerDto dto);
-
-	public int cntAnswer(Integer question_No);
-<<<<<<< HEAD
-=======
-
+	
+	// 답변 갯수 
+	public List<Integer> getCntAnswer(List<QuestionDto> qList);
+	
+	// 메인에서 보여지는 답변 갯수
 	public int count();
->>>>>>> parent of 4d88b8a... 승연이꺼 추가
 
-	public int count();
->>>>>>> parent of 4d88b8a... 승연이꺼 추가
-=======
->>>>>>> parent of 3d4349c... ㅈㄷㄹ
 
-	public int insert(AnswerDto dto);
 }

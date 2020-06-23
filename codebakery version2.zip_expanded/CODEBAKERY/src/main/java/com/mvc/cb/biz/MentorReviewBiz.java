@@ -8,4 +8,8 @@ public interface MentorReviewBiz {
 
 	public List<MentorReviewDto> selectList();
 
+	public MentorReviewDto selectOne(int mentor_No);
+
+	public List<MentorReviewDto> reviewAll(int mentor_No);
+
 }
