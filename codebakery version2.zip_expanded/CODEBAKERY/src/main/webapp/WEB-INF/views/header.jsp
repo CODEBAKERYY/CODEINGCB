@@ -9,9 +9,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>CODEBAKERY</title>
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-latest.min.js"></script>
+<link rel="shortcut icon" type="image/x-icon" href="resources/images/favicon.png" />
 <link
 	href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900"
 	rel="stylesheet" />

@@ -7,7 +7,8 @@
     <!-- <script src="http://192.168.130.43:82/socket.io/socket.io.js"></script> -->
     <script src="http://localhost:82/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-   	<title>socket server</title>
+   	<title>CODEBAKERY</title>
+   	<link rel="shortcut icon" type="image/x-icon" href="resources/images/favicon.png" />
    	<style type="text/css">
    		#chat {
    			padding-left: 20%;
