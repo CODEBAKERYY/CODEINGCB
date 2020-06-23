@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!--
 Design by TEMPLATED
 http://templated.co
@@ -52,7 +52,7 @@ Released   : 20130811
 	</div>
 
 	<!--============== 공지사항 게시글 리스트 START ==============-->
- 	 		<div class="container" id="notice">
+ 	<div class="container" id="notice">
                 <table class="table table-hover">
                   <thead style="background-color: #DCDCDC;">
                     <tr style="text-align: center;">
@@ -71,7 +71,7 @@ Released   : 20130811
 							</tr>
 						</c:when>
 						<c:otherwise>
-							<c:forEach items="${ list }" var="list">
+							<c:forEach items="${ list }" var="list" begin="${ count }" end="${ count + 9 }">
 								<tbody class="tbody">
 									<tr>
 										<td>${ list.notice_No }</td>
@@ -84,66 +84,36 @@ Released   : 20130811
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
+    				<c:set var="count" value="${ count + 10 }" />
                     </tbody>
             </table>
-            
-            
                 <br><br>
-                
-               	<!-- 관리자 일때만 글쓰기버튼 활성화 -->
-                <c:if test="${User.user_Grade == ADMIN}">
                 <div class="text-right">
                     <button type="button" class="btn btn-secondary pull-right" onclick="location.href='notice_write.do'" style="width: 8%;" >글쓰기</button>
                 </div>
-                </c:if>
-                
 				<br><br>
-			<!--============== 공지사항 게시글 리스트 END ============== -->
+			<!--============== 공지사항 게시글 리스트 END ==============-->
 			
 			<!--============== 페이지 버튼 STATRT ==============-->
-          	
-      <div style="width: 200px; margin: 0px auto;"> 
-		        <div style="width: 100%; height:100%;  text-align: center;">
-		                <div style="margin: 0 auto; display: inline-block;">
-			                <div class="container">
-								<ul class="pagination">
-								
-								<c:if test="${pageMaker.prev }">
-			               			<li class="page-item">
-			                 			<a class="page-link" href="notice.do?page=${pageMaker.startPage - 1 }" aria-label="Previous">
-			                   				<span aria-hidden="true">&laquo;</span>
-			                 			</a>
-			               			</li>                          
-			            		 </c:if>
-			            		 
-			            		 <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
-					                <c:choose>
-					                   <c:when test="${idx eq page }">
-					                     <li class="page-item active"><a class="page-link" href="notice.do?page=${idx }">${idx }</a></li>
-					                   </c:when>
-					                   <c:otherwise>                      
-					                     <li class="page-item"><a class="page-link" href="notice.do?page=${idx }">${idx }</a></li>
-					                   </c:otherwise>
-					                </c:choose>                
-			            		 </c:forEach>
-			            		 
-			            		 <c:if test="${pageMaker.next && pageMaker.endPage>0 }">
-						               <li class="page-item">
-						                 <a class="page-link" href="notice.do?page=${pageMaker.endPage + 1 }" aria-label="Next">
-						                   <span aria-hidden="true">&raquo;</span>
-						                 </a>
-						               </li>           
-			           			 </c:if>
-			           			 
-								 </ul>
-							</div>
-		                </div>
-		            </div>
-        
-      </div>
-          	
+            <div style="width: 100%; height:100%;  text-align: center;">
+                <div style="margin: 0 auto; display: inline-block;">
+	                <div class="container">
+						<ul class="pagination">
+							  <li><a href="#">«</a></li>
+				              <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+				              <li><a href="#">2</a></li>
+				              <li><a href="#">3</a></li>
+				              <li><a href="#">4</a></li>
+				              <li><a href="#">5</a></li>
+				              <li><a href="#">»</a></li>
+						 </ul>
+					</div>
+                </div>
+            </div>
             <!--============== 페이지 버튼 END ==============-->
         </div>
+        <br><br><br><br><br><br><br>
+
 
 	<%@ include file="footer.jsp"%>
 </body>

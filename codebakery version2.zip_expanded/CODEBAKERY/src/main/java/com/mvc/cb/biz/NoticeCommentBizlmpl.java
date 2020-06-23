@@ -15,8 +15,8 @@ public class NoticeCommentBizlmpl implements NoticeCommentBiz{
 	private NoticeCommentDao dao;
 	
 	@Override
-	public List<NoticeCommentDto> selectAll(int notice_No) {
-		return dao.selectAll(notice_No);
+	public List<NoticeCommentDto> selectAll() {
+		return dao.selectAll();
 	}
 
 	@Override

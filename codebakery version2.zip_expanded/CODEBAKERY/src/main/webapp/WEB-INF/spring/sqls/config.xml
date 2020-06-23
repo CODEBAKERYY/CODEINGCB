@@ -19,6 +19,7 @@
 		<typeAlias type="com.mvc.cb.model.dto.QuestionDto" alias="QuestionDto"/>
 		<typeAlias type="com.mvc.cb.model.dto.AnswerDto" alias="AnswerDto" />
 		<typeAlias type="com.mvc.cb.model.dto.QnACommentDto" alias="QnACommentDto"/>
+<<<<<<< HEAD
 =======
 		<!-- <typeAlias type="com.mvc.cb.model.dto.MentorReviewDto"
 			alias="MentorReviewDto" /> -->
@@ -41,6 +42,9 @@
 		<typeAlias type="com.mvc.cb.model.dto.Pagination"
 			alias="Pagination" />
 >>>>>>> master
+=======
+		<typeAlias type="com.mvc.cb.model.dto.Pagination" alias="Pagination"/>
+>>>>>>> parent of a6d3f1c... 미완성
 	</typeAliases>
 
 	<mappers>
