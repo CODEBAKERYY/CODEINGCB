@@ -11,15 +11,6 @@
 			alias="quizDto" />
 		<typeAlias type="com.mvc.cb.model.dto.MentorDto"
 			alias="MentorDto" />
-<<<<<<< HEAD
-		<typeAlias type="com.mvc.cb.model.dto.NoticeDto" 
-			alias="NoticeDto"/>
-		<typeAlias type="com.mvc.cb.model.dto.NoticeCommentDto" 
-			alias="NoticeCommentDto"/>
-		<typeAlias type="com.mvc.cb.model.dto.QuestionDto" alias="QuestionDto"/>
-		<typeAlias type="com.mvc.cb.model.dto.AnswerDto" alias="AnswerDto" />
-		<typeAlias type="com.mvc.cb.model.dto.QnACommentDto" alias="QnACommentDto"/>
-=======
 		<!-- <typeAlias type="com.mvc.cb.model.dto.MentorReviewDto"
 			alias="MentorReviewDto" /> -->
 		<typeAlias type="com.mvc.cb.model.dto.UserDto"
@@ -40,7 +31,6 @@
 			alias="QnACommentDto" />
 		<typeAlias type="com.mvc.cb.model.dto.Pagination"
 			alias="Pagination" />
->>>>>>> master
 	</typeAliases>
 
 	<mappers>
