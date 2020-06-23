@@ -33,6 +33,19 @@ public class AnswerBizlmpl implements AnswerBiz{
 	public int insert(AnswerDto dto) {
 		return dao.insert(dto);
 	}
+<<<<<<< HEAD
 	
+=======
+
+	public int cntAnswer(Integer question_No) {
+		return dao.cntAnswer(question_No);
+	}
+
+	@Override
+	public int count() {
+		return dao.count();
+	}
+
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
 
 }

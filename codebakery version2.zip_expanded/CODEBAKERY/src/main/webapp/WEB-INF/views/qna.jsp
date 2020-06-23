@@ -46,7 +46,11 @@ Released   : 20130811
 	<%@ include file="header.jsp"%>
 	<div id="logo" class="container">
 		<h1>
+<<<<<<< HEAD
 			<a href="qna.do" class="icon icon-tasks"><span>질문 게시판</span></a>
+=======
+			<span>질문 게시판</span>
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
 		</h1>
 	</div>
 	<div id="mainbar">
@@ -72,7 +76,14 @@ Released   : 20130811
 											</div>
 										</div>
 									<div class="status answered-accepted">
+<<<<<<< HEAD
 										<strong style="font-size: 20px">17</strong><br /> answers
+=======
+										<%-- <form method="post" action="">
+											<input type="hidden" name="question_No" value="${dto.question_No }"/>
+										</form>  --%>
+										<strong style="font-size: 20px">${list.size() }</strong><br /> answers
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
 									</div>
 									</div>
 								</div>
@@ -82,9 +93,13 @@ Released   : 20130811
 									<div class="excerpt">${dto.question_Content }</div>
 									
 									<div class="tags user-tags t-android t-eclipse t-certificate">
+<<<<<<< HEAD
 										<a href="#" class="post-tag" title="" rel="tag">android</a> 
 										<a href="#" class="post-tag" title="" rel="tag">eclipse</a> 
 										<a href="#" class="post-tag" title="" rel="tag">certificate</a>
+=======
+										<a href="#" class="post-tag" title="" rel="tag">${dto.question_Tag }</a> 
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
 									</div>
 									
 									<div class="started fr">
