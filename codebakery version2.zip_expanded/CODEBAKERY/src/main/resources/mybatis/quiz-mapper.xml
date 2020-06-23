@@ -26,6 +26,11 @@
   		ORDER BY QUIZ_NO DESC
   	</select>
   	
+  	<select id="selectOne" resultType="quizDto">
+  		SELECT * FROM QUIZ
+  		WHERE QUIZ_NO = #{quiz_No}
+  	</select>
+  	
   	<insert id="insert" parameterType="quizDto">
   		INSERT INTO QUIZ
   		VALUES(QUIZSEQ.NEXTVAL, #{quiz_Title}, #{quiz_Content}, SYSDATE, 0, 0, 0, 0, #{input_Explanation}, #{output_Explanation}, #{input_Sample}, #{output_Sample}, #{user_Id})

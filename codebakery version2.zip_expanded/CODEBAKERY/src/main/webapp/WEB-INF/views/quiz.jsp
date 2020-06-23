@@ -53,7 +53,7 @@
 				<c:forEach items="${quizList }" var="dto">
 					<tr>
 						<td>${dto.quiz_No }</td>
-						<td><a href="quiz_detail?quiz_No=${dto.quiz_No}">${dto.quiz_Title }</a></td>
+						<td><a href="quiz_detail.do?quiz_No=${dto.quiz_No}">${dto.quiz_Title }</a></td>
 						<td></td>
 						<td>${dto.correct_User}</td>
 						<td>${dto.try_User }</td>

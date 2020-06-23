@@ -10,4 +10,5 @@ public interface QuizDao {
 	
 	public int insert(QuizDto dto);
 	public List<QuizDto> selectList();
+	public QuizDto selectOne(int quiz_No);
 }

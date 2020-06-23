@@ -47,4 +47,19 @@ public class QuizDaolmpl implements QuizDao{
 		
 		return quizList;
 	}
+	
+	@Override
+	public QuizDto selectOne(int quiz_No) {
+		
+		QuizDto dto = null;
+		
+		try {
+			dto = sqlSession.selectOne(NAMESPACE+"selectOne", quiz_No);
+		}catch (Exception e) {
+			System.out.println("[error] : Quiz selectOne");
+			e.printStackTrace();
+		}
+		
+		return dto;
+	}
 }

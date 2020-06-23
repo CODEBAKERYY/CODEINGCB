@@ -23,4 +23,9 @@ public class QuizBizlmpl implements QuizBiz{
 	public List<QuizDto> selectList() {
 		return quizDao.selectList();
 	}
+
+	@Override
+	public QuizDto selectOne(int quiz_No) {
+		return quizDao.selectOne(quiz_No);
+	}
 }
