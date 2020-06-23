@@ -18,7 +18,6 @@
 		<typeAlias type="com.mvc.cb.model.dto.QuestionDto" alias="QuestionDto"/>
 		<typeAlias type="com.mvc.cb.model.dto.AnswerDto" alias="AnswerDto" />
 		<typeAlias type="com.mvc.cb.model.dto.QnACommentDto" alias="QnACommentDto"/>
-		<typeAlias type="com.mvc.cb.model.dto.Pagination" alias="Pagination"/>
 	</typeAliases>
 
 	<mappers>
