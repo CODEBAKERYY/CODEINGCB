@@ -22,7 +22,6 @@ Released   : 20130811
 <meta name="description" content="" />
 <!--bootstrap css  -->
 <link rel="shortcut icon" type="image/x-icon" href="resources/images/favicon.png" />
-<link rel="shortcut icon" type="image/x-icon" href="resources/images/favicon.png" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
 <link
 	href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900"

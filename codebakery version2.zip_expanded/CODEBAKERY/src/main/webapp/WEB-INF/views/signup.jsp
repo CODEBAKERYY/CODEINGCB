@@ -5,9 +5,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title></title>
+<title>CODEBAKERY</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
+<link rel="shortcut icon" type="image/x-icon" href="resources/images/favicon.png" />
 <link
 	href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900"
 	rel="stylesheet" />
@@ -15,7 +16,7 @@
 	media="all" />
 <link href="resources/csss/fonts/fonts.css" rel="stylesheet"
 	type="text/css" media="all" />
-<link href="resources/csss/signstyle.css" rel="stylesheet">
+<link href="resources/csss/signstyle.css" rel="stylesheet" />
 	<script src=https://code.jquery.com/jquery-3.5.1.min.js></script>
 	<script type="text/javascript">
 		function idcheckz() {

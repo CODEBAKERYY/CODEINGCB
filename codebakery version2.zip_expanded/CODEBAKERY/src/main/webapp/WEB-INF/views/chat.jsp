@@ -4,6 +4,7 @@
 <html>
 <head>
    	<meta charset="UTF-8">
+<<<<<<< HEAD
    	<meta name="viewport" content="width=device-width, initial-scale=1">
    	<link rel="stylesheet" href="resources/css/bootstrap.css">
    	<link rel="stylesheet" href="resources/css/custom.css">
@@ -11,6 +12,39 @@
     <!-- <script src="http://localhost:82/socket.io/socket.io.js"></script> -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="js/bootstrap.js"></script>
+=======
+    <!-- <script src="http://192.168.130.43:82/socket.io/socket.io.js"></script> -->
+    <script src="http://localhost:82/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+   	<title>CODEBAKERY</title>
+   	<link rel="shortcut icon" type="image/x-icon" href="resources/images/favicon.png" />
+   	<style type="text/css">
+   		#chat {
+   			padding-left: 20%;
+   		} 
+		#chat_box {
+		    width: 800px;
+		    min-width: 800px;
+		    height: 400px;
+		    min-height: 400px;
+		    border: 1px solid black; 
+		}
+		#msg {
+		    width: 700px;
+		    height: 40px;
+		}
+		#msg_process {
+		    width: 90px;
+		    height: 45px;
+		}
+		#main_chat {
+			padding-left: 20%;
+		}
+		#name{
+			width: 60px;
+		}
+	</style>
+>>>>>>> stella
 </head>
 <body>
 	<div class="container">
