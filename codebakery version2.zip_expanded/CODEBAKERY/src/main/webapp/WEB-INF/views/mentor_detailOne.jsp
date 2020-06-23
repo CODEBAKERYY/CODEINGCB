@@ -59,9 +59,20 @@
 		<div id="content">
 			<div class="title">
 				<h2>${mentor.user_Name}</h2>
-				&nbsp;&nbsp;<input type="button" class="button"
-					style="float: right;" value="1:1채팅"
-					onclick="location.href = 'chat.do'" /> <span class="byline">${mentor.mentor_Career}</span>
+				&nbsp;&nbsp;
+				<c:if test="${!empty User }">
+					<input type="button" onclick="location.href='chat.do'" class="button" style="float: right;" value="1:1채팅" />
+				</c:if>
+				<c:if test="${empty User }">
+					<input type="button" onclick="apply();" class="button" style="float: right;" value="1:1채팅" />
+                </c:if>
+                <script type="text/javascript">
+                	function apply(){
+                   		alert('로그인 후 이용할 수 있습니다.');
+                   	}
+                </script>
+                    
+				<span class="byline">${mentor.mentor_Career}</span>
 			</div>
 			<p>${mentor.mentor_Content}</p>
 		</div>
