@@ -10,33 +10,33 @@ import com.mvc.cb.model.dto.NoticeCommentDto;
 
 @Service
 public class NoticeCommentBizlmpl implements NoticeCommentBiz{
-	
-	@Autowired
-	private NoticeCommentDao dao;
-	
-	@Override
-	public List<NoticeCommentDto> selectAll() {
-		return dao.selectAll();
-	}
+   
+   @Autowired
+   private NoticeCommentDao dao;
+   
+   @Override
+   public List<NoticeCommentDto> selectAll(int notice_No) {
+      return dao.selectAll(notice_No);
+   }
 
-	@Override
-	public NoticeCommentDto selectOne(int comment_No) {
-		return dao.selectOne(comment_No);
-	}
+   @Override
+   public NoticeCommentDto selectOne(int comment_No) {
+      return dao.selectOne(comment_No);
+   }
 
-	@Override
-	public int insert(NoticeCommentDto dto) {
-		return dao.insert(dto);
-	}
+   @Override
+   public int insert(NoticeCommentDto dto) {
+      return dao.insert(dto);
+   }
 
-	@Override
-	public int update(NoticeCommentDto dto) {
-		return dao.update(dto);
-	}
+   @Override
+   public int update(NoticeCommentDto dto) {
+      return dao.update(dto);
+   }
 
-	@Override
-	public int delete(int comment_No) {
-		return dao.delete(comment_No);
-	}
+   @Override
+   public int delete(int comment_No) {
+      return dao.delete(comment_No);
+   }
 
 }

@@ -7,10 +7,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title></title>
+<title>CODEBAKERY</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
-
+<link rel="shortcut icon" type="image/x-icon" href="resources/images/favicon.png" />
 <link
 	href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900"
 	rel="stylesheet" />
@@ -77,8 +77,7 @@
 			<p>${mentor.mentor_Content}</p>
 		</div>
 		<div id="sidebar">
-			<a href="#" class="image image-full"><img src="images/pic05.jpg"
-				alt="" /></a>
+			<a href="#" class="image image-full"><img src="${pageContext.request.contextPath}/upload${mentor.user_Pic}" alt="" /></a>
 		</div>
 	</div>
 	<div class="container">

@@ -16,13 +16,13 @@ public class MentorReviewDaolmpl implements MentorReviewDao {
 	private SqlSessionTemplate sqlSession;
 
 	@Override
-	public List<MentorReviewDto> selectList() {
+	public List<MentorReviewDto> selectList(int mentor_No) {
 
 		List<MentorReviewDto> list = new ArrayList<MentorReviewDto>();
 
 		try {
 
-			list = sqlSession.selectList(NAMESPACE + "mentorReviewAll");
+			list = sqlSession.selectList(NAMESPACE + "mentorReviewAll",mentor_No);
 
 		} catch (Exception e) {
 
@@ -35,29 +35,29 @@ public class MentorReviewDaolmpl implements MentorReviewDao {
 
 	@Override
 	public MentorReviewDto selectOne(int mentor_No) {
-		
+
 		MentorReviewDto dto = null;
-		
+
 		try {
-			dto=sqlSession.selectOne(NAMESPACE+"selectOne");
+			dto = sqlSession.selectOne(NAMESPACE + "selectOne");
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 		return null;
 	}
 
 	@Override
-	public List<MentorReviewDto> reviewAll(int mentor_No) {
-		
+	public List<MentorReviewDto> review(int mentor_No) {
+
 		List<MentorReviewDto> list = new ArrayList<MentorReviewDto>();
 		System.out.println("리뷰 가지러 왔다");
-		
+
 		try {
-			list = sqlSession.selectList(NAMESPACE+"mentorReview",mentor_No);
-			
+			list = sqlSession.selectList(NAMESPACE + "Review", mentor_No);
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
-	
+
 		return list;
 	}
 

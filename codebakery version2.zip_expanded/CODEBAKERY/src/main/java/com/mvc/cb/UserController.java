@@ -59,7 +59,7 @@ public class UserController {
 	// 메인으로 이동시 해당 정보
 	@RequestMapping(value = "/main.do")
 	public String main(Model model) {
-		logger.info("mentor selectAll");
+		logger.info("멘토 다 들고나온다");
 		model.addAttribute("mentor", m_biz.selectList());
 		System.out.println(m_biz.selectList());
 		model.addAttribute("question", q_biz.count());
@@ -68,17 +68,16 @@ public class UserController {
 		return "main";
 	}
 
-	// selectOne
-	@RequestMapping(value = "/mentor_review.do")
-	public String mentorReviewOne(Model model, int mentor_No) {
-
-		logger.info("mentor reviewList selectOne");
-		System.out.println("mentor_No : " + mentor_No);
-		model.addAttribute("review", mr_biz.reviewAll(mentor_No));
-		System.out.println(mr_biz.reviewAll(mentor_No));
-
-		return "main";
-	}
+//	// selectOne
+//	@RequestMapping(value = "/mentor_review.do")
+//	public String mentorReviewOne(Model model, int mentor_No) {
+//
+//		logger.info("mentor reviewList selectOne");
+//		System.out.println("mentor_No : " + mentor_No);
+//		System.out.println(mr_biz.review(mentor_No));
+//
+//		return "main";
+//	}
 
 	// 회원가입
 	@RequestMapping(value = "/sign.do")
@@ -156,7 +155,7 @@ public class UserController {
 		UserDto res = u_biz.login(dto);
 		if (res != null) {
 			session.setAttribute("User", res);
-		}else {
+		} else {
 			return "redirect:login.do";
 		}
 		return "redirect:main.do";
@@ -173,7 +172,7 @@ public class UserController {
 	// 아이디 체크
 	@RequestMapping(value = "idcheck.do", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, UserDto> idchk(@RequestBody UserDto dto) {
+	public Map<String, Boolean> idchk(@RequestBody UserDto dto) {
 
 		System.out.println("ajax넘어왔다");
 		System.out.println(dto.getUser_Id());
@@ -181,10 +180,16 @@ public class UserController {
 		logger.info("ID CHECK");
 		String user_Id = dto.getUser_Id();
 		System.out.println(user_Id);
-		UserDto res = u_biz.idcheck(user_Id);
+		UserDto res = null;
+		res = u_biz.idcheck(user_Id);
+		System.out.println(res);
+		Boolean check = true;
+		if(res==null) {
+			check=false;
+		}
 		System.out.println("ajax: res : " + res);
-		Map<String, UserDto> map = new HashMap<String, UserDto>();
-		map.put("code", res);
+		Map<String, Boolean> map = new HashMap<String, Boolean>();
+		map.put("check", check);
 		return map;
 	}
 

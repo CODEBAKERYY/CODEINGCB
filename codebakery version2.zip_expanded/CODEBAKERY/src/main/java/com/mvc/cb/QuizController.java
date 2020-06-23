@@ -1,5 +1,11 @@
 package com.mvc.cb;
 	
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +31,14 @@ public class QuizController {
 		
 		return "quiz";
 	}
+	
+	@RequestMapping(value="/quiz_detail.do")
+	public String quizDetail(Model model, int quiz_No) {
+		logger.info("quizDetail");
+		
+		model.addAttribute("list", quizBiz.selectOne(quiz_No));
+		return "quiz_detail";
+	}
 
 	@RequestMapping(value="/quiz_write.do")
 	public String QuizWrite() {
@@ -41,5 +55,30 @@ public class QuizController {
 		}else {
 			return "redirect:quiz_write.do";
 		}
+	}
+	
+	@RequestMapping(value="/quiz_submit.do")
+	public String quiz_submit() {
+		return "quiz_submit";
+	}
+	
+	@RequestMapping(value="/quiz_Answer.do")
+	public String quizAnswer(String quiz_answer) {
+		File file = new File("test.txt");
+		
+		try {
+			OutputStream output = new FileOutputStream(file);
+			
+		    String str = quiz_answer;
+		    byte[] by=str.getBytes();
+		    output.write(by);
+		    output.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return "redirect:quiz.do";
 	}
 }

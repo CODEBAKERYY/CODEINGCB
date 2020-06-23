@@ -12,13 +12,8 @@
 		<result property="mentor_No" column="MENTOR_NO" />
 	</resultMap>
 
-	<select id="mentorReviewAll" resultMap="MentorReviewMap">
-		SELECT * FROM
-		MENTOR_REVIEW
-		ORDER BY REVIEW_NO DESC
-	</select>
 
-	<select id="mentorReview" resultMap="MentorReviewMap" parameterType="int">
+	<select id="mentorReviewAll" resultMap="MentorReviewMap" parameterType="int">
 		SELECT * FROM
 		MENTOR_REVIEW
 		WHERE MENTOR_NO = #{mentor_No}

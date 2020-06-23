@@ -6,9 +6,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>main</title>
+<title>CODEBAKERY</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
+<link rel="shortcut icon" type="image/x-icon" href="resources/images/favicon.png" />
 <link
 	href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900"
 	rel="stylesheet" />
@@ -59,12 +60,12 @@ background-color: white;
 
 <!-- 리뷰 배너 스크립트 -->
 <script type="text/javascript">
-	$(document).ready(function() {
+/* 	$(document).ready(function() {
 		$("#reviewclass").hide();
 		$(".button").click(function() {
 			$("#reviewclass").show();
 		});
-	})
+	}) */
 	$(document).ready(function() {
 		/* 배너 롤링 */
 		var nowNum = 0;
@@ -157,8 +158,8 @@ background-color: white;
 					<div class="box">
 						<p>${dto.mentor_Content}</p>
 						<p>mentor No : ${dto.mentor_No }</p>
-						<a href="mentor_review.do?mentor_No=${dto.mentor_No}"
-							class="button">리뷰보기</a>
+						<a href="mentor_detail.do?mentor_No=${dto.mentor_No}"
+							class="button">자세히 보기</a>
 					</div>
 				</div>
 			</c:forEach>
@@ -191,7 +192,7 @@ background-color: white;
 
 
 
-	<div id="reviewclass">
+	<%-- <div id="reviewclass">
 		<div class="slideWrap">
 			<ul class="slideUl">
 				<c:forEach items="${review }" var="review" varStatus="i" begin="0"
@@ -200,7 +201,7 @@ background-color: white;
 				</c:forEach>
 			</ul>
 		</div>
-	</div>
+	</div> --%>
 	<div id="featured-wrapper">
 		<div id="featured" class="container">
 			<div class="major">
