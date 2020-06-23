@@ -191,7 +191,7 @@ background-color: white;
 
 
 
-	<div id="reviewclass">
+	<%-- <div id="reviewclass">
 		<div class="slideWrap">
 			<ul class="slideUl">
 				<c:forEach items="${review }" var="review" varStatus="i" begin="0"
@@ -200,7 +200,7 @@ background-color: white;
 				</c:forEach>
 			</ul>
 		</div>
-	</div>
+	</div> --%>
 	<div id="featured-wrapper">
 		<div id="featured" class="container">
 			<div class="major">
