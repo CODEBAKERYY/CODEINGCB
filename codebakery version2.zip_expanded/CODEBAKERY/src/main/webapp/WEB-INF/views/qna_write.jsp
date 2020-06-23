@@ -16,11 +16,12 @@ Released   : 20130811
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title></title>
+<title>CODEBAKERY</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <!--bootstrap css  -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link rel="shortcut icon" type="image/x-icon" href="resources/images/favicon.png" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
 <link
 	href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900"
 	rel="stylesheet" />
@@ -45,6 +46,7 @@ Released   : 20130811
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript">
+
 	var list = [];
 	function addTag(){
 		var tag = $("#tag").val();
@@ -61,6 +63,7 @@ Released   : 20130811
 		
 	} 
 	
+	// 글쓰기 유효성 검사
 	$(function(){
 		$("#form").submit(function(){
 			var titleChk = document.getElementsByName("question_Title")[0].value;
@@ -79,7 +82,7 @@ Released   : 20130811
 			}
 			
 			if(Tag == "#"){
-				alert("태그를 한개 이상 추가해주세요");
+				alert("태그를 한 개 이상 추가해주세요.");
 				return false;
 			}
 			
@@ -88,14 +91,12 @@ Released   : 20130811
 
 </script>
 
-
 </head>
-
 <body>
 	<%@ include file="header.jsp"%>
 	
 	<div id="logo" class="container">
-		<h1><a class="icon icon-tasks"><span>질문 글쓰기</span></a></h1>
+		<h1><p class="icon icon-tasks"><span>질문 글쓰기</span></p></h1>
 	</div>
 	
 	<article>
