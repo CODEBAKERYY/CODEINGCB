@@ -8,7 +8,7 @@ public interface MentorReviewDao {
 	
 	String NAMESPACE = "mentorReview.";
 
-	List<MentorReviewDto> selectList();
+	List<MentorReviewDto> selectList(int mentor_No);
 
 	MentorReviewDto selectOne(int mentor_No);
 

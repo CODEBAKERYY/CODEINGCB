@@ -13,7 +13,7 @@
 	</resultMap>
 
 
-	<select id="Review" resultMap="MentorReviewMap" parameterType="int">
+	<select id="mentorReviewAll" resultMap="MentorReviewMap" parameterType="int">
 		SELECT * FROM
 		MENTOR_REVIEW
 		WHERE MENTOR_NO = #{mentor_No}

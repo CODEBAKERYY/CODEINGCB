@@ -16,13 +16,13 @@ public class MentorReviewDaolmpl implements MentorReviewDao {
 	private SqlSessionTemplate sqlSession;
 
 	@Override
-	public List<MentorReviewDto> selectList() {
+	public List<MentorReviewDto> selectList(int mentor_No) {
 
 		List<MentorReviewDto> list = new ArrayList<MentorReviewDto>();
 
 		try {
 
-			list = sqlSession.selectList(NAMESPACE + "mentorReviewAll");
+			list = sqlSession.selectList(NAMESPACE + "mentorReviewAll",mentor_No);
 
 		} catch (Exception e) {
 
