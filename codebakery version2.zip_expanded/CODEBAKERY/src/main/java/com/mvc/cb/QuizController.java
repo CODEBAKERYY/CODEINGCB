@@ -79,6 +79,6 @@ public class QuizController {
 			e.printStackTrace();
 		}
 		
-		return null;
+		return "redirect:quiz.do";
 	}
 }

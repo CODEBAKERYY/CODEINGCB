@@ -102,7 +102,7 @@
 	</div>		
 	
 	<div id="contact" class="container" style="text-align: right;">
-		<input type="button" value="문제 풀기" class="button" style="border-radius: 12px; margin-top: 30px;" onclick = location.href="quiz_submit"/>
+		<input type="button" value="문제 풀기" class="button" style="border-radius: 12px; margin-top: 30px;" onclick="location.href='quiz_submit.do'"/>
 	</div>
 	
 	<footer style="clear: both; margin-top: 40px;">
