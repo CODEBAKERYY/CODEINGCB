@@ -25,7 +25,12 @@ public class QuizBizlmpl implements QuizBiz{
 	}
 
 	@Override
+<<<<<<< HEAD
 	public int count() {
 		return quizDao.count();
+=======
+	public QuizDto selectOne(int quiz_No) {
+		return quizDao.selectOne(quiz_No);
+>>>>>>> origin/minseok222
 	}
 }

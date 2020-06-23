@@ -47,6 +47,7 @@ public class QuizDaolmpl implements QuizDao{
 		
 		return quizList;
 	}
+<<<<<<< HEAD
 
 	@Override
 	public int count() {
@@ -58,5 +59,21 @@ public class QuizDaolmpl implements QuizDao{
 			e.printStackTrace();
 		}
 		return res;
+=======
+	
+	@Override
+	public QuizDto selectOne(int quiz_No) {
+		
+		QuizDto dto = null;
+		
+		try {
+			dto = sqlSession.selectOne(NAMESPACE+"selectOne", quiz_No);
+		}catch (Exception e) {
+			System.out.println("[error] : Quiz selectOne");
+			e.printStackTrace();
+		}
+		
+		return dto;
+>>>>>>> origin/minseok222
 	}
 }

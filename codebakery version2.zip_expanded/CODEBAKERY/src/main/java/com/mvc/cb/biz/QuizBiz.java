@@ -8,6 +8,11 @@ public interface QuizBiz {
 
 	public int insert(QuizDto dto);
 	public List<QuizDto> selectList();
+<<<<<<< HEAD
 	public int count();
 
+=======
+	public QuizDto selectOne(int quiz_No);
+	
+>>>>>>> origin/minseok222
 }
