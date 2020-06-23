@@ -59,12 +59,12 @@ background-color: white;
 
 <!-- 리뷰 배너 스크립트 -->
 <script type="text/javascript">
-	$(document).ready(function() {
+/* 	$(document).ready(function() {
 		$("#reviewclass").hide();
 		$(".button").click(function() {
 			$("#reviewclass").show();
 		});
-	})
+	}) */
 	$(document).ready(function() {
 		/* 배너 롤링 */
 		var nowNum = 0;
@@ -191,7 +191,7 @@ background-color: white;
 
 
 
-	<div id="reviewclass">
+	<%-- <div id="reviewclass">
 		<div class="slideWrap">
 			<ul class="slideUl">
 				<c:forEach items="${review }" var="review" varStatus="i" begin="0"
@@ -200,7 +200,7 @@ background-color: white;
 				</c:forEach>
 			</ul>
 		</div>
-	</div>
+	</div> --%>
 	<div id="featured-wrapper">
 		<div id="featured" class="container">
 			<div class="major">
