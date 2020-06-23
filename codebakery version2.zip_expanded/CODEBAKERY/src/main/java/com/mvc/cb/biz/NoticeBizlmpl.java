@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.mvc.cb.model.dao.NoticeDao;
 import com.mvc.cb.model.dto.NoticeDto;
-import com.mvc.cb.model.dto.Pagination;
+import com.mvc.cb.model.dto.PageNavigator;
 
 @Service
 public class NoticeBizlmpl implements NoticeBiz{
@@ -16,8 +16,8 @@ public class NoticeBizlmpl implements NoticeBiz{
 	private NoticeDao dao;
 	
 	@Override
-	public List<NoticeDto> selectAll(Pagination pagination) {
-		return dao.selectAll(pagination);
+	public List<NoticeDto> selectAll(PageNavigator paging) {
+		return dao.selectAll(paging);
 	}
 
 	@Override
@@ -46,8 +46,8 @@ public class NoticeBizlmpl implements NoticeBiz{
 	}
 
 	@Override
-	public int pageCnt(Pagination pagination) {
-		return dao.pageCnt(pagination);
+	public int pageCnt() {
+		return dao.pageCnt();
 	}
 
 	

@@ -1,5 +1,6 @@
 package com.mvc.cb.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -15,9 +16,20 @@ public class NoticeCommentDaolmpl implements NoticeCommentDao{
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
-	public List<NoticeCommentDto> selectAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<NoticeCommentDto> selectAll(int notice_No) {
+		
+		List<NoticeCommentDto> list = new ArrayList<NoticeCommentDto>();
+		
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE + "selectList",notice_No);
+			} catch(Exception e) {
+				System.out.println("[error] : select list");
+				e.printStackTrace();
+			}
+			
+			return list;
+		
 	}
 
 	@Override
