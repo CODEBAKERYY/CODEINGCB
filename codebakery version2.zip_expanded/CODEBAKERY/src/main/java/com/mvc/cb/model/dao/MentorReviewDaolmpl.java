@@ -54,7 +54,7 @@ public class MentorReviewDaolmpl implements MentorReviewDao {
 		
 		try {
 			list = sqlSession.selectList(NAMESPACE+"mentorReview",mentor_No);
-			
+			System.out.println(list);
 		} catch (Exception e) {
 		}
 	
