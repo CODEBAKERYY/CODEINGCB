@@ -163,6 +163,9 @@
 		</dependency>
 		<!-- Java Mail API -->
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of a6d3f1c... 미완성
 		  <dependency>
 		     <groupId>javax.mail</groupId>
 		     <artifactId>mail</artifactId>
@@ -170,6 +173,7 @@
 		  </dependency>
 		  
 		  <dependency>
+<<<<<<< HEAD
 		    <groupId>xerces</groupId>
 		    <artifactId>xercesImpl</artifactId>
 		    <version>2.9.1</version>
@@ -202,6 +206,13 @@
 		</dependency>
  
 >>>>>>> parent of 3d4349c... ㅈㄷㄹ
+=======
+		    <groupId>xerces</groupId>
+		    <artifactId>xercesImpl</artifactId>
+		    <version>2.9.1</version>
+		  </dependency>
+		     
+>>>>>>> parent of a6d3f1c... 미완성
 	</dependencies>
     <build>
         <plugins>
