@@ -1,5 +1,7 @@
 package com.mvc.cb;
 
+
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +18,6 @@ import com.mvc.cb.biz.QuestionBiz;
 import com.mvc.cb.model.dto.AnswerDto;
 import com.mvc.cb.model.dto.QnACommentDto;
 import com.mvc.cb.model.dto.QuestionDto;
-
-import oracle.net.aso.s;
 
 @Controller
 public class QnAController {
@@ -39,6 +39,8 @@ public class QnAController {
 	public String QnAList(Model model) {
 		logger.info("QnAList");
 		model.addAttribute("list", q_biz.selectList());
+		
+		System.out.println();
 		
 		//model.addAttribute("cnt", a_biz.cntAnswer(question_No));
 		
@@ -155,22 +157,26 @@ public class QnAController {
 			}
 		}
 		
+		//답변수정 -> 팝업창으로 넘김
 		@RequestMapping( value="/answer_modify.do" )
-		public String modifyAnswer(Integer question_No, Integer answer_No, String answer_Title, String answer_Content) {
+		public String modifyAnswer(Model model, AnswerDto dto) {
 			logger.info("Modify Answer");
 			
-			AnswerDto dto = new AnswerDto();
-			dto.setAnswer_No(answer_No);
-			dto.setAnswer_Title(answer_Title);
-			dto.setAnswer_Content(answer_Content);
+			model.addAttribute("ans", dto);
+			
+			return "modifyAnswer";
+			}
+		
+		//팝업창에서 답변 변경후 넘김
+		@RequestMapping( value="/changeAnswer.do" )
+		public String changeAnswer(AnswerDto dto){
+			logger.info("changeAnswer");
+			
 			
 			int res = a_biz.update(dto);
 			
-			if(res>0) {
-				return "redirect:qna_detail.do?question_No="+question_No;
-			} else {
-				return "redirect:qna_detail.do?question_No="+question_No;
-			}
+			
+			return "redirect:qna_detail.do?question_No="+dto.getQuestion_No();
 		}
 		
 		// 답변 작성시 들어오는 요청
@@ -179,10 +185,8 @@ public class QnAController {
 		public String insertAnswer(AnswerDto dto) {
 			logger.info("Insert Answer");
 			
-			System.out.println(dto.getAnswer_Title());
-			
 			int res = a_biz.insert(dto);
-	
+			
 			if(res>0) {
 				return "location.reload()";
 			} else {
@@ -190,9 +194,9 @@ public class QnAController {
 			}
 		}
 		
-		// ------------------------ 답변 직성/수정/삭제 END -------------------------
+		// ------------------------ 답변 등록/수정/삭제 END -------------------------
 		
-		// ------------------------ 댓글 직성/수정/삭제 START-------------------------
+		// ------------------------ 댓글 등록/수정/삭제 START-------------------------
 		
 		
 		// 질문글에 댓글 작성
@@ -227,7 +231,30 @@ public class QnAController {
 			}
 		}
 		
+
+		// 댓글 수정
+		@RequestMapping( value="/updateComment.do" )
+		@ResponseBody
+		public String updateComment(@RequestParam int comment_No, @RequestParam String comment_Content) {
+			logger.info("updateComment");
+			
+			System.out.println(comment_No + " : "+comment_Content);
+			QnACommentDto dto = new QnACommentDto();
+			dto.setComment_No(comment_No);
+			dto.setComment_Content(comment_Content);
+			
+			
+			int res =  c_biz.update(dto);
+			
+			if(res>0) {
+				return "location.reload()";
+			} else {
+				return "location.reload()";
+			}
+		}
 		
-		// ------------------------ 답변 직성/수정/삭제 END -------------------------
+		
+		
+		// ------------------------ 답변 등록/수정/삭제 END -------------------------
 
 }

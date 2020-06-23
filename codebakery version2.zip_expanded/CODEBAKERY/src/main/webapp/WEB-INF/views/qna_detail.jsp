@@ -51,11 +51,39 @@ Released   : 20130811
   <link href="resources/csss/style.css" rel="stylesheet" />
   <link href="resources/csss/board-detail.css" rel="stylesheet" />
   
+<style type="text/css">
+	.comment-list{
+		display: none;
+	}
+</style>
+  
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript">
 
+
+		//댓글보기 버튼 클릭
+		function showComment(){
+			
+			if($(".comment-list").css("display") == "none"){
+				$(".comment-list").css("display", "block");
+				$("#shwComm").val("댓글 숨기기");
+			} else{
+				$(".comment-list").css("display", "none");
+				$("#shwComm").val("댓글 더보기");
+			} 
+		}
+		
+		
+
+
+
+
 	// ------------------------ 답변 -------------------------------
+	
+	
+	
+	
 	
 		//답변쓰기
 		function writeAnswer(){
@@ -75,6 +103,11 @@ Released   : 20130811
 				return false;
 			}
 			
+			if(user_Id == "" || user_Id == null){
+				alert("로그인후 이용가능합니다");
+				return false;
+			}
+			
 			
 			 $.ajax({
 				url: "answer_write.do",
@@ -87,65 +120,41 @@ Released   : 20130811
 				error: function(request, status, error){
 					alert("ajax 통신 실패!");
 			        //alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
-			        location.reload();
 				}
 			}); 
 			
 		}
 
+	
 
 	// 답변수정
-	function modifyAnswer(question_No, answer_No, answer_Title, answer_Content){
-		var a = '';
+	 function modifyAnswer(question_No, answer_No, answer_Title, answer_Content){
+			
 		
-		a += '<div class="input-group">';
-	    a += '<input type="text" name="answer_Title" style="width:400px; height:40px;" value="'+answer_Title+'"/>';
-	   	a += '<textarea class="answer" name="answer_Content" style="width:600px; height:150px; resize:none;">'+answer_Content+'</textarea>';
-	    a += '<span class="input-group-btn">'
-	    //a += '<button class="btn btn-default" type="button" onclick="saveAnswer('+question_No+','+answer_No+',\"'+answer_Title+'\", \"'+answer_Content+'\");">저장</button> </span>';
-	    a += '<button class="btn btn-default" type="button" onclick="saveAnswer('+answer_No+');">저장</button> </span>';
-	    a += '</div>';
-	    
-	    var size = ${alist.size()} 
-	    
-	    for(var i=0; i<size; i++){
-	    	//alert($('.commentContent')[0]); //[object HTMLDivElement]
-	    	console.log($('.commentContent').val());
-	    }
-	    
-	    $('.commentContent').html(a)
-	    	
-
-
-	}
-	
-	
-	
-	// 수정된 답변 저장
-	function saveAnswer(answer_No/* question_No, answer_No, answer_Title, answer_Content */){
-		alert(answer_No);
+		var setting = "width=400, height=450"
+		var url = "answer_modify.do?question_No="+question_No+"&answer_No="+answer_No+"&answer_Title="+answer_Title+"&answer_Content="+answer_Content;
 		
-		$.ajax({
+		window.open(url, "", setting);
+		window.close();
+		
+		
+		  /* $.ajax({
 			url: "answer_modify.do",
 			type: 'POST',
 			data: {"question_No":question_No, "answer_No":answer_No, "answer_Title":answer_Title, "answer_Content":answer_Content},
-			success:function(data){
-				if(data == "ture"){
-					alert("답변이 수정되었습니다.")
-					location.reload();
-				} else{
-					alert("답변 수정을 실패하였습니다.")
-				}
+			success: function(data){
+				window.close();
+				window.opener.location.reload();
 			},
-			error: function(request,status,error){
+			error: function(request, status, error){
 				alert("ajax 통신 실패!");
-		        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
-		       
+		        //alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
 			}
-			
-		});
-	}
+		});   */ 
+		
 
+	} 
+	
 
 
 	// 답변삭제
@@ -179,19 +188,81 @@ Released   : 20130811
 	// ------------------------ 댓글 ------------------------------
 	
 	
-	//댓글삭제
-	function deleteComment(comment_No, question_No){
+		$(function(){
+			$("#commentForm").submit(function(){
+				var user_Id = document.getElementsByName("user_Id")[0].value;
+				var Content = document.getElementById("inputComment")[0].value;
+				
+				
+				if(Content == "" || Content == null){
+					alert("내용을 입력해 주세요.");
+					return false;
+				}
+				
+				if(user_Id == "" || user_Id == null){
+					alert("로그인이 필요합니다.");
+					return false;
+				}
+				
+			});
+		});	
+	
+	
 		
-		var msg = confirm("댓글을 삭제하시겠습니까?");
+	
+		//댓글삭제
+		function deleteComment(comment_No, question_No){
 		
-		if(msg){
+			var msg = confirm("댓글을 삭제하시겠습니까?");
+			
+			if(msg){
+				
+				$.ajax({
+					url: "qcomment_delete.do",
+					type: "POST",
+					data: {"comment_No":comment_No, "question_No":question_No},
+					success:function(data){
+							alert("댓글이 삭제되었습니다.")
+							location.reload();
+					},
+					error: function(request, status, error){
+						alert("ajax 통신 실패!");
+				        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+					}
+				});
+			} else{
+				return false;
+			} 
+		}
+		
+		//댓글수정 폼열기
+		function modifyComment(comment_No, comment_Content){
+			//alert(comment_No + ": "+comment_Content);
+			
+				var a = "";
+				
+				a += '<div class="input-group">';
+			    a += '<input type="text" class="form-control" name="comm_Content" value="'+comment_Content+'"/>';
+			    a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="commentUpdate('+comment_No+','+comment_Content+');">수정</button> </span>';
+			    a += '</div>';
+			
+			$("#result").html(a);
+		}
+		
+		//댓글수정
+		function commentUpdate(comment_No,comment_Content){
+			
+			var comm = $('input[name=comm_Content]').val();
+			
+			
+			console.log(comment_No + ": " + comm);
 			
 			$.ajax({
-				url: "qcomment_delete.do",
+				url: "updateComment.do",
 				type: "POST",
-				data: {"comment_No":comment_No, "question_No":question_No},
+				data: {"comment_No":comment_No, "comment_Content" : comm},
 				success:function(data){
-						alert("댓글이 삭제되었습니다.")
+						alert("댓글이 수정되었습니다.")
 						location.reload();
 				},
 				error: function(request, status, error){
@@ -199,13 +270,15 @@ Released   : 20130811
 			        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
 				}
 			});
-		} else{
-			return false;
-		} 
-	}
+			
+		}
 	
+		
 	// ------------------------ 댓글 ------------------------------
 
+        
+
+	
 </script>
 
 </head>
@@ -223,7 +296,7 @@ Released   : 20130811
 			<div class="col-md-12 blog-content">
 			
 			<!--------- 질문글 START ----------->
-				<span class="title">${qlist.question_Title }</span>
+				<span class="title" style="font-weight: bold; font-size: 30px;">${qlist.question_Title }</span>
 				<div class="post-meta">
 								<span class="author">${qlist.user_Id }</span>
 								<span class="date"><fmt:formatDate value="${qlist.question_Date }" pattern="yyyy.MM.dd"/></span>
@@ -234,34 +307,38 @@ Released   : 20130811
 					<p> Tags: <a href="#">${qlist.question_Tag }</a></p>
 				</div>
 				<div style="text-align: right;">
+					<c:if test="${!empty User && (User.user_Id eq qlist.user_Id) }">
 					<input type="button" value="수정" onclick="location.href='qna_update.do?question_No=${qlist.question_No}'"/>
 					<input type="button" value="삭제" onclick="location.href='qna_delete.do?question_No=${qlist.question_No}'"/>
+					</c:if>
 					<input type="button" value="목록" onclick="location.href='qna.do'"/>
 				</div>
 			<!--------- 질문글 End ----------->	
-				
+					<br></br><br></br>
 			<!--------- 댓글 START ----------->
-				<div class="pt-5">
-					<h3 class="mb-5">${clist.size() } Comments</h3>
 					<form action="writeComment.do" id="commentForm" method="post">
 						<input type="hidden" name="user_Id" value="${User.user_Id }" />
 						<input type="hidden" name="question_No" value="${qlist.question_No }" />
 	                    <div>
 	                        <div>
 	                            <table class="table">                    
+	                       			 <tr>
+	                       			 	<td style="font-weight: bold; font-size: 20px; font-family: initial;" >${clist.size() } Comments</td>
+	                       			 	<td><input type="button" class="btn btn-outline-secondary" value="댓글 더보기" onclick="showComment();" id="shwComm"/></td>
+	                       			 </tr>
 	                                <tr>
 	                                    <td>
-	                                        <textarea class="form-control" style="width: 1100px; resize: none;" rows="2" cols="30" id="inputComment" name="comment_Content" placeholder="댓글을 입력하세요"></textarea>
-	                                        <br />
-	                                        <div style="text-align: right;">
-	                                           <input type="submit" class="btn pull-right btn-success" value="등록" />
-	                                        </div>
+	                                        <textarea class="form-control" style="width: 1000px; resize: none;" rows="2" cols="30" id="inputComment" name="comment_Content" placeholder="댓글을 입력하세요"></textarea>
+	                                    </td>
+	                                    <td style="text-align: right; mdisplay:table-cell; vertical-align:middle;">
+	                                    	<input type="submit" class="btn btn-primary" value="등록" style="width: 90px; height: 50px;"/>
 	                                    </td>
 	                                </tr>
 	                            </table>
 	                        </div>
 	                    </div>  
 	                </form>
+	                <br></br>
 					<ul class="comment-list">
 						<c:choose>
 							<c:when test="${empty clist }">
@@ -269,15 +346,17 @@ Released   : 20130811
 							</c:when>
 							<c:otherwise>
 								<c:forEach items="${clist }" var="dto">
-								<li class="comment">
+								<li class="comment" id="onecomm">
 									<div class="vcard bio">
 										<img src="resources/csss/images/person_4_sq.jpg" alt="Image placeholder">
 									</div>
 									<div class="comment-body">
 										<h3>${dto.user_Id }</h3>
 										<span class="meta"><fmt:formatDate value="${dto.comment_Date }" pattern="yyyy.MM.dd HH:mm:ss"/></span>&nbsp;&nbsp;
-										<input type="button" value="수정" onclick="modifyComment();"/>
+										<c:if test="${!empty User && (User.user_Id eq dto.user_Id) }">
+										<input type="button" value="수정" onclick="modifyComment(${dto.comment_No}, '${dto.comment_Content }');"/>
 										<input type="button" value="삭제" onclick="deleteComment(${dto.comment_No}, ${qlist.question_No });"/>
+										</c:if>
 										<p>${dto.comment_Content }</p>
 										<p>
 											<a href="#" class="reply">Reply</a>
@@ -291,12 +370,13 @@ Released   : 20130811
 				</div>
 				<br />
             	<div class="container" style="margin-bottom: 70px;">
-                <div id="result"></div>
+                <div id="result"></div> 
 				<!--------- 댓글 END ----------->
+				
 				
 				<!--------- 답글 START ----------->
 				<div class="pt-5">
-					<h3 class="mb-5">${alist.size()} Answers</h3>
+					<div><h3 class="mb-5">${alist.size()} Answers</h3></div>
 					<c:choose>
 						<c:when test="${empty alist }">
 							<p>------------------- 작성된 리뷰가 없습니다. -------------------</p>
@@ -307,8 +387,10 @@ Released   : 20130811
 								<div class="post-meta">
 									<span class="author">${dto.user_Id }</span>
 									<span class="date"><fmt:formatDate value="${dto.answer_Date }" pattern="yyyy.MM.dd HH:mm"/></span>
+									<c:if test="${!empty User && (User.user_Id eq dto.user_Id) }">
 									<input type="button" value="수정" onclick="modifyAnswer(${qlist.question_No }, ${dto.answer_No}, '${dto.answer_Title }', '${dto.answer_Content }');"/>
 									<input type="button" value="삭제" onclick="deleteAnswer(${dto.answer_No}, ${qlist.question_No });"/>
+									</c:if>
 								</div>
 								<hr />
 								<p class="lead" id="comm">${dto.answer_Content }</p>

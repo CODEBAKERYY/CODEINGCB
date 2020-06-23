@@ -41,6 +41,7 @@ Released   : 20130811
 		  font-size: 13px;
 	}
 </style>
+
 </head>
 <body >
 
@@ -75,7 +76,7 @@ Released   : 20130811
 									<div class="status answered-accepted">
 										<%-- <form method="post" action="">
 											<input type="hidden" name="question_No" value="${dto.question_No }"/>
-										</form> --%>
+										</form>  --%>
 										<strong style="font-size: 20px">${list.size() }</strong><br /> answers
 									</div>
 									</div>

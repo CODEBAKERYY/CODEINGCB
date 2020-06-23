@@ -2,6 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<<<<<<< HEAD
 
 <mapper namespace="qcomment">
 
@@ -41,3 +42,44 @@
 		WHERE COMMENT_NO = #{comment_No}
 	</update>
 </mapper>
+=======
+  
+  <mapper namespace="qcomment">
+ 
+  	<resultMap type="QnACommentDto" id="QnACommentMap">
+		<result property="comment_No" column="QCOMMENT_NO" />  	
+  		<result property="question_No" column="QUESTION_NO" />
+  		<result property="parent_No" column="PARENT_NO" />
+  		<result property="comment_Content" column="QCOMMENT_CONTENT" />
+  		<result property="comment_Date" column="QCOMMENT_DATE" />
+  		<result property="depth" column="DEPTH" />
+  		<result property="reply_Id" column="REPLY_ID" />
+  		<result property="user_Id" column="USER_ID" />
+  		<result property="nuser_Id" column="NUSER_ID" />
+  	</resultMap>
+  	
+  	<select id="selectList" resultMap="QnACommentMap">
+  		SELECT * 
+  		FROM QNA_COMMENT
+  		WHERE QUESTION_NO=#{question_No}
+  		ORDER BY QCOMMENT_NO DESC
+  	</select>
+  	
+  	<insert id="insertQuestion" parameterType="QnACommentDto">
+  		INSERT INTO QNA_COMMENT
+  		VALUES(QCOMMENTSEQ.NEXTVAL, #{question_No}, 0, #{comment_Content}, SYSDATE, 0, NULL, #{user_Id}, NULL)
+  	</insert>
+  	
+  	<delete id="delete" parameterType="int">
+  		DELETE FROM QNA_COMMENT
+  		WHERE QCOMMENT_NO=#{comment_No}
+  	</delete>
+  	
+  	<update id="update" parameterType="QnACommentDto">
+  		UPDATE QNA_COMMENT
+  		SET QCOMMENT_CONTENT = #{comment_Content}
+  		WHERE QCOMMENT_NO = #{comment_No}
+  	</update>
+  
+  </mapper>
+>>>>>>> stella

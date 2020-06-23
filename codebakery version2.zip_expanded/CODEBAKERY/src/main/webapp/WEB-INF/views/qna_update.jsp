@@ -59,6 +59,26 @@ Released   : 20130811
 	
 		document.getElementById("tags").innerHTML = list;
 	} 
+	
+	
+	$(function(){
+		$("#form").submit(function(){
+			var titleChk = document.getElementsByName("question_Title")[0].value;
+			var ContentChk = document.getElementsByName("question_Content")[0].value;
+			
+			
+			if(titleChk == "" || titleChk == null){
+				alert("제목을 입력해 주세요.");
+				return false;
+			}
+			
+			if(ContentChk == "" || ContentChk == null){
+				alert("내용을 입력해 주세요.");
+				return false;
+			}
+			
+		});
+	});
 </script>
 </head>
 
@@ -88,7 +108,7 @@ Released   : 20130811
 				</div>
 				<div class="mb-3">
 					<label for="tag">TAG</label>
-					<span><input type="text" class="form-control" id="tag" name="question_Tag"/></span>
+					<span><input type="text" class="form-control" id="tag" name="question_Tag"/ value="#"></span>
 					<input type="button" value="추가" onclick="addTag();"/>
 					<div class="one_tag" id="tags">${dto.question_Tag }</div>
 				</div>
