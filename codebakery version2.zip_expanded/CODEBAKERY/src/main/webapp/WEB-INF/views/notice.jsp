@@ -20,14 +20,14 @@ Released   : 20130811
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <!--bootstrap css  -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
 <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
 <link href="resources/css/default.css" rel="stylesheet" type="text/css" media="all" />
 <link href="resources/css/fonts/fonts.css" rel="stylesheet" type="text/css" media="all" />
 <link href="resources/css/boardstyle.css" rel="stylesheet" type="text/css" media="all" />
 
 <!------- 페이징 효과때문에 추가 ------>
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" />
 <!------- 페이징 효과때문에 추가 ------>
 
 <!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
@@ -91,7 +91,7 @@ Released   : 20130811
                 <br><br>
                 
                	<!-- 관리자 일때만 글쓰기버튼 활성화 -->
-                <c:if test="${User.user_Grade == ADMIN}">
+                <c:if test="${User.user_Grade == '관리자' && !empty User}">
                 <div class="text-right">
                     <button type="button" class="btn btn-secondary pull-right" onclick="location.href='notice_write.do'" style="width: 8%;" >글쓰기</button>
                 </div>

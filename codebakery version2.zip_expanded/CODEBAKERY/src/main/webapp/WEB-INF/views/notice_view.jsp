@@ -75,7 +75,7 @@ Released   : 20130811
                         
                         <div style="width: 850px; margin: 0 auto; text-align: right;" >
                         	<!-- 관리자일때만 수정삭제 보이게함 -->
-                        	 <c:if test="${User.user_Grade == ADMIN}">
+                        	 <c:if test="${User.user_Grade == '관리자' && !empty User}">
                             <button type="button" class="btn btn-light pull-right" id="btnUpdate" onclick="location.href='notice_edit.do?notice_No=${detail.notice_No}'">수정</button>
                             <button type="button" class="btn btn-light pull-right" id="btnDelete" onclick="location.href='notice_delete.do?notice_No=${detail.notice_No}'">삭제</button>
                             </c:if>
@@ -90,6 +90,7 @@ Released   : 20130811
        <br></br>
        
         <!--============== 공지사항 디테일 댓글 쓰기 START ==============-->
+        <c:if test="${!empty User}">
         <div class="container">
            <form action="comment_write.do?notice_No=${detail.notice_No}&user_Id=${User.user_Id }" method="post">
                <div>
@@ -109,6 +110,7 @@ Released   : 20130811
                </div>
            </form>
        </div>
+       </c:if>
        <!--============== 공지사항 디테일 댓글 쓰기 END ==============-->
             
             <br></br>
