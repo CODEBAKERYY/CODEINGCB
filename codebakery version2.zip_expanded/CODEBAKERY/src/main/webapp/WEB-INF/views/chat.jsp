@@ -25,6 +25,9 @@
 							<div>
 								<button type="button" class="btn btn-default pull-right" onclick="location.href='main.do'">종료</button>
 							</div>
+							<div>
+								<button type="button" class="btn btn-default pull-right" onclick="location.href='main.do'">호출</button>
+							</div>
 							<div class="clearfix"></div>
 						</div>
 						<div id="chat" class="panel-collapse collapse in">
