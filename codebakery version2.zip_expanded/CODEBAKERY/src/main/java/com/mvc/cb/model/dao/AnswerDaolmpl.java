@@ -10,61 +10,84 @@ import org.springframework.stereotype.Repository;
 import com.mvc.cb.model.dto.AnswerDto;
 
 @Repository
-public class AnswerDaolmpl implements AnswerDao{
-	
+public class AnswerDaolmpl implements AnswerDao {
+
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
 	@Override
 	public List<AnswerDto> selectList(int question_No) {
-		
+
 		List<AnswerDto> list = new ArrayList<AnswerDto>();
-		
+
 		try {
-			list = sqlSession.selectList(NAMESPACE+"selectList", question_No);
-		}catch(Exception e) {
+			list = sqlSession.selectList(NAMESPACE + "selectList", question_No);
+		} catch (Exception e) {
 			System.out.println("[error] : Answer selectList");
 			e.printStackTrace();
 		}
 		return list;
 	}
+<<<<<<< HEAD
+=======
 
 	@Override
 	public int delete(int answer_No) {
-		
+
 		int res = 0;
-		
+
 		try {
-			res = sqlSession.delete(NAMESPACE+"delete", answer_No);
-		} catch(Exception e) {
+			res = sqlSession.delete(NAMESPACE + "delete", answer_No);
+		} catch (Exception e) {
 			System.out.println("[error] : Answer delete");
 			e.printStackTrace();
 		}
-		
+
 		return res;
 	}
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
 
 	@Override
 	public int update(AnswerDto dto) {
-		
-		int res  = 0;
-		
+
+		int res = 0;
+
 		try {
-			res = sqlSession.update(NAMESPACE+"update", dto);
-		} catch(Exception e) {
+			res = sqlSession.update(NAMESPACE + "update", dto);
+		} catch (Exception e) {
 			System.out.println("[error] : Answer update");
 			e.printStackTrace();
 		}
-		
+
 		return res;
 	}
 
 	@Override
 	public int insert(AnswerDto dto) {
-		
+
 		int res = 0;
-		
+
 		try {
+			res = sqlSession.insert(NAMESPACE + "insert", dto);
+		} catch (Exception e) {
+			System.out.println("[error] : Answer insert");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+<<<<<<< HEAD
+	@Override
+	public int insert(AnswerDto dto) {
+		
+=======
+	public int cntAnswer(Integer question_No) {
+
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
+		int res = 0;
+
+		try {
+<<<<<<< HEAD
 			res = sqlSession.insert(NAMESPACE+"insert", dto);
 		} catch(Exception e) {
 			System.out.println("[error] : Answer insert");
@@ -73,4 +96,28 @@ public class AnswerDaolmpl implements AnswerDao{
 		return res;
 	}
 
+=======
+			res = sqlSession.selectOne(NAMESPACE + "cntAnswer", question_No);
+		} catch (Exception e) {
+			System.out.println("[error] : count Answer");
+			e.printStackTrace();
+		}
+
+		return res;
+	}
+
+	@Override
+	public int count() {
+
+		int res = 0;
+
+		try {
+			res = sqlSession.selectOne(NAMESPACE + "count");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
 }

@@ -200,6 +200,104 @@ CREATE TABLE NOTICE_COMMENT (
 
 --------------------------- DATA INSERT ----------------------------
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+INSERT INTO USER_TB VALUES('user1','1234','일반회원','김건영','010-2342-1234','kky@kh.or.kr','userpic','java');
+INSERT INTO USER_TB VALUES('user2','1234','일반회원','박주혁','010-6787-1234','pjyy@kh.or.kr','userpic','java');
+INSERT INTO USER_TB VALUES('user3','1234','일반회원','권민석','010-7942-1234','kms@kh.or.kr','userpic','java');
+INSERT INTO USER_TB VALUES('user4','1234','일반회원','정승연','010-3782-1234','jsy@kh.or.kr','userpic','java');
+INSERT INTO USER_TB VALUES('user5','1234','일반회원','주수현','010-1782-1234','jsh@kh.or.kr','userpic','java');
+INSERT INTO USER_TB VALUES('user6','1234','일반회원','이재익','010-94562-1234','ljl@kh.or.kr','userpic','java');
+INSERT INTO USER_TB VALUES('user6','1234','일반회원','이재익','010-94562-1234','ljl@kh.or.kr','userpic','java');
+
+SELECT * FROM USER_TB;
+UPDATE USER_TB SET USER_GRADE ='관리자' WHERE USER_ID = 'muser';
+=======
+-- USER_TB
+INSERT INTO USER_TB VALUES('ADMIN','1234','관리자', '관리자','010-2345-6767', 'admin@kh.or.kr', 0, NULL, NULL);
+INSERT INTO USER_TB VALUES('user1','1234','일반회원','김건영','010-2342-1234','kky@kh.or.kr', 0,'userpic','java');
+INSERT INTO USER_TB VALUES('user2','1234','일반회원','박주혁','010-6787-1234','pjyy@kh.or.kr', 0,'userpic','java');
+INSERT INTO USER_TB VALUES('user3','1234','일반회원','권민석','010-7942-1234','kms@kh.or.kr', 0,'userpic','java');
+INSERT INTO USER_TB VALUES('user4','1234','일반회원','정승연','010-3782-1234','jsy@kh.or.kr', 0,'userpic','java');
+INSERT INTO USER_TB VALUES('user5','1234','일반회원','주수현','010-1782-1234','jsh@kh.or.kr', 0,'userpic','java');
+INSERT INTO USER_TB VALUES('user6','1234','일반회원','이재익','010-94562-1234','ljl@kh.or.kr', 0,'userpic','java');
+
+SELECT * FROM USER_TB;
+
+-- MENTOR_INTRO
+INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'삼성 1위 입사자','모든것을 한번에 해결해드립니다.','user1');
+INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'구글 1년 경력','모든것을 한번에 해결해드립니다.','user2');
+INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'애플에서 냄새맡음','모든것을 한번에 해결해드립니다.','user3');
+INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'화웨이출신','모든것을 한번에 해결해드립니다.','user4');
+
+SELECT * FROM MENTOR_INTRO;
+
+-- MENTOR_REVIEW
+INSERT INTO MENTOR_REVIEW VALUES(REVIEWSEQ.NEXTVAL, '멘토리뷰내용01', SYSDATE, 'user1', 3);
+INSERT INTO MENTOR_REVIEW VALUES(REVIEWSEQ.NEXTVAL, '멘토리뷰내용02', SYSDATE, 'user2', 4);
+
+SELECT * FROM MENTOR_REVIEW;
+
+-- QUESTION
+INSERT INTO QUESTION 
+VALUES(QUESTIONSEQ.NEXTVAL, '오라클 서버가 자꾸 오류납니다..', '이렇게 했는데 자꾸 에러가 뜨네요 어떻게 고칠까요?', SYSDATE, 0, NULL, 'user3');
+INSERT INTO QUESTION 
+VALUES(QUESTIONSEQ.NEXTVAL, '경로를 못찾아요..', '경로를 잘 잡아준거 같은데 계속 404만 뜨네요 도와주세요..', SYSDATE, 0, NULL, 'user4');
+
+SELECT * FROM QUESTION;
+
+-- ANSWER
+INSERT INTO ANSWER VALUES(ANSWERSEQ.NEXTVAL, '질문답변 답변 제목01', '질문답변 답변 제목01', SYSDATE, 1, 'user5');
+INSERT INTO ANSWER VALUES(ANSWERSEQ.NEXTVAL, '질문답변 답변 제목02', '질문답변 답변 제목02', SYSDATE, 2, 'user6');
+
+SELECT * FROM ANSWER;
+
+-- QNA_COMMENT
+INSERT INTO QNA_COMMENT
+VALUES(QCOMMENTSEQ.NEXTVAL, 1 ,0, '질문답변 댓글 내용01', SYSDATE, 0, NULL, 'user1', NULL);
+INSERT INTO QNA_COMMENT
+VALUES(QCOMMENTSEQ.NEXTVAL, 2 ,0, '질문답변 댓글 내용02', SYSDATE, 0, NULL, 'user2', NULL);
+
+SELECT * FROM QNA_COMMENT;
+
+-- QUIZ
+INSERT INTO QUIZ
+VALUES(QUIZSEQ.NEXTVAL, '퀴즈 제목01', '퀴즈 내용01', SYSDATE, 0, 0, 0, 0,'인풋 설명01', '인풋 설명01', '인풋 샘플01', '아웃풋 샘플01','user3');
+INSERT INTO QUIZ
+VALUES(QUIZSEQ.NEXTVAL, '퀴즈 제목02', '퀴즈 내용02', SYSDATE, 0, 0, 0, 0,'인풋 설명02', '인풋 설명02' , '인풋 샘플02', '아웃풋 샘플02', 'user4');		
+>>>>>>> stella
+
+SELECT * FROM QUIZ;
+
+-- TRY_QUIZ
+INSERT INTO TRY_QUIZ
+VALUES(1, '문제풀기 내용01', '예시 결과01', '실제 결과01', 'user5');
+INSERT INTO TRY_QUIZ
+VALUES(3, '문제풀기 내용02', '예시 결과02', '실제 결과01', 'user6');
+
+SELECT * FROM TRY_QUIZ
+
+-- QUIZ_RESULT
+INSERT INTO QUIZ_RESULT VALUES(1, '퀴즈 결과01', 'user6');
+INSERT INTO QUIZ_RESULT VALUES(3, '퀴즈 결과02', 'user1');
+
+SELECT * FROM QUIZ_RESULT;
+
+-- NOTICE
+INSERT INTO NOTICE
+VALUES(NOTICESEQ.NEXTVAL, '공지사항 제목01', '공지사항 내용01', SYSDATE, 0, 'ADMIN');
+INSERT INTO NOTICE
+VALUES(NOTICESEQ.NEXTVAL, '공지사항 제목02', '공지사항 내용02', SYSDATE, 0, 'ADMIN');
+
+SELECT * FROM NOTICE;
+
+-- NOTICE_COMMENT
+INSERT INTO NOTICE_COMMENT VALUES(NCOMMENTSEQ.NEXTVAL, 1, '공지댓글내용01', SYSDATE, 'user2');
+INSERT INTO NOTICE_COMMENT VALUES(NCOMMENTSEQ.NEXTVAL, 2, '공지댓글내용02', SYSDATE, 'user3');
+
+SELECT * FROM NOTICE_COMMENT;
+>>>>>>> parent of 4d88b8a... 승연이꺼 추가
 
 INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'구글 10년 경력','모든것을 한번에 해결해드립니다.','admin');
 INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'구글 1년 경력','모든것을 한번에 해결해드립니다.','admin');
