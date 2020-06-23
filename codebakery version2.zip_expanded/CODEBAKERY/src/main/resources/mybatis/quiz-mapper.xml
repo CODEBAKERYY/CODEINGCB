@@ -35,4 +35,7 @@
   		INSERT INTO QUIZ
   		VALUES(QUIZSEQ.NEXTVAL, #{quiz_Title}, #{quiz_Content}, SYSDATE, 0, 0, 0, 0, #{input_Explanation}, #{output_Explanation}, #{input_Sample}, #{output_Sample}, #{user_Id})
   	</insert>
+  	<select id="count" resultType="int">
+  	SELECT COUNT(*) FROM QUIZ
+  	</select>
   </mapper>

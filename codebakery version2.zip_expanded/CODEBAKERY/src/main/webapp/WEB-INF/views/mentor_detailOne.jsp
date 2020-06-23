@@ -50,32 +50,60 @@
 </head>
 <body>
 	<%@ include file="header.jsp"%>
+	<div id="logo" class="container">
+		<h1>
+			<span>멘토 게시판</span>
+		</h1>
+	</div>
 	<div id="page" class="container">
 		<div id="content">
 			<div class="title">
 				<h2>${mentor.user_Name}</h2>
-				&nbsp;&nbsp;<input type="button" class="button"
-					style="float: right;" value="1:1채팅"
-					onclick="location.href = 'chat.do'" /> <span class="byline">${mentor.mentor_Career}</span>
+				&nbsp;&nbsp;
+				<c:if test="${!empty User }">
+					<input type="button" onclick="location.href='chat.do'" class="button" style="float: right;" value="1:1채팅" />
+				</c:if>
+				<c:if test="${empty User }">
+					<input type="button" onclick="apply();" class="button" style="float: right;" value="1:1채팅" />
+                </c:if>
+                <script type="text/javascript">
+                	function apply(){
+                   		alert('로그인 후 이용할 수 있습니다.');
+                   	}
+                </script>
+                    
+				<span class="byline">${mentor.mentor_Career}</span>
 			</div>
 			<p>${mentor.mentor_Content}</p>
 		</div>
 		<div id="sidebar">
-			<a href="#" class="image image-full"><img src="images/pic05.jpg"
-				alt="" /></a>
+			<a href="#" class="image image-full"><img src="${pageContext.request.contextPath}/upload${mentor.user_Pic}" alt="" /></a>
 		</div>
 	</div>
 	<div class="container">
-		<table class='table'>
-			<tr>
-				<span style="font-size: 18px;">user3</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<span style="color: grey; font-size: 14px;">2020.04.23 17:16</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<hr></hr>
-			</tr>
-			<tr>
-				<td>공지사항 댓글입니다.333333</td>
-			</tr>
-		</table>
+		<c:choose>
+			<c:when test="${empty review }">
+				<tr>
+					<td colspan="4" align="center">------------- 작성된 글이 없습니다.
+						-------------</td>
+				</tr>
+			</c:when>
+			<c:otherwise>
+				<c:forEach items="${review }" var="dto" begin="0" end="3"
+					varStatus="i" step="1">
+					<table class='table'>
+						<tr>
+							<span style="font-size: 18px;">${dto.user_Id }</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<span style="color: grey; font-size: 14px;">${dto.review_Date }</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<hr></hr>
+						</tr>
+						<tr>
+							<td>${dto.review_Content }</td>
+						</tr>
+					</table>
+				</c:forEach>
+			</c:otherwise>
+		</c:choose>
 	</div>
 	<!-- 	<table class="type03">
 		<tr>

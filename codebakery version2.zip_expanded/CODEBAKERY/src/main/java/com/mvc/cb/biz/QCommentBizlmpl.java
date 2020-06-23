@@ -34,5 +34,10 @@ public class QCommentBizlmpl implements QCommentBiz{
 		return dao.delete(comment_No);
 	}
 
+	@Override
+	public int insertReply(QnACommentDto dto) {
+		return dao.insertReply(dto);
+	}
+
 
 }

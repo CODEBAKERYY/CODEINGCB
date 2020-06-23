@@ -63,12 +63,29 @@ public class QCommentDaolmpl implements QCommentDao{
 
 	@Override
 	public int delete(int comment_No) {
-			int res = 0;
+		
+		int res = 0;
 		
 		try {
 			res = sqlSession.update(NAMESPACE+"delete", comment_No);
 		}catch (Exception e) {
 			System.out.println("[error] : QCommentDao delete");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+
+	@Override
+	public int insertReply(QnACommentDto dto) {
+		
+		int res = 0;
+		
+		
+		try {
+			res = sqlSession.insert(NAMESPACE+"insertReply", dto);
+		} catch (Exception e) {
+			System.out.println("[error] : QCommentDao insertReply");
 			e.printStackTrace();
 		}
 		
