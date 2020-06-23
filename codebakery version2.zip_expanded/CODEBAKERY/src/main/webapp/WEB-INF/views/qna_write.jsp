@@ -72,34 +72,6 @@ Released   : 20130811
 		}); */
 		
 	} 
-<<<<<<< HEAD
-=======
-	
-	$(function(){
-		$("#form").submit(function(){
-			var titleChk = document.getElementsByName("question_Title")[0].value;
-			var ContentChk = document.getElementsByName("question_Content")[0].value;
-			var Tag = document.getElementById("tag").value;
-			
-			
-			if(titleChk == "" || titleChk == null){
-				alert("제목을 입력해 주세요.");
-				return false;
-			}
-			
-			if(ContentChk == "" || ContentChk == null){
-				alert("내용을 입력해 주세요.");
-				return false;
-			}
-			
-			if(Tag == "#"){
-				alert("태그를 한개 이상 추가해주세요");
-				return false;
-			}
-			
-		});
-	});
->>>>>>> parent of 4d88b8a... 승연이꺼 추가
 
 </script>
 
