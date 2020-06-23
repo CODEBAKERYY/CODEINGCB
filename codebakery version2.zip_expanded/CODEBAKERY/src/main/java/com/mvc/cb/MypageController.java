@@ -27,10 +27,7 @@ public class MypageController {
 	@Autowired
 	private MyPageBiz biz;
 	
-	@RequestMapping(value = "/mypage_modify.do")
-	public String QnABoard() {
-		return "mypage_modify";
-	}
+
 	
 	@RequestMapping("admin.do")
 	public String Admin() {
@@ -46,6 +43,7 @@ public class MypageController {
 		
 		
 		if(dto.getUser_Pw() == null || dto.getUser_Pw() == "") {
+			System.out.println("null null null");
 			biz.update_nonpw(dto);
 			session.removeAttribute("User");
 			UserDto res = biz.getInfo(dto);
@@ -58,9 +56,11 @@ public class MypageController {
 				System.out.println("수정 실패!!");
 			}			
 			
-			return "mypage_modify";
-		}else {
 			
+			
+			return "mypage_modify";
+		}else if(dto.getUser_Pw() != null) {
+			System.out.println("not null not not");
 			biz.updateMember(dto);
 			session.removeAttribute("User");
 			UserDto res = u_biz.login(dto);
@@ -69,6 +69,7 @@ public class MypageController {
 			return "mypage_modify";
 			
 		}		
+		return "mypage_modify";
 	}
 	@RequestMapping("deactivatepopup.do")
 	public String deactivatePopup() {
@@ -104,7 +105,22 @@ public class MypageController {
 		return "main";
 		 
 	}
+//	수정한 부분!!
+	@RequestMapping("/apply.do")
+	public String mento_apply() {
+		logger.info("APPLY PAGE");
+		return "mypage_apply";
+	}
+	@RequestMapping("/mypoint.do")
+	public String pointchk() {
+		logger.info("APPLY PAGE");
+		return "mypage_point";
+	}
 	
+	@RequestMapping(value = "/mypage_modify.do")
+	public String mypage_modify() {
+		return "mypage_modify";
+	}
 	
 
 }

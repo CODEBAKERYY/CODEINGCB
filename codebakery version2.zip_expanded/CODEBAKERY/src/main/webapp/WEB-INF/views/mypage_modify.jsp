@@ -29,7 +29,7 @@ function passwordCheckk(){
           
           form.action="mypage_modify";
           
-    }else{
+    }else if(password == passwordCheck){
     	
   	  return true;
     }
