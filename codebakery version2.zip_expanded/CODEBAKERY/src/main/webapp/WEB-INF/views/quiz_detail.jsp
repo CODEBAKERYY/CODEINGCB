@@ -22,7 +22,7 @@
 	
 	<div id="contact" class="container" style=" border-bottom: solid 1px #eee">
 		<div class="page-header" style="margin: 40px 0 20px">
-			<h2 style="padding-top: 20px;">Hello World!!!</h2>
+			<h2 style="padding-top: 20px;">${list.quiz_Title }</h2>
 		</div>
 	</div>
 	
@@ -37,9 +37,9 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td>10000</td>
-					<td>3000</td>
-					<td>3000/10000</td>
+					<td>${list.try_User }</td>
+					<td>${list.correct_User }</td>
+					<td>${list.correct_Rate }</td>
 				</tr>
 			</tbody>
 		</table>
@@ -52,7 +52,7 @@
 			</div>
 			<div>
 				<p>
-					문제 설명 어쩌구 저쩌구
+					${list.quiz_Content }
 				</p>
 			</div>
 		</section>
@@ -64,7 +64,7 @@
 				<h2>입력</h2>
 			</div>
 			<p>
-				입력값
+				${list.input_Explanation }
 			</p>
 		</section>
 	</div>
@@ -75,7 +75,7 @@
 				<h2>출력</h2>
 			</div>
 			<p>
-				출력값
+				${list.output_Explanation }
 			</p>
 		</section>
 	</div>
@@ -86,7 +86,7 @@
 				<div class="headline">
 					<h2>예제 입력 1</h2>
 				</div>
-				<pre class="sampledata">
+				<pre class="sampledata">${list.input_Sample }
 				</pre>
 			</section>
 		</div>
@@ -95,19 +95,14 @@
 				<div class="headline">
 					<h2>예제 출력 1</h2>
 				</div>
-				<pre class="sampledata">Hello World!!!
-asdf
-				asd
-				fas
-				dfa
-				sfd
+				<pre class="sampledata">${list.output_Sample }
 				</pre>
 			</section>
 		</div>
 	</div>		
 	
 	<div id="contact" class="container" style="text-align: right;">
-		<input type="button" value="문제 풀기" class="button" style="border-radius: 12px; margin-top: 30px;"/>
+		<input type="button" value="문제 풀기" class="button" style="border-radius: 12px; margin-top: 30px;" onclick="location.href='quiz_submit.do'"/>
 	</div>
 	
 	<footer style="clear: both; margin-top: 40px;">

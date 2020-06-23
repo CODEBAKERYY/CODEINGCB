@@ -1,5 +1,7 @@
 package com.mvc.cb;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +16,10 @@ import com.mvc.cb.biz.AnswerBiz;
 import com.mvc.cb.biz.QCommentBiz;
 import com.mvc.cb.biz.QuestionBiz;
 import com.mvc.cb.model.dto.AnswerDto;
+import com.mvc.cb.model.dto.PageMaker;
 import com.mvc.cb.model.dto.QnACommentDto;
+import com.mvc.cb.model.dto.QnAPagingDto;
 import com.mvc.cb.model.dto.QuestionDto;
-
-import oracle.net.aso.s;
 
 @Controller
 public class QnAController {
@@ -35,16 +37,77 @@ public class QnAController {
 	
 	
 	// 메뉴에서 '질의응답'을 누르면 들어오는 요청
-	@RequestMapping(value = "/qna.do")
-	public String QnAList(Model model) {
-		logger.info("QnAList");
-		model.addAttribute("list", q_biz.selectList());
+	@RequestMapping("/qna.do")
+	public String QnAList(Model model,Integer question_No ,
+						 @RequestParam(value="page",required = false) Integer page) {
 		
-		//model.addAttribute("cnt", a_biz.cntAnswer(question_No));
+		logger.info("QnAList");
+		
+		//페이지가 넘어오지 않았을 경우 1페이지로 설정
+		if( page == null ) {
+			page = 1;
+		}
+		
+		int total = q_biz.countBoard();
+		
+		QnAPagingDto paging = new QnAPagingDto();
+		paging.setPage(page);
+		paging.setTotalArticle(total);
+		paging.setTotalPage(total);
+		paging.setStartRow();
+		paging.setEndRow();
+		
+		// 한 페이지에 출력 될  질문 게시글 리스트
+		List<QuestionDto> qList = q_biz.selectList(paging); 
+
+		// 한 페이지에 출력될 질문 게시글(qList)에 맞춰서 답변 수를 가져온다.
+		List<Integer> cntList = a_biz.getCntAnswer(qList); 
+		
+		PageMaker maker = new PageMaker();
+		maker.setPaging(paging);
+		
+		model.addAttribute("list", qList);
+		model.addAttribute("cntList",cntList);
+		model.addAttribute("pageMaker",maker);
 		
 		return "qna";
 	}
 	
+	//태그를 눌렀을때 보여지는 리스트
+	@RequestMapping( value="/tagList.do" )
+	public String tagList(Model model, String question_Tag,
+							@RequestParam(value="page",required = false) Integer page) {
+		logger.info("tagList");
+		
+		//페이지가 넘어오지 않았을 경우 1페이지로 설정
+		if( page == null ) {
+			page = 1;
+		}
+		
+		List<QuestionDto> list = q_biz.selectTagList(question_Tag);
+		
+		QnAPagingDto paging = new QnAPagingDto();
+		paging.setPage(page);
+		paging.setTotalArticle(list.size());
+		paging.setTotalPage(list.size());
+		paging.setStartRow();
+		paging.setEndRow();
+		
+		// 한 페이지에 출력될 질문 게시글(qList)에 맞춰서 답변 수를 가져온다.
+		List<Integer> cntList = a_biz.getCntAnswer(list);
+		
+		
+		PageMaker maker = new PageMaker();
+		maker.setPaging(paging);
+		
+		model.addAttribute("pageMaker",maker);
+		model.addAttribute("cntList",cntList);
+		model.addAttribute("list", list);
+		
+		return "qna";
+	}
+	
+
 	// 질문제목을 클릭했을때 들어오는 요청
 	@RequestMapping( value = "/qna_detail.do")
 	public String QnADetail(Model model, Integer question_No) {
@@ -59,7 +122,6 @@ public class QnAController {
 		
 		return "qna_detail";
 	}
-	
 	
 	// ------------------------ 질문글 작성/수정/삭제 START-------------------------
 	
@@ -76,7 +138,6 @@ public class QnAController {
 		logger.info("insert_Question");
 		
 		int res = q_biz.insert(dto);
-		
 		
 		if(res>0) {
 			return  "redirect:qna.do";
@@ -101,21 +162,6 @@ public class QnAController {
 		logger.info("update_Question");
 		int res = q_biz.update(dto);
 		
-//		String str = dto.getQuestion_Tag();
-//		
-//		String[] split =  str.split(",");
-//		
-//		System.out.println(split.length);
-//		System.out.println(Arrays.toString(split));
-//		
-//		String tags = "";
-//		
-//		for(int i=0; i<split.length; i++) {
-//			tags += split[i];
-//			System.out.println(tags);
-//		}
-//		
-//		model.addAttribute("tag", tags);
 		
 		if(res>0) {
 			return "redirect:qna_detail.do?question_No="+dto.getQuestion_No();
@@ -137,9 +183,10 @@ public class QnAController {
 			return "redirect:qna_detail.do?question_No="+question_No;
 		}
 		}
-		// ------------------------ 질문글 수정/삭제 END-------------------------
-		
-		// ------------------------ 답변 직성/수정/삭제 START-------------------------
+	// ------------------------ 질문글 수정/삭제 END-------------------------
+	
+
+	// ------------------------ 답변 직성/수정/삭제 START-------------------------
 	
 		// 답변삭제
 		@RequestMapping( value="/answer_delete.do" )
@@ -155,22 +202,27 @@ public class QnAController {
 			}
 		}
 		
+		//답변수정 -> 팝업창으로 넘김
 		@RequestMapping( value="/answer_modify.do" )
-		public String modifyAnswer(Integer question_No, Integer answer_No, String answer_Title, String answer_Content) {
+		public String modifyAnswer(Model model, AnswerDto dto) {
 			logger.info("Modify Answer");
 			
-			AnswerDto dto = new AnswerDto();
-			dto.setAnswer_No(answer_No);
-			dto.setAnswer_Title(answer_Title);
-			dto.setAnswer_Content(answer_Content);
+			model.addAttribute("ans", dto);
+			
+			return "modifyAnswer";
+			}
+		
+		//팝업창에서 답변 변경후 넘김
+		@RequestMapping( value="/changeAnswer.do" )
+		public String changeAnswer(AnswerDto dto){
+			logger.info("changeAnswer");
+			
 			
 			int res = a_biz.update(dto);
+			System.out.println(dto.getAnswer_Content());
 			
-			if(res>0) {
-				return "redirect:qna_detail.do?question_No="+question_No;
-			} else {
-				return "redirect:qna_detail.do?question_No="+question_No;
-			}
+			
+			return "redirect:qna_detail.do?question_No="+dto.getQuestion_No();
 		}
 		
 		// 답변 작성시 들어오는 요청
@@ -179,10 +231,8 @@ public class QnAController {
 		public String insertAnswer(AnswerDto dto) {
 			logger.info("Insert Answer");
 			
-			System.out.println(dto.getAnswer_Title());
-			
 			int res = a_biz.insert(dto);
-	
+			
 			if(res>0) {
 				return "location.reload()";
 			} else {
@@ -190,9 +240,9 @@ public class QnAController {
 			}
 		}
 		
-		// ------------------------ 답변 직성/수정/삭제 END -------------------------
-		
-		// ------------------------ 댓글 직성/수정/삭제 START-------------------------
+	// ------------------------ 답변 등록/수정/삭제 END -------------------------
+	
+	// ------------------------ 댓글 등록/수정/삭제 START-------------------------
 		
 		
 		// 질문글에 댓글 작성
@@ -227,7 +277,44 @@ public class QnAController {
 			}
 		}
 		
+
+		// 댓글 수정
+		@RequestMapping( value="/updateComment.do" )
+		@ResponseBody
+		public String updateComment(@RequestParam int comment_No, @RequestParam String comment_Content) {
+			logger.info("updateComment");
+			
+			System.out.println(comment_No + " : "+comment_Content);
+			QnACommentDto dto = new QnACommentDto();
+			dto.setComment_No(comment_No);
+			dto.setComment_Content(comment_Content);
+			
+			
+			int res =  c_biz.update(dto);
+			
+			if(res>0) {
+				return "location.reload()";
+			} else {
+				return "location.reload()";
+			}
+		}
 		
-		// ------------------------ 답변 직성/수정/삭제 END -------------------------
+		// 대댓글 등록
+		@RequestMapping( value="/writeReply.do" )
+		public String insertReply(QnACommentDto dto) {
+			
+			logger.info("insertBody");
+			
+			int res = c_biz.insertReply(dto);
+			
+			
+			return "redirect:qna_detail.do?question_No="+dto.getQuestion_No();
+		}
+		
+		
+		
+	// ------------------------ 답변 등록/수정/삭제 END -------------------------
+		
+		
 
 }

@@ -74,8 +74,8 @@ public class UserController {
 
 		logger.info("mentor reviewList selectOne");
 		System.out.println("mentor_No : " + mentor_No);
-		model.addAttribute("review", mr_biz.reviewAll(mentor_No));
-		System.out.println(mr_biz.reviewAll(mentor_No));
+		model.addAttribute("review", mr_biz.review(mentor_No));
+		System.out.println(mr_biz.review(mentor_No));
 
 		return "main";
 	}
@@ -156,6 +156,8 @@ public class UserController {
 		UserDto res = u_biz.login(dto);
 		if (res != null) {
 			session.setAttribute("User", res);
+		}else {
+			return "redirect:login.do";
 		}
 		return "redirect:main.do";
 	}

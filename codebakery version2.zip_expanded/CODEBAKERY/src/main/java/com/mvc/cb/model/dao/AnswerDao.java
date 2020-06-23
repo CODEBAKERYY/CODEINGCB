@@ -8,16 +8,23 @@ public interface AnswerDao {
 	
 	String NAMESPACE = "answer.";
 	
+	
+	// 답변목록 불러오기
 	public List<AnswerDto> selectList(int question_No);
 
+	// 답변 작성
+	public int insert(AnswerDto dto);
+	
+	// 답변 삭제
 	public int delete(int answer_No);
 
+	// 답변 수정
 	public int update(AnswerDto dto);
 
-	public int insert(AnswerDto dto);
-
-	public int cntAnswer(Integer question_No);
-
+	// 답변 갯수 
+	public int cntAnswer(int question_No);
+	
+	// 메인에서 보여지는 답변 갯수
 	public int count();
 
 

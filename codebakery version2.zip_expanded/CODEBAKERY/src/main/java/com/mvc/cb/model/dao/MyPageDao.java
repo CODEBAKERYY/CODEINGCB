@@ -10,10 +10,8 @@ public interface MyPageDao {
 
 	public int non_pw_update(UserDto dto);
 
-	
+	public int member_delete(UserDto dto);
 
 	public UserDto getInfo(UserDto dto);
-
-	public int deactivate(UserDto dto);
 
 }

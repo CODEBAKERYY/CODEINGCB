@@ -9,8 +9,8 @@ import com.mvc.cb.model.dao.QuizDao;
 import com.mvc.cb.model.dto.QuizDto;
 
 @Service
-public class QuizBizlmpl implements QuizBiz{
-	
+public class QuizBizlmpl implements QuizBiz {
+
 	@Autowired
 	private QuizDao quizDao;
 
@@ -22,6 +22,11 @@ public class QuizBizlmpl implements QuizBiz{
 	@Override
 	public List<QuizDto> selectList() {
 		return quizDao.selectList();
+	}
+
+	@Override
+	public QuizDto selectOne(int quiz_No) {
+		return quizDao.selectOne(quiz_No);
 	}
 
 	@Override

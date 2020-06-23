@@ -2,7 +2,6 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper namespace="answer">
 
 	<resultMap type="AnswerDto" id="answerMap">
@@ -17,29 +16,24 @@
 	<select id="selectList" resultMap="answerMap">
 		SELECT *
 		FROM ANSWER
-		WHERE
-		QUESTION_NO=#{question_No}
+		WHERE QUESTION_NO=#{question_No}
 		ORDER BY ANSWER_NO DESC
 	</select>
 
 	<delete id="delete" parameterType="int">
 		DELETE FROM ANSWER
-		WHERE
-		ANSWER_NO=#{answer_No}
+		WHERE ANSWER_NO=#{answer_No}
 	</delete>
 
 	<update id="update" parameterType="AnswerDto">
 		UPDATE ANSWER
-		SET
-		ANSWER_TITLE=#{answer_Title}, ANSWER_CONTENT=#{answer_Content}
-		WHERE
-		ANSWER_NO=#{answer_No}
+		SET ANSWER_TITLE=#{answer_Title}, ANSWER_CONTENT=#{answer_Content}
+		WHERE ANSWER_NO=#{answer_No}
 	</update>
 
 	<insert id="insert" parameterType="AnswerDto">
 		INSERT INTO ANSWER
-		VALUES(ANSWERSEQ.NEXTVAL, #{answer_Title}, #{answer_Content}, SYSDATE,
-		#{question_No},
+		VALUES(ANSWERSEQ.NEXTVAL, #{answer_Title}, #{answer_Content}, SYSDATE, #{question_No},
 		#{user_Id})
 	</insert>
 
@@ -49,7 +43,17 @@
 		WHERE QUESTION_NO = #{question_No}
 	</select>
 
-	<select id="count" resultType="int">
-		SELECT COUNT(*) FROM ANSWER
+	<!-- 총 게시글 갯수 출력 -->
+	<select id="countAnswer" resultType="int" parameterType="int">
+		SELECT
+		COUNT(*)
+		FROM ANSWER
+		WHERE QUESTION_NO = #{question_No}
 	</select>
+
+	<select id="count" resultType="int">
+		SELECT COUNT(*)
+		FROM ANSWER
+	</select>
+
 </mapper>

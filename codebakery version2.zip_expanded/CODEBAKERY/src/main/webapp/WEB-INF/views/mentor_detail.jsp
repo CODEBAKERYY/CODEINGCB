@@ -50,15 +50,31 @@
 </head>
 <body>
 	<%@ include file="header.jsp"%>
+	<div id="logo" class="container">
+		<h1>
+			<span>멘토 게시판</span>
+		</h1>
+	</div>
 	<c:forEach items="${mentor }" var="dto" begin="0" end="4" varStatus="i"
 		step="1">
 		<div id="page" class="container">
 			<div id="content">
 				<div class="title">
 					<h2>${dto.user_Name}</h2>
-					&nbsp;&nbsp;<input type="button" class="button"
-						style="float: right;" value="1:1채팅"
-						onclick="location.href = 'chat.do'" /> <span class="byline">${dto.mentor_Career}</span>
+					&nbsp;&nbsp;
+					<c:if test="${!empty User }">
+						<input type="button" onclick="location.href='chat.do'" class="button" style="float: right;" value="1:1채팅" />
+					</c:if>
+					<c:if test="${empty User }">
+						<input type="button" onclick="apply();" class="button" style="float: right;" value="1:1채팅" />
+                    </c:if>
+                    <script type="text/javascript">
+                    	function apply(){
+                    		alert('로그인 후 이용할 수 있습니다.');
+                    	}
+                    </script>
+                    
+					<span class="byline">${dto.mentor_Career}</span>
 				</div>
 				<p>${dto.mentor_Content}</p>
 			</div>

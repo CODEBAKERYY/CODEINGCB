@@ -41,8 +41,9 @@
 
 
 	<delete id="member_delete" parameterType="UserDto">
+		WHERE USER_TB
 		DELETE FROM USER_TB
-  		WHERE USER_ID = #{user_Id} AND USER_PW = #{user_Pw}
+		WHERE USER_ID = ${user_Id} AND USER_PW = ${user_Pw}
 
 	</delete>
 
