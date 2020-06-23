@@ -50,12 +50,7 @@
 </head>
 <body>
 	<%@ include file="header.jsp"%>
-	<div id="logo" class="container">
-		<h1>
-			<span>멘토 게시판</span>
-		</h1>
-	</div>
-	<c:forEach items="${mentor }" var="dto" begin="0" end="4" varStatus="i"
+	<c:forEach items="${mentor }" var="dto" begin="1" end="4" varStatus="i"
 		step="1">
 		<div id="page" class="container">
 			<div id="content">
@@ -68,26 +63,22 @@
 				<p>${dto.mentor_Content}</p>
 			</div>
 			<div id="sidebar">
-				<a href="#" class="image image-full"><img
-					src="${pageContext.request.contextPath}/upload${dto.user_Pic}"
+				<a href="#" class="image image-full"><img src="images/pic05.jpg"
 					alt="" /></a>
 			</div>
 		</div>
 	</c:forEach>
 	<div class="container">
-		<c:forEach items="${review }" var="dto2" begin="0" end="3"
-			varStatus="i" step="1">
-			<table class='table'>
-				<tr>
-					<span style="font-size: 18px;">${dto2.user_Id }</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<span style="color: grey; font-size: 14px;">${dto2.review_Date }</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<hr></hr>
-				</tr>
-				<tr>
-					<td>${dto2.review_Content }</td>
-				</tr>
-			</table>
-		</c:forEach>
+		<table class='table'>
+			<tr>
+				<span style="font-size: 18px;">user3</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<span style="color: grey; font-size: 14px;">2020.04.23 17:16</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<hr></hr>
+			</tr>
+			<tr>
+				<td>공지사항 댓글입니다.333333</td>
+			</tr>
+		</table>
 	</div>
 	<!-- 	<table class="type03">
 		<tr>

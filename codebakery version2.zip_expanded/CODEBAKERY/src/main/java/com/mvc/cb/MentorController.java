@@ -17,7 +17,7 @@ public class MentorController {
 
 	@Autowired
 	private MentorBiz m_biz;
-
+	
 	@Autowired
 	private MentorReviewBiz mr_biz;
 
@@ -26,9 +26,8 @@ public class MentorController {
 	public String mentorDetailall(Model model) {
 		logger.info("mentor selectAll");
 		model.addAttribute("mentor", m_biz.selectList());
-		logger.info("mentorReview SelectAll");
-		model.addAttribute("review", mr_biz.selectList());
-		System.out.println(mr_biz.selectList());
+		logger.info("mentorReview selectAll");
+		model.addAttribute("mentorreview",mr_biz.selectList());
 		return "mentor_detail";
 	}
 
@@ -39,7 +38,6 @@ public class MentorController {
 		logger.info("mentor selectOne");
 		model.addAttribute("mentor", m_biz.selectOne(mentor_No));
 		System.out.println(m_biz.selectOne(mentor_No));
-		model.addAttribute("review", mr_biz.reviewAll(mentor_No));
 
 		return "mentor_detailOne";
 	}

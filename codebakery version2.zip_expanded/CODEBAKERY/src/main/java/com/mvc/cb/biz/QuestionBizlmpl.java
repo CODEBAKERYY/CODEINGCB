@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mvc.cb.model.dao.QuestionDao;
-import com.mvc.cb.model.dto.QnAPagingDto;
 import com.mvc.cb.model.dto.QuestionDto;
 
 @Service
@@ -16,8 +15,8 @@ public class QuestionBizlmpl implements QuestionBiz{
 	private QuestionDao dao;
 
 	@Override
-	public List<QuestionDto> selectList(QnAPagingDto dto) {
-		return dao.selectList(dto);
+	public List<QuestionDto> selectList() {
+		return dao.selectList();
 	}
 
 	@Override
@@ -45,20 +44,15 @@ public class QuestionBizlmpl implements QuestionBiz{
 		dao.plusCnt(question_No);
 	}
 
-	@Override
-	public int countBoard() {
-		return dao.countBoard();
-	}
 
-	@Override
-	public List<QuestionDto> selectTagList(String question_Tag) {
-		return dao.selectTagList(question_Tag);
-	}
-
-	@Override
-	public int count() {
-		return dao.count();
-	}
-
+//	@Override
+//	public int countBoard() {
+//		return dao.countBoard();
+//	}
+//
+//	@Override
+//	public List<QuestionDto> selectBoard(QnAPagingDto dto) {
+//		return dao.selectBoard(dto);
+//	}
 
 }

@@ -17,19 +17,18 @@ Released   : 20130811
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>CODEBAKERY</title>
+<title></title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <!--bootstrap css  -->
-<link rel="shortcut icon" type="image/x-icon" href="resources/images/favicon.png" />
-<link rel="shortcut icon" type="image/x-icon" href="resources/images/favicon.png" />
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <link
 	href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900"
 	rel="stylesheet" />
 <link href="resources/csss/default.css" rel="stylesheet" type="text/css" media="all" />
 <link href="resources/css/fonts/fonts.css" rel="stylesheet" type="text/css" media="all" />
 <link href="resources/csss/boardstyle.css" rel="stylesheet" type="text/css" media="all" />
+<!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
 <style type="text/css">
 	.writebtn{
 		  background-color: #555555; 
@@ -42,25 +41,17 @@ Released   : 20130811
 		  font-size: 13px;
 	}
 </style>
-
 </head>
 <body >
-
 	<%@ include file="header.jsp"%>
 	<div id="logo" class="container">
 		<h1>
-<<<<<<< HEAD
-			<span>질문 게시판</span>
-=======
-			<p class="icon icon-tasks"><span>질문 게시판</span></p>
->>>>>>> stella
+			<a href="qna.do" class="icon icon-tasks"><span>질문 게시판</span></a>
 		</h1>
 	</div>
 	<div id="mainbar">
 		<div id="page" class="container">
-				<c:if test="${!empty User }">
 				<div style="text-align: right;"><button class="writebtn" onclick="location.href='qna_write.do'">글쓰기</button></div>
-				</c:if>
 				<br />
 			<div class="flush-left js-search-results">
 				<div>
@@ -70,7 +61,7 @@ Released   : 20130811
 							<a href="qna_detail.do">------------- 작성된 글이 없습니다. -------------</a>
 						</c:when>
 					<c:otherwise>
-						<c:forEach items="${list }" var="dto" varStatus="status">
+						<c:forEach items="${list }" var="dto">
 							<div class="question-summary search-result" id="question-summary-2194808" data-position="1" style="padding: 30px">
 								<div class="statscontainer">
 									<div class="stats">
@@ -81,19 +72,19 @@ Released   : 20130811
 											</div>
 										</div>
 									<div class="status answered-accepted">
-										<strong style="font-size: 20px">${cntList[status.index] }</strong><br /> answers
+										<strong style="font-size: 20px">17</strong><br /> answers
 									</div>
 									</div>
 								</div>
 							<div class="summary">
 								<div class="result-link">
-									<h3><a href="qna_detail.do?question_No=${dto.question_No }" style="font-size: 20px; font-weight: 500;"> ${dto.question_Title }</a></h3>
-									<div class="excerpt" style="font-size: 15px;">${dto.question_Content }</div>
+									<h3><a href="qna_detail.do?question_No=${dto.question_No }"> ${dto.question_Title }</a></h3>
+									<div class="excerpt">${dto.question_Content }</div>
 									
 									<div class="tags user-tags t-android t-eclipse t-certificate">
-										<c:forTokens items="${dto.question_Tag }" delims="#" var="item" varStatus="i">
-											<a class="post-tag" title="" rel="tag" onclick="location.href='tagList.do?question_Tag=${item}'">#&nbsp;${item }</a> 
-										</c:forTokens>
+										<a href="#" class="post-tag" title="" rel="tag">android</a> 
+										<a href="#" class="post-tag" title="" rel="tag">eclipse</a> 
+										<a href="#" class="post-tag" title="" rel="tag">certificate</a>
 									</div>
 									
 									<div class="started fr">
@@ -110,38 +101,23 @@ Released   : 20130811
 				<!------------ 게시글 END -------------->
 							
 				<!------------ 페이징 START -------------->
-				
-			     <div style="width: 200px; margin: 0px auto;"> 
-			        <nav aria-label="Page navigation example">
-			          <ul class="pagination">
-			             <c:if test="${pageMaker.prev }">
-			               <li class="page-item">
-			                 <a class="page-link" href="qna.do?page=${pageMaker.startPage - 1 }" aria-label="Previous">
-			                   <span aria-hidden="true">&laquo;</span>
-			                 </a>
-			               </li>                          
-			             </c:if>
-			             <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
-			                <c:choose>
-			                   <c:when test="${idx eq page }">
-			                     <li class="page-item active"><a class="page-link" href="qna.do?page=${idx }">${idx }</a></li>
-			                   </c:when>
-			                   <c:otherwise>                      
-			                     <li class="page-item"><a class="page-link" href="qna.do?page=${idx }">${idx }</a></li>
-			                   </c:otherwise>
-			                </c:choose>                
-			             </c:forEach>
-			             
-			            <c:if test="${pageMaker.next && pageMaker.endPage>0 }">
-			               <li class="page-item">
-			                 <a class="page-link" href="qna.do?page=${pageMaker.endPage + 1 }" aria-label="Next">
-			                   <span aria-hidden="true">&raquo;</span>
-			                 </a>
-			               </li>           
-			            </c:if>
-			          </ul>
-			        </nav>
-			      </div>
+				<nav aria-label="Page navigation example">
+				  <ul class="pagination justify-content-center">
+				    <li class="page-item">
+				      <a class="page-link" href="#" aria-label="Previous">
+				        <span aria-hidden="true">&laquo;</span>
+				      </a>
+				    </li>
+				    <li class="page-item"><a class="page-link" href="#">1</a></li>
+				    <li class="page-item"><a class="page-link" href="#">2</a></li>
+				    <li class="page-item"><a class="page-link" href="#">3</a></li>
+				    <li class="page-item">
+				      <a class="page-link" href="#" aria-label="Next">
+				        <span aria-hidden="true">&raquo;</span>
+				      </a>
+				    </li>
+				  </ul>
+				</nav>
 				<!------------ 페이징 END -------------->
 				</div>
 			</div>

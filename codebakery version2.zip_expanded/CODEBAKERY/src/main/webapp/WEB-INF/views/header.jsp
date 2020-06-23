@@ -17,8 +17,7 @@
 	rel="stylesheet" />
 <link href="resources/css/default.css" rel="stylesheet" type="text/css"
 	media="all" />
-<link href="resources/css/fonts.css" rel="stylesheet" type="text/css"
-	media="all" />
+<link href="resources/css/fonts.css" rel="stylesheet" type="text/css" media="all" />
 
 <!-- Toastr -->
 <link href="resources/css/toastr.min.css" rel="stylesheet">
@@ -37,8 +36,7 @@
 				showMethod : 'slideDown',
 				"extendedTimeOut": 100000, // 토스트에 호버링 했다 땠을 때 사라지는 시간(마우스를 올렸다가 땠을 때)
 				timeOut : 100000
-			};<%for (int i = 0; i < 10; i++) {%>toastr.info('알림<%=i%>
-	', '알림이다!');
+			};<%for (int i = 0; i < 10; i++) {%>toastr.info('알림<%=i%>', '알림이다!');
 <%}%>
 	});
 
@@ -62,18 +60,10 @@
 				<li><a href="notice.do" accesskey="4" title="">공지사항</a></li>
 				<%
 					if (user != null) {
-					if (user.getUser_Grade() == "관리자") {
-				%>
-				<li><a href="admin.do" accesskey="5" title="">마이페이지</a></li>
-				<%
-					} else {
 				%>
 				<li><a href="mypage_modify.do" accesskey="5" title="">마이페이지</a></li>
-				<li><a href="logout.do">로그아웃</a></li>
 				<%
-					}
-
-				} else {
+					} else {
 				%>
 				<li><a href="login.do" accesskey="5" title="">로그인</a></li>
 				<%

@@ -6,15 +6,9 @@ public class PageMaker {
    private int endPage; // 페이지 블럭에 출력 될 마지막 페이지
    private boolean prev; //이전
    private boolean next; //다음
-<<<<<<< HEAD
    private PageNavigator paging;
    
    public void setPaging(PageNavigator paging) {
-=======
-   private QnAPagingDto paging;
-   
-   public void setPaging(QnAPagingDto paging) {
->>>>>>> master
       this.paging = paging;
       calcData();
    }
@@ -68,11 +62,7 @@ public class PageMaker {
       return displayBlockNum;
    }
 
-<<<<<<< HEAD
    public PageNavigator getPaging() {
-=======
-   public QnAPagingDto getPaging() {
->>>>>>> master
       return paging;
    }
 

@@ -28,20 +28,6 @@ public class AnswerDaolmpl implements AnswerDao{
 		}
 		return list;
 	}
-	
-	@Override
-	public int insert(AnswerDto dto) {
-		
-		int res = 0;
-		
-		try {
-			res = sqlSession.insert(NAMESPACE+"insert", dto);
-		} catch(Exception e) {
-			System.out.println("[error] : Answer insert");
-			e.printStackTrace();
-		}
-		return res;
-	}
 
 	@Override
 	public int delete(int answer_No) {
@@ -74,30 +60,17 @@ public class AnswerDaolmpl implements AnswerDao{
 	}
 
 	@Override
-	public int cntAnswer(int question_No) {
+	public int insert(AnswerDto dto) {
 		
 		int res = 0;
 		
 		try {
-			res = sqlSession.selectOne(NAMESPACE+"countAnswer", question_No);
-		} catch (Exception e) {
-			System.out.println("[error] : count Answer");
-			e.printStackTrace();
-		}
-		
-		return res;
-	}
-
-	@Override
-	public int count() {
-
-		int res = 0;
-
-		try {
-			res = sqlSession.selectOne(NAMESPACE + "count");
-		} catch (Exception e) {
+			res = sqlSession.insert(NAMESPACE+"insert", dto);
+		} catch(Exception e) {
+			System.out.println("[error] : Answer insert");
 			e.printStackTrace();
 		}
 		return res;
 	}
+
 }

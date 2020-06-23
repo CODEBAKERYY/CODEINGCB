@@ -1,14 +1,12 @@
 package com.mvc.cb.model.dao;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.mvc.cb.model.dto.QnAPagingDto;
 import com.mvc.cb.model.dto.QuestionDto;
 
 @Repository
@@ -18,25 +16,18 @@ public class QuestionDaolmpl implements QuestionDao{
 	private SqlSessionTemplate sqlSession;
 
 	@Override
-	public List<QuestionDto> selectList(QnAPagingDto dto) {
+	public List<QuestionDto> selectList() {
 		
 		List<QuestionDto> list = new ArrayList<QuestionDto>();
 		
-		int start = dto.getStartRow();
-		int end = dto.getEndRow();
-		
-		HashMap<String, Object> param = new HashMap<String, Object>();
-		param.put("start", start);
-		param.put("end", end);
-		
-		
 		try {
-			list = sqlSession.selectList(NAMESPACE+"selectList", param);
+			list = sqlSession.selectList(NAMESPACE+"selectList");
 			
 		}catch(Exception e) {
 			System.out.println("[error] : Question selectList");
 			e.printStackTrace();
 		}
+		
 		
 		return list;
 	}
@@ -62,8 +53,6 @@ public class QuestionDaolmpl implements QuestionDao{
 		
 		try {
 			res = sqlSession.insert(NAMESPACE+"insert", dto);
-			
-			
 		} catch(Exception e) {
 			System.out.println("[error] : Question insert");
 			e.printStackTrace();
@@ -101,57 +90,28 @@ public class QuestionDaolmpl implements QuestionDao{
 		return res;
 	}
 
+//	@Override
+//	public int countBoard() {
+//		return 0;
+//	}
 
-	@Override
-	public int countBoard() {
-		
-		int res = 0;
-				
-		try {
-			res = sqlSession.selectOne(NAMESPACE+"countBoard");
-		} catch(Exception e) {
-			System.out.println("[error] : countBoard selectOne");
-			e.printStackTrace();
-		}
-		
-		return res;
-	}
-
-	@Override
-	public List<QuestionDto> selectTagList(String question_Tag) {
-		
-		List<QuestionDto> list = null;
-		
-		try {
-			list = sqlSession.selectList(NAMESPACE+"tagList", question_Tag);
-		} catch (Exception e) {
-			System.out.println("[error] : select Tag List");
-			e.printStackTrace();
-		}
-		
-		return list;
-	}
-	
 	@Override
 	public void plusCnt(int question_No) {
+		
 		
 		sqlSession.update(NAMESPACE+"plusCnt", question_No);
 		
 	}
 
-	@Override
-	public int count() {
-
-		int res = 0;
-
-		try {
-			res = sqlSession.selectOne(NAMESPACE + "count");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return res;
-	}
-
+//	@Override
+//	public List<QuestionDto> selectBoard(QnAPagingDto dto) {
+//		return null;
+//	}
+//
+//	@Override
+//	public boolean plusCnt(int question_No) {
+//		// TODO Auto-generated method stub
+//		return false;
+//	}
 
 }

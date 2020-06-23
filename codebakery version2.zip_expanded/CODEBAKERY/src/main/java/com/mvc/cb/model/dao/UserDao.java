@@ -9,6 +9,4 @@ public interface UserDao {
 	public int signup(UserDto dto);
 
 	public UserDto login(UserDto dto);
-
-	public UserDto idchk(String user_Id);
 }

@@ -22,9 +22,4 @@ public class UserBizlmpl implements UserBiz {
 		return dao.login(dto);
 	}
 
-	@Override
-	public UserDto idcheck(String user_Id) {
-		return dao.idchk(user_Id);
-	}
-
 }

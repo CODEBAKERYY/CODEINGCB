@@ -47,7 +47,7 @@ Released   : 20130811
 	
 	<div id="logo" class="container">
 		<h1>
-			<span>공지사항</span>
+			<a class="icon icon-tasks"><span>공지사항</span></a>
 		</h1>
 	</div>
 
