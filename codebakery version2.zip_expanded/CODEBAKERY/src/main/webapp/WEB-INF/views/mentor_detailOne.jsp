@@ -66,8 +66,7 @@
 			<p>${mentor.mentor_Content}</p>
 		</div>
 		<div id="sidebar">
-			<a href="#" class="image image-full"><img src="images/pic05.jpg"
-				alt="" /></a>
+			<a href="#" class="image image-full"><img src="${pageContext.request.contextPath}/upload${dto.user_Pic}" alt="" /></a>
 		</div>
 	</div>
 	<div class="container">

@@ -59,12 +59,12 @@ background-color: white;
 
 <!-- 리뷰 배너 스크립트 -->
 <script type="text/javascript">
-	$(document).ready(function() {
+/* 	$(document).ready(function() {
 		$("#reviewclass").hide();
 		$(".button").click(function() {
 			$("#reviewclass").show();
 		});
-	})
+	}) */
 	$(document).ready(function() {
 		/* 배너 롤링 */
 		var nowNum = 0;
