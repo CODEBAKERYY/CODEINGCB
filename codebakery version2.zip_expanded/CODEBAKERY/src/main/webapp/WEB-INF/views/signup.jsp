@@ -77,12 +77,12 @@
 				data : JSON.stringify(idchk),
 				contentType : "application/json",
 				dataType : "json",
-				success : function(data) {
-					console.log(data);
-					if (data > 0) {
-						alert("아이디써도된다");
+				success : function(msg) {
+					console.log(msg);
+					if (msg.check == false) {
+						alert("사용 가능한 아이디입니다.");
 					} else {
-						alert("아이디 중복된다");
+						alert("사용할 수 없는 아이디입니다");
 					}
 				},
 				error : function() {
@@ -109,6 +109,20 @@
 				}
 			});
 		});
+		function signup() {
+			var id = $("#userid").val();
+			var pw = $("#userpw").val();
+			var username = $("#username").val();
+			var userphone = $("#userphone").val();
+			var usermail = $("#usermail").val();
+			var pic = $("#pic").val();
+			if (id == null || pw == null || username == null
+					|| userphone == null || usermail == null || pic == null) {
+				alert("모든 값을 입력해주세요");
+				return true;
+			}
+			return false;
+		}
 	</script>
 	<style type="text/css">
 .alert alert-success {
@@ -129,18 +143,17 @@
 			modelAttribute="uploadFile" action="signup.do">
 			<input type="hidden" name="user_Point" value="0" />
 			<div class="txt_field">
-				<input type="text" name="user_Id" id="userid"> <span></span>
-					<label>id</label>
+				<input type="text" name="user_Id" id="userid" /> <span></span> <label>id</label>
 			</div>
-			<input type="button" onclick="idchk();" value="아이디 체크">
+			<input type="button" onclick="idchk();" value="아이디 체크" />
 			<div id="id_chk"></div>
 			<div class="txt_field">
 				<input type="password" name="user_Pw" id="userpw"
-					onfocus="idcheckz();"> <span></span> <label>password</label>
+					onfocus="idcheckz();" /> <span></span> <label>password</label>
 			</div>
 			<div class="txt_field">
-				<input type="password" id="userpwcheck" onfocus="pwcheckz();">
-					<span></span> <label>password check</label>
+				<input type="password" id="userpwcheck" onfocus="pwcheckz();" /> <span></span>
+				<label>password check</label>
 			</div>
 			<div class="alert alert-success" id="alert-success">비밀번호가
 				일치합니다.</div>
@@ -148,18 +161,20 @@
 				않습니다.</div>
 
 			<div class="txt_field">
-				<input type="text" name="user_Name" id="username"><span></span>
-					<label>user name</label>
+				<input type="text" name="user_Name" id="username" /><span></span> <label>user
+					name</label>
 			</div>
 
 			<div class="txt_field">
-				<input type="text" name="user_Phone"> <span></span> <label>phone</label>
+				<input type="text" name="user_Phone" id="userphone" /> <span></span>
+				<label>phone</label>
 			</div>
 			<div class="txt_field">
-				<input type="text" name="user_Mail"> <span></span> <label>email</label>
+				<input type="text" name="user_Mail" id="usermail" /> <span></span>
+				<label>email</label>
 			</div>
 			<div class="txt_field">
-				<input type="file" id="photo" name="pic"><span></span>
+				<input type="file" id="photo" name="pic" /><span></span>
 			</div>
 			<div class="language">
 				<div>Preferred language</div>
@@ -170,10 +185,11 @@
 					name="javascript" value="javascript">javascript</input> <input
 					type="hidden" name="user_Lang" value="java" />
 			</div>
-			<input type="submit" value="회원가입" style="margin-top: 20px">
-			<div class="signup_link">
-				회원이세요? <a href="login.do">로그인</a>
-			</div>
+			<input type="submit" value="회원가입" onclick="signup();"
+				style="margin-top: 20px">
+				<div class="signup_link">
+					회원이세요? <a href="login.do">로그인</a>
+				</div>
 		</form:form>
 	</div>
 	<div style="height: 100px;"></div>

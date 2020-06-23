@@ -15,8 +15,8 @@ public class MentorReviewBizlmpl implements MentorReviewBiz {
 	private MentorReviewDao dao;
 
 	@Override
-	public List<MentorReviewDto> selectList() {
-		return dao.selectList();
+	public List<MentorReviewDto> selectList(int mentor_No) {
+		return dao.selectList(mentor_No);
 	}
 
 	@Override
