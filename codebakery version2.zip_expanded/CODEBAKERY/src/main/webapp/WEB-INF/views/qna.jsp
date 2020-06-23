@@ -49,11 +49,7 @@ Released   : 20130811
 	<%@ include file="header.jsp"%>
 	<div id="logo" class="container">
 		<h1>
-<<<<<<< HEAD
-			<span>질문 게시판</span>
-=======
 			<p class="icon icon-tasks"><span>질문 게시판</span></p>
->>>>>>> stella
 		</h1>
 	</div>
 	<div id="mainbar">
