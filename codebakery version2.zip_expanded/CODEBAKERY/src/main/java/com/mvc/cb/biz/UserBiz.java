@@ -8,6 +8,8 @@ public interface UserBiz {
 	public int signup(UserDto dto);
 
 	public UserDto login(UserDto dto);
+
+	public UserDto idcheck(String user_Id);
 	
 	
 }

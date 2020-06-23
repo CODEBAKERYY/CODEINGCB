@@ -23,7 +23,7 @@
 	</header>
 		
 	<form action="insertQuiz.do" method="post">
-	<input type="hidden" name="user_Id" value="user1">
+	<input type="hidden" name="user_Id" value="${User.user_Id }">
 	<div id="contact" class="container">
 		<section id="description">
 			<div class="headline">
@@ -56,7 +56,7 @@
 				<h2>입력</h2>
 			</div>
 			<p>
-				<input type="text" name="input"/>
+				<input type="text" name="input_Explanation"/>
 			</p>
 		</section>
 	</div>
@@ -67,7 +67,7 @@
 				<h2>출력</h2>
 			</div>
 			<p>
-				<input type="text" name="output"/>
+				<input type="text" name="output_Explanation"/>
 			</p>
 		</section>
 	</div>

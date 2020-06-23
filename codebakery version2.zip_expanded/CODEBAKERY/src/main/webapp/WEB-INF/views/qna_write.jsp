@@ -16,11 +16,12 @@ Released   : 20130811
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title></title>
+<title>CODEBAKERY</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <!--bootstrap css  -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link rel="shortcut icon" type="image/x-icon" href="resources/images/favicon.png" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
 <link
 	href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900"
 	rel="stylesheet" />
@@ -45,6 +46,7 @@ Released   : 20130811
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript">
+
 	var list = [];
 	function addTag(){
 		var tag = $("#tag").val();
@@ -55,63 +57,77 @@ Released   : 20130811
 		
 		list.push(tag);
 
-		document.getElementById("tags").innerHTML = list;
-
+		document.getElementById("taglist").innerHTML = list
 		
-		/* $.ajax({
-			url: "insert_question.do",
-			type: 'POST',
-			data: {"question_Tag" : list},
-			success: function(data){
-				alert("태그 추가 테스트");
-			},
-			error: function(request, status, error){
-				alert("ajax 통신 실패!");
-		        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
-			}
-		}); */
+		form.question_Tag.value = list; 		
 		
 	} 
+	
+	// 글쓰기 유효성 검사
+	$(function(){
+		$("#form").submit(function(){
+			var titleChk = document.getElementsByName("question_Title")[0].value;
+			var ContentChk = document.getElementsByName("question_Content")[0].value;
+			var Tag = document.getElementById("tag").value;
+			
+			
+			if(titleChk == "" || titleChk == null){
+				alert("제목을 입력해 주세요.");
+				return false;
+			}
+			
+			if(ContentChk == "" || ContentChk == null){
+				alert("내용을 입력해 주세요.");
+				return false;
+			}
+			
+			if(Tag == "#"){
+				alert("태그를 한 개 이상 추가해주세요.");
+				return false;
+			}
+			
+		});
+	});
 
 </script>
 
-
 </head>
-
 <body>
 	<%@ include file="header.jsp"%>
 	
 	<div id="logo" class="container">
-		<h1><a class="icon icon-tasks"><span>질문 글쓰기</span></a></h1>
+		<h1><p class="icon icon-tasks"><span>질문 글쓰기</span></p></h1>
 	</div>
 	
 	<article>
 		<div class="container" role="main">
 			<form name="form" id="form" role="form" method="post" action="insert_question.do">
-				<input type="hidden" name="user_Id" value="USER01"/>
+				<input type="hidden" name="question_Tag" id="taglist"/>
 				<div class="mb-3">
 					<label for="title">제목</label>
-					<input type="text" class="form-control" name="question_Title" placeholder="제목을 입력해 주세요">
+					<input type="text" class="form-control" name="question_Title" placeholder="제목을 입력해 주세요" />
 				</div>
 				<div class="mb-3">
 					<label for="reg_id">작성자</label>
 					<!-- <input type="text" class="form-control" name="reg_id" id="reg_id" placeholder="이름을 입력해 주세요"> -->
-					<p>user01</p>
+					<input type="text" class="form-control" name="user_Id" value="${User.user_Id }" />
 				</div>
 				<div class="mb-3">
 					<label for="content">내용</label>
 					<textarea class="form-control" rows="9" name="question_Content" placeholder="내용을 입력해 주세요" style="width:100%; resize:none;"></textarea>
 				</div>
 				<div class="mb-3">
-					<label for="tag">TAG</label>
-					<span><input type="text" class="form-control" id="tag" name="question_Tag" placeholder="태그를 입력해 주세요" value="#"/></span>
+					<label for="tag">TAG : </label>&nbsp;&nbsp;
+					<input type="text" id="tag" placeholder="태그를 입력해 주세요" value="#" style="width:40%; height:30px;" />&nbsp;&nbsp;
 					<input type="button" value="추가" onclick="addTag();"/>
-					<div class="one_tag" id="tags"></div>
+					<br></br>
+					<div class="one_tag" id="tags" style="margin-left: 50px;"></div>
 				</div>
-			<div >
-				<input type="submit" id="btnSave" value="저장" />
-				<input type="button" id="btnList" value="목록" onclick="location.href='qna.do'" />
-			</div>
+				<br></br>
+				<div >
+					<input type="submit" id="btnSave" value="저장" />
+					<input type="button" id="btnList" value="목록" onclick="location.href='qna.do'" />
+				</div>
 			</form>
 		</div>
 	</article>

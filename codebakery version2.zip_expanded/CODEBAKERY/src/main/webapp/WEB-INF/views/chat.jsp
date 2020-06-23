@@ -3,7 +3,7 @@
 <html>
 <head>
    	<meta charset="UTF-8">
-    <script src="http://localhost:82/socket.io/socket.io.js"></script>
+    <script src="http://192.168.130.43:82/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
    	<title>socket server</title>
    	<style type="text/css">
@@ -42,8 +42,9 @@
 	
 	<script>
 	$(document).ready(function(){
-    	var socket = io("http://localhost:82");
-                
+    	var socket = io("http://192.168.130.43:82");
+    	var time;
+    
         //msg에서 키를 누를떄
         $("#msg").keydown(function(key){
         	//해당하는 키가 엔터키(13) 일떄
@@ -55,16 +56,17 @@
         
         //msg_process를 클릭할 때
         $("#msg_process").click(function(){
-        	//소켓에 send_msg라는 이벤트로 input에 #msg의 벨류를 담고 보내준다.
+        	//소켓에 send_msg라는 이벤트로 input에 #msg의 value를 담고 보내준다.
 			socket.emit("send_msg", $("#msg").val());
-			//#msg에 벨류값을 비워준다.
+			//#msg에 value값을 비워준다.
 			$("#msg").val("");
 		});
-        
+		
 		// socket server로부터 send_msg를 통해 event를 받을 경우
 		socket.on('send_msg', function(msg){
 			// div 태그를 만들어 텍스트를 msg로 지정을 한 뒤 #chat_box에 추가를 시켜준다.
 			$('<div></div>').text(msg).appendTo("#chat_box");
+			
 		});
 	});
 	</script>

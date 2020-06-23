@@ -19,8 +19,10 @@
 <body>
 	<%@ include file="header.jsp"%>
 
-	<div class="major">
-		<h2 style="padding-top: 10px">문제 게시판</h2>
+	<div id="logo" class="container">
+		<h1>
+			<span>퀴즈 게시판</span>
+		</h1>
 	</div>
 
 	<!-- SpringMVC01에서 boardlist 그대로 가져옴 기능구현할 때 변경해야함 -->
@@ -38,36 +40,39 @@
 			<th>문제 번호</th>
 			<th>제목</th>
 			<th>결과</th>
-			<th>정답</th>
+			<th>정답자</th>
 			<th>제출</th>
 			<th>정답 비율</th>
-			
 		</tr>
 		<c:choose>
-			<c:when test="${empty list }">
+			<c:when test="${empty quizList }">
 				<tr>
 					<td colspan="6" align="center">------------- 작성된 글이 없습니다.
 						-------------</td>
 				</tr>
 			</c:when>
 			<c:otherwise>
-				<c:forEach items="${list }" var="dto">
+				<c:forEach items="${quizList }" var="dto">
 					<tr>
+						<td>${dto.quiz_No }</td>
+						<td><a href="quiz_detail?quiz_No=${dto.quiz_No}">${dto.quiz_Title }</a></td>
 						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td>${dto.correct_User}</td>
+						<td>${dto.try_User }</td>
+						<td>${dto.correct_Rate }</td>
 					</tr>
 				</c:forEach>
 			</c:otherwise>
 		</c:choose>
 		<!-- 작성 버튼은 등급이 멘토일때만 보이게 구현 c:if사용-->
+		<!-- <c:set var="grade" value="${dto.quiz_Title }"></c:set>
+		<c:if test="${grade eq '멘토' }">
+					
+		</c:if>-->
 		<tr>
-			<td colspan="6" align="right"><input type="button"
-				value="문제 작성" class="button" onclick="location.href='quiz_write.do'" /></td>
-		</tr>
+				<td colspan="6" align="right"><input type="button"
+					value="문제 작성" class="button" onclick="location.href='quiz_write.do'" /></td>
+			</tr>
 	</table>
 	</div>
 	<br>

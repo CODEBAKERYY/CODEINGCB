@@ -13,13 +13,24 @@
   		<result property="try_User" column="TRY_USER"/>
   		<result property="correct_Rate" column="CORRECT_RATE"/>
   		<result property="quiz_Views" column="QUIZ_VIEWS"/>
+  		<result property="input_Explanation" column="INPUT_EXPLANATION"/>
+  		<result property="output_Explanation" column="OUTPUT_EXPLANATION"/>
   		<result property="input_Sample" column="INPUT_SAMPLE"/>
   		<result property="output_Sample" column="OUTPUT_SAMPLE"/>
   		<result property="user_Id" column="USER_ID"/>  		
   	</resultMap>
   	
+  	<select id="selectList" resultMap="quizMap">
+  		SELECT *
+  		FROM QUIZ
+  		ORDER BY QUIZ_NO DESC
+  	</select>
+  	
   	<insert id="insert" parameterType="quizDto">
   		INSERT INTO QUIZ
-  		VALUES(QUIZSEQ.NEXTVAL, #{quiz_Title}, #{quiz_Content}, SYSDATE, 0, 0, 0, 0, #{input_Sample}, #{output_Sample}, #{user_Id})
+  		VALUES(QUIZSEQ.NEXTVAL, #{quiz_Title}, #{quiz_Content}, SYSDATE, 0, 0, 0, 0, #{input_Explanation}, #{output_Explanation}, #{input_Sample}, #{output_Sample}, #{user_Id})
   	</insert>
+  	<select id="count" resultType="int">
+  	SELECT COUNT(*) FROM QUIZ
+  	</select>
   </mapper>
