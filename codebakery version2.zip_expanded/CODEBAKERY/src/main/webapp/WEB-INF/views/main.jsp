@@ -157,8 +157,8 @@ background-color: white;
 					<div class="box">
 						<p>${dto.mentor_Content}</p>
 						<p>mentor No : ${dto.mentor_No }</p>
-						<a href="mentor_review.do?mentor_No=${dto.mentor_No}"
-							class="button">리뷰보기</a>
+						<a href="mentor_detail.do?mentor_No=${dto.mentor_No}"
+							class="button">자세히 보기</a>
 					</div>
 				</div>
 			</c:forEach>
