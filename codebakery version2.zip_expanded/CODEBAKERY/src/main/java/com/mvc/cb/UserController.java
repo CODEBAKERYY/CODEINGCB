@@ -157,7 +157,7 @@ public class UserController {
 		if (res != null) {
 			session.setAttribute("User", res);
 		}else {
-			return "redirect:login";
+			return "redirect:login.do";
 		}
 		return "redirect:main.do";
 	}

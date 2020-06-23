@@ -3,7 +3,6 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <<<<<<< HEAD
-
 <mapper namespace="answer">
 
 	<resultMap type="AnswerDto" id="answerMap">
@@ -45,15 +44,6 @@
 	</insert>
 
 	<select id="cntAnswer" parameterType="int">
-		SELECT COUNT(*)
-		FROM ANSWER
-		WHERE QUESTION_NO = #{question_No}
-	</select>
-
-	<select id="count" resultType="int">
-		SELECT COUNT(*) FROM ANSWER
-	</select>
-</mapper>
 =======
   
   <mapper namespace="answer">
@@ -65,6 +55,7 @@
   		<result property="answer_Date" column="ANSWER_DATE" />
   		<result property="question_No" column="QUESTION_NO" />
   		<result property="user_Id" column="USER_ID" />
+  		
   	</resultMap>
   	
   	<select id="selectList" resultMap="answerMap">
@@ -96,7 +87,25 @@
   		WHERE QUESTION_NO = #{question_No}
   	</select>
   	
+  	<!-- 총 게시글 갯수 출력 -->
+	<select id="countAnswer" resultType="int" parameterType="int">
+>>>>>>> stella
+		SELECT COUNT(*)
+		FROM ANSWER
+		WHERE QUESTION_NO = #{question_No}
+	</select> 
  
+ 	<select id="count" resultType="int">
+		SELECT COUNT(*) 
+		FROM ANSWER
+	</select>
+<<<<<<< HEAD
+
+	<select id="count" resultType="int">
+		SELECT COUNT(*) FROM ANSWER
+	</select>
+</mapper>
+=======
   
   </mapper>
 >>>>>>> stella

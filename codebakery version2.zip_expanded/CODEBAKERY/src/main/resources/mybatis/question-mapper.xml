@@ -16,10 +16,14 @@
   		
   	</resultMap>
   	
-  	<select id="selectList" resultMap="questionMap">
+  	<select id="selectList" resultType="QuestionDto" parameterType="java.util.HashMap">
   		SELECT *
-  		FROM QUESTION
-  		ORDER BY QUESTION_NO DESC
+		FROM (SELECT ROWNUM RN, A.*
+			  FROM (SELECT *
+			  		FROM QUESTION
+			  		ORDER BY QUESTION_NO DESC) A
+			  )
+		WHERE RN BETWEEN #{start} AND #{end}
   	</select>
   	
   	<select id="selectOne" parameterType="int" resultType="QuestionDto">
@@ -52,15 +56,21 @@
 	</update>
 	
 	
-	<!-- 페이징 START -->
-	
-	<select id="selectCount" resultType="int">
-		SELECT COUNT(QUESTIONSEQ)
+	<!-- 총 게시글 갯수 출력 -->
+	<select id="countBoard" resultType="int">
+		SELECT COUNT(*)
 		FROM QUESTION
 	</select>
 	
-	<!-- 페이징 END -->
-	<select id="count" resultType="int">
-	SELECT COUNT(*) FROM QUESTION
+	<select id="tagList" resultType="QuestionDto" parameterType="String">
+		SELECT *
+		FROM QUESTION
+		WHERE QUESTION_TAG LIKE '%'||#{question_Tag}||'%'
 	</select>
+	
+	<select id="count" resultType="int">
+		SELECT COUNT(*) 
+		FROM QUESTION
+	</select>
+	
  </mapper>
