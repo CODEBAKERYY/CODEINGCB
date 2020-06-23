@@ -73,6 +73,7 @@ Released   : 20130811
 		
 	} 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 	
 	$(function(){
@@ -100,6 +101,8 @@ Released   : 20130811
 		});
 	});
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
+=======
+>>>>>>> parent of 3d4349c... ㅈㄷㄹ
 
 </script>
 

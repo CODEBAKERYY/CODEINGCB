@@ -3,12 +3,15 @@ package com.mvc.cb.model.dao;
 import java.util.ArrayList;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import java.util.Arrays;
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
 =======
 import java.util.Arrays;
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
+=======
+>>>>>>> parent of 3d4349c... ㅈㄷㄹ
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -27,6 +30,9 @@ public class QuestionDaolmpl implements QuestionDao {
 	public List<QuestionDto> selectList() {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 3d4349c... ㅈㄷㄹ
 		
 		List<QuestionDto> list = new ArrayList<QuestionDto>();
 		
@@ -39,6 +45,7 @@ public class QuestionDaolmpl implements QuestionDao {
 		}
 		
 		
+<<<<<<< HEAD
 =======
 
 		List<QuestionDto> list = new ArrayList<QuestionDto>();
@@ -65,6 +72,8 @@ public class QuestionDaolmpl implements QuestionDao {
 		}
 
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
+=======
+>>>>>>> parent of 3d4349c... ㅈㄷㄹ
 		return list;
 	}
 
@@ -149,6 +158,7 @@ public class QuestionDaolmpl implements QuestionDao {
 <<<<<<< HEAD
 		
 		
+		
 		sqlSession.update(NAMESPACE+"plusCnt", question_No);
 		
 =======
@@ -164,6 +174,7 @@ public class QuestionDaolmpl implements QuestionDao {
 
 	}
 
+<<<<<<< HEAD
 	@Override
 	public int count() {
 
@@ -182,6 +193,8 @@ public class QuestionDaolmpl implements QuestionDao {
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
 =======
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
+=======
+>>>>>>> parent of 3d4349c... ㅈㄷㄹ
 //	@Override
 //	public List<QuestionDto> selectBoard(QnAPagingDto dto) {
 //		return null;

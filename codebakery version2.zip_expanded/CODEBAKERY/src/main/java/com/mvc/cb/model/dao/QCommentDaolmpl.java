@@ -30,6 +30,7 @@ public class QCommentDaolmpl implements QCommentDao {
 		return list;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 	
 =======
@@ -81,5 +82,9 @@ public class QCommentDaolmpl implements QCommentDao {
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
 =======
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
+=======
+	
+	
+>>>>>>> parent of 3d4349c... ㅈㄷㄹ
 
 }

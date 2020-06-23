@@ -202,6 +202,7 @@ CREATE TABLE NOTICE_COMMENT (
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 =======
@@ -301,6 +302,8 @@ INSERT INTO NOTICE_COMMENT VALUES(NCOMMENTSEQ.NEXTVAL, 2, '공지댓글내용02'
 
 SELECT * FROM NOTICE_COMMENT;
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
+=======
+>>>>>>> parent of 3d4349c... ㅈㄷㄹ
 
 INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'구글 10년 경력','모든것을 한번에 해결해드립니다.','admin');
 INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'구글 1년 경력','모든것을 한번에 해결해드립니다.','admin');

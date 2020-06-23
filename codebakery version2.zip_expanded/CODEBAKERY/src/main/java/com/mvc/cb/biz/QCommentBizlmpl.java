@@ -20,6 +20,7 @@ public class QCommentBizlmpl implements QCommentBiz {
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 	@Override
 	public int insert(QnACommentDto dto) {
@@ -40,4 +41,6 @@ public class QCommentBizlmpl implements QCommentBiz {
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
 =======
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
+=======
+>>>>>>> parent of 3d4349c... ㅈㄷㄹ
 }

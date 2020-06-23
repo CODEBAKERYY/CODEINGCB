@@ -16,12 +16,15 @@ import com.mvc.cb.biz.QuestionBiz;
 import com.mvc.cb.model.dto.AnswerDto;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import com.mvc.cb.model.dto.QnACommentDto;
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
 =======
 import com.mvc.cb.model.dto.QnACommentDto;
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
+=======
+>>>>>>> parent of 3d4349c... ㅈㄷㄹ
 import com.mvc.cb.model.dto.QuestionDto;
 
 @Controller
@@ -43,6 +46,9 @@ public class QnAController {
 	@RequestMapping(value = "/qna.do")
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 3d4349c... ㅈㄷㄹ
 	public String QnAList(Model model)
 			//, QnAPagingDto dto 
 //						@RequestParam(value="nowPage", required=false)String nowPage,
@@ -52,6 +58,7 @@ public class QnAController {
 		logger.info("QnAList");
 		model.addAttribute("list", q_biz.selectList());
 		//q_biz.plusCnt(question_No);
+<<<<<<< HEAD
 		
 //		int total = q_biz.countBoard();
 //		if(nowPage == null && cntPerPage == null) {
@@ -75,10 +82,19 @@ public class QnAController {
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
 =======
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
+=======
+		
+//		int total = q_biz.countBoard();
+//		if(nowPage == null && cntPerPage == null) {
+//			nowPage = "1";
+//			cntPerPage = "5";
+//		} 
+>>>>>>> parent of 3d4349c... ㅈㄷㄹ
 		
 		return "qna";
 	}
 	
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 	// 하나의 질문제목을 클릭했을때 들어오는 요청
@@ -87,6 +103,9 @@ public class QnAController {
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
 	// 질문제목을 클릭했을때 들어오는 요청
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
+=======
+	// 하나의 질문제목을 클릭했을때 들어오는 요청
+>>>>>>> parent of 3d4349c... ㅈㄷㄹ
 	@RequestMapping( value = "/qna_detail.do")
 	public String QnADetail(Model model, Integer question_No) {
 		logger.info("QnaDetail");
@@ -156,6 +175,7 @@ public class QnAController {
 		
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
@@ -179,6 +199,8 @@ public class QnAController {
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
 =======
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
+=======
+>>>>>>> parent of 3d4349c... ㅈㄷㄹ
 		if(res>0) {
 			return "redirect:qna_detail.do?question_No="+dto.getQuestion_No();
 		} else {
@@ -199,6 +221,7 @@ public class QnAController {
 			return "redirect:qna_detail.do?question_No="+question_No;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	}
 =======
 		}
@@ -207,21 +230,15 @@ public class QnAController {
 =======
 		
 		// ------------------------ 답변 직성/수정/삭제 START-------------------------
+=======
+	}
+>>>>>>> parent of 3d4349c... ㅈㄷㄹ
 	
-		// 답변삭제
-		@RequestMapping( value="/answer_delete.do" )
-		public String deleteAnswer(Integer answer_No, Integer question_No) {
-			logger.info("Delete Answer");
-			
-			int res = a_biz.delete(answer_No);
-			
-			if(res>0) {
-				return "redirect:qna_detail.do?question_No="+question_No;
-			} else {
-				return "redirect:qna_detail.do?question_No="+question_No;
-			}
-		}
+	@RequestMapping( value="/answer_modify.do" )
+	public String modifyAnswer(Integer question_No, Integer answer_No, String answer_Title, String answer_Content) {
+		logger.info("Modify Answer");
 		
+<<<<<<< HEAD
 		//답변수정 -> 팝업창으로 넘김
 		@RequestMapping( value="/answer_modify.do" )
 		public String modifyAnswer(Model model, AnswerDto dto) {
@@ -260,6 +277,14 @@ public class QnAController {
 			return "redirect:qna_detail.do?question_No="+dto.getQuestion_No();
 		}
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
+=======
+		AnswerDto dto = new AnswerDto();
+		dto.setAnswer_No(answer_No);
+		dto.setAnswer_Title(answer_Title);
+		dto.setAnswer_Content(answer_Content);
+		
+		int res = a_biz.update(dto);
+>>>>>>> parent of 3d4349c... ㅈㄷㄹ
 		
 		if(res>0) {
 			return "redirect:qna_detail.do?question_No="+question_No;
@@ -268,12 +293,16 @@ public class QnAController {
 		}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 3d4349c... ㅈㄷㄹ
 	}
 	
 	// 답변 작성시 들어오는 요청
 	@RequestMapping( value="/answer_write.do" )
 	public String insertAnswer(String answer_Title, String answer_Content) {
 		logger.info("Insert Answer");
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
@@ -287,6 +316,8 @@ public class QnAController {
 		@RequestMapping( value = "/writeComment.do")
 		public String insertComment(QnACommentDto dto) {
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
+=======
+>>>>>>> parent of 3d4349c... ㅈㄷㄹ
 		
 		AnswerDto dto = new AnswerDto();
 		dto.setAnswer_Title(answer_Title);
@@ -295,12 +326,16 @@ public class QnAController {
 		int res = a_biz.insert(dto);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 3d4349c... ㅈㄷㄹ
 		if(res>0) {
 			return "redirect:qna_do";
 		} else {
 			return "redirect:qna_do";
 		}
 	}
+<<<<<<< HEAD
 =======
 		// 댓글 수정
 		@RequestMapping( value="/updateComment.do" )
@@ -330,5 +365,7 @@ public class QnAController {
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
 =======
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
+=======
+>>>>>>> parent of 3d4349c... ㅈㄷㄹ
 
 }

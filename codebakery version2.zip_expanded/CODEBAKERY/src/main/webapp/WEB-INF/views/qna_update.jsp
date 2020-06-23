@@ -42,6 +42,7 @@ Released   : 20130811
 		}
 </style>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
@@ -83,6 +84,8 @@ Released   : 20130811
 	});
 </script>
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
+=======
+>>>>>>> parent of 3d4349c... ㅈㄷㄹ
 </head>
 
 <body>
@@ -113,6 +116,7 @@ Released   : 20130811
 					<label for="tag">TAG</label>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 					<input type="text" class="form-control" name="question_Tag" placeholder="태그를 입력해 주세요" >
 =======
 					<span><input type="text" class="form-control" id="tag" name="question_Tag"/ value="#"></span>
@@ -124,6 +128,9 @@ Released   : 20130811
 					<input type="button" value="추가" onclick="addTag();"/>
 					<div class="one_tag" id="tags">${dto.question_Tag }</div>
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
+=======
+					<input type="text" class="form-control" name="question_Tag" placeholder="태그를 입력해 주세요" >
+>>>>>>> parent of 3d4349c... ㅈㄷㄹ
 				</div>
 			<div >
 				<input type="submit" id="btnSave" value="수정완료" />

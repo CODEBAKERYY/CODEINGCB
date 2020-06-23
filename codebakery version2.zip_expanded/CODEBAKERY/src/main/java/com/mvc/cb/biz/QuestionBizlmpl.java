@@ -46,6 +46,7 @@ public class QuestionBizlmpl implements QuestionBiz{
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
@@ -74,6 +75,8 @@ public class QuestionBizlmpl implements QuestionBiz{
 //	public List<QuestionDto> selectBoard(QnAPagingDto dto) {
 //		return dao.selectBoard(dto);
 //	}
+=======
+>>>>>>> parent of 3d4349c... ㅈㄷㄹ
 
 //	@Override
 //	public int countBoard() {

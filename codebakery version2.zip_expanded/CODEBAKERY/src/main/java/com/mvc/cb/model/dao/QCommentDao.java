@@ -10,6 +10,7 @@ public interface QCommentDao {
 	
 String NAMESPACE = "qcomment.";
 	
+<<<<<<< HEAD
 	public List<QnACommentDto> selectList(int question_No);
 =======
 =======
@@ -28,5 +29,8 @@ String NAMESPACE = "qcomment.";
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
 =======
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
+=======
+	public List<QnACommentDto> selectList(int question_No);
+>>>>>>> parent of 3d4349c... ㅈㄷㄹ
 
 }

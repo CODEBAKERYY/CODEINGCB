@@ -13,6 +13,9 @@
 			alias="MentorDto" />
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 3d4349c... ㅈㄷㄹ
 		<typeAlias type="com.mvc.cb.model.dto.NoticeDto" 
 			alias="NoticeDto"/>
 		<typeAlias type="com.mvc.cb.model.dto.NoticeCommentDto" 
@@ -20,6 +23,7 @@
 		<typeAlias type="com.mvc.cb.model.dto.QuestionDto" alias="QuestionDto"/>
 		<typeAlias type="com.mvc.cb.model.dto.AnswerDto" alias="AnswerDto" />
 		<typeAlias type="com.mvc.cb.model.dto.QnACommentDto" alias="QnACommentDto"/>
+<<<<<<< HEAD
 		<typeAlias type="com.mvc.cb.model.dto.Pagination" alias="Pagination"/>
 =======
 =======
@@ -45,12 +49,15 @@
 		<typeAlias type="com.mvc.cb.model.dto.Pagination"
 			alias="Pagination" />
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
+=======
+>>>>>>> parent of 3d4349c... ㅈㄷㄹ
 	</typeAliases>
 
 	<mappers>
 		<mapper resource="/mybatis/user-mapper.xml" />
 		<mapper resource="/mybatis/quiz-mapper.xml" />
 		<mapper resource="/mybatis/mentor-mapper.xml" />
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 		<mapper resource="/mybatis/question-mapper.xml"/>
@@ -60,6 +67,9 @@
 		<mapper resource="/mybatis/mentorReview-mapper.xml" />
 		<mapper resource="/mybatis/question-mapper.xml" />
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
+=======
+		<mapper resource="/mybatis/question-mapper.xml"/>
+>>>>>>> parent of 3d4349c... ㅈㄷㄹ
 		<mapper resource="/mybatis/answer-mapper.xml" />
 		<mapper resource="/mybatis/qcomment-mapper.xml" />
 		<mapper resource="/mybatis/mentor-mapper.xml" />

@@ -30,6 +30,7 @@ public class AnswerDaolmpl implements AnswerDao {
 	}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
@@ -49,6 +50,8 @@ public class AnswerDaolmpl implements AnswerDao {
 		return res;
 	}
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
+=======
+>>>>>>> parent of 3d4349c... ㅈㄷㄹ
 
 	@Override
 	public int update(AnswerDto dto) {
@@ -92,6 +95,7 @@ public class AnswerDaolmpl implements AnswerDao {
 
 		try {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			res = sqlSession.insert(NAMESPACE+"insert", dto);
 		} catch(Exception e) {
 			System.out.println("[error] : Answer insert");
@@ -134,4 +138,14 @@ public class AnswerDaolmpl implements AnswerDao {
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
 =======
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
+=======
+			res = sqlSession.insert(NAMESPACE+"insert", dto);
+		} catch(Exception e) {
+			System.out.println("[error] : Answer insert");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+>>>>>>> parent of 3d4349c... ㅈㄷㄹ
 }

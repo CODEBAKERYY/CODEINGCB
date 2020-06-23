@@ -36,6 +36,7 @@ public class AnswerBizlmpl implements AnswerBiz{
 <<<<<<< HEAD
 <<<<<<< HEAD
 	
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
@@ -50,5 +51,7 @@ public class AnswerBizlmpl implements AnswerBiz{
 	}
 
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
+=======
+>>>>>>> parent of 3d4349c... ㅈㄷㄹ
 
 }

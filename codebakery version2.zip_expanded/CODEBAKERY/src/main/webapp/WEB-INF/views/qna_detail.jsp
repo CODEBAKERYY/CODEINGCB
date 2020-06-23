@@ -38,6 +38,7 @@
   <link href="resources/csss/board-detail.css" rel="stylesheet" />
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  
 =======
 =======
@@ -273,6 +274,9 @@
 	
 </script>
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
+=======
+ 
+>>>>>>> parent of 3d4349c... ㅈㄷㄹ
 
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
@@ -300,6 +304,7 @@
 				<hr />
 				<p class="lead">${qlist.question_Content }</p>
 				<div class="pt-5">
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 					<p> Tags: <a href="#">#html</a>, <a href="#">#trends</a></p>
@@ -348,6 +353,15 @@
 	                </form>
 	                <br></br>
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
+=======
+					<p> Tags: <a href="#">#html</a>, <a href="#">#trends</a></p>
+				</div>
+			<!--------- 질문글 End ----------->	
+				
+			<!--------- 리뷰 START ----------->
+				<div class="pt-5">
+					<h3 class="mb-5">${clist.size() } Comments</h3>
+>>>>>>> parent of 3d4349c... ㅈㄷㄹ
 					<ul class="comment-list">
 						<c:choose>
 							<c:when test="${empty clist }">
@@ -357,6 +371,7 @@
 								<c:forEach items="${clist }" var="dto">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 								<li class="comment">
 =======
 								<li class="comment" id="onecomm">
@@ -364,6 +379,9 @@
 =======
 								<li class="comment" id="onecomm">
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
+=======
+								<li class="comment">
+>>>>>>> parent of 3d4349c... ㅈㄷㄹ
 									<div class="vcard bio">
 										<img src="resources/csss/images/person_4_sq.jpg" alt="Image placeholder">
 									</div>
@@ -371,12 +389,16 @@
 										<h3>${dto.user_Id }</h3>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 3d4349c... ㅈㄷㄹ
 										<div class="meta">${dto.comment_Date }</div>
 										<p>${dto.comment_Content }</p>
 										<p>
 											<a href="#" onclick="#" class="reply">Reply</a>
 											<br/>
 											<textarea class="form-control" style="width:80%; display:none;" placeholder="댓글을 입력해주세요."></textarea>
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
@@ -392,6 +414,8 @@
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
 =======
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
+=======
+>>>>>>> parent of 3d4349c... ㅈㄷㄹ
 										</p>
 									</div>
 								</li>
@@ -400,6 +424,7 @@
 						</c:choose>
 					</ul>
 				</div>
+<<<<<<< HEAD
 <<<<<<< HEAD
 				<!--------- 리뷰 END ----------->
 =======
@@ -412,6 +437,9 @@
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
 =======
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
+=======
+				<!--------- 리뷰 END ----------->
+>>>>>>> parent of 3d4349c... ㅈㄷㄹ
 				
 				<!--------- 답글 START ----------->
 				<div class="pt-5">
@@ -426,10 +454,14 @@
 								<div class="post-meta">
 									<span class="author">${dto.user_Id }</span>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 3d4349c... ㅈㄷㄹ
 									<span class="date">${dto.answer_Date }</span>
 									<!-- 자신의 글일때
 									<span><a href="#">수정</a></span>
 									<span><a href="#" onclick="#">삭제</a></span> -->
+<<<<<<< HEAD
 =======
 									<span class="date"><fmt:formatDate value="${dto.answer_Date }" pattern="yyyy.MM.dd HH:mm"/></span>
 									<c:if test="${!empty User && (User.user_Id eq dto.user_Id) }">
@@ -437,6 +469,8 @@
 									<input type="button" value="삭제" onclick="deleteAnswer(${dto.answer_No}, ${qlist.question_No });"/>
 									</c:if>
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
+=======
+>>>>>>> parent of 3d4349c... ㅈㄷㄹ
 								</div>
 								<hr />
 								<p class="lead">${dto.answer_Content }</p>

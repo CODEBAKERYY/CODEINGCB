@@ -4,6 +4,9 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 3d4349c... ㅈㄷㄹ
   
   <mapper namespace="answer">
   
@@ -39,6 +42,7 @@
   		VALUES(ANSWERSEQ.NEXTVAL, #{answer_Title}, #{answer_Content}, SYSDATE, 17, 'USER01')
   	</insert>
   
+<<<<<<< HEAD
   </mapper>
 =======
 =======
@@ -98,3 +102,6 @@
 =======
 </mapper>
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
+=======
+  </mapper>
+>>>>>>> parent of 3d4349c... ㅈㄷㄹ

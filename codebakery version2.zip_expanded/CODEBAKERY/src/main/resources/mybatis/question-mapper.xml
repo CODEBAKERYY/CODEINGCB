@@ -54,6 +54,7 @@
 	<!-- 페이징 START -->
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 	<select id="selectCount" resultType="int">
 		SELECT COUNT(QUESTIONSEQ)
@@ -79,4 +80,13 @@
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
 =======
 >>>>>>> parent of 4d88b8a... 승연이꺼 추가
+=======
+	
+	<select id="selectCount" resultType="int">
+		SELECT COUNT(QUESTIONSEQ)
+		FROM QUESTION
+	</select>
+	
+	<!-- 페이징 END -->
+>>>>>>> parent of 3d4349c... ㅈㄷㄹ
  </mapper>
