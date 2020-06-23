@@ -8,5 +8,6 @@ public interface QuizBiz {
 
 	public int insert(QuizDto dto);
 	public List<QuizDto> selectList();
+	public int count();
 
 }

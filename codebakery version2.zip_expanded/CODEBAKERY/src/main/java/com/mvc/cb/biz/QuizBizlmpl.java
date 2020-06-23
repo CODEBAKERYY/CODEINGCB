@@ -23,4 +23,9 @@ public class QuizBizlmpl implements QuizBiz{
 	public List<QuizDto> selectList() {
 		return quizDao.selectList();
 	}
+
+	@Override
+	public int count() {
+		return quizDao.count();
+	}
 }

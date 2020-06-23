@@ -46,4 +46,19 @@ public class MentorReviewDaolmpl implements MentorReviewDao {
 		return null;
 	}
 
+	@Override
+	public List<MentorReviewDto> reviewAll(int mentor_No) {
+		
+		List<MentorReviewDto> list = new ArrayList<MentorReviewDto>();
+		System.out.println("리뷰 가지러 왔다");
+		
+		try {
+			list = sqlSession.selectList(NAMESPACE+"mentorReview",mentor_No);
+			
+		} catch (Exception e) {
+		}
+	
+		return list;
+	}
+
 }

@@ -18,5 +18,7 @@ public interface AnswerDao {
 
 	public int cntAnswer(Integer question_No);
 
+	public int count();
+
 
 }

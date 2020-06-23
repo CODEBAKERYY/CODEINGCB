@@ -41,13 +41,14 @@ Released   : 20130811
 		  font-size: 13px;
 	}
 </style>
+
 </head>
 <body >
 
 	<%@ include file="header.jsp"%>
 	<div id="logo" class="container">
 		<h1>
-			<a href="qna.do" class="icon icon-tasks"><span>질문 게시판</span></a>
+			<span>질문 게시판</span>
 		</h1>
 	</div>
 	<div id="mainbar">
@@ -75,7 +76,7 @@ Released   : 20130811
 									<div class="status answered-accepted">
 										<%-- <form method="post" action="">
 											<input type="hidden" name="question_No" value="${dto.question_No }"/>
-										</form> --%>
+										</form>  --%>
 										<strong style="font-size: 20px">${list.size() }</strong><br /> answers
 									</div>
 									</div>

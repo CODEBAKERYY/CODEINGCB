@@ -19,8 +19,10 @@
 <body>
 	<%@ include file="header.jsp"%>
 
-	<div class="major">
-		<h2 style="padding-top: 10px">문제 게시판</h2>
+	<div id="logo" class="container">
+		<h1>
+			<span>퀴즈 게시판</span>
+		</h1>
 	</div>
 
 	<!-- SpringMVC01에서 boardlist 그대로 가져옴 기능구현할 때 변경해야함 -->

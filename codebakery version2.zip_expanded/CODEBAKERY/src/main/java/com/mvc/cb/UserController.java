@@ -17,15 +17,19 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.util.WebUtils;
 
+import com.mvc.cb.biz.AnswerBiz;
 import com.mvc.cb.biz.MentorBiz;
+import com.mvc.cb.biz.MentorReviewBiz;
+import com.mvc.cb.biz.QCommentBiz;
+import com.mvc.cb.biz.QuestionBiz;
+import com.mvc.cb.biz.QuizBiz;
 import com.mvc.cb.biz.UserBiz;
 import com.mvc.cb.model.dto.UserDto;
 
@@ -40,12 +44,27 @@ public class UserController {
 	@Autowired
 	private MentorBiz m_biz;
 
+	@Autowired
+	private MentorReviewBiz mr_biz;
+
+	@Autowired
+	private QuestionBiz q_biz;
+
+	@Autowired
+	private QuizBiz qu_biz;
+
+	@Autowired
+	AnswerBiz an_biz;
+
 	// 메인으로 이동시 해당 정보
 	@RequestMapping(value = "/main.do")
 	public String main(Model model) {
 		logger.info("mentor selectAll");
 		model.addAttribute("mentor", m_biz.selectList());
 		System.out.println(m_biz.selectList());
+		model.addAttribute("question", q_biz.count());
+		model.addAttribute("quiz", qu_biz.count());
+		model.addAttribute("answer", an_biz.count());
 		return "main";
 	}
 
@@ -53,9 +72,10 @@ public class UserController {
 	@RequestMapping(value = "/mentor_review.do")
 	public String mentorReviewOne(Model model, int mentor_No) {
 
-		logger.info("mentor selectOne");
-		model.addAttribute("review", m_biz.selectOne(mentor_No));
-		System.out.println(m_biz.selectOne(mentor_No));
+		logger.info("mentor reviewList selectOne");
+		System.out.println("mentor_No : " + mentor_No);
+		model.addAttribute("review", mr_biz.reviewAll(mentor_No));
+		System.out.println(mr_biz.reviewAll(mentor_No));
 
 		return "main";
 	}
@@ -136,8 +156,36 @@ public class UserController {
 		UserDto res = u_biz.login(dto);
 		if (res != null) {
 			session.setAttribute("User", res);
+		}else {
+			return "redirect:login";
 		}
 		return "redirect:main.do";
+	}
+
+	// 로그아웃
+	@RequestMapping("logout.do")
+	public String loginOut(HttpSession session) {
+		logger.info("LOGOUT");
+		session.removeAttribute("User");
+		return "redirect:main.do";
+	}
+
+	// 아이디 체크
+	@RequestMapping(value = "idcheck.do", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, UserDto> idchk(@RequestBody UserDto dto) {
+
+		System.out.println("ajax넘어왔다");
+		System.out.println(dto.getUser_Id());
+
+		logger.info("ID CHECK");
+		String user_Id = dto.getUser_Id();
+		System.out.println(user_Id);
+		UserDto res = u_biz.idcheck(user_Id);
+		System.out.println("ajax: res : " + res);
+		Map<String, UserDto> map = new HashMap<String, UserDto>();
+		map.put("code", res);
+		return map;
 	}
 
 }

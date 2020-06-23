@@ -13,4 +13,5 @@ public interface QCommentBiz {
 	public int update(QnACommentDto dto);
 	
 	public int delete(int comment_No);
+	
 }

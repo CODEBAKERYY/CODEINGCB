@@ -60,6 +60,31 @@ Released   : 20130811
 		form.question_Tag.value = list; 		
 		
 	} 
+	
+	$(function(){
+		$("#form").submit(function(){
+			var titleChk = document.getElementsByName("question_Title")[0].value;
+			var ContentChk = document.getElementsByName("question_Content")[0].value;
+			var Tag = document.getElementById("tag").value;
+			
+			
+			if(titleChk == "" || titleChk == null){
+				alert("제목을 입력해 주세요.");
+				return false;
+			}
+			
+			if(ContentChk == "" || ContentChk == null){
+				alert("내용을 입력해 주세요.");
+				return false;
+			}
+			
+			if(Tag == "#"){
+				alert("태그를 한개 이상 추가해주세요");
+				return false;
+			}
+			
+		});
+	});
 
 </script>
 
@@ -92,7 +117,7 @@ Released   : 20130811
 				</div>
 				<div class="mb-3">
 					<label for="tag">TAG : </label>&nbsp;&nbsp;
-					<input type="text" id="tag" placeholder="태그를 입력해 주세요" value="#" style="width:40%; height:30px;"/>&nbsp;&nbsp;
+					<input type="text" id="tag" placeholder="태그를 입력해 주세요" value="#" style="width:40%; height:30px;" />&nbsp;&nbsp;
 					<input type="button" value="추가" onclick="addTag();"/>
 					<br></br>
 					<div class="one_tag" id="tags" style="margin-left: 50px;"></div>

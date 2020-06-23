@@ -13,5 +13,6 @@ public interface QuestionBiz {
 	public int update(QuestionDto dto);
 
 	public void plusCnt(int question_No);
+	public int count();
 	
 }
