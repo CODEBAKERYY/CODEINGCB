@@ -37,5 +37,7 @@ public interface QuestionDao {
 	
 	//메인화면에 보여지는 질문글 갯수
 	public int count();
+
+	public List<QuestionDto> questionList();
 	
 }

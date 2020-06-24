@@ -31,32 +31,31 @@ Released   : 20130811
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 <script type="text/javascript">
-	$("#loginform").submit(function() {
-		var user_Id = $('#userId').val();
-		alert(user_Id);
-		var idchk = {
-			"user_Id" : user_Id
-		};
-		$.ajax({
-			type : "POST",
-			url : "idcheck.do",
-			data : JSON.stringify(idchk),
-			contentType : "application/json",
-			dataType : "json",
-			success : function(msg) {
-				console.log(msg);
-				if (msg.check == false) {
-					alert("아이디가 존재하지않습니다");
-					return false;
-				} else {
-					alert("환영합니다");
-					return true;
+	$(function() {
+		$("#loginform").submit(function() {
+			var user_Id = $('#userId').val();
+			var idchk = {
+				"user_Id" : user_Id
+			};
+			$.ajax({
+				type : "POST",
+				url : "idcheck.do",
+				data : JSON.stringify(idchk),
+				contentType : "application/json",
+				dataType : "json",
+				success : function(msg) {
+					console.log(msg);
+					if (msg.check == false) {
+						alert("아이디 및 비밀번호를 확인해주세요");
+					} else {
+						alert(user_Id+"님 환영합니다");
+					}
+				},
+				error : function() {
+					alert("ajax 통신 실패!");
 				}
-			},
-			error : function() {
-				alert("ajax 통신 실패!");
-			}
 
+			});
 		});
 	});
 </script>

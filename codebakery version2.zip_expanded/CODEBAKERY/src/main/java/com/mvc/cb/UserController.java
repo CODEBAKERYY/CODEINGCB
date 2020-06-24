@@ -70,6 +70,7 @@ public class UserController {
 		model.addAttribute("question", q_biz.count());
 		model.addAttribute("quiz", qu_biz.count());
 		model.addAttribute("answer", an_biz.count());
+//		model.addAttribute("questionlist",q_biz.questionList());
 		return "main";
 	}
 

@@ -9,7 +9,8 @@
 <title>CODEBAKERY</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
-<link rel="shortcut icon" type="image/x-icon" href="resources/images/favicon.png" />
+<link rel="shortcut icon" type="image/x-icon"
+	href="resources/images/favicon.png" />
 <link
 	href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900"
 	rel="stylesheet" />
@@ -212,7 +213,6 @@ background-color: white;
 				<p id="counter1" style="font-size: 30pt; margin-left: 75px;"></p>
 				<div class="title">
 					<h2>현재 답변 수</h2>
-
 				</div>
 			</div>
 			<div class="column2">
@@ -248,6 +248,10 @@ background-color: white;
 			<div class="column1">
 				<div class="box">
 					<p>새로운 질문</p>
+					<c:forEach items="${questionlist }" var="dto" begin="0" end="3"
+						varStatus="i" step="1">
+						<p>${dto.question_Title }</p>
+					</c:forEach>
 				</div>
 			</div>
 			<div class="column2">
