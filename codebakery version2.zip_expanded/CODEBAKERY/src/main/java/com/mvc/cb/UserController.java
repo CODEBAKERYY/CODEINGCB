@@ -157,10 +157,10 @@ public class UserController {
 	public String loginchk(HttpSession session, UserDto dto) {
 		logger.info("LOGIN chk");
 		UserDto res = u_biz.login(dto);
-		if (res != null) {
-			session.setAttribute("User", res);
+		if(res.getUser_Grade().equals("관리자")) {
+			session.setAttribute("admin", res);
 		} else {
-			return "redirect:login.do";
+			session.setAttribute("User", res);
 		}
 		return "redirect:main.do";
 	}
@@ -169,6 +169,7 @@ public class UserController {
 	@RequestMapping("logout.do")
 	public String loginOut(HttpSession session) {
 		logger.info("LOGOUT");
+		session.removeAttribute("admin");
 		session.removeAttribute("User");
 		return "redirect:main.do";
 	}
@@ -220,6 +221,6 @@ public class UserController {
         
         return numStr;
 	    }
-
-
+	
+	
 }

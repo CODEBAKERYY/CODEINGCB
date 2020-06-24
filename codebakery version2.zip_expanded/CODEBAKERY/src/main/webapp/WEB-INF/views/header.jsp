@@ -4,6 +4,7 @@
 
 <%
 	UserDto user = (UserDto) session.getAttribute("User");
+	UserDto admin = (UserDto) session.getAttribute("admin");
 %>
 <!DOCTYPE html>
 <html>
@@ -111,7 +112,12 @@
 				<li><a href="quiz.do" accesskey="3" title="">퀴즈</a></li>
 				<li><a href="notice.do" accesskey="4" title="">공지사항</a></li>
 				<%
-					if (user != null) {
+					if(admin != null) {
+				%>
+					<li><a href="admin.do">마이페이지</a></li>
+					<li><a href="logout.do">로그아웃</a></li>
+				<%
+					} else if (user != null) {
 				%>
 				<li><div class="dropdown">
 						<button class="dropbtn">마이페이지</button>
@@ -122,7 +128,7 @@
 					</div></li>
 				<li><a href="logout.do">로그아웃</a></li>
 				<%
-					} else {
+					} else if(admin == null || user == null){
 				%>
 				<li><a href="login.do" accesskey="5" title="">로그인</a></li>
 				<%

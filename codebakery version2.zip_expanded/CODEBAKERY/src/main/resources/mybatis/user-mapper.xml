@@ -68,6 +68,10 @@
 		USER_ID = #{user_Id}
 
 	</update>
-
-
+	
+	<!-- 관리자 유저 리스트 -->
+	<select id="userList" resultMap="UserMap">
+    	SELECT * FROM USER_TB   
+    </select>
+	
 </mapper>
