@@ -18,9 +18,12 @@
 <link href="resources/csss/fonts/fonts.css" rel="stylesheet"
 	type="text/css" media="all" />
 <link href="resources/csss/signstyle.css" rel="stylesheet" />
-<script src=https://code.jquery.com/jquery-3.5.1.min.js></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript">
+
 	function idcheckz() {
+		
 		var idCheck = RegExp(/^[a-zA-Z0-9]{4,12}$/);
 		if (!idCheck.test($("#userid").val())) {
 			alert("4~12자리의 영문 대소문자와 숫자로만 입력해주세요");
@@ -30,6 +33,7 @@
 		}
 	}
 
+	
 	function pwcheckz() {
 		var passwdCheck = RegExp(/^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/);
 		if (!passwdCheck.test($("#userpw").val())) {
@@ -40,33 +44,6 @@
 		}
 	}
 
-	/* 	function idchk() {
-			// id = "id_reg" / name = "userId"
-			var user_Id = $('#userid').val();
-			var idchk = {
-				"user_Id" : user_Id
-			};
-			console.log(user_Id);
-			$.ajax({
-				type : "POST",
-				url : "idcheck.do",
-				data : JSON.stringify(idchk),
-				contentType : "application/json",
-				dataType : "json",
-				success : function(msg) {
-					if (msg.code == null) {
-						$("#id_check").text("사용하셈 :p");
-						$("#id_check").css("color", "red");
-					} else {
-						$("#id_check").text("아이디 중복됨:p");
-						$("#id_check").css("color", "red");
-					}
-				},
-				error : function() {
-					alert("통신 실패");
-				}
-			});
-		} */
 
 	function idchk() {
 		var user_Id = $('#userid').val();
@@ -84,17 +61,18 @@
 				if (msg.check == false) {
 					alert("사용 가능한 아이디입니다.");
 				} else {
-					alert("사용할 수 없는 아이디입니다");
+					alert("사용할 수 없는 아이디입니다.");
 				}
 			},
 			error : function() {
-				alert("실패함");
+				alert("ajax 통신 실패!");
 			}
 
 		});
 	}
 
 	$(function() {
+		
 		$("#alert-success").hide();
 		$("#alert-danger").hide();
 		$("input").keyup(function() {
@@ -110,14 +88,18 @@
 				}
 			}
 		});
+		
 		$("#signupform").submit(
+				
 				function() {
+					
 					var id = $("#userid").val();
 					var pw = $("#userpw").val();
 					var username = $("#username").val();
 					var userphone = $("#userphone").val();
 					var usermail = $("#usermail").val();
 					var pic = $("#photo").val();
+					
 					if ((id == null || id == "") || (pw == null || pw == "")
 							|| (username == null || username == "")
 							|| (userphone == null || userphone == "")
@@ -126,11 +108,58 @@
 						alert("모든 값을 입력해주세요");
 						return false;
 					} else {
-						alert(username+"님 회원가입 축하드립니다");
+						alert(username+"님 회원가입을 축하드립니다.");
 						return true;
 					}
 				});
-	});
+			});
+	
+	
+	/* 휴대폰 본인인증 */	
+	function sendSMS(){
+		
+         var phoneNumber = $("#userphone").val();
+         
+         if(phoneNumber == null || phoneNumber == ""){
+        	 alert("전화번호를 입력해주세요!");
+        	 return false;
+         }
+
+         $("#getPhoneBtn").css('display', 'none');
+         $("#verCode").css('display', 'block');
+         $("#checkBtn").css('display', 'block');
+		
+         $.ajax({
+             type: "GET",
+             url: "sendSms.do",
+             data: {
+                 "phoneNumber" : phoneNumber
+             },
+             success: function(res){
+            	 
+                 $('#checkBtn').click(function(){
+                	 var noChk = $("#noChk").val();
+                	 
+                     if(res == noChk){
+							
+                    	 alert("휴대폰 인증이 정상적으로 완료되었습니다.");
+                    	 $("#checkBtn").prop('disabled', true);
+                    	 
+                         
+                     }else{
+                         alert("인증번호가 올바르지 않습니다!");
+                         return false;
+                     }
+                 })
+
+             },
+				error: function(request, status, error){
+					alert("ajax 통신 실패!");
+				}
+	         });
+		 }
+		
+		
 </script>
 <style type="text/css">
 .alert alert-success {
@@ -140,6 +169,11 @@
 .alert-danger {
 	color: red;
 }
+
+
+	#verCode, #checkBtn{
+		display: none;
+	}
 </style>
 </head>
 <body>
@@ -151,32 +185,36 @@
 			modelAttribute="uploadFile" id="signupform" action="signup.do">
 			<input type="hidden" name="user_Point" value="0" />
 			<div class="txt_field">
-				<input type="text" name="user_Id" id="userid" /> <span></span> <label>id</label>
+				<input type="text" name="user_Id" id="userid" /> <span></span> 
+				<label>id</label>
 			</div>
 			<input type="button" onclick="idchk();" value="아이디 체크" />
 			<div id="id_chk"></div>
 			<div class="txt_field">
-				<input type="password" name="user_Pw" id="userpw"
-					onfocus="idcheckz();" /> <span></span> <label>password</label>
+				<input type="password" name="user_Pw" id="userpw" onfocus="idcheckz();" /> <span></span> 
+				<label>password</label>
 			</div>
 			<div class="txt_field">
 				<input type="password" id="userpwcheck" onfocus="pwcheckz();" /> <span></span>
 				<label>password check</label>
 			</div>
-			<div class="alert alert-success" id="alert-success">비밀번호가
-				일치합니다.</div>
-			<div class="alert alert-danger" id="alert-danger">비밀번호가 일치하지
-				않습니다.</div>
+			<div class="alert alert-success" id="alert-success">비밀번호가 일치합니다.</div>
+			<div class="alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다.</div>
 
 			<div class="txt_field">
-				<input type="text" name="user_Name" id="username" /><span></span> <label>user
-					name</label>
+				<input type="text" name="user_Name" id="username" /><span></span> 
+				<label>user name</label>
 			</div>
 
 			<div class="txt_field">
-				<input type="text" name="user_Phone" id="userphone" /> <span></span>
+				<input type="text" name="user_Phone" id="userphone" style="width: 200px;"/> <span></span>
 				<label>phone</label>
 			</div>
+			<span style="text-align: right;"><input type="button" value="인증번호받기" onclick="sendSMS();" id="getPhoneBtn"/></span>
+			<div class="txt_field" id="verCode">
+				<input type="text" style="width: 200px;" id="noChk"/> <span></span> <label>verification code</label>
+			</div>
+				<input type="button" id="checkBtn" value="인증번호 확인"/>
 			<div class="txt_field">
 				<input type="text" name="user_Mail" id="usermail" /> <span></span>
 				<label>email</label>
@@ -186,14 +224,14 @@
 			</div>
 			<div class="language">
 				<div>Preferred language</div>
-				<input type="checkbox" name="java" value="java">java</input> <input
-					type="checkbox" name="python" value="python">python</input> <input
-					type="checkbox" name="c++" value="c++">c++</input> <input
-					type="checkbox" name="c" value="c">c</input> <input type="checkbox"
-					name="javascript" value="javascript">javascript</input> <input
-					type="hidden" name="user_Lang" value="java" />
+				<input type="checkbox" name="user_Lang" value="1" />java 
+				<input type="checkbox" name="user_Lang" value="2" />python 
+				<input type="checkbox" name="user_Lang" value="3" />c++
+				<input type="checkbox" name="user_Lang" value="4" />c
+				<input type="checkbox" name="user_Lang" value="5" />javascript 
+				<!-- <input type="hidden" name="user_Lang" value="java" /> -->
 			</div>
-			<input type="submit" value="회원가입" style="margin-top: 20px">
+			<input type="submit" value="회원가입" style="margin-top: 20px" />
 				<div class="signup_link">
 					회원이세요? <a href="login.do">로그인</a>
 				</div>
