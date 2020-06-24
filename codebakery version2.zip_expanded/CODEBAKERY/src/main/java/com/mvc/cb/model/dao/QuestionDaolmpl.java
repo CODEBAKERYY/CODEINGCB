@@ -157,6 +157,7 @@ public class QuestionDaolmpl implements QuestionDao {
 
 		try {
 			list = sqlSession.selectList(NAMESPACE + "questionList");
+			System.out.println("문제list 가져왔다");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

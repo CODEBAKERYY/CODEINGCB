@@ -50,5 +50,10 @@ public class NoticeBizlmpl implements NoticeBiz{
       return dao.pageCnt();
    }
 
+@Override
+public List<NoticeDto> noticeList() {
+	return dao.noticeList();
+}
+
    
 }

@@ -1,5 +1,7 @@
 package com.mvc.cb.model.dao;
 
+import java.util.List;
+
 import com.mvc.cb.model.dto.UserDto;
 
 public interface MyPageDao {
@@ -13,5 +15,8 @@ public interface MyPageDao {
 	public int member_delete(UserDto dto);
 
 	public UserDto getInfo(UserDto dto);
+	
+	//관리자 유저리스트
+	public List<UserDto> userList();
 
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!--
 Design by TEMPLATED
@@ -74,9 +75,12 @@ Released   : 20130811
                         </table>
                         
                         <div style="width: 850px; margin: 0 auto; text-align: right;" >
+                        	<!-- 관리자일때만 수정삭제 보이게함 -->
+                        	 <c:if test="${User.user_Grade == '관리자' && !empty User}">
                             <button type="button" class="btn btn-light pull-right" id="btnUpdate" onclick="location.href='notice_edit.do?notice_No=${detail.notice_No}'">수정</button>
                             <button type="button" class="btn btn-light pull-right" id="btnDelete" onclick="location.href='notice_delete.do?notice_No=${detail.notice_No}'">삭제</button>
-                            <button type="button" class="btn btn-light pull-right" id="btnList" onclick="location.href='notice.do'">목록</button>
+                            </c:if>
+                            <button type="button" class="btn btn-light pull-right" id="btnList" onclick="location.href='notice.do?'">목록</button>
                         </div>
                     </div>
                 </div>
@@ -87,8 +91,9 @@ Released   : 20130811
        <br></br>
        
         <!--============== 공지사항 디테일 댓글 쓰기 START ==============-->
+        <c:if test="${!empty User}">
         <div class="container">
-           <form method="post">
+           <form action="comment_write.do?notice_No=${detail.notice_No}&user_Id=${User.user_Id }" method="post">
                <div>
                    <div style="margin-top: 70px;">
                        <span style="font-weight: bold;">Comments</span>
@@ -98,7 +103,7 @@ Released   : 20130811
                            <tr>
                                <td>
                                    <textarea style="resize: none;" rows="5" cols="140" placeholder="댓글을 입력하세요." name="comment_Content"></textarea>
-                                   <div style="text-align:right;"><button class="btn btn-primary pull-right" style="width:70px; height:35px;" onclick="location.href='comment_write.do?notice_No=${detail.notice_No}'">등록</button></div>
+                                   <div style="text-align:right;"><input type="submit" class="btn btn-primary pull-right" style="width:70px; height:35px;" value="등록"/></div>
                                </td>
                            </tr>
                        </table>
@@ -106,6 +111,7 @@ Released   : 20130811
                </div>
            </form>
        </div>
+       </c:if>
        <!--============== 공지사항 디테일 댓글 쓰기 END ==============-->
             
             <br></br>
@@ -117,13 +123,17 @@ Released   : 20130811
                        <div>
                            <div>
                                <table class='table'>
+                               
+                               <c:forEach items="${c_list }" var="reply">
                                	<tr>
-                                   	<span style="font-size: 18px;">user3</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                       <span style="color:grey; font-size: 14px;">2020.04.23 17:16</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                  	 </tr>
-                                  	 <tr>
-                                       <td>공지사항 댓글입니다.333333</td>
-                                   </tr>
+                                   	<span style="font-size: 18px;">${reply.user_Id }</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <span style="color:grey; font-size: 14px;">%{reply.comment_Date}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                </tr>
+                                <tr>
+                                  <td>${reply.comment_Content }</td>
+                                </tr>
+                                </c:forEach>
+                                
                                </table>
                            </div>
                        </div>

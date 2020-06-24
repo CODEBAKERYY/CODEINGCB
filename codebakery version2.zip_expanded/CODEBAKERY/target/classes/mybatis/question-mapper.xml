@@ -84,8 +84,8 @@
 		FROM QUESTION
 	</select>
 	<select id="questionList" resultMap="questionMap">
-		<!--[CDATA[ SELECT * FROM ( SELECT * FROM QUESTION ORDER BY QUESTION_NO 
-			DESC ) WHERE ROWNUM <=5 ]] -->
+	 SELECT * FROM ( SELECT * FROM QUESTION ORDER BY QUESTION_NO 
+			DESC ) 	<!--[CDATA[WHERE ROWNUM <=5 ]] -->
 	</select>
 
 </mapper>

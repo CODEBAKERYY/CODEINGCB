@@ -30,6 +30,7 @@ import com.mvc.cb.biz.AnswerBiz;
 import com.mvc.cb.biz.CertificationService;
 import com.mvc.cb.biz.MentorBiz;
 import com.mvc.cb.biz.MentorReviewBiz;
+import com.mvc.cb.biz.NoticeBiz;
 import com.mvc.cb.biz.QuestionBiz;
 import com.mvc.cb.biz.QuizBiz;
 import com.mvc.cb.biz.UserBiz;
@@ -57,6 +58,9 @@ public class UserController {
 
 	@Autowired
 	private AnswerBiz an_biz;
+	
+	@Autowired
+	private NoticeBiz no_biz;
 
 	@Autowired
 	private CertificationService certificationService;
@@ -70,7 +74,10 @@ public class UserController {
 		model.addAttribute("question", q_biz.count());
 		model.addAttribute("quiz", qu_biz.count());
 		model.addAttribute("answer", an_biz.count());
-//		model.addAttribute("questionlist",q_biz.questionList());
+		model.addAttribute("questionlist",q_biz.questionList());
+		model.addAttribute("answerlist", an_biz.answerList());
+		model.addAttribute("quizlist",qu_biz.quizList());
+		model.addAttribute("noticelist",no_biz.noticeList());
 		return "main";
 	}
 
@@ -165,10 +172,10 @@ public class UserController {
 	public String loginchk(HttpSession session, UserDto dto) {
 		logger.info("LOGIN chk");
 		UserDto res = u_biz.login(dto);
-		if (res != null) {
-			session.setAttribute("User", res);
+		if(res.getUser_Grade().equals("관리자")) {
+			session.setAttribute("admin", res);
 		} else {
-			return "redirect:login.do";
+			session.setAttribute("User", res);
 		}
 		return "redirect:main.do";
 	}
@@ -177,6 +184,7 @@ public class UserController {
 	@RequestMapping("logout.do")
 	public String loginOut(HttpSession session) {
 		logger.info("LOGOUT");
+		session.removeAttribute("admin");
 		session.removeAttribute("User");
 		return "redirect:main.do";
 	}
@@ -228,6 +236,6 @@ public class UserController {
         
         return numStr;
 	    }
-
-
+	
+	
 }

@@ -55,5 +55,9 @@
 		SELECT COUNT(*)
 		FROM ANSWER
 	</select>
+	<select id="answerList" resultMap="answerMap">
+		 SELECT * FROM ( SELECT * FROM ANSWER ORDER BY ANSWER_NO 
+			DESC ) 	<!--[CDATA[WHERE ROWNUM <=5 ]] -->
+	</select>
 
 </mapper>

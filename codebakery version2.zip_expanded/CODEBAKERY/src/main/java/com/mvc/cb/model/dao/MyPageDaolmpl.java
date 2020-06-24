@@ -1,5 +1,8 @@
 package com.mvc.cb.model.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -39,6 +42,23 @@ public class MyPageDaolmpl implements MyPageDao{
 			}
 			
 		return res;
+	}
+	
+	//관리자 유저리스트
+	@Override
+	public List<UserDto> userList() {
+		
+		List<UserDto> list = new ArrayList<UserDto>();
+		
+		try {
+	         list = sqlSession.selectList(NAMESPACE + "userList");
+	         } catch(Exception e) {
+	            System.out.println("[error] : userList");
+	            e.printStackTrace();
+	         }
+	         
+	         return list;
+		
 	}
 
 }

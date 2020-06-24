@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,42 +38,14 @@ function adjust(){
 			<th>회원등급</th>
 			<th>등급조정</th>
 		</tr>
+		<c:forEach items="${userlist }" var="list">
 		<tr>
-			<td>minseokZzang</td>
-			<td>권민석</td>
-			<td>일반회원</td>
+			<td>${list.user_Id }</td>
+			<td>${list.user_Name }</td>
+			<td>${list.user_Grade }</td>
 			<td><input type="button" value="조정하기" class="button" onclick="adjust();"></td>
 		</tr>
-		<tr>
-			<td>stella</td>
-			<td>정승연</td>
-			<td>일반회원</td>
-			<td><input type="button" value="조정하기" class="button" onclick="adjust();"></td>
-		</tr>
-		<tr>
-			<td>LakinRad</td>
-			<td>이재익</td>
-			<td>멘토</td>
-			<td><input type="button" value="조정하기" class="button" onclick="adjust();"></td>
-		</tr>
-		<tr>
-			<td>soo</td>
-			<td>주수현</td>
-			<td>멘토</td>
-			<td><input type="button" value="조정하기" class="button" onclick="adjust();"></td>
-		</tr>
-		<tr>
-			<td>ju</td>
-			<td>박주혁</td>
-			<td>일반회원</td>
-			<td><input type="button" value="조정하기" class="button" onclick="adjust();"></td>
-		</tr>
-		<tr>
-			<td>geon)</td>
-			<td>김건영</td>
-			<td>멘토</td>
-			<td><input type="button" value="조정하기" class="button" onclick="adjust();"></td>
-		</tr>
+		</c:forEach>
 	</table>
 	
 <jsp:include page="footer.jsp"></jsp:include>
