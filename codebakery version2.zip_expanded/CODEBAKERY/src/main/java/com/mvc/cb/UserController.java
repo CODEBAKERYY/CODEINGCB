@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,9 +26,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.WebUtils;
 
 import com.mvc.cb.biz.AnswerBiz;
+import com.mvc.cb.biz.CertificationService;
 import com.mvc.cb.biz.MentorBiz;
 import com.mvc.cb.biz.MentorReviewBiz;
-import com.mvc.cb.biz.QCommentBiz;
 import com.mvc.cb.biz.QuestionBiz;
 import com.mvc.cb.biz.QuizBiz;
 import com.mvc.cb.biz.UserBiz;
@@ -54,8 +55,11 @@ public class UserController {
 	private QuizBiz qu_biz;
 
 	@Autowired
-	AnswerBiz an_biz;
+	private AnswerBiz an_biz;
 
+	@Autowired
+	private CertificationService certificationService;
+	
 	// 메인으로 이동시 해당 정보
 	@RequestMapping(value = "/main.do")
 	public String main(Model model) {
@@ -192,5 +196,30 @@ public class UserController {
 		map.put("check", check);
 		return map;
 	}
+	
+	// 문자 본인 인증
+	@RequestMapping( value="/sendSms.do" )
+	@ResponseBody
+	public String sendSMS(String phoneNumber) {
+		
+		logger.info("sendSMS");
+
+        Random rand  = new Random();
+        String numStr = "";
+        for(int i=0; i<4; i++) {
+            String ran = Integer.toString(rand.nextInt(10));
+            numStr+=ran;
+        }
+
+        System.out.println("수신자 번호 : " + phoneNumber);
+        System.out.println("인증번호 : " + numStr);
+        
+        // 아래의 서비스단 주석여부에 따라 문자로 본인인증 메세지가 날라옴 (자기 번호 입력해야 확인 가능)
+        // 주석처리를 할 경우 콘솔창에 출력된 인증번호로 인증 가능
+        certificationService.certifiedPhoneNumber(phoneNumber,numStr);
+        
+        return numStr;
+	    }
+
 
 }
