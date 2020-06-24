@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -95,10 +96,16 @@ public class UserController {
 		logger.info("signup");
 		System.out.println(dto);
 		String originalFile = pic.getOriginalFilename();
+		// uuid 생성(Universal Unique IDentifier, 범용 고유 식별자)
+        UUID uuid = UUID.randomUUID();
+        // 랜덤생성+파일이름 저장
+        String savedName = uuid.toString()+"_"+originalFile;
 //		String uploadPath = request.getSession().getServletContext().getRealPath("./upload"); // 업로드 경로
 
 		InputStream inputStream = null;
 		OutputStream outputStream = null;
+		
+      
 
 		try {
 			inputStream = pic.getInputStream();
@@ -109,7 +116,7 @@ public class UserController {
 			if (!storage.exists()) { // 경로 존재 여부
 				storage.mkdirs(); // 디렉토리 생성
 			}
-			File newfile = new File(path + "/" + originalFile);
+			File newfile = new File(path + "/" + savedName);
 			if (!newfile.exists()) {
 				newfile.createNewFile();
 			}
@@ -134,7 +141,7 @@ public class UserController {
 			}
 		}
 
-		String user_Pic = "/" + originalFile;
+		String user_Pic = "/" + savedName;
 		dto.setUser_Pic(user_Pic);
 		int res = u_biz.signup(dto);
 
