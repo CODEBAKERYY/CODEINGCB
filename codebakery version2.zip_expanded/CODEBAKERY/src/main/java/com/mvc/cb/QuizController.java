@@ -27,7 +27,7 @@ public class QuizController {
 	@RequestMapping(value= "/quiz.do")
 	public String quizList(Model model) {
 		logger.info("QUIZ SELECT LIST");
-		model.addAttribute("quizList", quizBiz.selectList());
+		model.addAttribute("list", quizBiz.selectList());
 		
 		return "quiz";
 	}
@@ -63,8 +63,8 @@ public class QuizController {
 	}
 	
 	@RequestMapping(value="/quiz_Answer.do")
-	public String quizAnswer(String quiz_answer) {
-		File file = new File("test.txt");
+	public String quizAnswer(String quiz_answer, String quiz_type) {
+		File file = new File("/Users/kwonminseok/Documents");
 		
 		try {
 			OutputStream output = new FileOutputStream(file);
