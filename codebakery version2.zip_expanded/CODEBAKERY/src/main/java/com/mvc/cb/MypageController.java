@@ -34,6 +34,16 @@ public class MypageController {
 		return "admin_mypage";
 	}
 
+	@RequestMapping("mypoint.do")
+	public String myPoint() {
+		return "mypage_point";
+	}
+
+	@RequestMapping("apply.do")
+	public String applyMentor() {
+		return "mypage_apply";
+	}
+
 	@RequestMapping("/modify.do")
 	public String memberUpdate(UserDto dto, HttpSession session, HttpServletResponse response) {
 		System.out.println("user_id = " + dto.getUser_Id());
