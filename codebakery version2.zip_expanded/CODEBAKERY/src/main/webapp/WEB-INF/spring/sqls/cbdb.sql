@@ -296,3 +296,7 @@ SELECT * FROM
 SELECT * FROM
 		MENTOR_REVIEW;
 
+select * from user_tb;
+select * from mentor_intro;
+
+commit;

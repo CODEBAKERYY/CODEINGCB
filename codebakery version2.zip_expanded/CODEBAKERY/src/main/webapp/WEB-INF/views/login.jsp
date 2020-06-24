@@ -15,9 +15,10 @@ Released   : 20130811
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title></title>
+<title>CODEBAKERY</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
+<link rel="shortcut icon" type="image/x-icon" href="resources/images/favicon.png" />
 <link
 	href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900"
 	rel="stylesheet" />
@@ -25,7 +26,7 @@ Released   : 20130811
 	media="all" />
 <link href="resources/csss/fonts/fonts.css" rel="stylesheet"
 	type="text/css" media="all" />
-<link href="resources/csss/loginstyle.css" rel="stylesheet">
+<link href="resources/csss/loginstyle.css" rel="stylesheet" />
 
 	<!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
 </head>
