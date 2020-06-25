@@ -11,4 +11,6 @@ public interface UserDao {
 	public UserDto login(UserDto dto);
 
 	public UserDto idchk(String user_Id);
+
+	public int adjust(UserDto dto);
 }
