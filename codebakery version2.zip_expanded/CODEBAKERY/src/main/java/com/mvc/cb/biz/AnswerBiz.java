@@ -26,8 +26,5 @@ public interface AnswerBiz {
 	// 메인에서 보여지는 답변 갯수
 	public int count();
 
-	public List<AnswerDto> answerList();
-	//로우넘 답변 리스트
-
 
 }
