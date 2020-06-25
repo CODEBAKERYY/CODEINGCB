@@ -7,6 +7,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,9 +27,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.WebUtils;
 
 import com.mvc.cb.biz.AnswerBiz;
+import com.mvc.cb.biz.CertificationService;
 import com.mvc.cb.biz.MentorBiz;
 import com.mvc.cb.biz.MentorReviewBiz;
-import com.mvc.cb.biz.QCommentBiz;
+import com.mvc.cb.biz.NoticeBiz;
 import com.mvc.cb.biz.QuestionBiz;
 import com.mvc.cb.biz.QuizBiz;
 import com.mvc.cb.biz.UserBiz;
@@ -54,8 +57,14 @@ public class UserController {
 	private QuizBiz qu_biz;
 
 	@Autowired
-	AnswerBiz an_biz;
+	private AnswerBiz an_biz;
+	
+	@Autowired
+	private NoticeBiz no_biz;
 
+	@Autowired
+	private CertificationService certificationService;
+	
 	// 메인으로 이동시 해당 정보
 	@RequestMapping(value = "/main.do")
 	public String main(Model model) {
@@ -65,6 +74,10 @@ public class UserController {
 		model.addAttribute("question", q_biz.count());
 		model.addAttribute("quiz", qu_biz.count());
 		model.addAttribute("answer", an_biz.count());
+		model.addAttribute("questionlist",q_biz.questionList());
+		model.addAttribute("answerlist", an_biz.answerList());
+		model.addAttribute("quizlist",qu_biz.quizList());
+		model.addAttribute("noticelist",no_biz.noticeList());
 		return "main";
 	}
 
@@ -91,10 +104,16 @@ public class UserController {
 		logger.info("signup");
 		System.out.println(dto);
 		String originalFile = pic.getOriginalFilename();
+		// uuid 생성(Universal Unique IDentifier, 범용 고유 식별자)
+        UUID uuid = UUID.randomUUID();
+        // 랜덤생성+파일이름 저장
+        String savedName = uuid.toString()+"_"+originalFile;
 //		String uploadPath = request.getSession().getServletContext().getRealPath("./upload"); // 업로드 경로
 
 		InputStream inputStream = null;
 		OutputStream outputStream = null;
+		
+      
 
 		try {
 			inputStream = pic.getInputStream();
@@ -105,7 +124,7 @@ public class UserController {
 			if (!storage.exists()) { // 경로 존재 여부
 				storage.mkdirs(); // 디렉토리 생성
 			}
-			File newfile = new File(path + "/" + originalFile);
+			File newfile = new File(path + "/" + savedName);
 			if (!newfile.exists()) {
 				newfile.createNewFile();
 			}
@@ -130,7 +149,7 @@ public class UserController {
 			}
 		}
 
-		String user_Pic = "/" + originalFile;
+		String user_Pic = "/" + savedName;
 		dto.setUser_Pic(user_Pic);
 		int res = u_biz.signup(dto);
 
@@ -153,10 +172,10 @@ public class UserController {
 	public String loginchk(HttpSession session, UserDto dto) {
 		logger.info("LOGIN chk");
 		UserDto res = u_biz.login(dto);
-		if (res != null) {
-			session.setAttribute("User", res);
+		if(res.getUser_Grade().equals("관리자")) {
+			session.setAttribute("admin", res);
 		} else {
-			return "redirect:login.do";
+			session.setAttribute("User", res);
 		}
 		return "redirect:main.do";
 	}
@@ -165,6 +184,7 @@ public class UserController {
 	@RequestMapping("logout.do")
 	public String loginOut(HttpSession session) {
 		logger.info("LOGOUT");
+		session.removeAttribute("admin");
 		session.removeAttribute("User");
 		return "redirect:main.do";
 	}
@@ -192,5 +212,30 @@ public class UserController {
 		map.put("check", check);
 		return map;
 	}
+	
+	// 문자 본인 인증
+	@RequestMapping( value="/sendSms.do" )
+	@ResponseBody
+	public String sendSMS(String phoneNumber) {
+		
+		logger.info("sendSMS");
 
+        Random rand  = new Random();
+        String numStr = "";
+        for(int i=0; i<4; i++) {
+            String ran = Integer.toString(rand.nextInt(10));
+            numStr+=ran;
+        }
+
+        System.out.println("수신자 번호 : " + phoneNumber);
+        System.out.println("인증번호 : " + numStr);
+        
+        // 아래의 서비스단 주석여부에 따라 문자로 본인인증 메세지가 날라옴 (자기 번호 입력해야 확인 가능)
+        // 주석처리를 할 경우 콘솔창에 출력된 인증번호로 인증 가능
+        certificationService.certifiedPhoneNumber(phoneNumber,numStr);
+        
+        return numStr;
+	    }
+	
+	
 }

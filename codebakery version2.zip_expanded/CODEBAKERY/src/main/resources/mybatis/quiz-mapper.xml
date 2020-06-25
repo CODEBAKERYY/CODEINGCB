@@ -38,4 +38,8 @@
   	<select id="count" resultType="int">
   	SELECT COUNT(*) FROM QUIZ
   	</select>
+  	<select id="quizList" resultMap="quizMap">
+  		 SELECT * FROM ( SELECT * FROM QUIZ ORDER BY QUIZ_NO 
+			DESC ) 	<!--[CDATA[WHERE ROWNUM <=5 ]] -->
+  	</select>
   </mapper>

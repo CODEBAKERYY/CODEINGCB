@@ -13,4 +13,6 @@ public interface QuizBiz {
 	public int count();
 
 	public QuizDto selectOne(int quiz_No);
+
+	public List<QuizDto> quizList();
 }

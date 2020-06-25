@@ -60,5 +60,10 @@ public class QuestionBizlmpl implements QuestionBiz{
 		return dao.count();
 	}
 
+	@Override
+	public List<QuestionDto> questionList() {
+		return dao.questionList();
+	}
+
 
 }

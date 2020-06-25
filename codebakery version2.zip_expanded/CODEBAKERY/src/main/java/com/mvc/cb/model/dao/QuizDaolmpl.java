@@ -74,4 +74,16 @@ public class QuizDaolmpl implements QuizDao {
 
 		return dto;
 	}
+
+	@Override
+	public List<QuizDto> quizList() {
+		List<QuizDto> quizList = new ArrayList<QuizDto>();
+		
+		try {
+			quizList = sqlSession.selectList(NAMESPACE+"quizList");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

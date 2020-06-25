@@ -33,4 +33,9 @@ public class QuizBizlmpl implements QuizBiz {
 	public int count() {
 		return quizDao.count();
 	}
+
+	@Override
+	public List<QuizDto> quizList() {
+		return quizDao.quizList();
+	}
 }

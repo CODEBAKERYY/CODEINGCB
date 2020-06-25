@@ -1,5 +1,7 @@
 package com.mvc.cb;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -7,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mvc.cb.biz.MyPageBiz;
@@ -28,10 +31,25 @@ public class MypageController {
 	public String mypage_modify() {
 		return "mypage_modify";
 	}
-
+	
+	//관리자 회원관리 페이지 이동
 	@RequestMapping("admin.do")
-	public String Admin() {
+	public String Admin(Model model) {
+		List<UserDto> userlist = biz.userList();
+		model.addAttribute("userlist",userlist);
 		return "admin_mypage";
+	}
+	
+	
+
+	@RequestMapping("mypoint.do")
+	public String myPoint() {
+		return "mypage_point";
+	}
+
+	@RequestMapping("apply.do")
+	public String applyMentor() {
+		return "mypage_apply";
 	}
 
 	@RequestMapping("/modify.do")

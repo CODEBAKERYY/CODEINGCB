@@ -1,5 +1,7 @@
 package com.mvc.cb.biz;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +31,12 @@ public class MyPageBizlmpl implements MyPageBiz{
 	@Override
 	public UserDto getInfo(UserDto dto) {
 		return dao.getInfo(dto);
+	}
+	
+	//관리자 유저리스트
+	@Override
+	public List<UserDto> userList() {
+		return dao.userList();
 	}
 
 }

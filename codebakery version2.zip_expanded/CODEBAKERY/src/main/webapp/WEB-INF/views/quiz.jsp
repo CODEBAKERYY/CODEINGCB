@@ -54,13 +54,8 @@
 			<c:otherwise>
 				<c:forEach items="${list }" var="dto">
 					<tr>
-<<<<<<< HEAD
 						<td>${dto.quiz_No }</td>
 						<td><a href="quiz_detail.do?quiz_No=${dto.quiz_No}">${dto.quiz_Title }</a></td>
-=======
->>>>>>> origin/parkjuhyeok
-						<td></td>
-						<td></td>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -69,12 +64,12 @@
 				</c:forEach>
 			</c:otherwise>
 		</c:choose>
-		<!-- 작성 버튼은 등급이 멘토일때만 보이게 구현 c:if사용-->
-		<tr>
-			<td colspan="6" align="right"><input type="button"
-				value="문제 작성" class="button" onclick="location.href='quiz_write.do'" /></td>
-		</tr>
 	</table>
+	<!-- 작성 버튼은 등급이 멘토일때만 보이게 구현 c:if사용-->
+		<div class="major">
+			<input type="button"
+				value="문제 작성" class="button" onclick="location.href='quiz_write.do'" />
+		</div>
 	</div>
 	<br>
 	<br>
