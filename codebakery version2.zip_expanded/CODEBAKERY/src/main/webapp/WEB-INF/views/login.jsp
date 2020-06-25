@@ -1,6 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+Design by TEMPLATED
+http://templated.co
+Released for free under the Creative Commons Attribution License
+
+Name       : TwoColours 
+Description: A two-column, fixed-width design with dark color scheme.
+Version    : 1.0
+Released   : 20130811
+
+-->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -37,7 +48,7 @@
 					if (msg.check == false) {
 						alert("아이디 및 비밀번호를 확인해주세요");
 					} else {
-						alert(user_Id + "님 환영합니다");
+						alert(user_Id+"님 환영합니다");
 					}
 				},
 				error : function() {
@@ -56,18 +67,19 @@
 		<h1>Login</h1>
 		<form method="post" action="loginchk.do" id="loginform">
 			<div class="txt_field">
-				<input type="text" name="user_Id" id="userId" /> <span></span> <label>id</label>
+				<input type="text" name="user_Id" id="userId"> <span></span>
+					<label>id</label>
 			</div>
 			<div class="txt_field">
-				<input type="password" name="user_Pw" id="userPwS" /> <span></span>
-				<label>password</label>
+				<input type="password" name="user_Pw" id="userPwS"> <span></span>
+					<label>password</label>
 			</div>
 			<div class="pass">Forgot password</div>
-			<input type="submit" value="Login" />
-			<input type="submit" class="google" value="Google Login" />
-			<div class="signup_link">
-				Not a member? <a href="sign.do">Singup</a>
-			</div>
+			<input type="submit" value="Login"> <input type="submit"
+				class="google" value="Google Login">
+					<div class="signup_link">
+						Not a member? <a href="sign.do">Singup</a>
+					</div>
 		</form>
 	</div>
 
