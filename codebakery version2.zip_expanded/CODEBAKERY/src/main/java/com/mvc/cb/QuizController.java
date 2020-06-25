@@ -69,6 +69,7 @@ public class QuizController {
 		try {
 			OutputStream output = new FileOutputStream(file);
 			
+<<<<<<< HEAD
 		    String str = quiz_answer;
 		    byte[] by=str.getBytes();
 		    output.write(by);
@@ -78,6 +79,40 @@ public class QuizController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+=======
+			try {
+				OutputStream output = new FileOutputStream(file);
+				
+			    String str = quiz_answer;
+			    byte[] by=str.getBytes();
+			    output.write(by);
+			    output.close();
+			    
+			    File dir = new File("/Users/kwonminseok/Documents");
+			    Runtime runtime = Runtime.getRuntime();
+				Process process = runtime.exec("java test.java", null, dir);
+				
+				try {
+					process.waitFor();
+					String output1 = IOUtils.toString(process.getInputStream());
+					String errorOutput = IOUtils.toString(process.getErrorStream());
+					
+					System.out.println("output1 : " + output1);
+					System.out.println("errorOutput : " + errorOutput);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				//push push baby
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}else {
+			System.out.println("실패");
+		}		
+>>>>>>> origin/minseok222
 		
 		return "redirect:quiz.do";
 	}
