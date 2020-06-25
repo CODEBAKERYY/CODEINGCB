@@ -100,17 +100,4 @@ public class AnswerDaolmpl implements AnswerDao{
 		}
 		return res;
 	}
-
-	@Override
-	public List<AnswerDto> answerList() {
-		
-		List<AnswerDto> list = new ArrayList<AnswerDto>();
-		
-		try {
-			list = sqlSession.selectList(NAMESPACE+"answerList");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return list;
-	}
 }

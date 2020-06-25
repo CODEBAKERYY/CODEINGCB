@@ -27,7 +27,10 @@ public interface QuestionBiz {
 	public int countBoard();
 	
 	// 태그 값에 대한 게시글 목록
-	public List<QuestionDto> selectTagList(String question_Tag);
+	public List<QuestionDto> selectTagList(QnAPagingDto dto,String question_Tag);
+	
+	// 해당 태그에 대한 게시물 갯수
+	public int countTags(String question_Tag);
 	
 	// 질문글에 대한 조회수
 	public void plusCnt(int question_No);
@@ -35,7 +38,6 @@ public interface QuestionBiz {
 	//메인화면에 보여지는 질문글 갯수
 	public int count();
 
-	public List<QuestionDto> questionList();
 	
 	
 }

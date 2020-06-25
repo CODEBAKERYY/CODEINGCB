@@ -27,7 +27,5 @@ public interface AnswerDao {
 	// 메인에서 보여지는 답변 갯수
 	public int count();
 
-	public List<AnswerDto> answerList();
-
 
 }

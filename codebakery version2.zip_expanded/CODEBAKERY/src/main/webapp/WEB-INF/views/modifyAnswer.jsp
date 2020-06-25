@@ -7,6 +7,24 @@
 <meta charset="UTF-8">
 <title>CODEBAKERY</title>
 <link rel="shortcut icon" type="image/x-icon" href="resources/images/favicon.png" />
+<style type="text/css">
+	body{
+		background: #F2EFEF;
+	}
+	
+	h2{
+		text-align: center;
+	    padding: 8px;
+       	font-size: 28px;
+	}
+	
+	#button{
+		text-align: right; 
+		margin-right: 70px;"
+	}
+	
+</style>
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -41,20 +59,20 @@
 </script>
 </head>
 <body>
-	<h2>MODIFY ANSWER</h2>
+	<h2>답변 수정하기</h2>
 	<form method="post">
 	<input type="hidden" name="answer_No" id="answer_No" value="${ans.answer_No }" />
 	<input type="hidden" name="question_No" id="question_No" value="${ans.question_No }" />
 		<table>
 			<tr>
 				<th>TITLE</th>
-				<td><input type="text" style="width: 200px; height: 20px;" name="answer_Title" id="answer_Title" value="${ans.answer_Title }" /></td>
+				<td><input type="text" style="width: 253px; height: 20px;" name="answer_Title" id="answer_Title" value="${ans.answer_Title }" /></td>
 			</tr>
 			<tr>
 				<th>CONTENT</th>
 				<td><textarea rows="17" cols="30" style="resize:none" name="answer_Content" id="answer_Content">${ans.answer_Content }</textarea></td>
 			</tr>
-			<tr style="text-align: right; margin-right: 50px;">
+			<tr id="button">
 				<td colspan="2"><input type="button" value="저장" onclick="updateAnswer();"/></td>
 				<td><input type="button" value="취소" onclick="window.close()"/></td>
 			</tr>

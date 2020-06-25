@@ -56,10 +56,5 @@ public class AnswerBizlmpl implements AnswerBiz{
 		return dao.count();
 	}
 
-	@Override
-	public List<AnswerDto> answerList() {
-		return dao.answerList();
-	}
-
 
 }
