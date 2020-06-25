@@ -30,9 +30,13 @@
 					<option value="c++">C++</option>
 				</select>
 			</div>
-			<textarea rows="10" cols="40" name="quiz_answer"></textarea>
+			<div class="major">
+				<textarea rows="30" cols="80" name="quiz_answer"></textarea>
+			</div>
 			<!-- <input type="hidden" name="quiz_type" value="java"/> -->
-			<input type="submit" value="제출"/>
+			<div class="major">
+				<input type="submit" class="button" value="제출"/>
+			</div>
 		</form>
 	<footer>
 		<%@ include file="footer.jsp" %>
