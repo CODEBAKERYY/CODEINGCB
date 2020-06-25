@@ -48,9 +48,6 @@ public class UserController {
 	private MentorBiz m_biz;
 
 	@Autowired
-	private MentorReviewBiz mr_biz;
-
-	@Autowired
 	private QuestionBiz q_biz;
 
 	@Autowired
@@ -68,37 +65,27 @@ public class UserController {
 	// 메인으로 이동시 해당 정보
 	@RequestMapping(value = "/main.do")
 	public String main(Model model) {
-		logger.info("멘토 다 들고나온다");
 		model.addAttribute("mentor", m_biz.selectList());
-		System.out.println(m_biz.selectList());
+		logger.info("멘토 정보 가져오기");
 		model.addAttribute("question", q_biz.count());
 		model.addAttribute("quiz", qu_biz.count());
 		model.addAttribute("answer", an_biz.count());
+		logger.info("카운팅 정보 가져오기");
 		model.addAttribute("questionlist", q_biz.questionList());
 		model.addAttribute("answerlist", an_biz.answerList());
 		model.addAttribute("quizlist", qu_biz.quizList());
 		model.addAttribute("noticelist", no_biz.noticeList());
+		logger.info("새글 정보 가져오기");
 		return "main";
 	}
 
-//	// selectOne
-//	@RequestMapping(value = "/mentor_review.do")
-//	public String mentorReviewOne(Model model, int mentor_No) {
-//
-//		logger.info("mentor reviewList selectOne");
-//		System.out.println("mentor_No : " + mentor_No);
-//		System.out.println(mr_biz.review(mentor_No));
-//
-//		return "main";
-//	}
-
-	// 회원가입
+	// 회원가입 폼 이동
 	@RequestMapping(value = "/sign.do")
 	public String signup() {
 		return "signup";
 	}
 
-	// 회원가입 폼 이동
+	// 회원가입 (파일 업로드)
 	@RequestMapping("/signup.do")
 	public String insertRes(UserDto dto, MultipartFile pic, HttpServletRequest request, HttpServletResponse response) {
 		logger.info("signup");
@@ -116,7 +103,7 @@ public class UserController {
 		try {
 			inputStream = pic.getInputStream();
 			String path = WebUtils.getRealPath(request.getSession().getServletContext(), "/upload");
-			System.out.println("업로드 될 실제 경로 : " + path);
+			System.out.println("업로드 실제 경로 : " + path);
 
 			File storage = new File(path);
 			if (!storage.exists()) { // 경로 존재 여부
@@ -191,15 +178,12 @@ public class UserController {
 		return "redirect:main.do";
 	}
 
-	// 아이디 체크
+	// 아이디 중복 체크 ajax
 	@RequestMapping(value = "idcheck.do", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Boolean> idchk(@RequestBody UserDto dto) {
 
-		System.out.println("ajax넘어왔다");
-		System.out.println(dto.getUser_Id());
-
-		logger.info("ID CHECK");
+		logger.info("ID CHECK ajax 넘어옴");
 		String user_Id = dto.getUser_Id();
 		System.out.println(user_Id);
 		UserDto res = null;
@@ -209,7 +193,7 @@ public class UserController {
 		if (res == null) {
 			check = false;
 		}
-		System.out.println("ajax: res : " + res);
+		System.out.println("ajax 결과값은 : " + res);
 		Map<String, Boolean> map = new HashMap<String, Boolean>();
 		map.put("check", check);
 		return map;
