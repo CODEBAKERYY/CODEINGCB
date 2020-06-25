@@ -87,7 +87,7 @@ Released   : 20130811
 	<%@ include file="header.jsp"%>
 	
 	<div id="logo" class="container">
-		<h1>질문 수정하기</h1>
+		<h1><p class="icon icon-tasks"><span>질문 수정하기</span></p></h1>
 	</div>
 	
 	<article>
@@ -108,18 +108,18 @@ Released   : 20130811
 					<textarea class="form-control" rows="9" name="question_Content" style="width:100%; resize:none;">${dto.question_Content }</textarea>
 				</div>
 				<div class="mb-3">
-					<label for="tag">TAG : </label>&nbsp;&nbsp;
-					<span><input type="text" id="tag" value="#" style="width:40%; height:30px;" />&nbsp;&nbsp;</span>
+					<label for="tag">TAG</label>
+					<span><input type="text" class="form-control" id="tag" name="question_Tag" value="#" /></span>
 					<input type="button" value="추가" onclick="addTag();"/>
 					<br /><br /> 
 					<c:forTokens items="${dto.question_Tag }" delims="#" var="item">
 						<span class="one_tag" id="tags">#&nbsp;${item }</span>
 					</c:forTokens>
 				</div>
-				<div style="text-align: right; margin-bottom: 20px;">
-					<input type="submit" id="btnSave" value="수정완료" />
-					<input type="button" id="btnList" value="목록" onclick="location.href='qna_detail.do?question_No=${dto.question_No}'" />
-				</div>
+			<div >
+				<input type="submit" id="btnSave" value="수정완료" />
+				<input type="button" id="btnList" value="목록" onclick="location.href='qna_detail.do?question_No=${dto.question_No}'" />
+			</div>
 			</form>
 		</div>
 	</article>

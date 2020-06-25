@@ -4,6 +4,7 @@
 
 <%
 	UserDto user = (UserDto) session.getAttribute("User");
+	UserDto admin = (UserDto) session.getAttribute("admin");
 %>
 <!DOCTYPE html>
 <html>
@@ -38,14 +39,12 @@
 				showMethod : 'slideDown',
 				"extendedTimeOut": 100000, // 토스트에 호버링 했다 땠을 때 사라지는 시간(마우스를 올렸다가 땠을 때)
 				timeOut : 100000
-			};
-			<%for (int i = 0; i < 10; i++) {%>
-				toastr.info('알림<%=i%>', '알림이다!');
-			<%}%>
+			};<%for (int i = 0; i < 10; i++) {%>toastr.info('알림<%=i%>
+	', '알림이다!');
+<%}%>
 	});
 
 	});
-	
 </script>
 <style type="text/css">
 .alrimdiv {
@@ -113,19 +112,23 @@
 				<li><a href="quiz.do" accesskey="3" title="">퀴즈</a></li>
 				<li><a href="notice.do" accesskey="4" title="">공지사항</a></li>
 				<%
-					if (user != null) {
+					if(admin != null) {
+				%>
+					<li><a href="admin.do">마이페이지</a></li>
+					<li><a href="logout.do">로그아웃</a></li>
+				<%
+					} else if (user != null) {
 				%>
 				<li><div class="dropdown">
 						<button class="dropbtn">마이페이지</button>
 						<div class="dropdown-content">
-							<a href="mypoint.do">나의 포인트</a> 
-							<a href="chkPw.do">회원정보</a>
+							<a href="mypoint.do">나의 포인트</a> <a href="mypage_modify.do">회원정보</a>
 							<a href="apply.do">멘토 신청</a>
 						</div>
 					</div></li>
 				<li><a href="logout.do">로그아웃</a></li>
 				<%
-					} else {
+					} else if(admin == null || user == null){
 				%>
 				<li><a href="login.do" accesskey="5" title="">로그인</a></li>
 				<%

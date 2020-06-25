@@ -74,8 +74,8 @@ public class UserController {
 		model.addAttribute("question", q_biz.count());
 		model.addAttribute("quiz", qu_biz.count());
 		model.addAttribute("answer", an_biz.count());
-		//model.addAttribute("questionlist",q_biz.questionList());
-		//model.addAttribute("answerlist", an_biz.answerList());
+		model.addAttribute("questionlist",q_biz.questionList());
+		model.addAttribute("answerlist", an_biz.answerList());
 		model.addAttribute("quizlist",qu_biz.quizList());
 		model.addAttribute("noticelist",no_biz.noticeList());
 		return "main";
