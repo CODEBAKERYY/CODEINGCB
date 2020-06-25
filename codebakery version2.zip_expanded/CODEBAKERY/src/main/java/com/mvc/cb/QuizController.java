@@ -65,11 +65,10 @@ public class QuizController {
 	
 	@RequestMapping(value="/quiz_Answer.do")
 	public String quizAnswer(String quiz_answer, String quiz_type) {
-		System.out.println("quiz_type : " + quiz_type);
 		
 		if(quiz_type.equals("java")) {
 			File file = new File("/Users/kwonminseok/Documents/test.java");
-			
+
 			try {
 				OutputStream output = new FileOutputStream(file);
 				
@@ -101,8 +100,7 @@ public class QuizController {
 			}
 		}else {
 			System.out.println("실패");
-		}		
-		
+			}		
 		return "redirect:quiz.do";
 	}
 }
