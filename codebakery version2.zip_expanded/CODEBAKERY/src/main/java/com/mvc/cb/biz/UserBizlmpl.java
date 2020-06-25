@@ -27,4 +27,9 @@ public class UserBizlmpl implements UserBiz {
 		return dao.idchk(user_Id);
 	}
 
+	@Override
+	public int adjust(UserDto dto) {
+		return dao.adjust(dto);
+	}
+
 }

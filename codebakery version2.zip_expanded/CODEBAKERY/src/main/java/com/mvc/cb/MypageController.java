@@ -33,13 +33,28 @@ public class MypageController {
 	}
 	
 	//관리자 회원관리 페이지 이동
-	@RequestMapping("admin.do")
+	@RequestMapping("/admin.do")
 	public String Admin(Model model) {
 		List<UserDto> userlist = biz.userList();
 		model.addAttribute("userlist",userlist);
 		return "admin_mypage";
 	}
 	
+	//관리자 등급조정 페이지 띄움
+	@RequestMapping("/adjust_rating.do")
+	public String adjust() {
+		logger.info("adjust_rating");
+		return "adjust_rating";
+	}
+	
+	//관리자 등급조정 결과
+	@RequestMapping("/adjustres.do")
+	public String adjustres(UserDto dto) {
+		logger.info("adjustres");
+		int res = u_biz.adjust(dto);
+		System.out.println();
+		return "redirect:admin_mypage.do";
+	}
 	
 
 	@RequestMapping("mypoint.do")

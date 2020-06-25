@@ -204,6 +204,7 @@ INSERT INTO USER_TB VALUES('user3','1234','일반회원','권민석','010-7942-1
 INSERT INTO USER_TB VALUES('user4','1234','일반회원','정승연','010-3782-1234','jsy@kh.or.kr', 0,'userpic','java');
 INSERT INTO USER_TB VALUES('user5','1234','일반회원','주수현','010-1782-1234','jsh@kh.or.kr', 0,'userpic','java');
 INSERT INTO USER_TB VALUES('user6','1234','일반회원','이재익','010-94562-1234','ljl@kh.or.kr', 0,'userpic','java');
+INSERT INTO USER_TB VALUES('mentor','1234','멘토','멘토','010-94562-1234','멘토@kh.or.kr', 0,'NULL','java');
 
 -- MENTOR_INTRO
 INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'삼성 1위 입사자','모든것을 한번에 해결해드립니다.','mentor1');
