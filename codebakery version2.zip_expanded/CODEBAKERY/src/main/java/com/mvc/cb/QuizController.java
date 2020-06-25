@@ -62,23 +62,56 @@ public class QuizController {
 		return "quiz_submit";
 	}
 	
-	@RequestMapping(value="/quiz_Answer.do")
-	public String quizAnswer(String quiz_answer, String quiz_type) {
-		File file = new File("/Users/kwonminseok/Documents");
-		
-		try {
-			OutputStream output = new FileOutputStream(file);
-			
-		    String str = quiz_answer;
-		    byte[] by=str.getBytes();
-		    output.write(by);
-		    output.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		return "redirect:quiz.do";
-	}
+//	@RequestMapping(value="/quiz_Answer.do")
+//	public String quizAnswer(String quiz_answer, String quiz_type) {
+//		File file = new File("/Users/kwonminseok/Documents");
+//		
+//		try {
+//			OutputStream output = new FileOutputStream(file);
+//			
+//		    String str = quiz_answer;
+//		    byte[] by=str.getBytes();
+//		    output.write(by);
+//		    output.close();
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//			try {
+//				OutputStream output = new FileOutputStream(file);
+//				
+//			    String str = quiz_answer;
+//			    byte[] by=str.getBytes();
+//			    output.write(by);
+//			    output.close();
+//			    
+//			    File dir = new File("/Users/kwonminseok/Documents");
+//			    Runtime runtime = Runtime.getRuntime();
+//				Process process = runtime.exec("java test.java", null, dir);
+//				
+//				try {
+//					process.waitFor();
+//					String output1 = IOUtils.toString(process.getInputStream());
+//					String errorOutput = IOUtils.toString(process.getErrorStream());
+//					
+//					System.out.println("output1 : " + output1);
+//					System.out.println("errorOutput : " + errorOutput);
+//				} catch (InterruptedException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//				
+//			} catch (FileNotFoundException e) {
+//				e.printStackTrace();
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+//		}else {
+//			System.out.println("실패");
+//		}		
+// parent of 1da81eb... push push
+//		
+//		return "redirect:quiz.do";
+//	}
 }
