@@ -15,4 +15,6 @@ public interface MyPageBiz {
 	
 	//관리자 유저리스트
 	public List<UserDto> userList();
+	
+	public UserDto selectOne(String user_Id);
 }
