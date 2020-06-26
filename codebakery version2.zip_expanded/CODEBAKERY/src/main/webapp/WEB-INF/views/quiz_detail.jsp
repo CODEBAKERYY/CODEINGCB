@@ -103,7 +103,7 @@
 	</div>		
 	
 	<div id="contact" class="container" style="text-align: center;">
-		<input type="button" value="문제 풀기" class="button" style="border-radius: 12px; margin-top: 30px;" onclick="location.href='quiz_submit.do'"/>
+		<input type="button" value="문제 풀기" class="button" style="border-radius: 12px; margin-top: 30px;" onclick="location.href='quiz_submit.do?quiz_No=${list.quiz_No}'"/>
 	</div>
 	
 	<footer style="clear: both; margin-top: 40px;">
