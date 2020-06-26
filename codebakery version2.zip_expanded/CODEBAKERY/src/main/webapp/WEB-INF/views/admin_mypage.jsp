@@ -14,42 +14,42 @@
 <link href="resources/fonts.css" rel="stylesheet" type="text/css" media="all" />
 <script type="text/javascript">
 function adjust(user_Id){
-      var url = "adjust_rating.do?user_Id=" + user_Id;
-       window.open(url,"","width=250,height=150,left=400,top=200");
-   }
+		var url = "adjust_rating.do?user_Id=" + user_Id;
+    	window.open(url,"","width=250,height=150,left=400,top=200");
+	}
 </script>
 <style type="text/css">
-   .line{
-      border-bottom: 1px solid black;
-   }
+	.line{
+		border-bottom: 1px solid black;
+	}
 </style>
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
 
-   <div class="title" style="margin-bottom: 20px; margin-top: 20px">
-         <h2>회원관리</h2>
-   </div>
-    
-   <table class="tableForm" style="margin: auto; width: 60%; height: 800px; text-align: center; font-size: 22px">
-      <tr class="line">
-         <th>회원아이디</th>
-         <th>회원이름</th>
-         <th>회원등급</th>
-         <th>등급조정</th>
-      </tr>
-      <c:forEach items="${userlist }" var="list">
-      <tr>
-         <c:if test="${list.user_Grade ne '관리자'}">
-         <td>${list.user_Id }</td>
-         <td>${list.user_Name }</td>
-         <td>${list.user_Grade }</td>
-         <td><input type="button" value="조정하기" class="button" onclick="adjust('${list.user_Id}');"></td>
-         </c:if>
-      </tr>
-      </c:forEach>
-   </table>
-   
+	<div class="title" style="margin-bottom: 20px; margin-top: 20px">
+			<h2>회원관리</h2>
+	</div>
+	 
+	<table class="tableForm" style="margin: auto; width: 60%; height: 800px; text-align: center; font-size: 22px">
+		<tr class="line">
+			<th>회원아이디</th>
+			<th>회원이름</th>
+			<th>회원등급</th>
+			<th>등급조정</th>
+		</tr>
+		<c:forEach items="${userlist }" var="list">
+		<tr>
+			<c:if test="${list.user_Grade ne '관리자'}">
+			<td>${list.user_Id }</td>
+			<td>${list.user_Name }</td>
+			<td>${list.user_Grade }</td>
+			<td><input type="button" value="조정하기" class="button" onclick="adjust('${list.user_Id}');"></td>
+			</c:if>
+		</tr>
+		</c:forEach>
+	</table>
+	
 <jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

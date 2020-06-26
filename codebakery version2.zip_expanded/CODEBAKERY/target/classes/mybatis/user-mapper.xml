@@ -59,23 +59,15 @@
 	</update>
 
 	<!-- 관리자 유저 리스트 -->
-	<select id="userList" resultMap="UserMap">
-		SELECT * FROM USER_TB
-	</select>
-
+	<select id="userList" resultMap="UserMap">SELECT * FROM USER_TB</select>
 	<!-- 관리자 등급조정 -->
 	<update id="adjust" parameterType="UserDto">
-		UPDATE USER_TB
-		SET USER_GRADE =
-		#{user_Grade}
-		WHERE USER_ID = #{user_Id}
+		UPDATE USER_TB SET USER_GRADE
+		= #{user_Grade} WHERE USER_ID = #{user_Id}
 	</update>
-
+	<!-- 관리자 등급 변경 -->
 	<select id="selectOne" parameterType="String"
-		resultType="UserDto">
-		SELECT * FROM USER_TB
-		WHERE USER_ID = #{user_Id}
-	</select>
+		resultType="UserDto">SELECT * FROM USER_TB WHERE USER_ID = #{user_Id}</select>
 
 	<!-- point charge 포인트 충전 -->
 	<update id="pointUpdate" parameterType="UserDto">
@@ -84,6 +76,4 @@
 		USER_POINT = #{user_Point}
 		WHERE USER_ID = #{user_Id}
 	</update>
-
-
 </mapper>

@@ -34,14 +34,14 @@ public class MypageController {
 	@Autowired
 	private MyPageBiz biz;
 
-	@RequestMapping( value="/chkPw.do" )
+	@RequestMapping(value = "/chkPw.do")
 	public String chkPw() {
-		
+
 		logger.info("chkPw");
-		
+
 		return "mypage_chkPw";
 	}
-	
+
 	@RequestMapping(value = "/mypage_modify.do")
 	public String mypage_modify() {
 		return "mypage_modify";
@@ -88,15 +88,15 @@ public class MypageController {
 
 	@RequestMapping("/modify.do")
 	public String memberUpdate(UserDto dto, HttpSession session) {
-		
+
 		logger.info("memberUpdate");
-		
+
 		int res = biz.updateMember(dto);
 
 		if (res > 0) {
 			session.removeAttribute("User");
 			session.setAttribute("User", dto);
-			
+
 		} else {
 			System.out.println("회원 정보 수정 실패!");
 		}
