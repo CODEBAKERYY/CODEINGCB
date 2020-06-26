@@ -34,7 +34,6 @@ Released   : 20130811
 	$(function() {
 		$("#loginform").submit(function() {
 			var user_Id = $('#userId').val();
-			var flag = true;
 			var idchk = {
 				"user_Id" : user_Id
 			};
@@ -44,15 +43,12 @@ Released   : 20130811
 				data : JSON.stringify(idchk),
 				contentType : "application/json",
 				dataType : "json",
-				async: false,
 				success : function(msg) {
 					console.log(msg);
 					if (msg.check == false) {
 						alert("아이디 및 비밀번호를 확인해주세요");
-						flag = false;
 					} else {
-						alert(user_Id + "님 환영합니다");
-						flag = true;
+						alert(user_Id+"님 환영합니다");
 					}
 				},
 				error : function() {
@@ -60,7 +56,6 @@ Released   : 20130811
 				}
 
 			});
-			return flag;
 		});
 	});
 </script>
