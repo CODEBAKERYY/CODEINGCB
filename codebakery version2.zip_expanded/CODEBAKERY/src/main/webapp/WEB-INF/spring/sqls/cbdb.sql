@@ -302,6 +302,7 @@ select * from mentor_intro;
  SELECT * FROM ( SELECT * FROM QUESTION ORDER BY QUESTION_NO DESC ) WHERE ROWNUM <=5 ; 
 SELECT * FROM ( SELECT * FROM ANSWER ORDER BY ANSWER_NO DESC ) WHERE ROWNUM <=5 ; 
 SELECT * FROM QUESTION;
+update user_tb set user_point= 600 where user_id = 'user7';
 
 
 commit;

@@ -66,7 +66,7 @@ public class MypageController {
 
 	@RequestMapping("mypoint.do")
 	public String myPoint() {
-		return "mypage_point";
+		return "redirect:mypage_point";
 	}
 
 	@RequestMapping("apply.do")
@@ -156,6 +156,11 @@ public class MypageController {
 		
 		
 		int res = biz.updatePoint(dto);
+		
+		session.removeAttribute("login");
+		UserDto relogin = biz.getInfo(dto);
+		session.setAttribute("login", relogin);
+		
 		System.out.println("뭐라고 받아질까"+res);
 		boolean check = false;
 		if(res > 0) {		//업데이트이가정상적으로 될때
