@@ -19,6 +19,4 @@ public interface MyPageDao {
 	//관리자 유저리스트
 	public List<UserDto> userList();
 
-	public int updatePoint(UserDto dto);
-
 }

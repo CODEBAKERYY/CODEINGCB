@@ -61,11 +61,4 @@ public class MyPageDaolmpl implements MyPageDao{
 		
 	}
 
-	@Override
-	public int updatePoint(UserDto dto) {
-		System.out.println("포인트 충전 중");
-		int res = sqlSession.update(NAMESPACE+"pointUpdate", dto);
-		return res;
-	}
-
 }
