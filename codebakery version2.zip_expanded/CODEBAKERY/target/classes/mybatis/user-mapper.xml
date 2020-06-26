@@ -78,12 +78,6 @@
     <update id="adjust" parameterType="UserDto">
     	UPDATE USER_TB
     	SET USER_GRADE = #{user_Grade}
-    	WHERE USER_ID = #{user_Id}
     </update>
-    
-    <select id="selectOne" parameterType="String" resultType="UserDto">
-		SELECT * FROM USER_TB
-		WHERE USER_ID = #{user_Id}
-	</select>
 	
 </mapper>

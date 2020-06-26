@@ -195,8 +195,7 @@ CREATE TABLE NOTICE_COMMENT (
 --------------------------------------------------------------------
 
 --------------------------- DATA INSERT ----------------------------
-DELETE FROM USER_TB WHERE USER_ID = 'ADMIN';
-SELECT * FROM USER_TB;
+
 -- USER_TB
 INSERT INTO USER_TB VALUES('ADMIN','1234','관리자', '관리자','010-2345-6767', 'admin@kh.or.kr', 0, NULL, 'java');
 INSERT INTO USER_TB VALUES('user1','1234','일반회원','김건영','010-2342-1234','kky@kh.or.kr', 0,'userpic','java');

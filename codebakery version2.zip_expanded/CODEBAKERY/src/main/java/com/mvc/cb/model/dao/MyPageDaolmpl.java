@@ -61,18 +61,4 @@ public class MyPageDaolmpl implements MyPageDao{
 		
 	}
 
-	@Override
-	public UserDto selectOne(String user_Id) {
-		
-		UserDto dto = null;
-		try {
-			dto = sqlSession.selectOne(NAMESPACE + "selectOne", user_Id);
-		} catch (Exception e) {
-			System.out.println("[error] : user select one");
-			e.printStackTrace();
-		}
-		
-		return dto;
-	}
-
 }

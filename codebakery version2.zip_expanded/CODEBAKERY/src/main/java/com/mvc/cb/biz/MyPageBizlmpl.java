@@ -39,9 +39,4 @@ public class MyPageBizlmpl implements MyPageBiz{
 		return dao.userList();
 	}
 
-	@Override
-	public UserDto selectOne(String user_Id) {
-		return dao.selectOne(user_Id);
-	}
-
 }

@@ -13,8 +13,8 @@
 <link href="resources/default.css" rel="stylesheet" type="text/css" media="all" />
 <link href="resources/fonts.css" rel="stylesheet" type="text/css" media="all" />
 <script type="text/javascript">
-function adjust(user_Id){
-		var url = "adjust_rating.do?user_Id=" + user_Id;
+function adjust(){
+    var url="adjust_rating.do";
     	window.open(url,"","width=250,height=150,left=400,top=200");
 	}
 </script>
@@ -40,12 +40,10 @@ function adjust(user_Id){
 		</tr>
 		<c:forEach items="${userlist }" var="list">
 		<tr>
-			<c:if test="${list.user_Grade ne '관리자'}">
 			<td>${list.user_Id }</td>
 			<td>${list.user_Name }</td>
 			<td>${list.user_Grade }</td>
-			<td><input type="button" value="조정하기" class="button" onclick="adjust('${list.user_Id}');"></td>
-			</c:if>
+			<td><input type="button" value="조정하기" class="button" onclick="adjust();"></td>
 		</tr>
 		</c:forEach>
 	</table>
