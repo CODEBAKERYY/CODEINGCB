@@ -218,7 +218,7 @@ public class UserController {
 
 		// 아래의 서비스단 주석여부에 따라 문자로 본인인증 메세지가 날라옴 (자기 번호 입력해야 확인 가능)
 		// 주석처리를 할 경우 콘솔창에 출력된 인증번호로 인증 가능
-		certificationService.certifiedPhoneNumber(phoneNumber, numStr);
+		//certificationService.certifiedPhoneNumber(phoneNumber, numStr);
 
 		return numStr;
 	}

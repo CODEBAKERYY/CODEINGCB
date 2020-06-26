@@ -34,6 +34,14 @@ public class MypageController {
 	@Autowired
 	private MyPageBiz biz;
 
+	@RequestMapping( value="/chkPw.do" )
+	public String chkPw() {
+		
+		logger.info("chkPw");
+		
+		return "mypage_chkPw";
+	}
+	
 	@RequestMapping(value = "/mypage_modify.do")
 	public String mypage_modify() {
 		return "mypage_modify";
@@ -75,24 +83,21 @@ public class MypageController {
 	}
 
 	@RequestMapping("/modify.do")
-	public String memberUpdate(UserDto dto, HttpSession session, HttpServletResponse response) {
-		System.out.println("user_id = " + dto.getUser_Id());
-		System.out.println("user_name = " + dto.getUser_Name());
-		System.out.println("user_phone = " + dto.getUser_Phone());
-		System.out.println("user_mail = " + dto.getUser_Mail());
+	public String memberUpdate(UserDto dto, HttpSession session) {
+		
+		logger.info("memberUpdate");
+		
+		int res = biz.updateMember(dto);
 
-		biz.update_nonpw(dto);
-		session.removeAttribute("login");
-		UserDto res = biz.getInfo(dto);
-		UserDto reres = u_biz.login(res);
-
-		if (reres != null) {
-			session.setAttribute("login", res);
+		if (res > 0) {
+			session.removeAttribute("User");
+			session.setAttribute("User", dto);
+			
 		} else {
-			System.out.println("수정 실패!!");
+			System.out.println("회원 정보 수정 실패!");
 		}
 
-		return "mypage_modify";
+		return "redirect:mypage_modify.do";
 	}
 	
 	@RequestMapping("deactivatepopup.do")

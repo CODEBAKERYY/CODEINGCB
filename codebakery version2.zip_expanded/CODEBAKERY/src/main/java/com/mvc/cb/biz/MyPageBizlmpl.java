@@ -19,11 +19,6 @@ public class MyPageBizlmpl implements MyPageBiz{
 	}
 
 	@Override
-	public int update_nonpw(UserDto dto) {
-		return dao.non_pw_update(dto);
-	}
-
-	@Override
 	public int member_delete(UserDto dto) {
 		return dao.member_delete(dto);
 	}

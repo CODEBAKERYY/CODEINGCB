@@ -6,7 +6,7 @@ import com.mvc.cb.model.dto.QnACommentDto;
 
 public interface QCommentBiz {
 	
-	// 댓글 몰록
+	// 댓글 목록
 	public List<QnACommentDto> selectList(int question_No);
 	
 	// 댓글 작성
