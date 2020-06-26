@@ -80,10 +80,12 @@ $(function(){
 			var price_val = $('input:radio[name=firstcharge]:checked').val();
 			var user_Point = '${User.user_Point}';
 			console.log(member_id_val+price_val);  //값 들어옴
+			var point_Sum = parseInt(price_val)+parseInt(user_Point);
+			console.log(point_Sum);
 			
 			var chargeVal={//키 값은 dto의 변수명과 같아야한다.
 					"user_Id":member_id_val,
-					"user_Point":price_val+user_Point
+					"user_Point":point_Sum
 					
 			};
 			console.log(chargeVal); //값 들어옴
