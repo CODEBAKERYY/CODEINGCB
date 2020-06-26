@@ -6,6 +6,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.PageContext;
+
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.util.WebUtils;
 
 import com.mvc.cb.biz.QuizBiz;
 import com.mvc.cb.model.dto.QuizDto;
@@ -64,12 +69,14 @@ public class QuizController {
 	}
 
 	@RequestMapping(value = "/quiz_Answer.do")
-	public String quizAnswer(String quiz_answer, String quiz_type) {
+	public String quizAnswer(String quiz_answer, String quiz_type, HttpServletRequest request,
+			HttpServletResponse response) {
 
 		if (quiz_type.equals("java")) {
-			File file = new File("/Users/kwonminseok/Documents/test.java");
 
 			try {
+				String path = WebUtils.getRealPath(request.getSession().getServletContext(), "/test");
+				File file = new File(path + "/test.java");
 				OutputStream output = new FileOutputStream(file);
 
 				String str = quiz_answer;
@@ -77,7 +84,7 @@ public class QuizController {
 				output.write(by);
 				output.close();
 
-				File dir = new File("/Users/kwonminseok/Documents");
+				File dir = new File(path);
 				Runtime runtime = Runtime.getRuntime();
 				Process process = runtime.exec("java test.java", null, dir);
 
@@ -89,7 +96,6 @@ public class QuizController {
 					System.out.println("output1 : " + output1);
 					System.out.println("errorOutput : " + errorOutput);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				// push push baby

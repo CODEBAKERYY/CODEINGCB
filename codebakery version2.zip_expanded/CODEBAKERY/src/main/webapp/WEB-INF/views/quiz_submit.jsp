@@ -23,16 +23,18 @@
 		<%@ include file="header.jsp" %>
 	</header>
 		<form action="quiz_Answer.do">
-			<div class="major">
+			<div class="major" style="margin-top: 30px;">
 				<select name="quiz_type">
 					<option value="java">Java</option>
 					<option value="c">C</option>
 					<option value="c++">C++</option>
 				</select>
 			</div>
-			<textarea rows="10" cols="40" name="quiz_answer"></textarea>
-			<!-- <input type="hidden" name="quiz_type" value="java"/> -->
-			<input type="submit" value="제출"/>
+			<div class="major">
+				<textarea rows="30" cols="80" name="quiz_answer" style="resize: none;"></textarea>
+				<br>
+				<input type="submit" class="button" value="제출"/>
+			</div>
 		</form>
 	<footer>
 		<%@ include file="footer.jsp" %>
