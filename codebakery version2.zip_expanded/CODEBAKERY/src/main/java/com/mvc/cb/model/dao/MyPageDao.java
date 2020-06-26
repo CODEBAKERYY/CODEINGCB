@@ -10,8 +10,6 @@ public interface MyPageDao {
 	
 	public int updateMember(UserDto dto);
 
-	public int non_pw_update(UserDto dto);
-
 	public int member_delete(UserDto dto);
 
 	public UserDto getInfo(UserDto dto);
@@ -20,5 +18,7 @@ public interface MyPageDao {
 	public List<UserDto> userList();
 
 	public int updatePoint(UserDto dto);
+
+	public UserDto selectOne(String user_Id);
 
 }

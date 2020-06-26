@@ -51,8 +51,13 @@ public class QuestionBizlmpl implements QuestionBiz{
 	}
 
 	@Override
-	public List<QuestionDto> selectTagList(String question_Tag) {
-		return dao.selectTagList(question_Tag);
+	public int countTags(String question_Tag) {
+		return dao.countTags(question_Tag);
+	}
+	
+	@Override
+	public List<QuestionDto> selectTagList(QnAPagingDto dto, String question_Tag) {
+		return dao.selectTagList(dto, question_Tag);
 	}
 
 	@Override

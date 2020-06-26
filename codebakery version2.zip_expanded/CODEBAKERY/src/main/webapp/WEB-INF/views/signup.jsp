@@ -26,7 +26,7 @@
 		
 		var idCheck = RegExp(/^[a-zA-Z0-9]{4,12}$/);
 		if (!idCheck.test($("#userid").val())) {
-			alert("4~12자리의 영문 대소문자와 숫자로만 입력해주세요");
+			alert("아이디는 4~12자리의 영문 대소문자와 숫자로만 입력해주세요");
 			$("#userid").val("");
 			$("#userid").focus();
 			return false;
@@ -37,12 +37,26 @@
 	function pwcheckz() {
 		var passwdCheck = RegExp(/^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/);
 		if (!passwdCheck.test($("#userpw").val())) {
-			alert("8~16자리의 영문 소문자, 숫자, 특수문자를 하나 이상 포함하여 입력해주세요");
+			alert("비밀번호는 8~16자리의 영문 소문자, 숫자, 특수문자를 하나 이상 포함하여 입력해주세요");
 			$("#userpw").val("");
 			$("#userpw").focus();
 			return false;
 		}
 	}
+	
+	function samePw(){
+
+		var pw = $("#userpw").val();
+		var pwchk = $("#userpwcheck").val()
+		
+		if(pw != pwchk){
+			alert("비밀번호가 일치하지 않습니다.");
+			$("#userpwcheck").focus();
+			return false;
+		}
+		
+	}
+
 
 
 	function idchk() {
@@ -59,9 +73,11 @@
 			success : function(msg) {
 				console.log(msg);
 				if (msg.check == false) {
-					alert("사용 가능한 아이디입니다.");
+					confirm("사용 가능한 아이디입니다.");
 				} else {
 					alert("사용할 수 없는 아이디입니다.");
+					$("#userid").focus();
+					return false;
 				}
 			},
 			error : function() {
@@ -70,6 +86,7 @@
 
 		});
 	}
+	
 
 	$(function() {
 		
@@ -95,22 +112,85 @@
 					
 					var id = $("#userid").val();
 					var pw = $("#userpw").val();
+					var pwchk = $("#userpwcheck").val()
 					var username = $("#username").val();
 					var userphone = $("#userphone").val();
+					var phchk = $("#noChk").val();
 					var usermail = $("#usermail").val();
 					var pic = $("#photo").val();
+					var lang = $("input[name=user_Lang]:checked").val();
 					
-					if ((id == null || id == "") || (pw == null || pw == "")
-							|| (username == null || username == "")
-							|| (userphone == null || userphone == "")
-							|| (usermail == null || usermail == "")
-							|| (pic == null || pic == "")) {
-						alert("모든 값을 입력해주세요");
+					if(id == null || id == ""){
+						alert("아이디를 입력해주세요.");
+						$("#userid").focus();
 						return false;
-					} else {
-						alert(username+"님 회원가입을 축하드립니다.");
-						return true;
 					}
+					
+					if(pw == null || pw == ""){
+						alert("비밀번호를 입력해주세요.");
+						$("#userpw").focus();
+						return false;
+					}
+					
+					
+					if(pwchk == null || pwchk == ""){
+						alert("비밀번호 확인창을 입력해주세요.");
+						$("#userpwcheck").focus();
+						return false;
+					}
+					
+					if(username == null || username == ""){
+						alert("이름을 입력해주세요.")
+						$("#username").focus();
+						return false;
+					}
+					
+					var phoneChk = /(\d{3}).*(\d{3}).*(\d{4})/;
+					if(userphone == null || userphone == ""){
+						alert("핸드폰번호를 입력해주세요.")
+						$("#userphone").focus();
+						return false;
+						
+					} else if(phoneChk.test(userphone) == false){
+						alert("핸드폰 형식이 올바르지 않습니다.\n예시) 010-0000-0000");
+						$("#userphone").val();
+						$("#userphone").focus();
+						return false;
+					}
+					
+					if(phchk == null || phchk == ""){
+						alert("핸드폰번호 인증을 해주세요.")
+						$("#noChk").focus();
+						return false;
+					}
+
+					var emailChk = /^[a-z0-9_+.-]+@([a-z0-9-]+\.)+[a-z0-9]{2,4}$/;
+					if(usermail == null || usermail == ""){
+						alert("이메일을 입력해주세요.");
+						$("#usermail").focus();
+						return false;
+						
+					} else if(emailChk.test(usermail) == false){
+						alert("이메일 형식이 올바르지 않습니다.\n예시) kh01@gmail.com");
+						$("#user_Mail").val();
+						$("#user_Mail").focus();
+						return false;
+					}
+					
+					if(pic == null || pic == ""){
+						alert("사진을 첨부해주세요.");
+						$("#photo").focus();
+						return false;
+					}
+					
+					if(lang == null || lang == ""){
+						alert("선호하는 언어를 한개 이상 체크해주세요.")
+						return false;
+					} 
+					
+					alert(username+"님 회원가입을 축하드립니다.");
+					return true;
+					
 				});
 			});
 	
@@ -144,7 +224,6 @@
 							
                     	 alert("휴대폰 인증이 정상적으로 완료되었습니다.");
                     	 $("#checkBtn").prop('disabled', true);
-                    	 
                          
                      }else{
                          alert("인증번호가 올바르지 않습니다!");
@@ -202,7 +281,7 @@
 			<div class="alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다.</div>
 
 			<div class="txt_field">
-				<input type="text" name="user_Name" id="username" /><span></span> 
+				<input type="text" name="user_Name" id="username" onfocus="samePw();"/><span></span> 
 				<label>user name</label>
 			</div>
 
