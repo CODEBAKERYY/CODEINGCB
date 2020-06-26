@@ -40,12 +40,10 @@
 	</select>
 
 
-	<delete id="member_delete" parameterType="UserDto">
-		WHERE USER_TB
-		DELETE FROM USER_TB
-		WHERE USER_ID = ${user_Id} AND USER_PW = ${user_Pw}
-
-	</delete>
+	<delete id="member_delete" parameterType="UserDto" >
+  			DELETE FROM USER_TB
+  			WHERE USER_ID = #{user_Id} AND USER_PW = #{user_Pw}
+  		</delete>
 
 	<update id="memberUpdate" parameterType="UserDto">
 		UPDATE USER_TB
@@ -79,5 +77,13 @@
     	UPDATE USER_TB
     	SET USER_GRADE = #{user_Grade}
     </update>
+    
+    <!-- point charge 포인트 충전-->
+ 	<update id="pointUpdate" parameterType="UserDto" >
+ 		UPDATE USER_TB
+ 		SET USER_POINT = #{user_Point}
+ 		WHERE USER_ID = #{user_Id}
+ 	</update>
+ 		
 	
 </mapper>
