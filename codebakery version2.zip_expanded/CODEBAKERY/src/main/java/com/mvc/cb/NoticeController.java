@@ -136,7 +136,7 @@ public class NoticeController {
       logger.info("COMMENT WRITE");
       int res = c_biz.insert(dto);
       
-      return "notice_view.do?notice_No="+dto.getNotice_No();
+      return "redirect:notice_view.do?notice_No="+dto.getNotice_No();
       
    }
    

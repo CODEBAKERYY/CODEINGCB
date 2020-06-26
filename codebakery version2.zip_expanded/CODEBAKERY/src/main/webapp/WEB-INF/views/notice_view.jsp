@@ -126,8 +126,10 @@ Released   : 20130811
                                
                                <c:forEach items="${c_list }" var="reply">
                                	<tr>
-                                   	<span style="font-size: 18px;">${reply.user_Id }</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <span style="color:grey; font-size: 14px;">%{reply.comment_Date}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                               		<td>
+                                   	${reply.user_Id }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    ${reply.comment_Date}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </td>
                                 </tr>
                                 <tr>
                                   <td>${reply.comment_Content }</td>
