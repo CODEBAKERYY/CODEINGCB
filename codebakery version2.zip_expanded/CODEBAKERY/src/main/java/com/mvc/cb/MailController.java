@@ -21,7 +21,7 @@ public class MailController {
   @RequestMapping(value = "/mypage_apply.do")
   public String mailSending(HttpServletRequest request) {
    
-    String setfrom = "jusu2529@gmail.com";         
+    String setfrom = "codebakeryy@gmail.com";         
     String tomail  = request.getParameter("tomail");     // 받는 사람 이메일
     String applicant  = request.getParameter("applicant");     // 받는 사람 이메일
     String title   = request.getParameter("title");      // 제목

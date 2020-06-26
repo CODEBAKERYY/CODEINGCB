@@ -265,11 +265,11 @@ background-color: white;
 				<div class="box">
 					<p>새로운 답변</p>
 					<c:choose>
-						<c:when test="${empty answerList }">
+						<c:when test="${empty answerlist }">
 							<p>새 답변이 없습니다</p>
 						</c:when>
 						<c:otherwise>
-							<c:forEach items="${answerList }" var="dto" begin="0" end="3"
+							<c:forEach items="${answerlist }" var="dto" begin="0" end="3"
 								varStatus="i" step="1">
 								<p>${dto.answer_Title }</p>
 							</c:forEach>

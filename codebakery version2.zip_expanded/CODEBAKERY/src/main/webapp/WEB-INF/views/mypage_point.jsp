@@ -57,7 +57,7 @@
 <body>
 <%@ include file="header.jsp"%>
 	
-	<div class="form">
+<div class="form">
 		<div class="title" style="margin-bottom: 20px; margin-top: 50px; height:250px;">
 			<div class="sub_title">
 				<h2>마이 포인트</h2>
@@ -70,10 +70,10 @@
 					<td colspan = "2" class="holdingpoint">보유 포인트</td>
 				</tr>
 				<tr>
-					<td colspan = "2" >104,500p</td>
+					<td colspan = "2" >${User.user_Point}</td>
 				</tr>
 				<tr>
-					<td colspan = "2" ><input type="button" class="charge" value="포인트 충전하기"></input></td>
+					<td colspan = "2" ><input type="button" class="charge" value="포인트 충전하기" onclick="location.href='payment.do'"></input></td>
 				</tr>
 			</table>
 			

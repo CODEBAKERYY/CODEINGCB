@@ -16,6 +16,7 @@ import com.mvc.cb.biz.AnswerBiz;
 import com.mvc.cb.biz.QCommentBiz;
 import com.mvc.cb.biz.QuestionBiz;
 import com.mvc.cb.model.dto.AnswerDto;
+import com.mvc.cb.model.dto.NUserDto;
 import com.mvc.cb.model.dto.PageMaker;
 import com.mvc.cb.model.dto.QnACommentDto;
 import com.mvc.cb.model.dto.QnAPagingDto;
@@ -80,29 +81,35 @@ public class QnAController {
 		logger.info("tagList");
 		
 		//페이지가 넘어오지 않았을 경우 1페이지로 설정
-		if( page == null ) {
-			page = 1;
-		}
-		
-		List<QuestionDto> list = q_biz.selectTagList(question_Tag);
-		
-		QnAPagingDto paging = new QnAPagingDto();
-		paging.setPage(page);
-		paging.setTotalArticle(list.size());
-		paging.setTotalPage(list.size());
-		paging.setStartRow();
-		paging.setEndRow();
-		
-		// 한 페이지에 출력될 질문 게시글(qList)에 맞춰서 답변 수를 가져온다.
-		List<Integer> cntList = a_biz.getCntAnswer(list);
-		
-		
-		PageMaker maker = new PageMaker();
-		maker.setPaging(paging);
-		
-		model.addAttribute("pageMaker",maker);
-		model.addAttribute("cntList",cntList);
-		model.addAttribute("list", list);
+			if( page == null ) {
+				page = 1;
+			}
+			
+			int total = q_biz.countTags(question_Tag);
+			
+			QnAPagingDto paging = new QnAPagingDto();
+			paging.setPage(page);
+			paging.setTotalArticle(total);
+			paging.setTotalPage(total);
+			paging.setStartRow();
+			paging.setEndRow();
+			
+			System.out.println(paging);
+			
+			// 한 페이지에 출력 될  질문 게시글 리스트
+			List<QuestionDto> list = q_biz.selectTagList(paging, question_Tag);
+			
+			// 한 페이지에 출력될 질문 게시글(qList)에 맞춰서 답변 수를 가져온다.
+			List<Integer> cntList = a_biz.getCntAnswer(list);
+			
+			
+			PageMaker maker = new PageMaker();
+			maker.setPaging(paging);
+			
+			model.addAttribute("list", list);
+			model.addAttribute("cntList",cntList);
+			model.addAttribute("pageMaker",maker);
+				
 		
 		return "qna";
 	}
@@ -239,6 +246,56 @@ public class QnAController {
 				return "redirect:qna_detail.do?question_No="+dto.getQuestion_No();
 			}
 		}
+		
+		// 비회원으로 답변 등록시도 할때 뜨는 창
+		@RequestMapping( value="/nonUserAnswer.do" )
+		public String nonUserAnswer(Model model, AnswerDto dto) {
+			logger.info("nonUserAnswer");
+			
+			model.addAttribute("answer", dto);
+			
+			return "qna_nonUserAnswer";
+		}
+		
+		// 비회원 등록창
+		@RequestMapping( value="/addNonUser.do" )
+		public String addNonUser(Model model, AnswerDto dto) {
+			
+			logger.info("addNonUser");
+
+			model.addAttribute("answer", dto);
+			
+			return "qna_addNonUser";
+		}
+		
+		// 비회원으로 답변 등록하기
+		@RequestMapping( value="/nonUser.do" )
+		@ResponseBody
+		public String NonUser(String nuser_Id, String nuser_Pw, AnswerDto dto) {
+			
+			logger.info("NonUser");
+			
+			AnswerDto adto = new AnswerDto();
+			adto.setUser_Id(nuser_Id);
+			adto.setQuestion_No(dto.getQuestion_No());
+			adto.setAnswer_Title(dto.getAnswer_Title());
+			adto.setAnswer_Content(dto.getAnswer_Content());
+			int res = a_biz.insert(adto);
+
+			
+			
+			NUserDto ndto = new NUserDto();
+			ndto.setNuser_Id(nuser_Id);
+			ndto.setNuser_Pw(nuser_Pw);
+			
+			
+			if(res>0) {
+				return "location.reload()";
+			} else {
+				return "redirect:qna_detail.do?question_No="+dto.getQuestion_No();
+			}
+		}
+				
 		
 	// ------------------------ 답변 등록/수정/삭제 END -------------------------
 	

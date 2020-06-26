@@ -58,7 +58,7 @@ public class UserDaolmpl implements UserDao {
 
 	@Override
 	public int adjust(UserDto dto) {
-		
+
 		int res = 0;
 		try {
 			res = sqlSession.update(NAMESPACE + "adjust", dto);
@@ -68,7 +68,7 @@ public class UserDaolmpl implements UserDao {
 		}
 
 		return res;
-		
+
 	}
 
 }

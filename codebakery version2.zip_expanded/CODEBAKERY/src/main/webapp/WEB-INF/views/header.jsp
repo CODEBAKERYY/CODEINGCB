@@ -122,7 +122,8 @@
 				<li><div class="dropdown">
 						<button class="dropbtn">마이페이지</button>
 						<div class="dropdown-content">
-							<a href="mypoint.do">나의 포인트</a> <a href="mypage_modify.do">회원정보</a>
+							<a href="mypoint.do">나의 포인트</a> 
+							<a href="chkPw.do">회원정보</a>
 							<a href="apply.do">멘토 신청</a>
 						</div>
 					</div></li>

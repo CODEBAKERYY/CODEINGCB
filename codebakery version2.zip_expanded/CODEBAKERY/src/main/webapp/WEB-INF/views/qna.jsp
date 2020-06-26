@@ -47,9 +47,7 @@ Released   : 20130811
 
 	<%@ include file="header.jsp"%>
 	<div id="logo" class="container">
-		<h1>
-			<p class="icon icon-tasks"><span>질문 게시판</span></p>
-		</h1>
+		<h1>질문 게시판</h1>
 	</div>
 	<div id="mainbar">
 		<div id="page" class="container">
@@ -80,23 +78,21 @@ Released   : 20130811
 									</div>
 									</div>
 								</div>
-							<div class="summary">
-								<div class="result-link">
-									<h3><a href="qna_detail.do?question_No=${dto.question_No }" style="font-size: 20px; font-weight: 500;"> ${dto.question_Title }</a></h3>
-									<div class="excerpt" style="font-size: 15px;">${dto.question_Content }</div>
-									
-									<div class="tags user-tags t-android t-eclipse t-certificate">
+								<div class="summary" style="width: 60%;">
+									<div class="result-link">
+										<h3><a href="qna_detail.do?question_No=${dto.question_No }" style="font-size: 20px; font-weight: 500;"> ${dto.question_Title }</a></h3>
+										<div class="excerpt" style="font-size: 15px;">${dto.question_Content }</div>
+										<div class="tags user-tags t-android t-eclipse t-certificate">
 										<c:forTokens items="${dto.question_Tag }" delims="#" var="item" varStatus="i">
 											<a class="post-tag" title="" rel="tag" onclick="location.href='tagList.do?question_Tag=${item}'">#&nbsp;${item }</a> 
 										</c:forTokens>
-									</div>
-									
-									<div class="started fr">
-									<span class="relativetime"><fmt:formatDate value="${dto.question_Date }" pattern="yyyy.MM.dd HH:mm"/></span><br></br> 
-									Asked By <a href="#">${dto.user_Id }</a>
+										</div>
 									</div>
 								</div>
-							</div>
+								<div class="started fr" style="margin-top: 20px; margin-left: 50px;">
+									<span class="relativetime"><fmt:formatDate value="${dto.question_Date }" pattern="yyyy.MM.dd HH:mm"/></span><br></br> 
+									Asked By <a href="#">${dto.user_Id }</a>
+								</div>
 							</div>
 							<hr></hr>
 						</c:forEach>
