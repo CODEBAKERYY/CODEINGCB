@@ -39,4 +39,9 @@ public class MyPageBizlmpl implements MyPageBiz{
 		return dao.userList();
 	}
 
+	@Override
+	public int updatePoint(UserDto dto) {
+		return dao.updatePoint(dto);
+	}
+
 }
