@@ -253,9 +253,9 @@ background-color: white;
 							<p>새글이 없습니다</p>
 						</c:when>
 						<c:otherwise>
-							<c:forEach items="${questionlist }" var="dto" begin="0" end="3"
+							<c:forEach items="${questionlist }" var="dto" begin="0" end="4"
 								varStatus="i" step="1">
-								<p>${dto.question_Title }</p>
+								<a href="qna_detail.do?question_No=${dto.question_No}"><p>${dto.question_Title }</p></a>
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
@@ -271,7 +271,7 @@ background-color: white;
 						<c:otherwise>
 							<c:forEach items="${answerlist }" var="dto" begin="0" end="3"
 								varStatus="i" step="1">
-								<p>${dto.answer_Title }</p>
+								<a href="answer_detail.do?answer_No=${dto.answer_No }"><p>${dto.answer_Title }</p></a>
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
@@ -287,7 +287,7 @@ background-color: white;
 						<c:otherwise>
 							<c:forEach items="${quizlist }" var="dto" begin="0" end="3"
 								varStatus="i" step="1">
-								<p>${dto.quiz_Title }</p>
+								<a href="quiz_detail.do?quiz_No=${dto.quiz_No}"><p>${dto.quiz_Title }</p></a>
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
@@ -303,7 +303,7 @@ background-color: white;
 						<c:otherwise>
 							<c:forEach items="${noticelist }" var="dto" begin="0" end="3"
 								varStatus="i" step="1">
-								<p>${dto.notice_Title }</p>
+								<a href="notice_view.do?notice_No=${dto.notice_No}"><p>${dto.notice_Title }</p></a>
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>

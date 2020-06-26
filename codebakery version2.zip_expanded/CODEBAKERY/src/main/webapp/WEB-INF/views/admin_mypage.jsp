@@ -15,7 +15,7 @@
 <script type="text/javascript">
 function adjust(user_Id){
 		var url = "adjust_rating.do?user_Id=" + user_Id;
-    	window.open(url,"","width=250,height=150,left=400,top=200");
+    	window.open(url,"","width=400,height=300,left=400,top=200");
 	}
 </script>
 <style type="text/css">

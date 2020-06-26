@@ -23,6 +23,7 @@
 		<%@ include file="header.jsp" %>
 	</header>
 		<form action="quiz_Answer.do">
+			<input type="hidden" name="quiz_No" value="${list.quiz_No }"/>
 			<div class="major" style="margin-top: 30px;">
 				<select name="quiz_type">
 					<option value="java">Java</option>

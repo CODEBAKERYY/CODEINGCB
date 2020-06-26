@@ -58,5 +58,8 @@
 		 SELECT * FROM ( SELECT * FROM ANSWER ORDER BY ANSWER_NO 
 			DESC ) 	<!--[CDATA[WHERE ROWNUM <=5 ]] -->
 	</select>
+	<select id="selectOne" resultType="AnswerDto" parameterType="int">
+	SELECT * FROM ANSWER WHERE ANSWER_NO = #{answer_No}
+	</select>
 
 </mapper>

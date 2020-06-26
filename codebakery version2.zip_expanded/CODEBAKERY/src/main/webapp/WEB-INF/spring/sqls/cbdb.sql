@@ -124,11 +124,12 @@ CREATE TABLE ANSWER (
 CREATE TABLE QNA_COMMENT (
 	QCOMMENT_NO	NUMBER CONSTRAINT PK_QCOMMNET_NO PRIMARY KEY,       -- 질문댓글번호
 	QUESTION_NO	NUMBER(10),                                         -- 질문번호
-    PARENT_NO NUMBER(10),
-	QCOMMENT_CONTENT VARCHAR2(1000)	NOT NULL,                       -- 질문댓글내용
-	QCOMMENT_DATE DATE DEFAULT SYSDATE,                              -- 질문댓글시간
-    DEPTH NUMBER(10),                                               -- 대댓글번호
-    REPLY_ID VARCHAR2(20),                                          -- 대댓글 아이디
+    QCOMMENT_CONTENT VARCHAR2(1000)	NOT NULL,                       -- 질문댓글내용
+    QCOMMENT_DATE DATE DEFAULT SYSDATE,                             -- 질문댓글시간
+    GROUP_ID NUMBER,
+    PARENT_NO NUMBER,
+    DEPTH NUMBER(10),                                              
+    ORDER_NO NUMBER,                                         
 	USER_ID	VARCHAR2(20),
 	NUSER_ID VARCHAR2(20)
 );
@@ -303,6 +304,5 @@ select * from mentor_intro;
  SELECT * FROM ( SELECT * FROM QUESTION ORDER BY QUESTION_NO DESC ) WHERE ROWNUM <=5 ; 
 SELECT * FROM ( SELECT * FROM ANSWER ORDER BY ANSWER_NO DESC ) WHERE ROWNUM <=5 ; 
 SELECT * FROM QUESTION;
-
-
+SELECT * FROM NOTICE_COMMENT;
 commit;

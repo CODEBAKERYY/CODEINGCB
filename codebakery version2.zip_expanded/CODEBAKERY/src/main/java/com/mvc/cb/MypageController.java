@@ -106,7 +106,7 @@ public class MypageController {
 
 	@RequestMapping("deactivatepopup.do")
 	public String deactivatePopup() {
-		return "deactivate";
+		return "mypage_deactivate";
 	}
 
 	@RequestMapping("deactivate.do")
