@@ -159,9 +159,12 @@ public class MypageController {
 		
 		session.removeAttribute("login");
 		UserDto relogin = biz.getInfo(dto);
-		session.setAttribute("login", relogin);
+		UserDto reres = u_biz.login( relogin);
+
 		
-		System.out.println("뭐라고 받아질까"+res);
+		session.setAttribute("login", reres);
+		
+		System.out.println("뭐라고 받아질까"+reres);
 		boolean check = false;
 		if(res > 0) {		//업데이트이가정상적으로 될때
 			
