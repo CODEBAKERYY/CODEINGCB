@@ -56,18 +56,6 @@
 		USER_MAIL = #{user_Mail}
 		WHERE
 		USER_ID = #{user_Id}
-
-	</update>
-	<update id="update_nonpw" parameterType="UserDto">
-		UPDATE USER_TB
-		SET
-		USER_NAME = #{user_Name},
-		USER_PHONE = #{user_Phone},
-		USER_MAIL =
-		#{user_Mail}
-		WHERE
-		USER_ID = #{user_Id}
-
 	</update>
 
 	<!-- 관리자 유저 리스트 -->
@@ -78,7 +66,8 @@
 	<!-- 관리자 등급조정 -->
 	<update id="adjust" parameterType="UserDto">
 		UPDATE USER_TB
-		SET USER_GRADE = #{user_Grade}
+		SET USER_GRADE =
+		#{user_Grade}
 		WHERE USER_ID = #{user_Id}
 	</update>
 
@@ -91,7 +80,8 @@
 	<!-- point charge 포인트 충전 -->
 	<update id="pointUpdate" parameterType="UserDto">
 		UPDATE USER_TB
-		SET USER_POINT = #{user_Point}
+		SET
+		USER_POINT = #{user_Point}
 		WHERE USER_ID = #{user_Id}
 	</update>
 

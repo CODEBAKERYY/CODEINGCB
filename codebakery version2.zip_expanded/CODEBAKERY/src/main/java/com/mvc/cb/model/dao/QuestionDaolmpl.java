@@ -115,18 +115,43 @@ public class QuestionDaolmpl implements QuestionDao {
 	}
 
 	@Override
-	public List<QuestionDto> selectTagList(String question_Tag) {
-
-		List<QuestionDto> list = null;
-
+	public List<QuestionDto> selectTagList(QnAPagingDto dto ,String question_Tag) {
+		
+		List<QuestionDto> list = new ArrayList<QuestionDto>();
+		
+		int start = dto.getStartRow();
+		int end = dto.getEndRow();
+		
+		HashMap<String, Object> param = new HashMap<String, Object>();
+		param.put("start", start);
+		param.put("end", end);
+		param.put("question_Tag", question_Tag);
+		
+		
 		try {
-			list = sqlSession.selectList(NAMESPACE + "tagList", question_Tag);
-		} catch (Exception e) {
-			System.out.println("[error] : select Tag List");
+			list = sqlSession.selectList(NAMESPACE+"tagList", param);
+			
+		}catch(Exception e) {
+			System.out.println("[error] : Question selectList");
 			e.printStackTrace();
 		}
-
+		
 		return list;
+	}
+	
+	@Override
+	public int countTags(String question_Tag) {
+		
+		int res = 0;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE+"countTags", question_Tag);
+		} catch(Exception e) {
+			System.out.println("[error] : countTags");
+			e.printStackTrace();
+		}
+		
+		return res;
 	}
 
 	@Override

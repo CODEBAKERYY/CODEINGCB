@@ -22,12 +22,6 @@ public class MyPageDaolmpl implements MyPageDao {
 	}
 
 	@Override
-	public int non_pw_update(UserDto dto) {
-		System.out.println("non_pw_update안돌아?");
-		return sqlSession.update(NAMESPACE + "update_nonpw", dto);
-	}
-
-	@Override
 	public int member_delete(UserDto dto) {
 		return sqlSession.delete(NAMESPACE + "member_delete", dto);
 	}
