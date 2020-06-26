@@ -204,6 +204,22 @@
 		    <artifactId>javaSDK</artifactId>
 		    <version>2.2</version>
 	  	</dependency>
+	  	
+	  	
+	  	
+	  	
+	  	<!-- json 사용 -->
+	  	<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.9.3</version>
+		</dependency>
+
+		<dependency>
+		    <groupId>org.codehaus.jackson</groupId>
+		    <artifactId>jackson-mapper-asl</artifactId>
+		    <version>1.9.13</version>
+		</dependency>
 		
 	</dependencies>
 	<build>
