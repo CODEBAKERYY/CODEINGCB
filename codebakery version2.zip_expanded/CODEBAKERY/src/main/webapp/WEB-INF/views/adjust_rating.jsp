@@ -35,6 +35,10 @@ function gradeChk() {
 	</div>
 	
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	<form action="adjustres.do">
+>>>>>>> parent of b5e306e... 관리자 회원등급조정
 =======
 	<form action="adjustres.do">
 >>>>>>> parent of b5e306e... 관리자 회원등급조정
@@ -54,6 +58,10 @@ function gradeChk() {
 		</tr>
 	</table>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	</form>
+>>>>>>> parent of b5e306e... 관리자 회원등급조정
 =======
 	</form>
 >>>>>>> parent of b5e306e... 관리자 회원등급조정
