@@ -56,4 +56,19 @@ public class UserDaolmpl implements UserDao {
 		return res;
 	}
 
+	@Override
+	public int adjust(UserDto dto) {
+		
+		int res = 0;
+		try {
+			res = sqlSession.update(NAMESPACE + "adjust", dto);
+		} catch (Exception e) {
+			System.out.println("[error] : adjust");
+			e.printStackTrace();
+		}
+
+		return res;
+		
+	}
+
 }

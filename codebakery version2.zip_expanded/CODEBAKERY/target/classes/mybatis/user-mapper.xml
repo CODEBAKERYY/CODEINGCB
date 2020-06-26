@@ -73,5 +73,11 @@
 	<select id="userList" resultMap="UserMap">
     	SELECT * FROM USER_TB   
     </select>
+    
+    <!-- 관리자 등급조정 -->
+    <update id="adjust" parameterType="UserDto">
+    	UPDATE USER_TB
+    	SET USER_GRADE = #{user_Grade}
+    </update>
 	
 </mapper>

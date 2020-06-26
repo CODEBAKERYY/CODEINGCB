@@ -14,7 +14,7 @@
 <link href="resources/fonts.css" rel="stylesheet" type="text/css" media="all" />
 <script type="text/javascript">
 function adjust(){
-    var url="adjust_rating.jsp";
+    var url="adjust_rating.do";
     	window.open(url,"","width=250,height=150,left=400,top=200");
 	}
 </script>

@@ -10,6 +10,8 @@ public interface UserBiz {
 	public UserDto login(UserDto dto);
 
 	public UserDto idcheck(String user_Id);
+
+	public int adjust(UserDto dto);
 	
 	
 }
