@@ -21,4 +21,6 @@ public interface MyPageDao {
 
 	public int updatePoint(UserDto dto);
 
+	public UserDto selectOne(String user_Id);
+
 }
