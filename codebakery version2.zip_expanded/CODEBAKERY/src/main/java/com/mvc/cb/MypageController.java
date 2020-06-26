@@ -1,6 +1,8 @@
 package com.mvc.cb;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -10,7 +12,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mvc.cb.biz.MyPageBiz;
 import com.mvc.cb.biz.UserBiz;
@@ -42,18 +46,23 @@ public class MypageController {
 	
 	//관리자 등급조정 페이지 띄움
 	@RequestMapping("/adjust_rating.do")
-	public String adjust() {
+	public String adjust(Model model, String user_Id) {
 		logger.info("adjust_rating");
+		model.addAttribute("userone",biz.selectOne(user_Id));
 		return "adjust_rating";
 	}
 	
 	//관리자 등급조정 결과
 	@RequestMapping("/adjustres.do")
-	public String adjustres(UserDto dto) {
+	@ResponseBody
+	public Map<String, Integer> adjustres(@RequestBody UserDto dto) {
 		logger.info("adjustres");
 		int res = u_biz.adjust(dto);
-		System.out.println();
-		return "redirect:admin_mypage.do";
+		
+		Map<String, Integer> adjustres = new HashMap<String, Integer>();
+		adjustres.put("adjust", res);
+		
+		return adjustres;
 	}
 	
 
