@@ -150,20 +150,19 @@ public class MypageController {
 		logger.info("CHARGE gogo");
 
 		int res = biz.updatePoint(dto);
-		session.removeAttribute("User");
 
+		session.removeAttribute("login");
 		UserDto relogin = biz.getInfo(dto);
 		UserDto reres = u_biz.login(relogin);
 
-		session.setAttribute("User", reres);
+		session.setAttribute("login", relogin);
 
-		System.out.println("세션정보 다시 받아옴");
+		System.out.println("뭐라고 받아질까" + res);
 		boolean check = false;
 		if (res > 0) { // 업데이트이가정상적으로 될때
 
 			check = true;
 		}
-		
 		Map<String, Boolean> map = new HashMap<String, Boolean>();
 		map.put("check", check);
 		return map;
