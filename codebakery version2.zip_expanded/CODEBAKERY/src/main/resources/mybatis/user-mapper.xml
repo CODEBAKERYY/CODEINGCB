@@ -53,7 +53,8 @@
 		USER_NAME = #{user_Name},
 		USER_PHONE =
 		#{user_Phone},
-		USER_MAIL = #{user_Mail}
+		USER_MAIL = #{user_Mail},
+		USER_PIC = #{user_Pic}
 		WHERE
 		USER_ID = #{user_Id}
 	</update>

@@ -85,8 +85,8 @@
 </head>
 <body>
 	<%@ include file="header.jsp"%>
-	<div class="center">
-		<h1>Login</h1>
+	<div class="center" style="margin-top: 60px;">
+		<h1 style="padding: 20px; font-weight: 700;">Login</h1>
 		<form method="post" action="loginchk.do" id="loginform">
 			<div class="txt_field">
 				<input type="text" name="user_Id" id="userId" /> <span></span>
@@ -96,9 +96,9 @@
 				<input type="password" name="user_Pw" id="userPwS" /> <span></span>
 				<label>password</label>
 			</div>
-			<div class="pass">Forgot password? </div>
+			<br />
 			<input type="button" value="Login" id="log" class="btn btn-secondary btn-lg btn-block"/>
-			<input type="button" class="google" value="Google Login" />
+			<input type="button" class="google" value="Google Login" /><br />
 			<div class="g-signin2" data-onsuccess="onSignIn"></div>
 			<div class="signup_link">
                Forgot Id or Password? <a href="findidpw.do">Find Id/Password</a>

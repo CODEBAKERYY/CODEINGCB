@@ -155,7 +155,7 @@
 
    <%@ include file="header.jsp"%>
    <div class="center">
-      <h1>Find ID Password</h1>
+      <h1 style="padding: 20px;">Find ID Password</h1>
       <form:form method="post" id="searchform" action="login.do">
          <div class="txt_field">
             <input type="text" name="user_Name" id="username"/><span></span> 
