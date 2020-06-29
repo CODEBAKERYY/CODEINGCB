@@ -37,5 +37,10 @@ public class UserBizlmpl implements UserBiz {
 	public UserDto selectOne(UserDto dto) {
 		return dao.selectOne(dto);
 	}
+	
+	@Override
+	public UserDto chkIdPw(UserDto dto) {
+		return dao.chkIdPw(dto);
+	}
 
 }

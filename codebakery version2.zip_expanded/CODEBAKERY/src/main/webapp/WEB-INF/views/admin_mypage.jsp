@@ -12,6 +12,7 @@
 <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
 <link href="resources/default.css" rel="stylesheet" type="text/css" media="all" />
 <link href="resources/fonts.css" rel="stylesheet" type="text/css" media="all" />
+<link href="resources/csss/bootstrap.min.css" rel="stylesheet"  type="text/css" media="all"/>
 <script type="text/javascript">
 function adjust(user_Id){
 		var url = "adjust_rating.do?user_Id=" + user_Id;
@@ -19,19 +20,27 @@ function adjust(user_Id){
 	}
 </script>
 <style type="text/css">
-	.line{
-		border-bottom: 1px solid black;
+
+  table {
+    width: 100%;
+    border: 1px solid #444444;
+    border-collapse: collapse;
 	}
+	
+	td {
+    border: 1px solid #444444;
+  	}
+  	
 </style>
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
 
-	<div class="title" style="margin-bottom: 20px; margin-top: 20px">
-			<h2>회원관리</h2>
+	<div class="title" style="margin-bottom: 20px; margin-top: 20px; padding:30px;">
+			<h1 style="font-size: 2.5em;">회원관리</h1>
 	</div>
 	 
-	<table class="tableForm" style="margin: auto; width: 60%; height: 800px; text-align: center; font-size: 22px">
+	<table class="tableForm" style="margin: auto; width: 60%; height: 800px; text-align: center; font-size: 22px; margin-bottom:100px;">
 		<tr class="line">
 			<th>회원아이디</th>
 			<th>회원이름</th>
@@ -44,7 +53,7 @@ function adjust(user_Id){
 			<td>${list.user_Id }</td>
 			<td>${list.user_Name }</td>
 			<td>${list.user_Grade }</td>
-			<td><input type="button" value="조정하기" class="button" onclick="adjust('${list.user_Id}');"></td>
+			<td><input type="button" value="조정하기" class="btn btn-dark" onclick="adjust('${list.user_Id}');" style="width:80%;"></td>
 			</c:if>
 		</tr>
 		</c:forEach>

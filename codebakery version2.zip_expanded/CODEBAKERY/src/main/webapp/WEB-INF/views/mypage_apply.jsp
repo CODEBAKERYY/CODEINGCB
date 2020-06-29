@@ -112,7 +112,7 @@
 <%@ include file="header.jsp"%>
 
 	<div class="form">
-		<h1>멘토 신청하기</h1>
+		<h1 style="padding: 30px;">멘토 신청하기</h1>
 			
 		<div class="introduce">
 			<br>

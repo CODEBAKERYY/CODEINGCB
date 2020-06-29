@@ -141,7 +141,7 @@ public class UserController {
 		int res = u_biz.signup(dto);
 
 		if (res > 0) {
-			return "redirect:main.do";
+			return "redirect:login.do";
 		} else {
 			return "redirect:signup.do";
 		}
@@ -297,6 +297,19 @@ public class UserController {
 		String user_Id = (request.getParameter("user_Id"));
 		dto.setUser_Id(user_Id);
 		session.setAttribute("User", dto);
+	}
+	
+	//아이디, 비밀번호 존재여부 (회원인지 아닌지 확인)
+	@RequestMapping( value = "/chkIdPw.do")
+	@ResponseBody
+	public UserDto chkIdPw(UserDto dto) {
+		
+		logger.info("chkIdPw");
+		
+		UserDto res = u_biz.chkIdPw(dto);
+		
+		
+		return res;
 	}
 
 }

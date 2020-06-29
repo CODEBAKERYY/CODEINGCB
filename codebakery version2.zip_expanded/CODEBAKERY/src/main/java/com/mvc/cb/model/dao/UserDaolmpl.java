@@ -87,5 +87,20 @@ public class UserDaolmpl implements UserDao {
 		return res;
 		
 	}
+	
+	@Override
+	public UserDto chkIdPw(UserDto dto) {
+		
+		UserDto res = null;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE + "chkIdPw", dto);
+		} catch(Exception e) {
+			System.out.println("[error] : chkIdPw");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
 
 }

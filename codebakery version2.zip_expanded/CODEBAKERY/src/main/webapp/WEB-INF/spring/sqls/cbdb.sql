@@ -123,15 +123,14 @@ CREATE TABLE ANSWER (
 -- 질문/답변 댓글
 CREATE TABLE QNA_COMMENT (
 	QCOMMENT_NO	NUMBER CONSTRAINT PK_QCOMMNET_NO PRIMARY KEY,       -- 질문댓글번호
-	QUESTION_NO	NUMBER(10),                                         -- 질문번호
+	QUESTION_NO	NUMBER,                                        		-- 질문번호
     QCOMMENT_CONTENT VARCHAR2(1000)	NOT NULL,                       -- 질문댓글내용
     QCOMMENT_DATE DATE DEFAULT SYSDATE,                             -- 질문댓글시간
-    GROUP_ID NUMBER,
-    PARENT_NO NUMBER,
-    DEPTH NUMBER(10),                                              
-    ORDER_NO NUMBER,                                         
-	USER_ID	VARCHAR2(20),
-	NUSER_ID VARCHAR2(20)
+    GROUP_ID NUMBER,												-- 그룹아이디
+    PARENT_NO NUMBER,												-- 대댓글 부모번호
+    DEPTH NUMBER,													-- 깊이
+    USER_ID	VARCHAR2(20),											-- 댓글아이디
+	USER_PIC VARCHAR2(100)											-- 댓글 사진
 );
 
 

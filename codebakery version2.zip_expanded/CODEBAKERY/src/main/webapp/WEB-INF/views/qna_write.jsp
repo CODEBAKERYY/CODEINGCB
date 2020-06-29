@@ -57,7 +57,7 @@ Released   : 20130811
 		
 		list.push(tag);
 
-		document.getElementById("taglist").innerHTML = list
+		document.getElementById("taglist").innerHTML = list;
 		
 		form.question_Tag.value = list; 		
 		

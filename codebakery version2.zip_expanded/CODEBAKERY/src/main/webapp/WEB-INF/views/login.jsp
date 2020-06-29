@@ -22,39 +22,40 @@
 	src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <meta name="google-signin-client_id"
-	content="121669463740-pd7j72id6sifhlpku0rie93puk61f33d.apps.googleusercontent.com">
+	content="121669463740-pd7j72id6sifhlpku0rie93puk61f33d.apps.googleusercontent.com" />
+<link href="resources/csss/bootstrap.min.css" rel="stylesheet"  type="text/css" media="all"/>
 <script type="text/javascript">
-	$(function() {
-		$("#loginform").submit(function() {
-			var flag = true;
-			var user_Id = $('#userId').val();
-			var idchk = {
-				"user_Id" : user_Id
-			};
+
+	$(function(){
+		
+		$("#log").click(function(){
+			
+			var id = $('#userId').val();
+			var pw = $("#userPwS").val();
+			
+			
 			$.ajax({
 				type : "POST",
-				url : "idcheck.do",
-				data : JSON.stringify(idchk),
-				contentType : "application/json",
-				dataType : "json",
-				async : false,
-				success : function(msg) {
-					console.log(msg);
-					if (msg.check == false) {
+				url : "chkIdPw.do",
+				data : {"user_Id": id, "user_Pw":pw},
+				success : function(data) {
+					if (data == 0 || data == null) {
 						alert("아이디 및 비밀번호를 확인해주세요");
-						flag = false;
 					} else {
-						alert(user_Id + "님 환영합니다");
-						flag = true;
+						alert(id + "님 환영합니다");
+						$("#loginform").submit();
 					}
 				},
 				error : function() {
 					alert("ajax 통신 실패!");
 				}
-
+	
 			});
-			return flag;
+			
+				
+				
 		});
+		
 	});
 
 	function onSignIn(googleUser) {
@@ -88,19 +89,19 @@
 		<h1>Login</h1>
 		<form method="post" action="loginchk.do" id="loginform">
 			<div class="txt_field">
-				<input type="text" name="user_Id" id="userId"> <span></span>
+				<input type="text" name="user_Id" id="userId" /> <span></span>
 				<label>id</label>
 			</div>
 			<div class="txt_field">
-				<input type="password" name="user_Pw" id="userPwS"> <span></span>
+				<input type="password" name="user_Pw" id="userPwS" /> <span></span>
 				<label>password</label>
 			</div>
-			<div class="pass">Forgot password</div>
-			<input type="submit" value="Login">
+			<div class="pass">Forgot password? </div>
+			<input type="button" value="Login" id="log" class="btn btn-secondary btn-lg btn-block"/>
 			<input type="button" class="google" value="Google Login" />
 			<div class="g-signin2" data-onsuccess="onSignIn"></div>
 			<div class="signup_link">
-               Forgot ID Password? <a href="findidpw.do">Find ID Password</a>
+               Forgot Id or Password? <a href="findidpw.do">Find Id/Password</a>
                </div>
 			<div class="signup_link">
 				Not a member? <a href="sign.do">Singup</a>

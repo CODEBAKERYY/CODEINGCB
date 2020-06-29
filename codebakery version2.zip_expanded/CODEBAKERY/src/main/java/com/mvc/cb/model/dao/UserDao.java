@@ -16,4 +16,6 @@ public interface UserDao {
 	
 	//아이디 비밀번호 찾기
 	public UserDto selectOne(UserDto dto);
+	
+	public UserDto chkIdPw(UserDto dto);
 }

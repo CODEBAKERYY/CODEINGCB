@@ -16,5 +16,8 @@ public interface UserBiz {
 	//아이디 비밀번호찾기
 	public UserDto selectOne(UserDto dto);
 	
+	//아이디 비밀번호 존재여부
+	public UserDto chkIdPw(UserDto dto);
+	
 	
 }

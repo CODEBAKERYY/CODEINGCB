@@ -51,14 +51,15 @@ Released   : 20130811
 	
 	function addTag(){
 		var tag = $("#tag").val();
-		
+		var tagg = "<c:out value='${dto.question_Tag }' />";
 		// 글쓰기 내에 태그 추가해주기
 		var a = '<span>'+tag+'</span>&nbsp;&nbsp;';
 		$(".one_tag").append(a);
 		
+		list.push(tagg);
 		list.push(tag);
 	
-		document.getElementById("tags").innerHTML = list;
+		form.question_Tag.value = list; 
 	} 
 	
 	// 글 수정 유효성 검사
@@ -80,6 +81,7 @@ Released   : 20130811
 			
 		});
 	});
+	
 </script>
 </head>
 
@@ -94,6 +96,7 @@ Released   : 20130811
 		<div class="container" role="main">
 			<form name="form" id="form" role="form" method="post" action="update_question.do">
 			<input type="hidden" name="question_No" value="${dto.question_No }" />
+			<input type="hidden" name="question_Tag" id="taglist"/>
 				<div class="mb-3">
 					<label for="title">제목</label>
 					<input type="text" class="form-control" name="question_Title" value="${dto.question_Title }" />
@@ -109,12 +112,13 @@ Released   : 20130811
 				</div>
 				<div class="mb-3">
 					<label for="tag">TAG : </label>&nbsp;&nbsp;
-					<span><input type="text" id="tag" value="#" style="width:40%; height:30px;" />&nbsp;&nbsp;</span>
+					<span><input type="text" id="tag" style="width:40%; height:30px;" value="#" />&nbsp;&nbsp;</span>
 					<input type="button" value="추가" onclick="addTag();"/>
 					<br /><br /> 
 					<c:forTokens items="${dto.question_Tag }" delims="#" var="item">
-						<span class="one_tag" id="tags">#&nbsp;${item }</span>
+						<span id="tags">#&nbsp;${item }</span>
 					</c:forTokens>
+						<span class="one_tag"></span>
 				</div>
 				<div style="text-align: right; margin-bottom: 20px;">
 					<input type="submit" id="btnSave" value="수정완료" />

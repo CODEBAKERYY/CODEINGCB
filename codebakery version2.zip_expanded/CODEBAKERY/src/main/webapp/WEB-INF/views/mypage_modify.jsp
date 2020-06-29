@@ -145,10 +145,16 @@
 <%@ include file="header.jsp"%>
 	
 		<div class="title" style="margin-bottom: 20px; margin-top: 20px; padding:30px; font-size:20px;">
-			<h1>마이페이지 수정</h1>
+			<h1>내 정보 수정</h1>
 		</div>
 		<form action="modify.do" method="post" id="mypageModify">
 		<table class="tableForm" style="margin: auto; width: 60%; height: 800px; text-align: center; font-size: 22px">
+			<tr>
+				<td colspan="2">
+					<img src="${pageContext.request.contextPath}/upload${User.user_Pic }" height="100" alt="img" />
+					<input type="hidden" id="user_Pic" name="user_Pic" value="${User.user_Pic}"/>
+				</td>
+			</tr>
 			<tr>
 				<th>ID : </th>
 				<td>
@@ -179,13 +185,19 @@
 			<tr>
 				<th>PREFERRED LANGUAGE : </th>
 				<td>
-					<input type="checkbox" id="java" value="1" name="user_Lang"><label for="java">&nbsp;java</label>&nbsp;&nbsp;
-					<input type="checkbox" id="python" value="2" name="user_Lang"><label for="python">&nbsp;python</label>&nbsp;&nbsp;
-					<input type="checkbox" id="c++" value="3" name="user_Lang"><label for="c++">&nbsp;c++</label>&nbsp;&nbsp;
-					<input type="checkbox" id="c" value="4" name="user_Lang"><label for="c">&nbsp;c</label>&nbsp;&nbsp;
-					<input type="checkbox" id="5" value="5" name="user_Lang"><label for="javascript">&nbsp;javascript</label>
+					<input type="checkbox" name="user_Lang" value="1" /><label for="c">&nbsp;c</label>&nbsp;&nbsp;
+					<input type="checkbox" name="user_Lang" value="2" /><label for="c++">&nbsp;c++</label>&nbsp;&nbsp; 
+					<input type="checkbox" name="user_Lang" value="3" /><label for="c#">&nbsp;c#</label><br>
+					<input type="checkbox" name="user_Lang" value="4" /><label for="Java">&nbsp;Java</label>&nbsp;&nbsp;
+					<input type="checkbox" name="user_Lang" value="5" /><label for="Python">&nbsp;Python</label>&nbsp;&nbsp;
+					<input type="checkbox" name="user_Lang" value="6" /><label for="Javascript">&nbsp;Javascript</label>&nbsp;&nbsp; 
+					<input type="checkbox" name="user_Lang" value="7" /><label for="PHP">&nbsp;PHP</label><br>
+					<input type="checkbox" name="user_Lang" value="8" /><label for="Scala">&nbsp;Scala</label>&nbsp;&nbsp;
+					<input type="checkbox" name="user_Lang" value="9" /><label for="Perl">&nbsp;Perl</label>&nbsp;&nbsp; 
+					<input type="checkbox" name="user_Lang" value="10" /><label for="Ruby">&nbsp;Ruby</label> 
 				</td>
 			</tr>
+			
 			
 			<tr>
 				<td colspan="2" style="padding: 30px; margin-bottom: 100px; margin-top: 50px; ">

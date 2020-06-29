@@ -81,4 +81,10 @@
 		SELECT * FROM USER_TB
 		WHERE USER_NAME = #{user_Name} AND USER_PHONE = #{user_Phone}
 	</select>
+	
+	<select id="chkIdPw" parameterType="UserDto" resultType="UserDto">
+		SELECT * 
+		FROM USER_TB
+		WHERE USER_ID = #{user_Id} AND USER_PW = #{user_Pw}
+	</select>
 </mapper>

@@ -2,20 +2,20 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
-<mapper namespace="question">
-
-	<resultMap type="QuestionDto" id="questionMap">
-		<result property="question_No" column="QUESTION_NO" />
-		<result property="question_Title" column="QUESTION_TITLE" />
-		<result property="question_Content" column="QUESTION_CONTENT" />
-		<result property="question_Date" column="QUESTION_DATE" />
-		<result property="question_Views" column="QUESTION_VIEWS" />
-		<result property="question_Tag" column="QUESTION_TAG" />
-		<result property="user_Id" column="USER_ID" />
-
-	</resultMap>
-
+  
+  <mapper namespace="question">
+  
+  	<resultMap type="QuestionDto" id="questionMap">
+  		<result property="question_No" column="QUESTION_NO" />
+  		<result property="question_Title" column="QUESTION_TITLE"/>
+  		<result property="question_Content" column="QUESTION_CONTENT" />
+  		<result property="question_Date" column="QUESTION_DATE" />
+  		<result property="question_Views" column="QUESTION_VIEWS" />
+  		<result property="question_Tag" column="QUESTION_TAG" />
+  		<result property="user_Id" column="USER_ID" />
+  		
+  	</resultMap>
+  	
   	<select id="selectList" resultType="QuestionDto" parameterType="java.util.HashMap">
   		SELECT *
 		FROM (SELECT ROWNUM RN, A.*
@@ -44,7 +44,7 @@
 	
 	<update id="update" parameterType="QuestionDto">
 		UPDATE QUESTION
-		SET QUESTION_TITLE=#{question_Title}, QUESTION_CONTENT=#{question_Content}
+		SET QUESTION_TITLE=#{question_Title}, QUESTION_CONTENT=#{question_Content}, QUESTION_TAG = #{question_Tag}
 		WHERE QUESTION_NO=#{question_No}
 	</update>
 	
@@ -78,14 +78,17 @@
 		FROM QUESTION
 		WHERE QUESTION_TAG LIKE '%'||#{question_Tag}||'%'
 	</select>
-
+	
+	
 	<select id="count" resultType="int">
-		SELECT COUNT(*)
+		SELECT COUNT(*) 
 		FROM QUESTION
 	</select>
+	
 	<select id="questionList" resultMap="questionMap">
-	 SELECT * FROM ( SELECT * FROM QUESTION ORDER BY QUESTION_NO 
-			DESC ) 	<!--[CDATA[WHERE ROWNUM <=5 ]] -->
+	 	SELECT * 
+	 	FROM ( SELECT * 
+				FROM QUESTION 
+				ORDER BY QUESTION_NO DESC ) 	<!--[CDATA[WHERE ROWNUM <=5 ]] -->
 	</select>
-
-</mapper>
+ </mapper>
