@@ -1,17 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<!--
-Design by TEMPLATED
-http://templated.co
-Released for free under the Creative Commons Attribution License
-
-Name       : TwoColours 
-Description: A two-column, fixed-width design with dark color scheme.
-Version    : 1.0
-Released   : 20130811
-
--->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -30,6 +20,9 @@ Released   : 20130811
 <link href="resources/csss/loginstyle.css" rel="stylesheet" />
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<meta name="google-signin-client_id"
+	content="121669463740-pd7j72id6sifhlpku0rie93puk61f33d.apps.googleusercontent.com">
 <script type="text/javascript">
 	$(function() {
 		$("#loginform").submit(function() {
@@ -63,8 +56,31 @@ Released   : 20130811
 			return flag;
 		});
 	});
-</script>
 
+	function onSignIn(googleUser) {
+
+		var profile = googleUser.getBasicProfile();
+		console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+		console.log('Name: ' + profile.getName());
+		console.log('Image URL: ' + profile.getImageUrl());
+		console.log('Email: ' + profile.getEmail());
+		var user_Id = profile.getId();
+		var user_Name = profile.getName();
+		$.ajax({
+			url : "googleLogin.do",
+			data : "user_Id=" + user_Id,
+			type : "POST",
+			success : function(data) {
+				alert("구글 로그인 성공")
+				window.location.replace("http://localhost:8787/cb/main.do");
+			},
+			error : function() {
+				alert("에러")
+			}
+		});
+
+	}
+</script>
 </head>
 <body>
 	<%@ include file="header.jsp"%>
@@ -73,18 +89,19 @@ Released   : 20130811
 		<form method="post" action="loginchk.do" id="loginform">
 			<div class="txt_field">
 				<input type="text" name="user_Id" id="userId"> <span></span>
-					<label>id</label>
+				<label>id</label>
 			</div>
 			<div class="txt_field">
 				<input type="password" name="user_Pw" id="userPwS"> <span></span>
-					<label>password</label>
+				<label>password</label>
 			</div>
 			<div class="pass">Forgot password</div>
-			<input type="submit" value="Login"> <input type="submit"
-				class="google" value="Google Login">
-					<div class="signup_link">
-						Not a member? <a href="sign.do">Singup</a>
-					</div>
+			<input type="submit" value="Login">
+			<input type="button" class="google" value="Google Login" />
+			<div class="g-signin2" data-onsuccess="onSignIn"></div>
+			<div class="signup_link">
+				Not a member? <a href="sign.do">Singup</a>
+			</div>
 		</form>
 	</div>
 

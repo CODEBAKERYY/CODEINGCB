@@ -22,6 +22,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.WebUtils;
@@ -61,6 +62,7 @@ public class UserController {
 
 	@Autowired
 	private CertificationService certificationService;
+
 
 	// 메인으로 이동시 해당 정보
 	@RequestMapping(value = "/main.do")
@@ -146,11 +148,52 @@ public class UserController {
 	}
 
 	// 로그인 폼 이동
-	@RequestMapping("login.do")
-	public String login() {
+	@RequestMapping(value = "login.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public String login(Model model, HttpSession session) {
 		logger.info("login");
+		/* 구글code 발행 */
+		/* 생성한 인증 URL을 View로 전달 */
 		return "login";
 	}
+
+//	// 구글 Callback호출 메소드
+//	@RequestMapping(value = "ggLogin.do", method = { RequestMethod.GET, RequestMethod.POST })
+//	public String googleCallback(Model model, HttpServletRequest request) throws IOException {
+//
+//		System.out.println("구글 로그인 들어왔다");
+//		String code = request.getParameter("code");
+//
+//		OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
+//		AccessGrant accessGrant = oauthOperations.exchangeForAccess(code, googleOAuth2Parameters.getRedirectUri(),
+//				null);
+//		String accessToken = accessGrant.getAccessToken();
+//		Long expireTime = accessGrant.getExpireTime();
+//		if (expireTime != null && expireTime < System.currentTimeMillis()) {
+//			accessToken = accessGrant.getRefreshToken();
+//			logger.info("accessToken is expired. refresh token = {}", accessToken);
+//		}
+//		Connection<Google> connection = googleConnectionFactory.createConnection(accessGrant);
+//		Google google = connection == null ? new GoogleTemplate(accessToken) : connection.getApi();
+//		PlusOperations plusOperations = google.plusOperations();
+//		Person person = plusOperations.getGoogleProfile();
+//
+////			UserDto user = new UserDto();
+////			user.setUser_Id(person.getDisplayName());
+//////			member.setAuth("USR");
+////
+////			HttpSession session = request.getSession();
+////			session.setAttribute("User", user );
+//
+//		/*
+//		 * System.out.println(person.getAccountEmail());
+//		 * System.out.println(person.getAboutMe());
+//		 * System.out.println(person.getDisplayName());
+//		 * System.out.println(person.getEtag());
+//		 * System.out.println(person.getFamilyName());
+//		 * System.out.println(person.getGender());
+//		 */
+//		return "main";
+//	}
 
 	// 로그인 확인
 	@RequestMapping("loginchk.do")
@@ -218,9 +261,18 @@ public class UserController {
 
 		// 아래의 서비스단 주석여부에 따라 문자로 본인인증 메세지가 날라옴 (자기 번호 입력해야 확인 가능)
 		// 주석처리를 할 경우 콘솔창에 출력된 인증번호로 인증 가능
-		//certificationService.certifiedPhoneNumber(phoneNumber, numStr);
+		// certificationService.certifiedPhoneNumber(phoneNumber, numStr);
 
 		return numStr;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "googleLogin.do", method = RequestMethod.POST)
+	public void memberRegi(String userName, UserDto dto, HttpServletRequest request, HttpSession session) {
+
+		String user_Id = (request.getParameter("user_Id"));
+		dto.setUser_Id(user_Id);
+		session.setAttribute("User", dto);
 	}
 
 }
