@@ -31,5 +31,11 @@ public class UserBizlmpl implements UserBiz {
 	public int adjust(UserDto dto) {
 		return dao.adjust(dto);
 	}
+	
+	//아이디 비밀번호찾기
+	@Override
+	public UserDto selectOne(UserDto dto) {
+		return dao.selectOne(dto);
+	}
 
 }

@@ -222,5 +222,26 @@ public class UserController {
 
 		return numStr;
 	}
+	
+	//아이디 비밀번호 찾기폼 이동
+	@RequestMapping("/findidpw.do")
+	public String findidpw() {
+		return "findidpw";
+	}
+	
+	//아이디 비밀번호 찾기
+	@RequestMapping("/search.do")
+	@ResponseBody
+	public Map<String, UserDto> search(@RequestBody UserDto dto) {
+		
+		logger.info("search id pw");
+		System.out.println("dto : " + dto);
+		
+		UserDto res = u_biz.selectOne(dto);
+		Map<String, UserDto> searchres = new HashMap<String, UserDto>();
+		searchres.put("search", res);
+		
+		return searchres;
+	}
 
 }

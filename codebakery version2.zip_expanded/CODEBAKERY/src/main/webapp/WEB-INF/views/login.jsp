@@ -63,6 +63,7 @@ Released   : 20130811
 			return flag;
 		});
 	});
+	
 </script>
 
 </head>
@@ -82,6 +83,9 @@ Released   : 20130811
 			<div class="pass">Forgot password</div>
 			<input type="submit" value="Login"> <input type="submit"
 				class="google" value="Google Login">
+					<div class="signup_link">
+					Forgot ID Password? <a href="findidpw.do">Find ID Password</a>
+					</div>
 					<div class="signup_link">
 						Not a member? <a href="sign.do">Singup</a>
 					</div>
