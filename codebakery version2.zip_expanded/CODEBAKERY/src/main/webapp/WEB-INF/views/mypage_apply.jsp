@@ -9,8 +9,10 @@
 <meta name="description" content="" />
 <link rel="shortcut icon" type="image/x-icon" href="resources/images/favicon.png" />
 <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
+
 <link href="./css/default.css" rel="stylesheet" type="text/css" media="all" />
 <link href="./fonts/fonts.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 <style type="text/css">
 
