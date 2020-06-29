@@ -271,7 +271,7 @@ background-color: white;
 						<c:otherwise>
 							<c:forEach items="${answerlist }" var="dto" begin="0" end="3"
 								varStatus="i" step="1">
-								<a href="answer_detail.do?answer_No=${dto.answer_No }"><p>${dto.answer_Title }</p></a>
+								<a href="answer_detail.do?answer_No=${dto.answer_No }&question_No=${dto.question_No}"><p>${dto.answer_Title }</p></a>
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>

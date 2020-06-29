@@ -115,11 +115,11 @@ public class AnswerDaolmpl implements AnswerDao {
 	}
 
 	@Override
-	public AnswerDto selectOne(int answer_No) {
+	public AnswerDto selectOne(AnswerDto dto) {
 
 		AnswerDto res = null;
 		try {
-			res = sqlSession.selectOne(NAMESPACE + "selectOne", answer_No);
+			res = sqlSession.selectOne(NAMESPACE + "selectOne", dto);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
