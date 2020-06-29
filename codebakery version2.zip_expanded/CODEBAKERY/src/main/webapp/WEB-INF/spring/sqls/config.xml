@@ -17,6 +17,10 @@
 			alias="UserDto" />
 		<typeAlias type="com.mvc.cb.model.dto.QuizDto"
 			alias="quizDto" />
+		<typeAlias type="com.mvc.cb.model.dto.QuizResultDto" 
+			alias="quizResultDto"/>
+		<typeAlias type="com.mvc.cb.model.dto.TryQuizDto" 
+			alias="tryQuizDto"/>
 		<typeAlias type="com.mvc.cb.model.dto.NoticeDto"
 			alias="NoticeDto" />
 		<typeAlias type="com.mvc.cb.model.dto.NoticeCommentDto"
