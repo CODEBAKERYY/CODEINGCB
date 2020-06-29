@@ -64,7 +64,48 @@
 	    text-align: center;
     	margin-left: 15%;
 	}
+	#apply_button{
+	    width: 120px;
+    height: 44px;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    }
+	#textcounter{
+		text-align: right;
+		margin-right: 21%;
+	}
 </style>
+<script type="text/javascript">
+		$(function() {
+			
+		      $('#textarea').keyup(function (){
+		          var content = $(this).val();
+		         /*  $(this).height(((content.split('\n').length + 1) * 1.5) + 'em'); */
+		          $('#counter').html(content.length + '/500');
+		      });
+		     // $('#content').keyup();
+		     
+		      $('#apply_button').click(function (){
+		          var content = $('#textarea').val();
+		          if(content.length < 300){
+		           alert("최소 300자를 채워주세요.");
+		    
+		       	   return false;
+		          }
+		      });
+		     
+		     
+		});
+		
+		
+		
+</script>
 </head>
 <body>
 <%@ include file="header.jsp"%>
@@ -74,8 +115,9 @@
 			
 		<div class="introduce">
 			<br>
-			안녕하세요. 환영니다.<br>
-			멘토 신청 관련 공지사항.<br>
+			안녕하세요. 환영합니다.<br>
+			내용을 성의있게 작성해 주세요.<br>
+			심사 후 결과를 알려드리겠습니다.<br>
 			감사합니다.<br>
 		</div>
 			
@@ -83,21 +125,25 @@
 		<form action="mypage_apply.do" method="post">	
 		<div style="text-align:center;">
 			<div style="padding: 2%;">신청자 &nbsp;&nbsp;
-				<input type="text" name ="applicant" style="width:200px; height: 20px;"/><br>
+				<input type="text" name ="applicant" style="width:200px; height: 20px; text-align:center;" value="${User.user_Id }"><br>
 				<input type="hidden" name="tomail" size="120" style="width:100%" value="jusu2529@gmail.com" class="form-control" >
 			</div>
 			<div >멘토경력&nbsp;&nbsp;
 				<input type="hidden" name="title" size="120" style="width:100%" value="멘토 신청합니다." class="form-control" >
-				<textarea name="content" rows="5" cols="70" style="text-align: center; resize:none;"></textarea>
+				<textarea name="content" rows="5" cols="70" style="text-align: center; resize:none;"
+				placeholder="경력을 자유롭게 기재해 주세요."></textarea>
 				
 			</div>	
 			<div style="padding: 2%;">멘토소개&nbsp;&nbsp;
-				<textarea  name="content1" rows="15" cols="70" style="text-align: center; resize:none;"></textarea>
+				<textarea  name="content1" id="textarea" rows="15" cols="70" style="text-align: center; resize:none;"
+				placeholder="최소 300자 이상 입력해주세요."></textarea>
+				<!-- <div><span id="count">0</span>/<span id="max-count">0</span></div> -->
+				<div id="textcounter"><span id="counter">0/500</span></div>
 			</div>	
 			<div>
 				<br>
 			<!-- 	<button>신청하기</button> -->
-				<input type="submit" value="신청하기">
+				<input type="submit" id="apply_button" value="신청하기">
 				<button>취소</button>
 			</div>
 		</div>
