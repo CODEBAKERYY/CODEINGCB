@@ -100,6 +100,9 @@
 			<input type="button" class="google" value="Google Login" />
 			<div class="g-signin2" data-onsuccess="onSignIn"></div>
 			<div class="signup_link">
+               Forgot ID Password? <a href="findidpw.do">Find ID Password</a>
+               </div>
+			<div class="signup_link">
 				Not a member? <a href="sign.do">Singup</a>
 			</div>
 		</form>

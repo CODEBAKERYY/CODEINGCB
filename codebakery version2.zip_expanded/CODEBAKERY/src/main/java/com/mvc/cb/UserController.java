@@ -281,12 +281,15 @@ public class UserController {
 		System.out.println("dto : " + dto);
 		
 		UserDto res = u_biz.selectOne(dto);
+		System.out.println(res);
 		Map<String, UserDto> searchres = new HashMap<String, UserDto>();
 		searchres.put("search", res);
 		
 		return searchres;
 	}
 
+	
+	//구글 로그인 처리
 	@ResponseBody
 	@RequestMapping(value = "googleLogin.do", method = RequestMethod.POST)
 	public void memberRegi(String userName, UserDto dto, HttpServletRequest request, HttpSession session) {
