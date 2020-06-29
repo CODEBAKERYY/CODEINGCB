@@ -47,7 +47,6 @@
 				<prop key="mail.debug">true</prop>
 			</props>
 		</property>
-
 	</bean>
 	<!-- 파일업로드에 필요한 bean -->
 	<bean id="multipartResolver"
@@ -55,5 +54,4 @@
 		<property name="maxUploadSize" value="1000000"></property>
 		<property name="defaultEncoding" value="UTF-8"></property>
 	</bean>
-
 </beans>

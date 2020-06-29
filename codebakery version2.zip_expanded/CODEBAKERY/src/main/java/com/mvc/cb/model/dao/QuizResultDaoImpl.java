@@ -2,9 +2,11 @@ package com.mvc.cb.model.dao;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.mvc.cb.model.dto.QuizResultDto;
 
+@Repository
 public class QuizResultDaoImpl implements QuizResultDao{
 	
 	@Autowired

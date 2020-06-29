@@ -37,6 +37,7 @@
 		<mapper resource="/mybatis/user-mapper.xml" />
 		<mapper resource="/mybatis/quiz-mapper.xml" />
 		<mapper resource="/mybatis/mentor-mapper.xml" />
+		<mapper resource="/mybatis/quizResult-mapper.xml"/>
 		<mapper resource="/mybatis/question-mapper.xml" />
 		<mapper resource="/mybatis/answer-mapper.xml" />
 		<mapper resource="/mybatis/qcomment-mapper.xml" />
