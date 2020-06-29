@@ -17,6 +17,10 @@
 			alias="UserDto" />
 		<typeAlias type="com.mvc.cb.model.dto.QuizDto"
 			alias="quizDto" />
+		<typeAlias type="com.mvc.cb.model.dto.QuizResultDto" 
+			alias="quizResultDto"/>
+		<typeAlias type="com.mvc.cb.model.dto.TryQuizDto" 
+			alias="tryQuizDto"/>
 		<typeAlias type="com.mvc.cb.model.dto.NoticeDto"
 			alias="NoticeDto" />
 		<typeAlias type="com.mvc.cb.model.dto.NoticeCommentDto"
@@ -33,6 +37,7 @@
 		<mapper resource="/mybatis/user-mapper.xml" />
 		<mapper resource="/mybatis/quiz-mapper.xml" />
 		<mapper resource="/mybatis/mentor-mapper.xml" />
+		<mapper resource="/mybatis/quizResult-mapper.xml"/>
 		<mapper resource="/mybatis/question-mapper.xml" />
 		<mapper resource="/mybatis/answer-mapper.xml" />
 		<mapper resource="/mybatis/qcomment-mapper.xml" />

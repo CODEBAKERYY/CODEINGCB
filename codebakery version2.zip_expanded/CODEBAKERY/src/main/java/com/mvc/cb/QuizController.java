@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,13 +20,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.util.WebUtils;
 
 import com.mvc.cb.biz.QuizBiz;
+import com.mvc.cb.biz.QuizResultBiz;
 import com.mvc.cb.model.dto.QuizDto;
+import com.mvc.cb.model.dto.QuizResultDto;
+import com.mvc.cb.model.dto.TryQuizDto;
 
 @Controller
 public class QuizController {
 
 	@Autowired
 	private QuizBiz quizBiz;
+
+	@Autowired
+	private QuizResultBiz quizResultBiz;
 
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
@@ -71,10 +78,11 @@ public class QuizController {
 	}
 
 	@RequestMapping(value = "/quiz_Answer.do")
-	public String quizAnswer(String quiz_answer, String quiz_type, int quiz_No, HttpServletRequest request,	HttpServletResponse response) {
+	public String quizAnswer(QuizResultDto quizResultDto, String quiz_answer, String quiz_type, int quiz_No, String user_Id, HttpServletRequest request, HttpServletResponse response) {
+		//quiz_No로 해당 문제 정보가져오기
 		QuizDto quizDto = quizBiz.selectOne(quiz_No);
+		//문제의 정답
 		String answer = quizDto.getOutput_Sample();
-		
 		
 		if (quiz_type.equals("java")) {
 			try {
@@ -92,25 +100,22 @@ public class QuizController {
 				Process process = runtime.exec("java test.java", null, dir);
 				process.waitFor();
 				
+				//컴파일 출력값을 toString으로 변환하여 answer와 비교한다.
 				String answerResult = IOUtils.toString(process.getInputStream(), "UTF-8");
+				answerResult = answerResult.trim(); //앞뒤 공백제거
 				String errorOutput = IOUtils.toString(process.getErrorStream());
 				
-				System.out.println("answer : " + answer);
-				System.out.println("answerResult : "+ answerResult);
-				System.out.println("errorOutput : " + errorOutput);
-
-				System.out.println(answerResult.equals("Hello World!!!"));
-				System.out.println(answerResult.toString().equals(answer));
-				System.out.println(answerResult.toString().equals("Hello World!!!"));
+				int res = quizResultBiz.insert(quizResultDto);
 				
-				System.out.println(answerResult.hashCode());
-				System.out.println(answer.hashCode());
+				System.out.println("문제 답 : " + answer);
 				
 				if(answer.equals(answerResult)) {
-					System.out.println("컴파일 성공");
+					System.out.println("컴파일 성공 : " + answerResult);
+					
 				}else {
-					System.out.println("컴파일 실패");
+					System.out.println("컴파일 실패 : " + errorOutput);
 				}
+				
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -118,8 +123,9 @@ public class QuizController {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-		} else {
+		}else {
 			System.out.println("실패");
+			System.out.println("자바가 아님");
 		}
 		return "redirect:quiz.do";
 	}

@@ -70,5 +70,37 @@ public class UserDaolmpl implements UserDao {
 		return res;
 
 	}
+	
+	//아이디 비밀번호 찾기
+	@Override
+	public UserDto selectOne(UserDto dto) {
+		
+		UserDto res = null;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE + "search", dto);
+		} catch (Exception e) {
+			System.out.println("[error] : select one");
+			e.printStackTrace();
+		}
+
+		return res;
+		
+	}
+	
+	@Override
+	public UserDto chkIdPw(UserDto dto) {
+		
+		UserDto res = null;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE + "chkIdPw", dto);
+		} catch(Exception e) {
+			System.out.println("[error] : chkIdPw");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
 
 }

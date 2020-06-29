@@ -91,8 +91,18 @@ Released   : 20130811
 			} 
 		}
 		
+		
+		//글 삭제시 알림창 띄워주기
+		function deleteBoard(question_No){
+			
+			result = confirm("게시글을 삭제하시겠습니까?");
+			
+			if(result == true){
+				alert("삭제되었습니다.");
+				location.href='qna_delete.do?question_No='+question_No;
+			}
 
-
+		}
 	// ------------------------ 답변 -------------------------------
 	
 		//답변쓰기
@@ -117,7 +127,7 @@ Released   : 20130811
 			
 			if(user_Id == "" || user_Id == null){
 				
-				var setting = "width=400, height=300"
+				var setting = "width=400, height=430"
 				var url = "nonUserAnswer.do?question_No="+question_No+"&answer_Title="+answer_Title+"&answer_Content="+answer_Content;
 				
 				window.open(url, "", setting);
@@ -196,6 +206,22 @@ Released   : 20130811
 				location.href="login.do";
 			});
 		});
+	
+		
+		//댓글 창이 빈칸일경우 검사
+		function sendComment(){
+			
+			var comment = $("#inputComment").val().trim();
+			
+			if(comment == null || comment == ""){
+				alert("댓글 내용을 입력해주세요.");
+				return false;
+			}
+			
+			alert("댓글이 등록되었습니다.");
+			$("#commentForm").submit();
+			
+		}
 	
 	
 		//댓글삭제
@@ -277,6 +303,7 @@ Released   : 20130811
 			a += '<form action="writeReply.do" id="commentForm" method="post">';
 			a += '<input type="hidden" name="user_Id" value="${User.user_Id }" />';
 			a += '<input type="hidden" name="question_No" value="${qlist.question_No }" />';
+			a += '<input type="hidden" name="user_Pic" value="${User.user_Pic }" />';
 			a += '<input type="hidden" name="comment_No" value="'+comment_No+'" />';
 			a += '<input type="hidden" name="depth" value="'+depth+'" />'; 
 			a += '<input type="hidden" name="group_Id" value="'+group_Id+'" />'; 
@@ -342,9 +369,9 @@ Released   : 20130811
 					</p>
 				</div>
 				<div style="text-align: right;">
-					<c:if test="${!empty User && (User.user_Id eq qlist.user_Id) }">
+					<c:if test="${!empty User && (User.user_Id eq qlist.user_Id) || (User.user_Id eq 'ADMIN')}">
 					<input type="button" class="btn btn-secondary" value="수정" onclick="location.href='qna_update.do?question_No=${qlist.question_No}'"/>
-					<input type="button" class="btn btn-secondary" value="삭제" onclick="location.href='qna_delete.do?question_No=${qlist.question_No}'"/>
+					<input type="button" class="btn btn-secondary" value="삭제" onclick="deleteBoard(${qlist.question_No});"/>
 					</c:if>
 					<input type="button" class="btn btn-secondary" value="목록" onclick="location.href='qna.do'"/>
 				</div>
@@ -358,6 +385,7 @@ Released   : 20130811
 					<form action="writeComment.do" id="commentForm" method="post">
 						<input type="hidden" name="user_Id" value="${User.user_Id }" />
 						<input type="hidden" name="question_No" value="${qlist.question_No }" />
+						<input type="hidden" name="user_Pic" value="${User.user_Pic }" />
 	                    <div>
 	                        <div>
 	                            <table class="table">                    
@@ -380,7 +408,7 @@ Released   : 20130811
 	                                        <textarea class="form-control" style="width: 1000px; resize: none;" rows="2" cols="30" id="inputComment" name="comment_Content" placeholder="댓글을 입력해주세요."></textarea>
 	                                    </td>
 	                                    <td style="text-align: right; mdisplay:table-cell; vertical-align:middle;">
-	                                    	<input type="submit" class="btn btn-primary" value="등록" style="width: 90px; height: 50px;"/>
+	                                    	<input type="button" class="btn btn-primary" value="등록" style="width: 90px; height: 50px;" onclick="sendComment();"/>
 	                                    </td>
 	                                    </c:otherwise>
 	                                    </c:choose>
@@ -400,15 +428,15 @@ Released   : 20130811
 								
 								<c:choose>
 									<c:when test="${dto.parent_No eq 0 }">
-										<li class="comment" id="onecomm">
+										<li class="comment" id="onecomm" style="margin-bottom: 0px;">
 											<div class="vcard bio">
-												<img src="resources/csss/images/person_4_sq.jpg" alt="Image placeholder" />
+												<img src="${pageContext.request.contextPath}/upload${dto.user_Pic }" alt="Image" />
 											</div>
 											<div class="comment-body">
 												<span style="font-size:20px; font-family: initial;">${dto.user_Id }</span>
 												<button class="btn btn-link" onclick="Reply(${dto.comment_No}, ${dto.depth }, ${dto.group_Id }, ${i.index });">Reply</button>
-												<span class="meta"><fmt:formatDate value="${dto.comment_Date }" pattern="yyyy.MM.dd HH:mm:ss"/></span>&nbsp;&nbsp;
-												<c:if test="${!empty User && (User.user_Id eq dto.user_Id) }">
+												<span class="meta"><fmt:formatDate value="${dto.comment_Date }" pattern="yyyy.MM.dd HH:mm"/></span>&nbsp;&nbsp;
+												<c:if test="${!empty User && (User.user_Id eq dto.user_Id) || (User.user_Id eq 'ADMIN')}">
 												<input type="button" class="btn btn-link" value="수정" onclick="modifyComment(${dto.comment_No}, '${dto.comment_Content }',${i.index });"/>
 												<input type="button" class="btn btn-link" value="삭제" onclick="deleteComment(${dto.comment_No}, ${qlist.question_No });"/>
 												</c:if>
@@ -418,20 +446,20 @@ Released   : 20130811
 										</li>
 									</c:when>
 									<c:otherwise>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;							
-									<svg class="bi bi-arrow-down-right" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-									  <path fill-rule="evenodd" d="M12 7.5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-.5.5H7a.5.5 0 0 1 0-1h4.5V8a.5.5 0 0 1 .5-.5z"/>
-									  <path fill-rule="evenodd" d="M2.646 3.646a.5.5 0 0 1 .708 0l9 9a.5.5 0 0 1-.708.708l-9-9a.5.5 0 0 1 0-.708z"/>
+									<svg class="bi bi-arrow-down-right-circle" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+									  <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+									  <path fill-rule="evenodd" d="M10.5 11h-4a.5.5 0 0 1 0-1h2.793L5.146 5.854a.5.5 0 1 1 .708-.708L10 9.293V6.5a.5.5 0 0 1 1 0v4a.5.5 0 0 1-.5.5z"/>
 									</svg>
-										<div style="margin-left: 40px;"> <span></span>
+										<div style="margin-left: 50px; margin-bottom: 0px;"> <span></span>
 										<li class="comment" id="onecomm">
 										<div class="vcard bio">
-											<img src="resources/csss/images/person_4_sq.jpg" alt="Image placeholder" />
+											<img src="${pageContext.request.contextPath}/upload${dto.user_Pic }" alt="Image" />
 										</div>
 										<div class="comment-body">
 											<span style="font-size:20px; font-family: initial;">${dto.user_Id }</span>
 											<button class="btn btn-link" onclick="Reply(${dto.comment_No}, ${dto.depth }, ${dto.group_Id }, ${i.index });">Reply</button>
 											<span class="meta"><fmt:formatDate value="${dto.comment_Date }" pattern="yyyy.MM.dd HH:mm:ss"/></span>&nbsp;&nbsp;
-											<c:if test="${!empty User && (User.user_Id eq dto.user_Id) }">
+											<c:if test="${!empty User && (User.user_Id eq dto.user_Id) || (User.user_Id eq 'ADMIN') }">
 											<input type="button" class="btn btn-link" value="수정" onclick="modifyComment(${dto.comment_No}, '${dto.comment_Content }',${i.index });"/>
 											<input type="button" class="btn btn-link" value="삭제" onclick="deleteComment(${dto.comment_No}, ${qlist.question_No });"/>
 											</c:if>
@@ -466,7 +494,7 @@ Released   : 20130811
 								<div class="post-meta">
 									<span class="author">${dto.user_Id }</span>&nbsp;&nbsp;&nbsp;&nbsp;
 									<span class="date"><fmt:formatDate value="${dto.answer_Date }" pattern="yyyy.MM.dd HH:mm"/></span>
-									<c:if test="${!empty User && (User.user_Id eq dto.user_Id) }">
+									<c:if test="${!empty User && (User.user_Id eq dto.user_Id) || (User.user_Id eq 'ADMIN')}">
 									<input type="button" class="btn btn-link" value="수정" onclick="modifyAnswer(${qlist.question_No }, ${dto.answer_No}, '${dto.answer_Title }', '${dto.answer_Content }');"/>
 									<input type="button" class="btn btn-link" value="삭제" onclick="deleteAnswer(${dto.answer_No}, ${qlist.question_No });"/>
 									</c:if>
@@ -515,6 +543,6 @@ Released   : 20130811
 
 
 
-	<%@ include file="footer.jsp" %>  
 </body>
+	<%@ include file="footer.jsp" %>  
 </html>

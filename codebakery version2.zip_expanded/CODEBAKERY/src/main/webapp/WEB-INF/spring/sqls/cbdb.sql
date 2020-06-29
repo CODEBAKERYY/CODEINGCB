@@ -123,15 +123,14 @@ CREATE TABLE ANSWER (
 -- 질문/답변 댓글
 CREATE TABLE QNA_COMMENT (
 	QCOMMENT_NO	NUMBER CONSTRAINT PK_QCOMMNET_NO PRIMARY KEY,       -- 질문댓글번호
-	QUESTION_NO	NUMBER(10),                                         -- 질문번호
+	QUESTION_NO	NUMBER,                                        		-- 질문번호
     QCOMMENT_CONTENT VARCHAR2(1000)	NOT NULL,                       -- 질문댓글내용
     QCOMMENT_DATE DATE DEFAULT SYSDATE,                             -- 질문댓글시간
-    GROUP_ID NUMBER,
-    PARENT_NO NUMBER,
-    DEPTH NUMBER(10),                                              
-    ORDER_NO NUMBER,                                         
-	USER_ID	VARCHAR2(20),
-	NUSER_ID VARCHAR2(20)
+    GROUP_ID NUMBER,												-- 그룹아이디
+    PARENT_NO NUMBER,												-- 대댓글 부모번호
+    DEPTH NUMBER,													-- 깊이
+    USER_ID	VARCHAR2(20),											-- 댓글아이디
+	USER_PIC VARCHAR2(100)											-- 댓글 사진
 );
 
 
@@ -153,23 +152,29 @@ CREATE TABLE QUIZ (
     CONSTRAINT FK_QUIZ_USER_ID FOREIGN KEY(USER_ID) REFERENCES USER_TB(USER_ID) ON DELETE CASCADE
 );
 
--- 문제풀기
-CREATE TABLE TRY_QUIZ (
-	QUIZ_NO	NUMBER CONSTRAINT PK_TQUIZ_NO PRIMARY KEY,          -- 문제번호
-	CODE_CONTENT VARCHAR2(4000)	NOT NULL,                       -- 작성코드내용
-	EX_RESULT VARCHAR2(300)	NOT NULL,                           -- 출력예시
-    PRINT_REULT VARCHAR2(300) NOT NULL,                         -- 출력결과
-	USER_ID	VARCHAR2(20) NOT NULL,                             
-    CONSTRAINT FK_TQUIZ_USER_ID FOREIGN KEY(USER_ID) REFERENCES USER_TB(USER_ID) ON DELETE CASCADE
-);
+--테이블 삭제
+---- 문제풀기
+--CREATE TABLE TRY_QUIZ (
+--	QUIZ_NO	NUMBER CONSTRAINT PK_TQUIZ_NO PRIMARY KEY,          -- 문제번호
+--	CODE_CONTENT VARCHAR2(4000)	NOT NULL,                       -- 작성코드내용
+--	EX_RESULT VARCHAR2(300)	NOT NULL,                           -- 출력예시
+--    PRINT_REULT VARCHAR2(300) NOT NULL,                         -- 출력결과
+--	USER_ID	VARCHAR2(20) NOT NULL,                             
+--    CONSTRAINT FK_TQUIZ_USER_ID FOREIGN KEY(USER_ID) REFERENCES USER_TB(USER_ID) ON DELETE CASCADE
+--);
 
 -- 채점결과
 CREATE TABLE QUIZ_RESULT (
 	QUIZ_NO	NUMBER CONSTRAINT PK_QRESULT_NO PRIMARY KEY,        -- 문제번호
+	CODE_CONTENT VARCHAR2(4000)	NOT NULL,                       -- 작성코드내용
+	EX_RESULT VARCHAR2(300)	NOT NULL,                           -- 출력예시
+    PRINT_REULT VARCHAR2(300) NOT NULL,                         -- 출력결과
 	QUIZ_RESULT	VARCHAR2(20) NOT NULL,                          -- 채점결과
 	USER_ID	VARCHAR2(20) NOT NULL,
     CONSTRAINT FK_QRESULT_USER_ID FOREIGN KEY(USER_ID) REFERENCES USER_TB(USER_ID) ON DELETE CASCADE
 );
+
+DROP TABLE QUIZ_RESULT;
 
 -- 공지사항
 CREATE TABLE NOTICE (

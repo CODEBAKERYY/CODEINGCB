@@ -7,17 +7,17 @@
 <meta charset="UTF-8">
 <title>CODEBAKERY</title>
 <link rel="shortcut icon" type="image/x-icon" href="resources/images/favicon.png" />
+<link href="resources/csss/bootstrap.min.css" rel="stylesheet"  type="text/css" media="all"/>
 <style type="text/css">
 	body{
 		background: #F2EFEF;
 		text-align: center;
 		padding: 30px;
-		margin-top: 35px;
+		margin-top: 100px;
 	}
 	
 	.button{
 		margin-bottom: 25px;
-	    background: #D2D2D7;
 	    border: none;
 	    padding: 25px;
 	    width: 200px;
@@ -40,8 +40,8 @@
 		<input type="hidden" name="question_No" value="${answer.question_No }" />
 		<input type="hidden" name="answer_Title" value="${answer.answer_Title }"/>
 		<input type="hidden" name="answer_Content" value="${answer.answer_Content }"/>
-		<input type="submit" class="button" value="비회원으로 작성하기"/><br>
-		<input type="button" class="button" value="로그인하기" onclick="doLogin();"/>
+		<input type="submit" class="btn btn-outline-dark btn-lg btn-block" value="비회원으로 작성하기"/><br>
+		<input type="button" class="btn btn-outline-dark btn-lg btn-block" value="로그인하기" onclick="doLogin();"/>
 	</form>
 </body>
 </html>

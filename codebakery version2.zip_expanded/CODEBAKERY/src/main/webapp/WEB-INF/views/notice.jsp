@@ -36,9 +36,7 @@
 	<%@ include file="header.jsp"%>
 	
 	<div id="logo" class="container">
-		<h1>
-			<a class="icon icon-tasks"><span>공지사항</span></a>
-		</h1>
+		<h1>공지사항</h1>
 	</div>
 
 	<!--============== 공지사항 게시글 리스트 START ==============-->
@@ -83,7 +81,7 @@
                	<!-- 관리자 일때만 글쓰기버튼 활성화 -->
                 <c:if test="${User.user_Grade == '관리자' && !empty User}">
                 <div class="text-right">
-                    <button type="button" class="btn btn-secondary pull-right" onclick="location.href='notice_write.do'" style="width: 8%;" >글쓰기</button>
+                    <button type="button" class="btn btn-secondary pull-right" onclick="location.href='notice_write.do'" style="width: 6%; text-align:center;" >글쓰기</button>
                 </div>
                 </c:if>
                 

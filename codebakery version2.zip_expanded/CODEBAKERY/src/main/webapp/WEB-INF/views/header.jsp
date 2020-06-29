@@ -30,7 +30,7 @@
 		/* $(".alram").click(function() {
 			$(".alrimdiv").toggle();
 		}); */
-		$(".alram").click(function() {
+	<%-- 	$(".alram").click(function() {
 			toastr.options = {
                 "preventDuplicates" : true, // 중복실행 방지, false일 경우 여러번 실행 가능, true면 하나만 띄운다(없어지면 다시 띄우기 가능)
 				closeButton : true,
@@ -42,7 +42,7 @@
 			};<%for (int i = 0; i < 10; i++) {%>toastr.info('알림<%=i%>
 	', '알림이다!');
 <%}%>
-	});
+	}); --%>
 
 	});
 </script>
@@ -108,7 +108,7 @@
 				<li class="current_page_item"><a href="main.do" accesskey="1"
 					title="">Home</a></li>
 				<li><a href="mentor_detailAll.do" accesskey="1" title="">멘토소개</a></li>
-				<li><a href="qna.do" accesskey="2" title="">질의응답</a></li>
+				<li><a href="qna.do" accesskey="2" title="">질문답변</a></li>
 				<li><a href="quiz.do" accesskey="3" title="">퀴즈</a></li>
 				<li><a href="notice.do" accesskey="4" title="">공지사항</a></li>
 				<%

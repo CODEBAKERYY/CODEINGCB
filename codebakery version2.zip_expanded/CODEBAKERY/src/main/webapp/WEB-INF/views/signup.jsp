@@ -22,6 +22,8 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript">
 
+
+	// 아이디 정규식
 	function idcheckz() {
 		
 		var idCheck = RegExp(/^[a-zA-Z0-9]{4,12}$/);
@@ -34,6 +36,7 @@
 	}
 
 	
+	// 비밀번호 정규식
 	function pwcheckz() {
 		var passwdCheck = RegExp(/^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/);
 		if (!passwdCheck.test($("#userpw").val())) {
@@ -44,6 +47,7 @@
 		}
 	}
 	
+	// 비밀번호 일치여부
 	function samePw(){
 
 		var pw = $("#userpw").val();
@@ -58,7 +62,7 @@
 	}
 
 
-
+	// 아이디 중복체크
 	function idchk() {
 		var user_Id = $('#userid').val();
 		var idchk = {
@@ -74,6 +78,7 @@
 				console.log(msg);
 				if (msg.check == false) {
 					confirm("사용 가능한 아이디입니다.");
+					$("#idCheck").val("y");
 				} else {
 					alert("사용할 수 없는 아이디입니다.");
 					$("#userid").focus();
@@ -88,6 +93,7 @@
 	}
 	
 
+	// 비밀번호 일치여부 보여주는 곳
 	$(function() {
 		
 		$("#alert-success").hide();
@@ -106,6 +112,8 @@
 			}
 		});
 		
+		
+		// 회원가입 전 유효성 검사
 		$("#signupform").submit(
 				
 				function() {
@@ -162,7 +170,7 @@
 						alert("핸드폰번호 인증을 해주세요.")
 						$("#noChk").focus();
 						return false;
-					}
+					} 
 
 					var emailChk = /^[a-z0-9_+.-]+@([a-z0-9-]+\.)+[a-z0-9]{2,4}$/;
 					if(usermail == null || usermail == ""){
@@ -183,8 +191,20 @@
 						return false;
 					}
 					
+					if($("#idCheck").val()=='n'){
+						alert("중복된 아이디 입니다.");
+						$("#userid").focus();
+						return false;
+					}
+					
+					if($("#phCheck").val()=='n'){
+						alert("인증번호를 다시 한번 확인해주세요.");
+						$("#noChk").focus();
+						return false;
+					}
+					
 					if(lang == null || lang == ""){
-						alert("선호하는 언어를 한개 이상 체크해주세요.")
+						alert("선호하는 언어를 한개 이상 체크해주세요.");
 						return false;
 					} 
 					
@@ -195,7 +215,7 @@
 			});
 	
 	
-	/* 휴대폰 본인인증 */	
+	// 휴대폰 본인인증 	
 	function sendSMS(){
 		
          var phoneNumber = $("#userphone").val();
@@ -206,6 +226,7 @@
          }
 
          $("#getPhoneBtn").css('display', 'none');
+         $("#getPhoneAgain").css('display', 'block');
          $("#verCode").css('display', 'block');
          $("#checkBtn").css('display', 'block');
 		
@@ -221,12 +242,13 @@
                 	 var noChk = $("#noChk").val();
                 	 
                      if(res == noChk){
-							
                     	 alert("휴대폰 인증이 정상적으로 완료되었습니다.");
+                    	 $("#phCheck").val("y")
                     	 $("#checkBtn").prop('disabled', true);
-                         
+                    	 
                      }else{
-                         alert("인증번호가 올바르지 않습니다!");
+                         alert("인증번호가 올바르지 않습니다.");
+                         $("#noChk").focus();
                          return false;
                      }
                  })
@@ -241,33 +263,47 @@
 		
 </script>
 <style type="text/css">
-.alert alert-success {
-	color: red;
-}
 
-.alert-danger {
-	color: red;
-}
-
+	.alert alert-success {
+		color: red;
+	}
+	
+	.alert-danger {
+		color: red;
+	}
 
 	#verCode, #checkBtn{
 		display: none;
 	}
+	
+	#getPhoneAgain{
+		display: none;
+	}
+	
+	.buttons{
+		margin-left: auto;
+		text-align: right;
+	}
+	
 </style>
 </head>
 <body>
 
 	<%@ include file="header.jsp"%>
-	<div class="center">
-		<h1>Signup</h1>
+	<div class="center" style="margin-top: 23%;">
+		<h1 style="padding: 13px;">Signup</h1>
 		<form:form method="post" enctype="multipart/form-data"
 			modelAttribute="uploadFile" id="signupform" action="signup.do">
+			<input type="hidden" value="n" id="idCheck"/>
+			<input type="hidden" value="n" id="phCheck" />
 			<input type="hidden" name="user_Point" value="0" />
 			<div class="txt_field">
 				<input type="text" name="user_Id" id="userid" /> <span></span> 
 				<label>id</label>
 			</div>
-			<input type="button" onclick="idchk();" value="아이디 체크" />
+			<div class="buttons" >
+				<input type="button" onclick="idchk();" value="아이디 체크" />
+			</div>
 			<div id="id_chk"></div>
 			<div class="txt_field">
 				<input type="password" name="user_Pw" id="userpw" onfocus="idcheckz();" /> <span></span> 
@@ -289,11 +325,16 @@
 				<input type="text" name="user_Phone" id="userphone" style="width: 200px;"/> <span></span>
 				<label>phone</label>
 			</div>
-			<span style="text-align: right;"><input type="button" value="인증번호받기" onclick="sendSMS();" id="getPhoneBtn"/></span>
+			<div class="buttons" >
+				<input type="button" value="인증번호받기" onclick="sendSMS();" id="getPhoneBtn" style="margin-left: auto; text-align: right;"/>
+				<input type="button" value="인증번호 다시 받기" onclick="sendSMS();" id="getPhoneAgain"  style="margin-left: auto; text-align: right;"/>
+			</div>
 			<div class="txt_field" id="verCode">
 				<input type="text" style="width: 200px;" id="noChk"/> <span></span> <label>verification code</label>
 			</div>
-				<input type="button" id="checkBtn" value="인증번호 확인"/>
+			<div class="buttons">
+				<input type="button" id="checkBtn" value="인증번호 확인" style="margin-left: auto; text-align: right;"/>
+			</div>
 			<div class="txt_field">
 				<input type="text" name="user_Mail" id="usermail" /> <span></span>
 				<label>email</label>
@@ -302,17 +343,21 @@
 				<input type="file" id="photo" name="pic" /><span></span>
 			</div>
 			<div class="language">
-				<div>Preferred language</div>
-				<input type="checkbox" name="user_Lang" value="1" />java 
-				<input type="checkbox" name="user_Lang" value="2" />python 
-				<input type="checkbox" name="user_Lang" value="3" />c++
-				<input type="checkbox" name="user_Lang" value="4" />c
-				<input type="checkbox" name="user_Lang" value="5" />javascript 
-				<!-- <input type="hidden" name="user_Lang" value="java" /> -->
-			</div>
+				<div style="color: #2691d9; font-size:18px">Preferred language</div><br />
+				<input type="checkbox" name="user_Lang" value="1" />c 
+				<input type="checkbox" name="user_Lang" value="2" />c++ 
+				<input type="checkbox" name="user_Lang" value="3" />c#
+				<input type="checkbox" name="user_Lang" value="4" />Java
+				<input type="checkbox" name="user_Lang" value="5" />Python<br />
+				<input type="checkbox" name="user_Lang" value="6" />Javascript 
+				<input type="checkbox" name="user_Lang" value="7" />PHP
+				<input type="checkbox" name="user_Lang" value="8" />Scala
+				<input type="checkbox" name="user_Lang" value="9" />Perl 
+				<input type="checkbox" name="user_Lang" value="10" />Ruby 
+			</div><br></br>
 			<input type="submit" value="회원가입" style="margin-top: 20px" />
 				<div class="signup_link">
-					회원이세요? <a href="login.do">로그인</a>
+					회원이세요? &nbsp;<a href="login.do">로그인</a>
 				</div>
 		</form:form>
 	</div>

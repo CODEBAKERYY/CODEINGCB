@@ -53,7 +53,8 @@
 		USER_NAME = #{user_Name},
 		USER_PHONE =
 		#{user_Phone},
-		USER_MAIL = #{user_Mail}
+		USER_MAIL = #{user_Mail},
+		USER_PIC = #{user_Pic}
 		WHERE
 		USER_ID = #{user_Id}
 	</update>
@@ -76,4 +77,15 @@
 		USER_POINT = #{user_Point}
 		WHERE USER_ID = #{user_Id}
 	</update>
+	
+	<select id="search" resultType="UserDto">
+		SELECT * FROM USER_TB
+		WHERE USER_NAME = #{user_Name} AND USER_PHONE = #{user_Phone}
+	</select>
+	
+	<select id="chkIdPw" parameterType="UserDto" resultType="UserDto">
+		SELECT * 
+		FROM USER_TB
+		WHERE USER_ID = #{user_Id} AND USER_PW = #{user_Pw}
+	</select>
 </mapper>

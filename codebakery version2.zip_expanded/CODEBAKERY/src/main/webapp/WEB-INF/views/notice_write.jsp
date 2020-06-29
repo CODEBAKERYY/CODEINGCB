@@ -46,9 +46,7 @@ Released   : 20130811
 	<%@ include file="header.jsp"%>
 	
 	<div id="logo" class="container">
-		<h1>
-			<a class="icon icon-tasks"><span>글쓰기</span></a>
-		</h1>
+		<h1>글쓰기</h1>
 	</div>
 
  	<!--============== 공지사항 글쓰기 START ==============-->
@@ -64,17 +62,17 @@ Released   : 20130811
                             <br><br>
                             <tr>
                                 <th>작성자</th>
-                                <td style="padding:10px;"><input style="width: 821px; height: 35px;" type="text" id="writer" name="user_Id" value="시스템관리자" readonly="readonly"/></td>
+                                <td style="padding:10px;"><input style="width: 821px; height: 35px;" type="text" id="writer" name="user_Id" value="시스템 관리자" readonly="readonly"/></td>
                             </tr>
                             <tr>
                                 <th style="display: table-cell; vertical-align: middle;">내용</th>
-                                <td style="padding:10px;"><textarea style="resize: none;" rows="15" cols="100" name="notice_Content" ></textarea></td>
+                                <td style="padding:10px;"><textarea style="resize: none; width: 821px;" rows="15" name="notice_Content" ></textarea></td>
                             </tr>
                         </table>
                         <tr>
 	                        <div style="width: 850px; margin: 0 auto; text-align: right;" >
-	                            <button type="submit" class="btn btn-light pull-right" id="btnDone">완료</button>
-	                            <button type="button" class="btn btn-light pull-right" id="btnList" onclick="location.href='notice.do'">취소</button>
+	                            <button type="submit" class="btn btn-secondary pull-right" id="btnDone" style="text-align:center;">완료</button>
+	                            <button type="button" class="btn btn-secondary pull-right" id="btnList" style="text-align: center;" onclick="location.href='notice.do'">취소</button>
 	                        </div>
                    	 </tr>
                     </div>

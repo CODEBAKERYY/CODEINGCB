@@ -8,6 +8,7 @@
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <link rel="shortcut icon" type="image/x-icon" href="resources/images/favicon.png" />
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
 
 <link href="./css/default.css" rel="stylesheet" type="text/css" media="all" />
@@ -113,7 +114,7 @@
 <%@ include file="header.jsp"%>
 
 	<div class="form">
-		<h1>멘토 신청하기</h1>
+		<h1 style="padding: 30px;">멘토 신청하기</h1>
 			
 		<div class="introduce">
 			<br>

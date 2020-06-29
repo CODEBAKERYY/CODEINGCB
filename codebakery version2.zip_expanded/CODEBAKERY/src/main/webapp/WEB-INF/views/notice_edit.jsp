@@ -46,9 +46,7 @@ Released   : 20130811
 	<%@ include file="header.jsp"%>
 	
 	<div id="logo" class="container">
-		<h1>
-			<a class="icon icon-tasks"><span>글 수정</span></a>
-		</h1>
+		<h1>공지사항 수정</h1>
 	</div>
 
  	<!--============== 공지사항 수정 START ==============-->
@@ -58,23 +56,23 @@ Released   : 20130811
                     <div>
                         <table style="margin: 0px auto;">
                             <tr>
-                                <th>제목</th>
-                                <td style="padding:10px;"><input style="width: 821px; height: 35px;" type="text" name="notice_Title" value="${update.notice_Title }" ></td>
+                                <th style="text-align: right;">제목</th>
+                                <td style="padding:10px;"><input style="width: 821px; height: 35px;" type="text" name="notice_Title" value="${update.notice_Title }" /></td>
                             </tr>
                             <br><br>
                             <tr>
-                                <th>작성자</th>
-                                <td style="padding:10px;"><input style="width: 821px; height: 35px;" type="text" name="user_Id" value="${update.user_Id }" readonly="readonly"></td>
+                                <th style="text-align: right;">작성자</th>
+                                <td style="padding:10px;"><input style="width: 821px; height: 35px;" type="text" name="user_Id" value="${update.user_Id }" readonly="readonly" /></td>
                             </tr>
                             <tr>
-                                <th style="display: table-cell; vertical-align: middle;">내용</th>
-                                <td style="padding:10px;"><textarea style="resize: none;" rows="15" cols="100" name="notice_Content">${update.notice_Content }</textarea></td>
+                                <th style="display: table-cell; vertical-align: middle; text-align: right;">내용</th>
+                                <td style="padding:10px;"><textarea style="resize: none; width: 821px;" rows="15" name="notice_Content">${update.notice_Content }</textarea></td>
                             </tr>
                         </table>
                         <tr>
 	                        <div style="width: 850px; margin: 0 auto; text-align: right;" >
-	                            <button type="submit" class="btn btn-light pull-right" id="btnDone">완료</button>
-	                            <button type="button" class="btn btn-light pull-right" id="btnList" onclick="location.href='notice_view.do?notice_No=${update.notice_No}'">취소</button>
+	                            <button type="submit" class="btn btn-secondary" style="text-align: center;" id="btnDone">완료</button>
+	                            <button type="button" class="btn btn-secondary" style="text-align: center;" id="btnList" onclick="location.href='notice_view.do?notice_No=${update.notice_No}'">취소</button>
 	                        </div>
                    	 	</tr>
                     </div>
