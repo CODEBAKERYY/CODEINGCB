@@ -51,6 +51,6 @@ public class ChatController {
 		rdto.setMentor_No(mentor_No);
 		rdto.setUser_Id(user.getUser_Id());
 		int res  = mr_biz.insert(rdto);
-		return "main";
+		return "redirect:main.do";
 	}
 }

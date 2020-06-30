@@ -41,6 +41,6 @@ public class QuizBizlmpl implements QuizBiz {
 
 	@Override
 	public int update(QuizDto quizDto) {
-		return quizDao.update();	
+		return quizDao.update(quizDto);	
 	}
 }
