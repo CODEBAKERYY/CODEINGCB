@@ -31,6 +31,7 @@ DROP TABLE NOTICE_COMMENT;
 DROP TABLE NOTICE;
 DROP TABLE USER_TB;
 DROP TABLE NON_USER;
+DROP TABLE POINT_TB;
 
 DROP SEQUENCE MENTORSEQ;
 DROP SEQUENCE REVIEWSEQ;
@@ -41,6 +42,7 @@ DROP SEQUENCE QCOMMENTGROUPSEQ;
 DROP SEQUENCE QUIZSEQ;
 DROP SEQUENCE NOTICESEQ;
 DROP SEQUENCE NCOMMENTSEQ;  
+DROP SEQUENCE POINTSEQ NOCACHE; 
 
 
 CREATE SEQUENCE MENTORSEQ NOCACHE;        -- 멘토게시판
@@ -52,6 +54,7 @@ CREATE SEQUENCE QCOMMENTGROUPSEQ NOCACHE; -- QnA 게시판 대댓글
 CREATE SEQUENCE QUIZSEQ NOCACHE;          -- 문제게시판
 CREATE SEQUENCE NOTICESEQ NOCACHE;        -- 공지사항
 CREATE SEQUENCE NCOMMENTSEQ NOCACHE;      -- 공지사항 댓글
+CREATE SEQUENCE POINTSEQ NOCACHE;         -- 포인트 사용내역
 
 
 -- 유저테이블 
@@ -192,6 +195,16 @@ CREATE TABLE NOTICE_COMMENT (
     CONSTRAINT FK_NCOMMENT_USER_ID FOREIGN KEY(USER_ID) REFERENCES USER_TB(USER_ID) ON DELETE CASCADE
 );
 
+-- 포인트 사용내역
+CREATE TABLE POINT_TB(
+   POINT_NO NUMBER CONSTRAINT PK_POINT_NO PRIMARY KEY,       -- 사용내역번호
+   POINT_DATE DATE,                                          -- 날짜
+   POINT_CHARGE VARCHAR2(50) DEFAULT 0,                      -- 충전금액
+   POINT_USE VARCHAR2(50) DEFAULT 0,                         -- 사용금액
+   POINT_HISTORY VARCHAR2(100),                              -- 사용내역
+   USER_ID   VARCHAR2(20),                                   -- 유저아이디 외래키
+    CONSTRAINT FK_POINT_USER_ID FOREIGN KEY(USER_ID) REFERENCES USER_TB(USER_ID) ON DELETE CASCADE
+);
 --------------------------------------------------------------------
 
 --------------------------- DATA INSERT ----------------------------
@@ -260,31 +273,16 @@ VALUES(NOTICESEQ.NEXTVAL, '공지사항 제목02', '공지사항 내용02', SYSD
 INSERT INTO NOTICE_COMMENT VALUES(NCOMMENTSEQ.NEXTVAL, 1, '공지댓글내용01', SYSDATE, 'user2');
 INSERT INTO NOTICE_COMMENT VALUES(NCOMMENTSEQ.NEXTVAL, 2, '공지댓글내용02', SYSDATE, 'user3');
 
-
-
-
-SELECT * FROM MENTOR_INTRO
-		JOIN USER_TB USING(USER_ID);
-		
-		SELECT * FROM MENTOR_REVIEW
-		ORDER BY REVIEW_NO DESC;
-
-	SELECT * FROM MENTOR_REVIEW
-		ORDER BY REVIEW_NO DESC
-		
-	INSERT INTO MENTOR_REVIEW VALUES(
-	REIVEWSEQ.NEXTVAL,'별로에요',SYSDATE,'mentor2',1
-	);
-	INSERT INTO MENTOR_REVIEW VALUES(
-	REIVEWSEQ.NEXTVAL,'좋아요',SYSDATE,'mentor2',1
-	);
-	INSERT INTO MENTOR_REVIEW VALUES(
-	REIVEWSEQ.NEXTVAL,'굿이에요',SYSDATE,'mentor2',1
-	);
-	SELECT * FROM MENTOR_REVIEW WHERE MENTOR_NO = 1;
-		
+-- POINT_TB
+INSERT INTO POINT_TB VALUES(POINTSEQ.NEXTVAL,SYSDATE,'','200','떙떙맨토 채팅 1분20초','user1');
+INSERT INTO POINT_TB VALUES(POINTSEQ.NEXTVAL, SYSDATE,'300','','충전','user1');
 
 COMMIT;
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 SELECT COUNT(*) FROM QNA_COMMENT;
 SELECT * FROM
 		MENTOR_REVIEW
@@ -302,27 +300,7 @@ SELECT * FROM QUESTION;
 SELECT * FROM NOTICE_COMMENT;
 commit;
 
---------------------------------------------------------------------------------------------------------------------------------------------------------------------
-CREATE SEQUENCE POINTSEQ NOCACHE;        -- 포인트 사용내역
--- 포인트 테이블
-CREATE TABLE POINT_TB(
-	POINT_NO NUMBER CONSTRAINT PK_POINT_NO PRIMARY KEY,       -- 사용내역번호
-	POINT_DATE DATE,											-- 날짜
-	POINT_CHARGE VARCHAR2(50) DEFAULT 0,						-- 충전금액
-	POINT_USE VARCHAR2(50) DEFAULT 0,							-- 사용금액
-	POINT_HISTORY VARCHAR2(100),								-- 사용내역
-	USER_ID	VARCHAR2(20),										-- 유저아이디 외래키
-    CONSTRAINT FK_POINT_USER_ID FOREIGN KEY(USER_ID) REFERENCES USER_TB(USER_ID) ON DELETE CASCADE
-);
-
-DROP TABLE POINT_TB;
-DELETE FROM POINT_TB;
-
-INSERT INTO POINT_TB VALUES(POINTSEQ.NEXTVAL,SYSDATE,'','200','떙떙맨토 채팅 1분20초','user1');
-INSERT INTO POINT_TB VALUES(POINTSEQ.NEXTVAL, SYSDATE,'300','','충전','user1');
-
 SELECT * FROM POINT_TB;
-
 select user_point from user_tb where user_id='user1';
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

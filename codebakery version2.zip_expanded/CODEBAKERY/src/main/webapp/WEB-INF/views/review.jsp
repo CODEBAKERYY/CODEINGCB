@@ -7,14 +7,13 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
-	function check() {
-		/* opener.location.href = 'main.do'; */
+$("#reviewform").submit( {
 		window.close();
 	}
 </script>
 </head>
 <body>
-	<form method="post" action="reviewinsert.do">
+	<form method="post" action="reviewinsert.do" id="reviewform">
 		<center>
 			<h2>리뷰 작성하기</h2>
 		</center>
@@ -27,8 +26,8 @@
 				<br> 현재 보유중인 포인트 : ${User.user_Point } point<br> 지불해야 할
 				포인트 : point<br>
 				<br>
-				<button type="button" class="btn btn-default pull-right"
-					onclick="check()">확인</button>
+				<!-- <button type="button" class="btn btn-default pull-right"
+					onclick="check()">확인</button> -->
 				<input type="hidden" name="mentor_No" value="${mentor_No }" /> <input
 					type="submit" />
 			</center>
