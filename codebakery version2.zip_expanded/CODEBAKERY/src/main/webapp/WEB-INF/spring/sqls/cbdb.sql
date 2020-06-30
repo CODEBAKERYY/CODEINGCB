@@ -62,7 +62,7 @@ CREATE TABLE USER_TB (
 	USER_NAME VARCHAR2(20) NOT NULL,                            -- 유저이름
 	USER_PHONE VARCHAR2(100) NOT NULL,                          -- 유저폰번호
 	USER_MAIL VARCHAR2(100) NOT NULL,                           -- 유저메일
-	USER_POINT NUMBER DEFAULT 0,                                -- 유저 이메일
+	USER_POINT NUMBER ,                                          -- 유저 이메일
 	USER_PIC VARCHAR2(100),                                     -- 유저사진
 	USER_LANG VARCHAR2(200) NOT NULL,                           -- 유저선호언어
     CONSTRAINT CHK_USER_GRADE CHECK (USER_GRADE IN('일반회원','멘토','관리자'))
@@ -202,14 +202,14 @@ CREATE TABLE NOTICE_COMMENT (
 --------------------------- DATA INSERT ----------------------------
 
 -- USER_TB
-INSERT INTO USER_TB VALUES('ADMIN','1234','관리자', '관리자','010-2345-6767', 'admin@kh.or.kr', NULL, NULL, 'java');
-INSERT INTO USER_TB VALUES('user1','1234','일반회원','김건영','010-2342-1234','kky@kh.or.kr', NULL,'userpic','java');
-INSERT INTO USER_TB VALUES('user2','1234','일반회원','박주혁','010-6787-1234','pjyy@kh.or.kr', NULL,'userpic','java');
-INSERT INTO USER_TB VALUES('user3','1234','일반회원','권민석','010-7942-1234','kms@kh.or.kr', NULL,'userpic','java');
-INSERT INTO USER_TB VALUES('user4','1234','일반회원','정승연','010-3782-1234','jsy@kh.or.kr', NULL,'userpic','java');
-INSERT INTO USER_TB VALUES('user5','1234','일반회원','주수현','010-1782-1234','jsh@kh.or.kr',NULL,'userpic','java');
-INSERT INTO USER_TB VALUES('user6','1234','일반회원','이재익','010-94562-1234','ljl@kh.or.kr', NULL,'userpic','java');
-INSERT INTO USER_TB VALUES('mentor','1234','멘토','멘토','010-94562-1234','멘토@kh.or.kr',NULL,'NULL','java');
+INSERT INTO USER_TB VALUES('ADMIN','1234','관리자', '관리자','010-2345-6767', 'admin@kh.or.kr', 0, NULL, 'java');
+INSERT INTO USER_TB VALUES('user1','1234','일반회원','김건영','010-2342-1234','kky@kh.or.kr', 0,'userpic','java');
+INSERT INTO USER_TB VALUES('user2','1234','일반회원','박주혁','010-6787-1234','pjyy@kh.or.kr', 0,'userpic','java');
+INSERT INTO USER_TB VALUES('user3','1234','일반회원','권민석','010-7942-1234','kms@kh.or.kr', 0,'userpic','java');
+INSERT INTO USER_TB VALUES('user4','1234','일반회원','정승연','010-3782-1234','jsy@kh.or.kr', 0,'userpic','java');
+INSERT INTO USER_TB VALUES('user5','1234','일반회원','주수현','010-1782-1234','jsh@kh.or.kr', 0,'userpic','java');
+INSERT INTO USER_TB VALUES('user6','1234','일반회원','이재익','010-94562-1234','ljl@kh.or.kr', 0,'userpic','java');
+INSERT INTO USER_TB VALUES('mentor','1234','멘토','멘토','010-94562-1234','멘토@kh.or.kr', 0,'NULL','java');
 
 SELECT * FROM USER_TB;
 -- MENTOR_INTRO
@@ -265,6 +265,22 @@ INSERT INTO NOTICE
 VALUES(NOTICESEQ.NEXTVAL, '공지사항 제목01', '공지사항 내용01', SYSDATE, 0, 'ADMIN');
 INSERT INTO NOTICE
 VALUES(NOTICESEQ.NEXTVAL, '공지사항 제목02', '공지사항 내용02', SYSDATE, 0, 'ADMIN');
+INSERT INTO NOTICE
+VALUES(NOTICESEQ.NEXTVAL, '공지사항 제목03', '공지사항 내용03', SYSDATE, 0, 'ADMIN');
+INSERT INTO NOTICE
+VALUES(NOTICESEQ.NEXTVAL, '공지사항 제목04', '공지사항 내용04', SYSDATE, 0, 'ADMIN');
+INSERT INTO NOTICE
+VALUES(NOTICESEQ.NEXTVAL, '공지사항 제목05', '공지사항 내용05', SYSDATE, 0, 'ADMIN');
+INSERT INTO NOTICE
+VALUES(NOTICESEQ.NEXTVAL, '공지사항 제목06', '공지사항 내용06', SYSDATE, 0, 'ADMIN');
+INSERT INTO NOTICE
+VALUES(NOTICESEQ.NEXTVAL, '공지사항 제목07', '공지사항 내용07', SYSDATE, 0, 'ADMIN');
+INSERT INTO NOTICE
+VALUES(NOTICESEQ.NEXTVAL, '공지사항 제목08', '공지사항 내용08', SYSDATE, 0, 'ADMIN');
+INSERT INTO NOTICE
+VALUES(NOTICESEQ.NEXTVAL, '공지사항 제목09', '공지사항 내용09', SYSDATE, 0, 'ADMIN');
+INSERT INTO NOTICE
+VALUES(NOTICESEQ.NEXTVAL, '공지사항 제목10', '공지사항 내용10', SYSDATE, 0, 'ADMIN');
 
 -- NOTICE_COMMENT
 INSERT INTO NOTICE_COMMENT VALUES(NCOMMENTSEQ.NEXTVAL, 1, '공지댓글내용01', SYSDATE, 'user2');
@@ -310,4 +326,5 @@ select * from mentor_intro;
 SELECT * FROM ( SELECT * FROM ANSWER ORDER BY ANSWER_NO DESC ) WHERE ROWNUM <=5 ; 
 SELECT * FROM QUESTION;
 SELECT * FROM NOTICE_COMMENT;
+SELECT * FROM NOTICE;
 commit;
