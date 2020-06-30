@@ -307,3 +307,30 @@ SELECT * FROM ( SELECT * FROM ANSWER ORDER BY ANSWER_NO DESC ) WHERE ROWNUM <=5 
 SELECT * FROM QUESTION;
 SELECT * FROM NOTICE_COMMENT;
 commit;
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+CREATE SEQUENCE POINTSEQ NOCACHE;        -- 포인트 사용내역
+-- 포인트 테이블
+CREATE TABLE POINT_TB(
+	POINT_NO NUMBER CONSTRAINT PK_POINT_NO PRIMARY KEY,       -- 사용내역번호
+	POINT_DATE DATE,											-- 날짜
+	POINT_CHARGE VARCHAR2(50) DEFAULT 0,						-- 충전금액
+	POINT_USE VARCHAR2(50) DEFAULT 0,							-- 사용금액
+	POINT_HISTORY VARCHAR2(100),								-- 사용내역
+	USER_ID	VARCHAR2(20),										-- 유저아이디 외래키
+    CONSTRAINT FK_POINT_USER_ID FOREIGN KEY(USER_ID) REFERENCES USER_TB(USER_ID) ON DELETE CASCADE
+);
+
+DROP TABLE POINT_TB;
+DELETE FROM POINT_TB;
+
+INSERT INTO POINT_TB VALUES(POINTSEQ.NEXTVAL,SYSDATE,'','200','떙떙맨토 채팅 1분20초','user1');
+INSERT INTO POINT_TB VALUES(POINTSEQ.NEXTVAL, SYSDATE,'300','','충전','user1');
+
+SELECT * FROM POINT_TB;
+
+select user_point from user_tb where user_id='user1';
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+

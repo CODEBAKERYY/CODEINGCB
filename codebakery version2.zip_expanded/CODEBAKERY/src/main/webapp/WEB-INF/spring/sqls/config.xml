@@ -31,6 +31,11 @@
 			alias="AnswerDto" />
 		<typeAlias type="com.mvc.cb.model.dto.QnACommentDto"
 			alias="QnACommentDto" />
+	    
+	    <!-- 포인트 내역 추가부분 -->
+		<typeAlias type="com.mvc.cb.model.dto.PointDto"
+			alias="PointDto" />
+	    
 	</typeAliases>
 
 	<mappers>
@@ -41,8 +46,13 @@
 		<mapper resource="/mybatis/question-mapper.xml" />
 		<mapper resource="/mybatis/answer-mapper.xml" />
 		<mapper resource="/mybatis/qcomment-mapper.xml" />
-		<mapper resource="/mybatis/mentorReview-mapper.xml" />
+	<!-- 	<mapper resource="/mybatis/mentorReview-mapper.xml" /> -->
 		<mapper resource="/mybatis/notice-mapper.xml" />
 		<mapper resource="/mybatis/notice_comment-mapper.xml" />
+		
+		
+		<!-- 포인트 내역 추가부분 -->
+		<mapper resource="/mybatis/point-mapper.xml" />	
+		
 	</mappers>
 </configuration>

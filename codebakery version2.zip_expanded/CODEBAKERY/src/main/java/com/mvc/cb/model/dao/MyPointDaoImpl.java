@@ -1,0 +1,41 @@
+package com.mvc.cb.model.dao;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.mvc.cb.model.dto.PointDto;
+
+@Repository
+public class MyPointDaoImpl implements MyPointDao{
+	
+	
+	@Autowired
+	private SqlSessionTemplate sqlSession;
+	
+	@Override
+	public List<PointDto> selectAll(String id) {
+		System.out.println("포인트 사용내역 가저오는 중");
+		
+		List<PointDto> list = new ArrayList<PointDto>();
+
+//		int start = paging.getStartRow();
+//		int end = paging.getEndRow();
+
+//		HashMap<String, Object> param = new HashMap<String, Object>();
+//		param.put("start", start);
+//		param.put("end", end);
+		try {
+//			list = sqlSession.selectList(NAMESPACE + "selectList", param);
+			list = sqlSession.selectList(NAMESPACE + "selectList");
+		} catch (Exception e) {
+			System.out.println("[error] : select list");
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+}

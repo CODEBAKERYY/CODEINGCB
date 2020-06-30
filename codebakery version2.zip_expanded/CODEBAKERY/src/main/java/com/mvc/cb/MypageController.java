@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mvc.cb.biz.MyPageBiz;
+import com.mvc.cb.biz.MyPointBiz;
 import com.mvc.cb.biz.UserBiz;
 import com.mvc.cb.model.dto.UserDto;
 
@@ -33,6 +34,9 @@ public class MypageController {
 
 	@Autowired
 	private MyPageBiz biz;
+	
+	@Autowired
+	private MyPointBiz p_biz;
 
 	@RequestMapping(value = "/chkPw.do")
 	public String chkPw() {
@@ -76,10 +80,16 @@ public class MypageController {
 		return adjustres;
 	}
 
-	@RequestMapping("mypoint.do")
-	public String myPoint() {
+//	포인트 내역 페이지로 인해 수정---------------------------------------------------------
+	@RequestMapping("/mypoint.do")
+	public String pointchk(Model model,String id) {
+		logger.info("APPLY PAGE");
+		System.out.println(id);
+		model.addAttribute("list", p_biz.selectAll(id));
+		
 		return "mypage_point";
 	}
+//----------------------------------------------------------------------------------	
 
 	@RequestMapping("apply.do")
 	public String applyMentor() {
