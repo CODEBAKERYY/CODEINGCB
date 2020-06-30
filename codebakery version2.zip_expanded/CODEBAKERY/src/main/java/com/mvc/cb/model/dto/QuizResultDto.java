@@ -3,11 +3,11 @@ package com.mvc.cb.model.dto;
 public class QuizResultDto {
 
 	private int quiz_No;
-	private String code_Content; //코드 내용
-	private String ex_Result; //정답
-	private String print_Result; //결과값
-	private String quiz_Result; //정답/실패
-	private String user_Id;
+	private String code_Content; // 코드 내용
+	private String ex_Result; // 정답
+	private String print_Result; // 결과값
+	private String quiz_Result; // 성공,실패
+	private String user_Id; // 유저 아이디
 	
 	public QuizResultDto() {
 		super();

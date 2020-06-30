@@ -36,9 +36,6 @@ public class QuizDaolmpl implements QuizDao {
 
 		try {
 			quizList = sqlSession.selectList(NAMESPACE + "selectList");
-			if (quizList == null) {
-				System.out.println("왜 널이 뜰까유????????????????????????????????");
-			}
 		} catch (Exception e) {
 			System.out.println("[error] : QuizSelectList");
 			e.printStackTrace();
@@ -85,5 +82,18 @@ public class QuizDaolmpl implements QuizDao {
 			e.printStackTrace();
 		}
 		return quizList;
+	}
+
+	@Override
+	public int update() {
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"update");
+		}catch(Exception e) {
+			System.out.println("[error] : Quiz Update");
+			e.printStackTrace();
+		}
+		return res;
 	}
 }

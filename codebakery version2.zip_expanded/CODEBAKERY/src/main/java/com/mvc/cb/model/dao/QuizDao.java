@@ -17,4 +17,6 @@ public interface QuizDao {
 	public QuizDto selectOne(int quiz_No);
 
 	public List<QuizDto> quizList();
+
+	public int update();
 }
