@@ -56,24 +56,19 @@ CREATE SEQUENCE NCOMMENTSEQ NOCACHE;      -- 공지사항 댓글
 
 -- 유저테이블 
 CREATE TABLE USER_TB (
-	USER_ID	VARCHAR2(20) CONSTRAINT PK_USER_ID PRIMARY KEY,     -- 유저아이디
+	USER_ID	VARCHAR2(50) CONSTRAINT PK_USER_ID PRIMARY KEY,     -- 유저아이디
 	USER_PW	VARCHAR2(50) NOT NULL,                              -- 유저비밀번호
     USER_GRADE VARCHAR2(20) DEFAULT '일반회원' NOT NULL,           -- 유저등급
 	USER_NAME VARCHAR2(20) NOT NULL,                            -- 유저이름
 	USER_PHONE VARCHAR2(100) NOT NULL,                          -- 유저폰번호
 	USER_MAIL VARCHAR2(100) NOT NULL,                           -- 유저메일
-	USER_POINT NUMBER,                                          -- 유저 이메일
+	USER_POINT NUMBER DEFAULT 0,                                -- 유저 이메일
 	USER_PIC VARCHAR2(100),                                     -- 유저사진
 	USER_LANG VARCHAR2(200) NOT NULL,                           -- 유저선호언어
     CONSTRAINT CHK_USER_GRADE CHECK (USER_GRADE IN('일반회원','멘토','관리자'))
 );
 
--- 비회원테이블
-CREATE TABLE NON_USER (
-	NUSER_ID VARCHAR2(20) CONSTRAINT PK_NUSER_ID PRIMARY KEY,   -- 비회원 아이디   
-	NUSER_PW VARCHAR2(50) NOT NULL,                             -- 비회원 비밀번호
-	NUSER_CONTENT VARCHAR2(1000) NOT NULL                       -- 비회원 댓글내용
-);
+
 
 -- 멘토게시판
 CREATE TABLE MENTOR_INTRO (

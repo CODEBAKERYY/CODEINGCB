@@ -17,7 +17,6 @@ import com.mvc.cb.biz.QCommentBiz;
 import com.mvc.cb.biz.QuestionBiz;
 import com.mvc.cb.biz.UserBiz;
 import com.mvc.cb.model.dto.AnswerDto;
-import com.mvc.cb.model.dto.NUserDto;
 import com.mvc.cb.model.dto.PageMaker;
 import com.mvc.cb.model.dto.QnACommentDto;
 import com.mvc.cb.model.dto.QnAPagingDto;
@@ -291,10 +290,6 @@ public class QnAController {
 			adto.setAnswer_Content(dto.getAnswer_Content());
 			int res = a_biz.insert(adto);
 
-			
-			NUserDto ndto = new NUserDto();
-			ndto.setNuser_Id(nuser_Id);
-			
 			
 			if(res>0) {
 				return "location.reload()";
