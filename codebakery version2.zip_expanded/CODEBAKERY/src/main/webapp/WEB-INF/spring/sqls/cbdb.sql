@@ -14,7 +14,7 @@ COMMIT;
 
 ------------------------------------------
 
-
+SELECT * FROM QUIZ;
 
 
 ------------ CODEBAKERY 테이블/시퀀스 생성 --------------
@@ -163,14 +163,15 @@ CREATE TABLE QUIZ (
 --	USER_ID	VARCHAR2(20) NOT NULL,                             
 --    CONSTRAINT FK_TQUIZ_USER_ID FOREIGN KEY(USER_ID) REFERENCES USER_TB(USER_ID) ON DELETE CASCADE
 --);
-
+DROP TABLE QUIZ_RESULT;
 -- 채점결과
+SELECT * FROM QUIZ_RESULT;
 CREATE TABLE QUIZ_RESULT (
 	QUIZ_NO	NUMBER CONSTRAINT PK_QRESULT_NO PRIMARY KEY,        -- 문제번호
 	CODE_CONTENT VARCHAR2(4000)	NOT NULL,                       -- 작성코드내용
 	EX_RESULT VARCHAR2(300)	NOT NULL,                           -- 출력예시
-    PRINT_REULT VARCHAR2(300) NOT NULL,                         -- 출력결과
-	QUIZ_RESULT	VARCHAR2(20) NOT NULL,                          -- 채점결과
+    PRINT_RESULT VARCHAR2(300) NOT NULL,                         -- 출력결과
+	QUIZ_RESULT	VARCHAR2(20),                                   -- 채점결과
 	USER_ID	VARCHAR2(20) NOT NULL,
     CONSTRAINT FK_QRESULT_USER_ID FOREIGN KEY(USER_ID) REFERENCES USER_TB(USER_ID) ON DELETE CASCADE
 );

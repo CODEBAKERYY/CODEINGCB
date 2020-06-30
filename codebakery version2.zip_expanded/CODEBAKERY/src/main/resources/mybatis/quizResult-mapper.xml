@@ -12,4 +12,15 @@
   		<result property="quiz_Result" column="QUIZ_RESULT"/>
   		<result property="user_Id" column="USER_ID"/>
   	</resultMap>
+  	
+  	<select id="selectList" resultMap="quizResultMap">
+  		SELECT *
+  		FROM QUIZ_RESULT
+  		ORDER BY QUIZ_NO DESC
+  	</select>
+  	
+  	<insert id="insert">
+  		INSERT INTO QUIZ_RESULT
+  		VALUES(#{quiz_No}, #{code_Content}, #{ex_Result}, #{print_Result}, #{quiz_Result}, #{user_Id})
+  	</insert>
   </mapper>
