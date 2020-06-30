@@ -44,36 +44,73 @@ public class QnAController {
 	// 메뉴에서 '질의응답'을 누르면 들어오는 요청
 	@RequestMapping("/qna.do")
 	public String QnAList(Model model,Integer question_No ,
-						 @RequestParam(value="page",required = false) Integer page) {
+						 @RequestParam(value="page",required = false) Integer page,@RequestParam(value="question_Tag",required=false) String question_Tag) {
 		
 		logger.info("QnAList");
 		
-		//페이지가 넘어오지 않았을 경우 1페이지로 설정
-		if( page == null ) {
-			page = 1;
-		}
-		
-		int total = q_biz.countBoard();
-		
-		QnAPagingDto paging = new QnAPagingDto();
-		paging.setPage(page);
-		paging.setTotalArticle(total);
-		paging.setTotalPage(total);
-		paging.setStartRow();
-		paging.setEndRow();
-		
-		// 한 페이지에 출력 될  질문 게시글 리스트
-		List<QuestionDto> qList = q_biz.selectList(paging); 
+		if(question_Tag == ""||question_Tag==null) {
+			
+			//페이지가 넘어오지 않았을 경우 1페이지로 설정
+			if( page == null ) {
+				page = 1;
+			}
+			
+			int total = q_biz.countBoard();
+			
+			QnAPagingDto paging = new QnAPagingDto();
+			paging.setPage(page);
+			paging.setTotalArticle(total);
+			paging.setTotalPage(total);
+			paging.setStartRow();
+			paging.setEndRow();
+			
+			// 한 페이지에 출력 될  질문 게시글 리스트
+			List<QuestionDto> qList = q_biz.selectList(paging); 
 
-		// 한 페이지에 출력될 질문 게시글(qList)에 맞춰서 답변 수를 가져온다.
-		List<Integer> cntList = a_biz.getCntAnswer(qList); 
-		
-		PageMaker maker = new PageMaker();
-		maker.setPaging(paging);
-		
-		model.addAttribute("list", qList);
-		model.addAttribute("cntList",cntList);
-		model.addAttribute("pageMaker",maker);
+			// 한 페이지에 출력될 질문 게시글(qList)에 맞춰서 답변 수를 가져온다.
+			List<Integer> cntList = a_biz.getCntAnswer(qList); 
+			
+			PageMaker maker = new PageMaker();
+			maker.setPaging(paging);
+			
+			model.addAttribute("list", qList);
+			model.addAttribute("cntList",cntList);
+			model.addAttribute("pageMaker",maker);
+			
+		}else {
+			
+			if( page == null ) {
+				page = 1;
+			}
+			
+			int total = q_biz.countTags(question_Tag);
+			
+			QnAPagingDto paging = new QnAPagingDto();
+			paging.setPage(page);
+			paging.setTotalArticle(total);
+			paging.setTotalPage(total);
+			paging.setStartRow();
+			paging.setEndRow();
+			
+			
+			// 한 페이지에 출력 될  질문 게시글 리스트
+			List<QuestionDto> list = q_biz.selectTagList(paging, question_Tag);
+			
+			// 한 페이지에 출력될 질문 게시글(qList)에 맞춰서 답변 수를 가져온다.
+			List<Integer> cntList = a_biz.getCntAnswer(list);
+			
+			
+			PageMaker maker = new PageMaker();
+			maker.setPaging(paging);
+			
+			model.addAttribute("list", list);
+			model.addAttribute("cntList",cntList);
+			model.addAttribute("pageMaker",maker);
+			model.addAttribute("tagName",question_Tag);
+			
+			
+			
+		}
 		
 		return "qna";
 	}
@@ -85,6 +122,9 @@ public class QnAController {
 		logger.info("tagList");
 		
 		//페이지가 넘어오지 않았을 경우 1페이지로 설정
+		
+		
+		
 		if( page == null ) {
 			page = 1;
 		}
@@ -112,7 +152,7 @@ public class QnAController {
 		model.addAttribute("list", list);
 		model.addAttribute("cntList",cntList);
 		model.addAttribute("pageMaker",maker);
-		
+		model.addAttribute("tagName",question_Tag);
 		return "qna";
 	}
 	
