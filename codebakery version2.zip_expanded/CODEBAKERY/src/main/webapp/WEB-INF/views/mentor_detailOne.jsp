@@ -89,7 +89,7 @@
 				</tr>
 			</c:when>
 			<c:otherwise>
-				<c:forEach items="${review }" var="dto" begin="0" end="3"
+				<c:forEach items="${review }" var="dto" begin="0" end="10"
 					varStatus="i" step="1">
 					<table class='table'>
 						<tr>
