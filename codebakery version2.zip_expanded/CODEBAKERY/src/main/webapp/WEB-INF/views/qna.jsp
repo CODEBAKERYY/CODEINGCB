@@ -107,7 +107,7 @@ Released   : 20130811
 			          <ul class="pagination">
 			             <c:if test="${pageMaker.prev }">
 			               <li class="page-item">
-			                 <a class="page-link" href="qna.do?page=${pageMaker.startPage - 1 }" aria-label="Previous">
+			                 <a class="page-link" href="qna.do?page=${pageMaker.startPage - 1 }&question_Tag=${tagName}" aria-label="Previous">
 			                   <span aria-hidden="true">&laquo;</span>
 			                 </a>
 			               </li>                          
@@ -115,10 +115,10 @@ Released   : 20130811
 			             <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
 			                <c:choose>
 			                   <c:when test="${idx eq page }">
-			                     <li class="page-item active"><a class="page-link" href="qna.do?page=${idx }">${idx }</a></li>
+			                     <li class="page-item active"><a class="page-link" href="qna.do?page=${idx }&question_Tag=${tagName}">${idx }</a></li>
 			                   </c:when>
 			                   <c:otherwise>                      
-			                     <li class="page-item"><a class="page-link" href="qna.do?page=${idx }">${idx }</a></li>
+			                     <li class="page-item"><a class="page-link" href="qna.do?page=${idx }&question_Tag=${tagName}">${idx }</a></li>
 			                   </c:otherwise>
 			                </c:choose>                
 			             </c:forEach>
