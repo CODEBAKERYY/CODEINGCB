@@ -67,8 +67,9 @@
 		= #{user_Grade} WHERE USER_ID = #{user_Id}
 	</update>
 	<!-- 관리자 등급 변경 -->
-	<select id="selectOne" parameterType="String"
-		resultType="UserDto">SELECT * FROM USER_TB WHERE USER_ID = #{user_Id}</select>
+	<select id="selectOne" parameterType="String" resultType="UserDto">
+		SELECT * FROM USER_TB WHERE USER_ID = #{user_Id}
+	</select>
 
 	<!-- point charge 포인트 충전 -->
 	<update id="pointUpdate" parameterType="UserDto">
