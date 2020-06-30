@@ -63,7 +63,6 @@ public class UserController {
 	@Autowired
 	private CertificationService certificationService;
 
-
 	// 메인으로 이동시 해당 정보
 	@RequestMapping(value = "/main.do")
 	public String main(Model model) {
@@ -148,52 +147,11 @@ public class UserController {
 	}
 
 	// 로그인 폼 이동
-	@RequestMapping(value = "login.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String login(Model model, HttpSession session) {
-		logger.info("login");
-		/* 구글code 발행 */
-		/* 생성한 인증 URL을 View로 전달 */
+	@RequestMapping(value = "login.do")
+	public String login() {
+		logger.info("login form");
 		return "login";
 	}
-
-//	// 구글 Callback호출 메소드
-//	@RequestMapping(value = "ggLogin.do", method = { RequestMethod.GET, RequestMethod.POST })
-//	public String googleCallback(Model model, HttpServletRequest request) throws IOException {
-//
-//		System.out.println("구글 로그인 들어왔다");
-//		String code = request.getParameter("code");
-//
-//		OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
-//		AccessGrant accessGrant = oauthOperations.exchangeForAccess(code, googleOAuth2Parameters.getRedirectUri(),
-//				null);
-//		String accessToken = accessGrant.getAccessToken();
-//		Long expireTime = accessGrant.getExpireTime();
-//		if (expireTime != null && expireTime < System.currentTimeMillis()) {
-//			accessToken = accessGrant.getRefreshToken();
-//			logger.info("accessToken is expired. refresh token = {}", accessToken);
-//		}
-//		Connection<Google> connection = googleConnectionFactory.createConnection(accessGrant);
-//		Google google = connection == null ? new GoogleTemplate(accessToken) : connection.getApi();
-//		PlusOperations plusOperations = google.plusOperations();
-//		Person person = plusOperations.getGoogleProfile();
-//
-////			UserDto user = new UserDto();
-////			user.setUser_Id(person.getDisplayName());
-//////			member.setAuth("USR");
-////
-////			HttpSession session = request.getSession();
-////			session.setAttribute("User", user );
-//
-//		/*
-//		 * System.out.println(person.getAccountEmail());
-//		 * System.out.println(person.getAboutMe());
-//		 * System.out.println(person.getDisplayName());
-//		 * System.out.println(person.getEtag());
-//		 * System.out.println(person.getFamilyName());
-//		 * System.out.println(person.getGender());
-//		 */
-//		return "main";
-//	}
 
 	// 로그인 확인
 	@RequestMapping("loginchk.do")
@@ -265,50 +223,48 @@ public class UserController {
 
 		return numStr;
 	}
-	
-	//아이디 비밀번호 찾기폼 이동
+
+	// 아이디 비밀번호 찾기폼 이동
 	@RequestMapping("/findidpw.do")
 	public String findidpw() {
 		return "findidpw";
 	}
-	
-	//아이디 비밀번호 찾기
+
+	// 아이디 비밀번호 찾기
 	@RequestMapping("/search.do")
 	@ResponseBody
 	public Map<String, UserDto> search(@RequestBody UserDto dto) {
-		
+
 		logger.info("search id pw");
-		System.out.println("dto : " + dto);
-		
 		UserDto res = u_biz.selectOne(dto);
-		System.out.println(res);
 		Map<String, UserDto> searchres = new HashMap<String, UserDto>();
 		searchres.put("search", res);
-		
 		return searchres;
 	}
 
-	
-	//구글 로그인 처리
+	// 구글 로그인 처리
 	@ResponseBody
 	@RequestMapping(value = "googleLogin.do", method = RequestMethod.POST)
 	public void memberRegi(String userName, UserDto dto, HttpServletRequest request, HttpSession session) {
 
 		String user_Id = (request.getParameter("user_Id"));
+		String user_Name = (request.getParameter("user_Name"));
+		String user_Pic = (request.getParameter("user_Pic"));
+		dto.setUser_Name(user_Name);
+		dto.setUser_Pic(user_Pic);
 		dto.setUser_Id(user_Id);
 		session.setAttribute("User", dto);
 	}
-	
-	//아이디, 비밀번호 존재여부 (회원인지 아닌지 확인)
-	@RequestMapping( value = "/chkIdPw.do")
+
+	// 아이디, 비밀번호 존재여부 (회원인지 아닌지 확인)
+	@RequestMapping(value = "/chkIdPw.do")
 	@ResponseBody
 	public UserDto chkIdPw(UserDto dto) {
-		
+
 		logger.info("chkIdPw");
-		
+
 		UserDto res = u_biz.chkIdPw(dto);
-		
-		
+
 		return res;
 	}
 

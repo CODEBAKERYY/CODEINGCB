@@ -1,5 +1,7 @@
 package com.mvc.cb.biz;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,11 @@ public class QuizResultBizImpl implements QuizResultBiz{
 	@Override
 	public int insert(QuizResultDto dto) {
 		return quizResultDao.insert(dto);
+	}
+
+	@Override
+	public List<QuizResultDto> selectList() {
+		return quizResultDao.selectList();
 	}
 	
 	

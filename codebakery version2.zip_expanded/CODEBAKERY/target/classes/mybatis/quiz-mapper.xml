@@ -35,11 +35,17 @@
   		INSERT INTO QUIZ
   		VALUES(QUIZSEQ.NEXTVAL, #{quiz_Title}, #{quiz_Content}, SYSDATE, 0, 0, 0, 0, #{input_Explanation}, #{output_Explanation}, #{input_Sample}, #{output_Sample}, #{user_Id})
   	</insert>
+  	
   	<select id="count" resultType="int">
   	SELECT COUNT(*) FROM QUIZ
   	</select>
+  	
   	<select id="quizList" resultMap="quizMap">
   		 SELECT * FROM ( SELECT * FROM QUIZ ORDER BY QUIZ_NO 
 			DESC ) 	<!--[CDATA[WHERE ROWNUM <=5 ]] -->
   	</select>
+  	
+  	<update id="update">
+  		UPDATE QUIZ SET CORRECT_USER = #{correct_User}, TRY_USER = #{try_User}, CORRECT_RATE = #{correct_Rate}
+  	</update>
   </mapper>

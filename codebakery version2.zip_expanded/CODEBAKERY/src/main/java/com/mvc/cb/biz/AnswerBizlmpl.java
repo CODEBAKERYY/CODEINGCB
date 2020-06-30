@@ -62,8 +62,8 @@ public class AnswerBizlmpl implements AnswerBiz{
 	}
 
 	@Override
-	public AnswerDto selectOne(int answer_No) {
-		return dao.selectOne(answer_No);
+	public AnswerDto selectOne(AnswerDto dto) {
+		return dao.selectOne(dto);
 	}
 
 

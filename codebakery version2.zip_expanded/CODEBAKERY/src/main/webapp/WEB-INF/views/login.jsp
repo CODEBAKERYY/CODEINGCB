@@ -23,7 +23,8 @@
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <meta name="google-signin-client_id"
 	content="121669463740-pd7j72id6sifhlpku0rie93puk61f33d.apps.googleusercontent.com" />
-<link href="resources/csss/bootstrap.min.css" rel="stylesheet"  type="text/css" media="all"/>
+<link href="resources/csss/bootstrap.min.css" rel="stylesheet"
+	type="text/css" media="all" />
 <script type="text/javascript">
 
 	$(function(){
@@ -67,9 +68,10 @@
 		console.log('Email: ' + profile.getEmail());
 		var user_Id = profile.getId();
 		var user_Name = profile.getName();
+		var user_Pic = profile.getImageUrl();
 		$.ajax({
 			url : "googleLogin.do",
-			data : "user_Id=" + user_Id,
+			data : {"user_Id" : user_Id, "user_Name" : user_Name, "user_Pic" : user_Pic},
 			type : "POST",
 			success : function(data) {
 				alert("구글 로그인 성공")
@@ -89,22 +91,23 @@
 		<h1 style="padding: 20px; font-weight: 700;">Login</h1>
 		<form method="post" action="loginchk.do" id="loginform">
 			<div class="txt_field">
-				<input type="text" name="user_Id" id="userId" /> <span></span>
-				<label>id</label>
+				<input type="text" name="user_Id" id="userId" /> <span></span> <label>id</label>
 			</div>
 			<div class="txt_field">
 				<input type="password" name="user_Pw" id="userPwS" /> <span></span>
 				<label>password</label>
 			</div>
 			<br />
-			<input type="button" value="Login" id="log" class="btn btn-secondary btn-lg btn-block"/>
-			<input type="button" class="google" value="Google Login" /><br />
-			<div class="g-signin2" data-onsuccess="onSignIn"></div>
+			<input type="button" value="Login" id="log"
+				class="btn btn-secondary btn-lg btn-block" />
+			<br></br>
+			<div class="g-signin2 btn btn-secondary btn-lg btn-block"
+				data-onsuccess="onSignIn"></div>
 			<div class="signup_link">
-               Forgot Id or Password? <a href="findidpw.do">Find Id/Password</a>
-               </div>
+				아이디 OR 비밀번호 ? <a href="findidpw.do">아이디 및 비밀번호 찾기</a>
+			</div>
 			<div class="signup_link">
-				Not a member? <a href="sign.do">Singup</a>
+				회원이 아니세요? <a href="sign.do">회원가입</a>
 			</div>
 		</form>
 	</div>

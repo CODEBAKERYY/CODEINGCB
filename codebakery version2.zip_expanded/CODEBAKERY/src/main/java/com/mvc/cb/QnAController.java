@@ -17,7 +17,6 @@ import com.mvc.cb.biz.QCommentBiz;
 import com.mvc.cb.biz.QuestionBiz;
 import com.mvc.cb.biz.UserBiz;
 import com.mvc.cb.model.dto.AnswerDto;
-import com.mvc.cb.model.dto.NUserDto;
 import com.mvc.cb.model.dto.PageMaker;
 import com.mvc.cb.model.dto.QnACommentDto;
 import com.mvc.cb.model.dto.QnAPagingDto;
@@ -292,10 +291,6 @@ public class QnAController {
 			int res = a_biz.insert(adto);
 
 			
-			NUserDto ndto = new NUserDto();
-			ndto.setNuser_Id(nuser_Id);
-			
-			
 			if(res>0) {
 				return "location.reload()";
 			} else {
@@ -396,6 +391,22 @@ public class QnAController {
 		
 	// ------------------------ 답변 등록/수정/삭제 END -------------------------
 		
-		
+		// 메인에서 보여지는 답변 리스트
+		@RequestMapping(value = "/answer_detail.do")
+		public String answerList(AnswerDto dto) {
+			
+			logger.info("answerList");
+			
+			System.out.println("question_No : "+dto.getQuestion_No());
+			System.out.println("answert_NO: "+dto.getAnswer_No());
+			
+			
+			AnswerDto res = a_biz.selectOne(dto);
+			
+			return "redirect:qna_detail.do?question_No="+dto.getQuestion_No();
+			
+		}
+	
+	
 
 }

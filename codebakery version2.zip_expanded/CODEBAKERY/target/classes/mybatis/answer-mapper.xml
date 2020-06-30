@@ -56,17 +56,18 @@
 		FROM ANSWER
 	</select>
   
+  <!--[CDATA[WHERE ROWNUM <=5 ]] -->
   	<select id="answerList" resultMap="answerMap">
 		 SELECT * 
 		 FROM ( SELECT * 
 		 		FROM ANSWER 
-		 		ORDER BY ANSWER_NO DESC ) 	<!--[CDATA[WHERE ROWNUM <=5 ]] -->
+		 		ORDER BY ANSWER_NO DESC ) 	
 	</select>
 	
-	<select id="selectOne" resultType="AnswerDto" parameterType="int">
+	<select id="selectOne" resultType="AnswerDto" parameterType="AnswerDto">
 		SELECT * 
 		FROM ANSWER 
-		WHERE ANSWER_NO = #{answer_No}
+		WHERE ANSWER_NO = #{answer_No} AND QUESTION_NO = #{question_No}
 	</select>
 	
   </mapper>

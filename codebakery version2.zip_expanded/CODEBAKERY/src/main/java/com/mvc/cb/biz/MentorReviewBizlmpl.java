@@ -29,4 +29,9 @@ public class MentorReviewBizlmpl implements MentorReviewBiz {
 		return dao.review(mentor_No);
 	}
 
+	@Override
+	public int insert(MentorReviewDto rdto) {
+		return dao.insert(rdto);
+	}
+
 }

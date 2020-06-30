@@ -40,7 +40,7 @@ public class QuizController {
 	public String quizList(Model model) {
 		logger.info("QUIZ SELECT LIST");
 		model.addAttribute("list", quizBiz.selectList());
-
+		model.addAttribute("resultList", quizResultBiz.selectList());
 		return "quiz";
 	}
 
@@ -77,18 +77,34 @@ public class QuizController {
 		return "quiz_submit";
 	}
 
-	@RequestMapping(value = "/quiz_Answer.do")
-	public String quizAnswer(QuizResultDto quizResultDto, String quiz_answer, String quiz_type, int quiz_No, String user_Id, HttpServletRequest request, HttpServletResponse response) {
+/*	@RequestMapping(value = "/quiz_Answer.do")
+	public String quizAnswer(String quiz_answer, String quiz_type, int quiz_No, String user_Id, HttpServletRequest request, HttpServletResponse response) {
 		//quiz_No로 해당 문제 정보가져오기
 		QuizDto quizDto = quizBiz.selectOne(quiz_No);
 		//문제의 정답
 		String answer = quizDto.getOutput_Sample();
 		
+		int correctUser = 0;
+		int tryUser = 0;
+		double correctRate = 0;
+		
 		if (quiz_type.equals("java")) {
 			try {
 				String path = WebUtils.getRealPath(request.getSession().getServletContext(), "/test");
-				File file = new File(path+"/test.java");
-				OutputStream output = new FileOutputStream(file);
+				
+				File storage = new File(path);
+				if (!storage.exists()) { // 경로 존재 여부
+					storage.mkdirs(); // 디렉토리 생성
+				}
+				
+				File newfile = new File(path + "/test.java");
+				if (!newfile.exists()) {
+					newfile.createNewFile();
+				}
+
+				OutputStream output = new FileOutputStream(newfile);
+//				File file = new File(path+"/test.java");
+//				OutputStream output = new FileOutputStream(file);
 
 				String str = quiz_answer;
 				byte[] by = str.getBytes();
@@ -105,22 +121,74 @@ public class QuizController {
 				answerResult = answerResult.trim(); //앞뒤 공백제거
 				String errorOutput = IOUtils.toString(process.getErrorStream());
 				
-				int res = quizResultBiz.insert(quizResultDto);
-				
 				System.out.println("문제 답 : " + answer);
 				
-				if(answer.equals(answerResult)) {
+				if(answer.equals(answerResult)) { //컴파일 성공시
 					System.out.println("컴파일 성공 : " + answerResult);
 					
-				}else {
+					//quizResultDto에 값을 넣은 후 insert하여 테이블에 추가하기(성공일 때)
+					QuizResultDto quizResultDto = new QuizResultDto(quiz_No, quiz_answer, answer, answerResult, "성공", user_Id);
+					int res = quizResultBiz.insert(quizResultDto);
+					
+					if(res>0) {
+						System.out.println("성공입니다.");
+						
+						//제출, 정답자, 정답률 업데이트
+						tryUser = quizDto.getTry_User()+1;
+						correctUser = quizDto.getCorrect_User()+1;
+						//소수 3자리까지 보여줌
+						correctRate = Math.round(((correctUser/tryUser)*1000)/1000);
+						
+						//QuizDto에 넣어주고 DB에 업데이트
+						quizDto.setTry_User(tryUser);
+						quizDto.setCorrect_User(correctUser);
+						quizDto.setCorrect_Rate(correctRate);
+						
+						res = quizBiz.update(quizDto);
+						
+						if(res >0) {
+							System.out.println("Quiz correct_User, try_User, correct_Rate 수정 완료");
+						}else {
+							System.out.println("Quiz correct_User, try_User, correct_Rate 수정 실패");
+						}
+					}else {
+						System.out.println("성공.quizResultInsert 에러");
+					}
+					
+				}else {	//컴파일 실패시
 					System.out.println("컴파일 실패 : " + errorOutput);
+					
+					//quizResultDto에 값을 넣은 후 insert하여 테이블에 추가하기(실패일 때)
+					QuizResultDto quizResultDto = new QuizResultDto(quiz_No, quiz_answer, answer, errorOutput, "실패", user_Id);
+					int res = quizResultBiz.insert(quizResultDto);
+					
+					if(res>0) {
+						System.out.println("실패입니다.");
+						
+						//제출, 정답자, 정답률 업데이트
+						tryUser = quizDto.getTry_User()+1;
+						correctUser = quizDto.getCorrect_User();
+						//소수 3자리까지 보여줌
+						correctRate = Math.round(((correctUser/tryUser)*1000)/1000);
+						
+						//QuizDto에 넣어주고 db에 업데이트
+						quizDto.setTry_User(tryUser);
+						quizDto.setCorrect_User(correctUser);
+						quizDto.setCorrect_Rate(correctRate);
+						
+						res = quizBiz.update(quizDto);
+						
+						if(res >0) {
+							System.out.println("Quiz try_User, correct_Rate 수정 완료");
+						}else {
+							System.out.println("Quiz try_User, correct_Rate 수정 실패");
+						}
+					}else {
+						System.out.println("실패.quizResultInsert 에러");
+					}
 				}
 				
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			} catch (InterruptedException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}else {
@@ -128,5 +196,5 @@ public class QuizController {
 			System.out.println("자바가 아님");
 		}
 		return "redirect:quiz.do";
-	}
+	}*/
 }

@@ -56,10 +56,22 @@
 					<tr>
 						<td>${dto.quiz_No }</td>
 						<td><a href="quiz_detail.do?quiz_No=${dto.quiz_No}">${dto.quiz_Title }</a></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+					<c:choose>
+						<c:when test="${empty resultList }">
+							<td></td>
+							<td>${dto.correct_User }</td>
+							<td>${dto.try_User }</td>
+							<td>${dto.correct_Rate }</td>
+						</c:when>
+						<c:otherwise>
+							<c:if test="${dto.quiz_No eq resultList.quiz_No and dto.user_Id eq resultList.user_Id }">
+								<td>${resultList.quiz_Result }</td>
+								<td>${dto.correct_User }</td>
+								<td>${dto.try_User }</td>
+								<td>${dto.correct_Rate }</td>
+							</c:if>
+						</c:otherwise>
+					</c:choose>						
 					</tr>
 				</c:forEach>
 			</c:otherwise>
