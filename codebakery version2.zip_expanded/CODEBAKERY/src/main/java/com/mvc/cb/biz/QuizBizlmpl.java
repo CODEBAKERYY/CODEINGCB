@@ -38,4 +38,9 @@ public class QuizBizlmpl implements QuizBiz {
 	public List<QuizDto> quizList() {
 		return quizDao.quizList();
 	}
+
+	@Override
+	public int update(QuizDto quizDto) {
+		return quizDao.update();	
+	}
 }

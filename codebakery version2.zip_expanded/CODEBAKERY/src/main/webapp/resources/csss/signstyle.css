@@ -59,7 +59,7 @@ form .txt_field{
   transform: translateY(-50%);
   font-size: 16px;
   pointer-events: none;
-  /* transition º¯È­¼Óµµ */
+  /* transition ï¿½ï¿½È­ï¿½Óµï¿½ */
   transition:  .5s; 
 }
 .txt_field span::before{
@@ -72,7 +72,7 @@ form .txt_field{
   background: #2691d9;
   transition:  .5s;
 }
-/* label ÅÂ±×°¡ inputÅÂ±×¸¦ °¡·Á Æ÷Ä¿½º ¸ø°¡´Â °ÍÀ» ¹æÁö */
+/* label ï¿½Â±×°ï¿½ inputï¿½Â±×¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ */
 .txt_field input:focus ~ label,
 .txt_field input:valid ~ label{
   top: -5px;
@@ -91,7 +91,7 @@ form .txt_field{
   text-decoration: underline;
 }
 input[type="submit"]{
-  /* ·Î±×ÀÎ ¹öÆ° */
+  /* ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½Æ° */
   width: 100%;
   height: 50px;
   border: 1px solid;

@@ -62,12 +62,22 @@ Released   : 20130811
 	.comment-list{
 		display: none;
 	}
+	
+	footer{
+		background: none;
+	}
 </style> 
   
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript">
 
+		//게시글에 태그를 눌렀을시 해당 태그가 달린 게시물 리스트를 보여줌
+		function sendTag(i, item){
+			var tag = item;
+			location.href="tagList.do?question_Tag="+item;
+		}
+			
 
 		//댓글보기 버튼 클릭
 		function showComment(){
@@ -77,12 +87,22 @@ Released   : 20130811
 				$("#shwComm").val("댓글 숨기기");
 			} else{
 				$(".comment-list").css("display", "none");
-				$("#shwComm").val("댓글 더보기");
+				$("#shwComm").val("댓글 보기");
 			} 
 		}
 		
+		
+		//글 삭제시 알림창 띄워주기
+		function deleteBoard(question_No){
+			
+			result = confirm("게시글을 삭제하시겠습니까?");
+			
+			if(result == true){
+				alert("삭제되었습니다.");
+				location.href='qna_delete.do?question_No='+question_No;
+			}
 
-
+		}
 	// ------------------------ 답변 -------------------------------
 	
 		//답변쓰기
@@ -95,12 +115,6 @@ Released   : 20130811
 			
 			
 			// 답변 유효성 검사
-			if(user_Id == "" || user_Id == null){
-				alert("로그인 후 이용가능합니다.");
-				location.href="login.do";
-				return false;
-			}
-			
 			if(answer_Title == "" || answer_Title == null){
 				alert("제목을 작성해주세요.");
 			 	return false;
@@ -108,6 +122,15 @@ Released   : 20130811
 			
 			if(answer_Content == "" || answer_Content == null){
 				alert("내용을 작성해 주세요.");
+				return false;
+			}
+			
+			if(user_Id == "" || user_Id == null){
+				
+				var setting = "width=400, height=430"
+				var url = "nonUserAnswer.do?question_No="+question_No+"&answer_Title="+answer_Title+"&answer_Content="+answer_Content;
+				
+				window.open(url, "", setting);
 				return false;
 			}
 			
@@ -176,28 +199,30 @@ Released   : 20130811
 	// ------------------------ 댓글 ------------------------------
 	
 	
-		//댓글 입력창
+		//댓글 입력창 (로그인을 하지 않앗을때)
 		$(function(){
-			$("#commentForm").submit(function(){
-				var user_Id = document.getElementsByName("user_Id")[0].value;
-				var Content = document.getElementById("inputComment")[0].value;
-				
-				
-				if(Content == "" || Content == null){
-					alert("내용을 입력해 주세요.");
-					return false;
-				}
-				
-				if(user_Id == "" || user_Id == null){
-					alert("로그인이 필요합니다.");
-					return false;
-				}
-				
+			$("#noneId_Comm").click(function(){
+				alert("로그인 후 이용해 주시기 바랍니다.");
+				location.href="login.do";
 			});
-		});	
-	
+		});
 	
 		
+		//댓글 창이 빈칸일경우 검사
+		function sendComment(){
+			
+			var comment = $("#inputComment").val().trim();
+			
+			if(comment == null || comment == ""){
+				alert("댓글 내용을 입력해주세요.");
+				return false;
+			}
+			
+			alert("댓글이 등록되었습니다.");
+			$("#commentForm").submit();
+			
+		}
+	
 	
 		//댓글삭제
 		function deleteComment(comment_No, question_No){
@@ -230,8 +255,8 @@ Released   : 20130811
 				var a = "";
 				
 				a += '<div class="input-group">';
-			    a += '<input type="text" class="form-control" name="comm_Content" value="'+comment_Content+'"/>';
-			    a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="commentUpdate('+comment_No+',\''+comment_Content+'\');">수정</button>';
+			    a += '<input type="text" class="form-control" name="comm_Content" value="'+comment_Content+'"/>&nbsp;&nbsp;&nbsp;';
+			    a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="commentUpdate('+comment_No+',\''+comment_Content+'\');">수정</button>&nbsp;';
 			    a += '<button class="btn btn-default" type="button" onclick="commentReset('+i+',\''+comment_Content+'\');">취소</button> </span>'
 			    a += '</div>';
 			
@@ -278,6 +303,7 @@ Released   : 20130811
 			a += '<form action="writeReply.do" id="commentForm" method="post">';
 			a += '<input type="hidden" name="user_Id" value="${User.user_Id }" />';
 			a += '<input type="hidden" name="question_No" value="${qlist.question_No }" />';
+			a += '<input type="hidden" name="user_Pic" value="${User.user_Pic }" />';
 			a += '<input type="hidden" name="comment_No" value="'+comment_No+'" />';
 			a += '<input type="hidden" name="depth" value="'+depth+'" />'; 
 			a += '<input type="hidden" name="group_Id" value="'+group_Id+'" />'; 
@@ -305,6 +331,10 @@ Released   : 20130811
 		}
 	
 		
+		
+		
+		
+		
 	// ------------------------ 댓글 ------------------------------
 
         
@@ -314,9 +344,7 @@ Released   : 20130811
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
 <%@ include file="header.jsp" %>  
 	<div id="logo" class="container">
-		<h1>
-			<p class="icon icon-tasks"><span>질문 게시판</span></p>
-		</h1>
+		<h1>질문 게시판</h1>
 	</div>
 
 	<section class="site-section">
@@ -332,17 +360,18 @@ Released   : 20130811
 				</div>
 				<hr />
 				<p class="lead">${qlist.question_Content }</p>
+				<br></br><br></br><br></br>
 				<div class="pt-5">
 					<p> Tags:&nbsp;&nbsp; 
-						<c:forTokens items="${qlist.question_Tag }" delims="#" var="item">
-							<span >#${item }</span>
+						<c:forTokens items="${qlist.question_Tag }" delims="#" var="item" varStatus="i">
+							<span><a onclick="sendTag(${i.index },'${item }');" style="cursor: pointer;" id="oneTag">#${item }&nbsp;</a></span>
 						</c:forTokens>
 					</p>
 				</div>
 				<div style="text-align: right;">
-					<c:if test="${!empty User && (User.user_Id eq qlist.user_Id) }">
+					<c:if test="${!empty User && (User.user_Id eq qlist.user_Id) || (User.user_Id eq 'ADMIN')}">
 					<input type="button" class="btn btn-secondary" value="수정" onclick="location.href='qna_update.do?question_No=${qlist.question_No}'"/>
-					<input type="button" class="btn btn-secondary" value="삭제" onclick="location.href='qna_delete.do?question_No=${qlist.question_No}'"/>
+					<input type="button" class="btn btn-secondary" value="삭제" onclick="deleteBoard(${qlist.question_No});"/>
 					</c:if>
 					<input type="button" class="btn btn-secondary" value="목록" onclick="location.href='qna.do'"/>
 				</div>
@@ -356,20 +385,33 @@ Released   : 20130811
 					<form action="writeComment.do" id="commentForm" method="post">
 						<input type="hidden" name="user_Id" value="${User.user_Id }" />
 						<input type="hidden" name="question_No" value="${qlist.question_No }" />
+						<input type="hidden" name="user_Pic" value="${User.user_Pic }" />
 	                    <div>
 	                        <div>
 	                            <table class="table">                    
 	                       			 <tr>
 	                       			 	<td style="font-weight: bold; font-size: 20px; font-family: initial;" >${clist.size() } Comments</td>
-	                       			 	<td><input type="button" class="btn btn-outline-secondary" value="댓글 더보기" onclick="showComment();" id="shwComm"/></td>
+	                       			 	<td><input type="button" class="btn btn-outline-secondary" value="댓글 보기" onclick="showComment();" id="shwComm"/></td>
 	                       			 </tr>
 	                                <tr>
+										<c:choose>
+										<c:when test="${empty User}">                              
 	                                    <td>
-	                                        <textarea class="form-control" style="width: 1000px; resize: none;" rows="2" cols="30" id="inputComment" name="comment_Content" placeholder="댓글을 입력하세요"></textarea>
+	                                        <textarea class="form-control" style="width: 1000px; resize: none;" rows="2" cols="30" id="inputComment" name="comment_Content" placeholder="댓글 작성은 회원만 이용 가능합니다." disabled></textarea>
+	                                    </td>
+                              	        <td style="text-align: right; mdisplay:table-cell; vertical-align:middle;">
+	                                    	<input type="submit" class="btn btn-primary" value="등록" style="width: 90px; height: 50px;" onclick="return false" id="noneId_Comm"/>
+	                                    </td>
+	                                    </c:when>
+	                                    <c:otherwise>
+	                                    <td>
+	                                        <textarea class="form-control" style="width: 1000px; resize: none;" rows="2" cols="30" id="inputComment" name="comment_Content" placeholder="댓글을 입력해주세요."></textarea>
 	                                    </td>
 	                                    <td style="text-align: right; mdisplay:table-cell; vertical-align:middle;">
-	                                    	<input type="submit" class="btn btn-primary" value="등록" style="width: 90px; height: 50px;"/>
+	                                    	<input type="button" class="btn btn-primary" value="등록" style="width: 90px; height: 50px;" onclick="sendComment();"/>
 	                                    </td>
+	                                    </c:otherwise>
+	                                    </c:choose>
 	                                </tr>
 	                            </table>
 	                        </div>
@@ -386,15 +428,15 @@ Released   : 20130811
 								
 								<c:choose>
 									<c:when test="${dto.parent_No eq 0 }">
-										<li class="comment" id="onecomm">
+										<li class="comment" id="onecomm" style="margin-bottom: 0px;">
 											<div class="vcard bio">
-												<img src="resources/csss/images/person_4_sq.jpg" alt="Image placeholder" />
+												<img src="${pageContext.request.contextPath}/upload${dto.user_Pic }" alt="Image" />
 											</div>
 											<div class="comment-body">
 												<span style="font-size:20px; font-family: initial;">${dto.user_Id }</span>
 												<button class="btn btn-link" onclick="Reply(${dto.comment_No}, ${dto.depth }, ${dto.group_Id }, ${i.index });">Reply</button>
-												<span class="meta"><fmt:formatDate value="${dto.comment_Date }" pattern="yyyy.MM.dd HH:mm:ss"/></span>&nbsp;&nbsp;
-												<c:if test="${!empty User && (User.user_Id eq dto.user_Id) }">
+												<span class="meta"><fmt:formatDate value="${dto.comment_Date }" pattern="yyyy.MM.dd HH:mm"/></span>&nbsp;&nbsp;
+												<c:if test="${!empty User && (User.user_Id eq dto.user_Id) || (User.user_Id eq 'ADMIN')}">
 												<input type="button" class="btn btn-link" value="수정" onclick="modifyComment(${dto.comment_No}, '${dto.comment_Content }',${i.index });"/>
 												<input type="button" class="btn btn-link" value="삭제" onclick="deleteComment(${dto.comment_No}, ${qlist.question_No });"/>
 												</c:if>
@@ -404,20 +446,20 @@ Released   : 20130811
 										</li>
 									</c:when>
 									<c:otherwise>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;							
-									<svg class="bi bi-arrow-down-right" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-									  <path fill-rule="evenodd" d="M12 7.5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-.5.5H7a.5.5 0 0 1 0-1h4.5V8a.5.5 0 0 1 .5-.5z"/>
-									  <path fill-rule="evenodd" d="M2.646 3.646a.5.5 0 0 1 .708 0l9 9a.5.5 0 0 1-.708.708l-9-9a.5.5 0 0 1 0-.708z"/>
+									<svg class="bi bi-arrow-down-right-circle" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+									  <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+									  <path fill-rule="evenodd" d="M10.5 11h-4a.5.5 0 0 1 0-1h2.793L5.146 5.854a.5.5 0 1 1 .708-.708L10 9.293V6.5a.5.5 0 0 1 1 0v4a.5.5 0 0 1-.5.5z"/>
 									</svg>
-										<div style="margin-left: 40px;"> <span></span>
+										<div style="margin-left: 50px; margin-bottom: 0px;"> <span></span>
 										<li class="comment" id="onecomm">
 										<div class="vcard bio">
-											<img src="resources/csss/images/person_4_sq.jpg" alt="Image placeholder" />
+											<img src="${pageContext.request.contextPath}/upload${dto.user_Pic }" alt="Image" />
 										</div>
 										<div class="comment-body">
 											<span style="font-size:20px; font-family: initial;">${dto.user_Id }</span>
 											<button class="btn btn-link" onclick="Reply(${dto.comment_No}, ${dto.depth }, ${dto.group_Id }, ${i.index });">Reply</button>
 											<span class="meta"><fmt:formatDate value="${dto.comment_Date }" pattern="yyyy.MM.dd HH:mm:ss"/></span>&nbsp;&nbsp;
-											<c:if test="${!empty User && (User.user_Id eq dto.user_Id) }">
+											<c:if test="${!empty User && (User.user_Id eq dto.user_Id) || (User.user_Id eq 'ADMIN') }">
 											<input type="button" class="btn btn-link" value="수정" onclick="modifyComment(${dto.comment_No}, '${dto.comment_Content }',${i.index });"/>
 											<input type="button" class="btn btn-link" value="삭제" onclick="deleteComment(${dto.comment_No}, ${qlist.question_No });"/>
 											</c:if>
@@ -440,7 +482,7 @@ Released   : 20130811
 				
 				
 				<!--------- 답글 START ----------->
-				<div class="pt-5">
+				<div class="pt-5" style="width: 100%; margin-bottom: 50px;">
 					<div><h3 class="mb-5">${alist.size()} Answers</h3></div>
 					<c:choose>
 						<c:when test="${empty alist }">
@@ -448,11 +490,11 @@ Released   : 20130811
 						</c:when>
 						<c:otherwise>
 							<c:forEach items="${alist }" var="dto">
-								<span class="title">RE: ${dto.answer_Title }</span>
+								<span class="title" style="font-size: 20px;">RE: ${dto.answer_Title }</span>
 								<div class="post-meta">
-									<span class="author">${dto.user_Id }</span>
+									<span class="author">${dto.user_Id }</span>&nbsp;&nbsp;&nbsp;&nbsp;
 									<span class="date"><fmt:formatDate value="${dto.answer_Date }" pattern="yyyy.MM.dd HH:mm"/></span>
-									<c:if test="${!empty User && (User.user_Id eq dto.user_Id) }">
+									<c:if test="${!empty User && (User.user_Id eq dto.user_Id) || (User.user_Id eq 'ADMIN')}">
 									<input type="button" class="btn btn-link" value="수정" onclick="modifyAnswer(${qlist.question_No }, ${dto.answer_No}, '${dto.answer_Title }', '${dto.answer_Content }');"/>
 									<input type="button" class="btn btn-link" value="삭제" onclick="deleteAnswer(${dto.answer_No}, ${qlist.question_No });"/>
 									</c:if>
@@ -501,6 +543,6 @@ Released   : 20130811
 
 
 
-	<%@ include file="footer.jsp" %>  
 </body>
+	<%@ include file="footer.jsp" %>  
 </html>

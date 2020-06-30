@@ -18,4 +18,8 @@
 		MENTOR_REVIEW
 		WHERE MENTOR_NO = #{mentor_No}
 	</select>
+	
+	<insert id="ReviewInsert" parameterType="mentorReviewDto">
+	INSERT INTO MENTOR_REVIEW VALUES(REIVEWSEQ.NEXTVAL,#{review_Content},SYSDATE,#{user_Id},#{mentor_No})
+	</insert>
 </mapper>

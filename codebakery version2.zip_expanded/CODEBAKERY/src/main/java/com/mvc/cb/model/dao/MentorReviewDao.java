@@ -14,4 +14,6 @@ public interface MentorReviewDao {
 
 	List<MentorReviewDto> review(int mentor_No);
 
+	int insert(MentorReviewDto rdto);
+
 }

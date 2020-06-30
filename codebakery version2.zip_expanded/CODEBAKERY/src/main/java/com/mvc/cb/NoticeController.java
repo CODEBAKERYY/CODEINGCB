@@ -133,10 +133,11 @@ public class NoticeController {
    @RequestMapping(value = "/comment_write.do")
    public String commentWrite(NoticeCommentDto dto) {
       
+	   System.out.println("노티스 댓글 달러왔다");
       logger.info("COMMENT WRITE");
       int res = c_biz.insert(dto);
       
-      return "notice_view.do?notice_No="+dto.getNotice_No();
+      return "redirect:notice_view.do?notice_No="+dto.getNotice_No();
       
    }
    

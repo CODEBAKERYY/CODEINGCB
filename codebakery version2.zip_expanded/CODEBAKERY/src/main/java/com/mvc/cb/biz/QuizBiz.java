@@ -15,4 +15,6 @@ public interface QuizBiz {
 	public QuizDto selectOne(int quiz_No);
 
 	public List<QuizDto> quizList();
+
+	public int update(QuizDto quizDto);
 }

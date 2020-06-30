@@ -17,7 +17,6 @@ public class QuizDaolmpl implements QuizDao {
 
 	@Override
 	public int insert(QuizDto dto) {
-
 		int res = 0;
 
 		try {
@@ -37,11 +36,8 @@ public class QuizDaolmpl implements QuizDao {
 
 		try {
 			quizList = sqlSession.selectList(NAMESPACE + "selectList");
-			if (quizList == null) {
-				System.out.println("왜 널이 뜰까유????????????????????????????????");
-			}
 		} catch (Exception e) {
-			System.out.println("[error] : selectList");
+			System.out.println("[error] : QuizSelectList");
 			e.printStackTrace();
 		}
 
@@ -55,6 +51,7 @@ public class QuizDaolmpl implements QuizDao {
 		try {
 			res = sqlSession.selectOne(NAMESPACE + "count");
 		} catch (Exception e) {
+			System.out.println("[error] : QuizCount()");
 			e.printStackTrace();
 		}
 		return res;
@@ -84,6 +81,19 @@ public class QuizDaolmpl implements QuizDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		return quizList;
+	}
+
+	@Override
+	public int update() {
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"update");
+		}catch(Exception e) {
+			System.out.println("[error] : Quiz Update");
+			e.printStackTrace();
+		}
+		return res;
 	}
 }

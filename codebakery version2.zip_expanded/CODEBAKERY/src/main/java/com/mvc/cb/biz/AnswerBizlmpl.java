@@ -61,5 +61,10 @@ public class AnswerBizlmpl implements AnswerBiz{
 		return dao.answerList();
 	}
 
+	@Override
+	public AnswerDto selectOne(AnswerDto dto) {
+		return dao.selectOne(dto);
+	}
+
 
 }

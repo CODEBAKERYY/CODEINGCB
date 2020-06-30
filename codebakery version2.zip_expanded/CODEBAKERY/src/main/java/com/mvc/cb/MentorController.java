@@ -21,10 +21,13 @@ public class MentorController {
 	@Autowired
 	private MentorReviewBiz mr_biz;
 
+	
+	//SelectAll
+	
 	@RequestMapping(value = "/mentor_detailAll.do")
 
 	public String mentorDetailall(Model model) {
-		logger.info("mentor selectAll");
+		logger.info("멘토소개 페이지 모든 멘토 가져오기");
 		model.addAttribute("mentor", m_biz.selectList());
 		return "mentor_detail";
 	}
@@ -33,9 +36,8 @@ public class MentorController {
 	@RequestMapping(value = "/mentor_detail.do")
 	public String mentorDetailOne(Model model, int mentor_No) {
 
-		logger.info("mentor selectOne");
+		logger.info("멘토 한명만 가져오기(With 멘토 리뷰)");
 		model.addAttribute("mentor", m_biz.selectOne(mentor_No));
-		System.out.println(m_biz.selectOne(mentor_No));
 		model.addAttribute("review", mr_biz.selectList(mentor_No));
 		return "mentor_detailOne";
 	}

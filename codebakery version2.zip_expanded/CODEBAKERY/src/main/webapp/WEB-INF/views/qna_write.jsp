@@ -57,7 +57,7 @@ Released   : 20130811
 		
 		list.push(tag);
 
-		document.getElementById("taglist").innerHTML = list
+		document.getElementById("taglist").innerHTML = list;
 		
 		form.question_Tag.value = list; 		
 		
@@ -86,6 +86,7 @@ Released   : 20130811
 				return false;
 			}
 			
+			alert("질문글이 등록되었습니다.");
 		});
 	});
 
@@ -96,7 +97,7 @@ Released   : 20130811
 	<%@ include file="header.jsp"%>
 	
 	<div id="logo" class="container">
-		<h1><p class="icon icon-tasks"><span>질문 글쓰기</span></p></h1>
+		<h1>질문 글쓰기</h1>
 	</div>
 	
 	<article>
@@ -105,26 +106,25 @@ Released   : 20130811
 				<input type="hidden" name="question_Tag" id="taglist"/>
 				<div class="mb-3">
 					<label for="title">제목</label>
-					<input type="text" class="form-control" name="question_Title" placeholder="제목을 입력해 주세요" />
+					<input type="text" class="form-control" name="question_Title" placeholder="제목을 입력해 주세요." />
 				</div>
 				<div class="mb-3">
 					<label for="reg_id">작성자</label>
-					<!-- <input type="text" class="form-control" name="reg_id" id="reg_id" placeholder="이름을 입력해 주세요"> -->
-					<input type="text" class="form-control" name="user_Id" value="${User.user_Id }" />
+					<input type="text" class="form-control" name="user_Id" readonly="readonly" value="${User.user_Id }" />
 				</div>
 				<div class="mb-3">
 					<label for="content">내용</label>
-					<textarea class="form-control" rows="9" name="question_Content" placeholder="내용을 입력해 주세요" style="width:100%; resize:none;"></textarea>
+					<textarea class="form-control" rows="9" name="question_Content" placeholder="내용을 입력해 주세요." style="width:100%; resize:none;"></textarea>
 				</div>
 				<div class="mb-3">
 					<label for="tag">TAG : </label>&nbsp;&nbsp;
-					<input type="text" id="tag" placeholder="태그를 입력해 주세요" value="#" style="width:40%; height:30px;" />&nbsp;&nbsp;
+					<input type="text" id="tag" value="#" style="width:40%; height:30px;" />&nbsp;&nbsp;
 					<input type="button" value="추가" onclick="addTag();"/>
 					<br></br>
 					<div class="one_tag" id="tags" style="margin-left: 50px;"></div>
 				</div>
 				<br></br>
-				<div >
+				<div style="text-align: right; margin-bottom: 20px;">
 					<input type="submit" id="btnSave" value="저장" />
 					<input type="button" id="btnList" value="목록" onclick="location.href='qna.do'" />
 				</div>

@@ -29,5 +29,8 @@ public interface AnswerDao {
 
 	public List<AnswerDto> answerList();
 
+	// 답변 selectOne
+	public AnswerDto selectOne(AnswerDto dto);
+
 
 }

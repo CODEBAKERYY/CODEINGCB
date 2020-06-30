@@ -51,14 +51,15 @@ Released   : 20130811
 	
 	function addTag(){
 		var tag = $("#tag").val();
-		
+		var tagg = "<c:out value='${dto.question_Tag }' />";
 		// 글쓰기 내에 태그 추가해주기
 		var a = '<span>'+tag+'</span>&nbsp;&nbsp;';
 		$(".one_tag").append(a);
 		
+		list.push(tagg);
 		list.push(tag);
 	
-		document.getElementById("tags").innerHTML = list;
+		form.question_Tag.value = list; 
 	} 
 	
 	// 글 수정 유효성 검사
@@ -80,6 +81,7 @@ Released   : 20130811
 			
 		});
 	});
+	
 </script>
 </head>
 
@@ -87,13 +89,14 @@ Released   : 20130811
 	<%@ include file="header.jsp"%>
 	
 	<div id="logo" class="container">
-		<h1><p class="icon icon-tasks"><span>질문 수정하기</span></p></h1>
+		<h1>질문 수정하기</h1>
 	</div>
 	
 	<article>
 		<div class="container" role="main">
 			<form name="form" id="form" role="form" method="post" action="update_question.do">
 			<input type="hidden" name="question_No" value="${dto.question_No }" />
+			<input type="hidden" name="question_Tag" id="taglist"/>
 				<div class="mb-3">
 					<label for="title">제목</label>
 					<input type="text" class="form-control" name="question_Title" value="${dto.question_Title }" />
@@ -108,18 +111,19 @@ Released   : 20130811
 					<textarea class="form-control" rows="9" name="question_Content" style="width:100%; resize:none;">${dto.question_Content }</textarea>
 				</div>
 				<div class="mb-3">
-					<label for="tag">TAG</label>
-					<span><input type="text" class="form-control" id="tag" name="question_Tag" value="#" /></span>
+					<label for="tag">TAG : </label>&nbsp;&nbsp;
+					<span><input type="text" id="tag" style="width:40%; height:30px;" value="#" />&nbsp;&nbsp;</span>
 					<input type="button" value="추가" onclick="addTag();"/>
 					<br /><br /> 
 					<c:forTokens items="${dto.question_Tag }" delims="#" var="item">
-						<span class="one_tag" id="tags">#&nbsp;${item }</span>
+						<span id="tags">#&nbsp;${item }</span>
 					</c:forTokens>
+						<span class="one_tag"></span>
 				</div>
-			<div >
-				<input type="submit" id="btnSave" value="수정완료" />
-				<input type="button" id="btnList" value="목록" onclick="location.href='qna_detail.do?question_No=${dto.question_No}'" />
-			</div>
+				<div style="text-align: right; margin-bottom: 20px;">
+					<input type="submit" id="btnSave" value="수정완료" />
+					<input type="button" id="btnList" value="목록" onclick="location.href='qna_detail.do?question_No=${dto.question_No}'" />
+				</div>
 			</form>
 		</div>
 	</article>

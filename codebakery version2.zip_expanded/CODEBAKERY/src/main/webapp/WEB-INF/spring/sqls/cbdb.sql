@@ -14,7 +14,7 @@ COMMIT;
 
 ------------------------------------------
 
-
+SELECT * FROM QUIZ;
 
 
 ------------ CODEBAKERY 테이블/시퀀스 생성 --------------
@@ -56,31 +56,26 @@ CREATE SEQUENCE NCOMMENTSEQ NOCACHE;      -- 공지사항 댓글
 
 -- 유저테이블 
 CREATE TABLE USER_TB (
-	USER_ID	VARCHAR2(20) CONSTRAINT PK_USER_ID PRIMARY KEY,     -- 유저아이디
+	USER_ID	VARCHAR2(50) CONSTRAINT PK_USER_ID PRIMARY KEY,     -- 유저아이디
 	USER_PW	VARCHAR2(50) NOT NULL,                              -- 유저비밀번호
     USER_GRADE VARCHAR2(20) DEFAULT '일반회원' NOT NULL,           -- 유저등급
 	USER_NAME VARCHAR2(20) NOT NULL,                            -- 유저이름
 	USER_PHONE VARCHAR2(100) NOT NULL,                          -- 유저폰번호
 	USER_MAIL VARCHAR2(100) NOT NULL,                           -- 유저메일
-	USER_POINT NUMBER,                                          -- 유저 이메일
+	USER_POINT NUMBER DEFAULT 0,                                -- 유저 이메일
 	USER_PIC VARCHAR2(100),                                     -- 유저사진
 	USER_LANG VARCHAR2(200) NOT NULL,                           -- 유저선호언어
     CONSTRAINT CHK_USER_GRADE CHECK (USER_GRADE IN('일반회원','멘토','관리자'))
 );
 
--- 비회원테이블
-CREATE TABLE NON_USER (
-	NUSER_ID VARCHAR2(20) CONSTRAINT PK_NUSER_ID PRIMARY KEY,   -- 비회원 아이디   
-	NUSER_PW VARCHAR2(50) NOT NULL,                             -- 비회원 비밀번호
-	NUSER_CONTENT VARCHAR2(1000) NOT NULL                       -- 비회원 댓글내용
-);
+
 
 -- 멘토게시판
 CREATE TABLE MENTOR_INTRO (
 	MENTOR_NO NUMBER CONSTRAINT PK_MENTOR_INTRO PRIMARY KEY,    -- 멘토번호
 	MENTOR_CAREER VARCHAR2(1000) NOT NULL,                      -- 멘토경력         
 	MENTOR_CONTENT VARCHAR2(2000) NOT NULL,                     -- 멘토소개
-	USER_ID	VARCHAR2(20),
+	USER_ID	VARCHAR2(50),
     CONSTRAINT FK_MENTOR_USER_ID FOREIGN KEY(USER_ID) REFERENCES USER_TB(USER_ID) ON DELETE CASCADE
 );
 
@@ -90,7 +85,7 @@ CREATE TABLE MENTOR_REVIEW (
 	REVIEW_NO NUMBER CONSTRAINT PK_REVIEW_NO PRIMARY KEY,       -- 리뷰번호 
 	REVIEW_CONTENT VARCHAR2(2000) NOT NULL,                     -- 리뷰내용
 	REVIEW_DATE	DATE NOT NULL,                                  -- 리뷰시간
-	USER_ID	VARCHAR2(20) NOT NULL,            
+	USER_ID	VARCHAR2(50) NOT NULL,            
 	MENTOR_NO NUMBER NOT NULL,
     CONSTRAINT FK_REVIEW_USER_ID FOREIGN KEY(USER_ID) REFERENCES USER_TB(USER_ID) ON DELETE CASCADE,
     CONSTRAINT FK_REVIEW_MENTOR_NO FOREIGN KEY(MENTOR_NO) REFERENCES MENTOR_INTRO(MENTOR_NO) ON DELETE CASCADE
@@ -104,7 +99,7 @@ CREATE TABLE QUESTION (
 	QUESTION_DATE DATE NOT NULL,                                -- 질문시간
 	QUESTION_VIEWS NUMBER NOT NULL,                             -- 질문글 조회수
     QUESTION_TAG VARCHAR2(100),                                 -- 질문글 해시태그
-	USER_ID	VARCHAR2(20) NOT NULL,
+	USER_ID	VARCHAR2(50) NOT NULL,
     CONSTRAINT FK_QUESTION_USER_ID FOREIGN KEY(USER_ID) REFERENCES USER_TB(USER_ID) ON DELETE CASCADE
 );
 
@@ -115,23 +110,22 @@ CREATE TABLE ANSWER (
 	ANSWER_CONTENT VARCHAR2(2000) NOT NULL,                     -- 답변내용
 	ANSWER_DATE	DATE NOT NULL,                                  -- 답변시간
 	QUESTION_NO	NUMBER NOT NULL,                                
-	USER_ID	VARCHAR2(20) NOT NULL,
-    CONSTRAINT FK_ANSWER_QUESTION_NO FOREIGN KEY(QUESTION_NO) REFERENCES QUESTION(QUESTION_NO) ON DELETE CASCADE,
-    CONSTRAINT FK_ANSWER_USER_ID FOREIGN KEY(USER_ID) REFERENCES USER_TB(USER_ID) ON DELETE CASCADE
+	USER_ID	VARCHAR2(50) NOT NULL,
+    CONSTRAINT FK_ANSWER_QUESTION_NO FOREIGN KEY(QUESTION_NO) REFERENCES QUESTION(QUESTION_NO) ON DELETE CASCADE
 );
 
 
 -- 질문/답변 댓글
 CREATE TABLE QNA_COMMENT (
 	QCOMMENT_NO	NUMBER CONSTRAINT PK_QCOMMNET_NO PRIMARY KEY,       -- 질문댓글번호
-	QUESTION_NO	NUMBER(10),                                         -- 질문번호
-    PARENT_NO NUMBER(10),
-	QCOMMENT_CONTENT VARCHAR2(1000)	NOT NULL,                       -- 질문댓글내용
-	QCOMMENT_DATE DATE DEFAULT SYSDATE,                              -- 질문댓글시간
-    DEPTH NUMBER(10),                                               -- 대댓글번호
-    REPLY_ID VARCHAR2(20),                                          -- 대댓글 아이디
-	USER_ID	VARCHAR2(20),
-	NUSER_ID VARCHAR2(20)
+	QUESTION_NO	NUMBER,                                        		-- 질문번호
+    QCOMMENT_CONTENT VARCHAR2(1000)	NOT NULL,                       -- 질문댓글내용
+    QCOMMENT_DATE DATE DEFAULT SYSDATE,                             -- 질문댓글시간
+    GROUP_ID NUMBER,												-- 그룹아이디
+    PARENT_NO NUMBER,												-- 대댓글 부모번호
+    DEPTH NUMBER,													-- 깊이
+    USER_ID	VARCHAR2(50),											-- 댓글아이디
+	USER_PIC VARCHAR2(100)											-- 댓글 사진
 );
 
 
@@ -149,27 +143,34 @@ CREATE TABLE QUIZ (
 	OUTPUT_EXPLANATION VARCHAR2(4000),						   -- 출력 설명
 	INPUT_SAMPLE VARCHAR2(4000),							    
 	OUTPUT_SAMPLE VARCHAR2(4000),							  
-	USER_ID	VARCHAR2(20) NOT NULL,          
+	USER_ID	VARCHAR2(50) NOT NULL,          
     CONSTRAINT FK_QUIZ_USER_ID FOREIGN KEY(USER_ID) REFERENCES USER_TB(USER_ID) ON DELETE CASCADE
 );
 
--- 문제풀기
-CREATE TABLE TRY_QUIZ (
-	QUIZ_NO	NUMBER CONSTRAINT PK_TQUIZ_NO PRIMARY KEY,          -- 문제번호
-	CODE_CONTENT VARCHAR2(4000)	NOT NULL,                       -- 작성코드내용
-	EX_RESULT VARCHAR2(300)	NOT NULL,                           -- 출력예시
-    PRINT_REULT VARCHAR2(300) NOT NULL,                         -- 출력결과
-	USER_ID	VARCHAR2(20) NOT NULL,                             
-    CONSTRAINT FK_TQUIZ_USER_ID FOREIGN KEY(USER_ID) REFERENCES USER_TB(USER_ID) ON DELETE CASCADE
-);
-
+--테이블 삭제
+---- 문제풀기
+--CREATE TABLE TRY_QUIZ (
+--	QUIZ_NO	NUMBER CONSTRAINT PK_TQUIZ_NO PRIMARY KEY,          -- 문제번호
+--	CODE_CONTENT VARCHAR2(4000)	NOT NULL,                       -- 작성코드내용
+--	EX_RESULT VARCHAR2(300)	NOT NULL,                           -- 출력예시
+--    PRINT_REULT VARCHAR2(300) NOT NULL,                         -- 출력결과
+--	USER_ID	VARCHAR2(20) NOT NULL,                             
+--    CONSTRAINT FK_TQUIZ_USER_ID FOREIGN KEY(USER_ID) REFERENCES USER_TB(USER_ID) ON DELETE CASCADE
+--);
+DROP TABLE QUIZ_RESULT;
 -- 채점결과
+SELECT * FROM QUIZ_RESULT;
 CREATE TABLE QUIZ_RESULT (
 	QUIZ_NO	NUMBER CONSTRAINT PK_QRESULT_NO PRIMARY KEY,        -- 문제번호
-	QUIZ_RESULT	VARCHAR2(20) NOT NULL,                          -- 채점결과
-	USER_ID	VARCHAR2(20) NOT NULL,
+	CODE_CONTENT VARCHAR2(4000)	NOT NULL,                       -- 작성코드내용
+	EX_RESULT VARCHAR2(300)	NOT NULL,                           -- 출력예시
+    PRINT_RESULT VARCHAR2(300) NOT NULL,                         -- 출력결과
+	QUIZ_RESULT	VARCHAR2(20),                                   -- 채점결과
+	USER_ID	VARCHAR2(50) NOT NULL,
     CONSTRAINT FK_QRESULT_USER_ID FOREIGN KEY(USER_ID) REFERENCES USER_TB(USER_ID) ON DELETE CASCADE
 );
+
+DROP TABLE QUIZ_RESULT;
 
 -- 공지사항
 CREATE TABLE NOTICE (
@@ -178,7 +179,7 @@ CREATE TABLE NOTICE (
 	NOTICE_CONTENT VARCHAR2(2000) NOT NULL,                     -- 공지사항내용
 	NOTICE_DATE	DATE NOT NULL,                                  -- 공지사항시간
 	NOTICE_VIEWS NUMBER	NOT NULL,                               -- 공지사항조회수
-	USER_ID	VARCHAR2(20) NOT NULL
+	USER_ID	VARCHAR2(50) NOT NULL
 );
 
 -- 공지사항 댓글
@@ -187,7 +188,7 @@ CREATE TABLE NOTICE_COMMENT (
 	NOTICE_NO NUMBER NOT NULL,                                      -- 공지사항 번호
 	NCOMMENT_CONTENT VARCHAR2(300) NOT NULL,                        -- 공지사항 댓글내용
 	NCOMMENT_DATE DATE NOT NULL,                                    -- 공지사항 댓글시간
-	USER_ID	VARCHAR2(20) NOT NULL,                  
+	USER_ID	VARCHAR2(50) NOT NULL,                  
     CONSTRAINT FK_NCOMMENT_NOTICE_NO FOREIGN KEY(NOTICE_NO) REFERENCES NOTICE(NOTICE_NO) ON DELETE CASCADE,
     CONSTRAINT FK_NCOMMENT_USER_ID FOREIGN KEY(USER_ID) REFERENCES USER_TB(USER_ID) ON DELETE CASCADE
 );
@@ -204,7 +205,9 @@ INSERT INTO USER_TB VALUES('user3','1234','일반회원','권민석','010-7942-1
 INSERT INTO USER_TB VALUES('user4','1234','일반회원','정승연','010-3782-1234','jsy@kh.or.kr', 0,'userpic','java');
 INSERT INTO USER_TB VALUES('user5','1234','일반회원','주수현','010-1782-1234','jsh@kh.or.kr', 0,'userpic','java');
 INSERT INTO USER_TB VALUES('user6','1234','일반회원','이재익','010-94562-1234','ljl@kh.or.kr', 0,'userpic','java');
+INSERT INTO USER_TB VALUES('mentor','1234','멘토','멘토','010-94562-1234','멘토@kh.or.kr', 0,'NULL','java');
 
+SELECT * FROM USER_TB;
 -- MENTOR_INTRO
 INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'삼성 1위 입사자','모든것을 한번에 해결해드립니다.','mentor1');
 INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'구글 1년 경력','간지네가 코딩.','mentor2');
@@ -297,10 +300,10 @@ SELECT * FROM
 		MENTOR_REVIEW;
 
 select * from user_tb;
+UPDATE USER_TB SET USER_GRADE = '관리자' WHERE USER_ID ='ADMIN';
 select * from mentor_intro;
  SELECT * FROM ( SELECT * FROM QUESTION ORDER BY QUESTION_NO DESC ) WHERE ROWNUM <=5 ; 
 SELECT * FROM ( SELECT * FROM ANSWER ORDER BY ANSWER_NO DESC ) WHERE ROWNUM <=5 ; 
 SELECT * FROM QUESTION;
-
-
+SELECT * FROM NOTICE_COMMENT;
 commit;

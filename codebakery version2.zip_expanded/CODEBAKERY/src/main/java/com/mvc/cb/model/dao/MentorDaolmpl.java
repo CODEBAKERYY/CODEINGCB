@@ -22,7 +22,6 @@ public class MentorDaolmpl implements MentorDao {
 		List<MentorDto> list = new ArrayList<MentorDto>();
 		try {
 			list = sqlSession.selectList(NAMESPACE + "mentorAll");
-			System.out.println("list 획득");
 
 		} catch (Exception e) {
 			System.out.println("[error] : mentor selectList");

@@ -15,11 +15,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.mvc.cb.biz.AnswerBiz;
 import com.mvc.cb.biz.QCommentBiz;
 import com.mvc.cb.biz.QuestionBiz;
+import com.mvc.cb.biz.UserBiz;
 import com.mvc.cb.model.dto.AnswerDto;
 import com.mvc.cb.model.dto.PageMaker;
 import com.mvc.cb.model.dto.QnACommentDto;
 import com.mvc.cb.model.dto.QnAPagingDto;
 import com.mvc.cb.model.dto.QuestionDto;
+import com.mvc.cb.model.dto.UserDto;
 
 @Controller
 public class QnAController {
@@ -34,6 +36,9 @@ public class QnAController {
 	
 	@Autowired
 	private QCommentBiz c_biz;
+	
+	@Autowired
+	private UserBiz u_biz;
 	
 	
 	// 메뉴에서 '질의응답'을 누르면 들어오는 요청
@@ -84,14 +89,18 @@ public class QnAController {
 			page = 1;
 		}
 		
-		List<QuestionDto> list = q_biz.selectTagList(question_Tag);
+		int total = q_biz.countTags(question_Tag);
 		
 		QnAPagingDto paging = new QnAPagingDto();
 		paging.setPage(page);
-		paging.setTotalArticle(list.size());
-		paging.setTotalPage(list.size());
+		paging.setTotalArticle(total);
+		paging.setTotalPage(total);
 		paging.setStartRow();
 		paging.setEndRow();
+		
+		
+		// 한 페이지에 출력 될  질문 게시글 리스트
+		List<QuestionDto> list = q_biz.selectTagList(paging, question_Tag);
 		
 		// 한 페이지에 출력될 질문 게시글(qList)에 맞춰서 답변 수를 가져온다.
 		List<Integer> cntList = a_biz.getCntAnswer(list);
@@ -100,9 +109,9 @@ public class QnAController {
 		PageMaker maker = new PageMaker();
 		maker.setPaging(paging);
 		
-		model.addAttribute("pageMaker",maker);
-		model.addAttribute("cntList",cntList);
 		model.addAttribute("list", list);
+		model.addAttribute("cntList",cntList);
+		model.addAttribute("pageMaker",maker);
 		
 		return "qna";
 	}
@@ -122,6 +131,7 @@ public class QnAController {
 		
 		return "qna_detail";
 	}
+	
 	
 	// ------------------------ 질문글 작성/수정/삭제 START-------------------------
 	
@@ -160,8 +170,12 @@ public class QnAController {
 	@RequestMapping( value="/update_question.do" )
 	public String updateQnA(Model model, QuestionDto dto) {
 		logger.info("update_Question");
+		
+		System.out.println("before: "+dto.getQuestion_Tag());
+		
 		int res = q_biz.update(dto);
 		
+		System.out.println("after: "+dto.getQuestion_Tag());
 		
 		if(res>0) {
 			return "redirect:qna_detail.do?question_No="+dto.getQuestion_No();
@@ -169,6 +183,7 @@ public class QnAController {
 			return "redirect:qna_update.do?question_No="+dto.getQuestion_No();
 		}
 	}
+
 	
 	
 	// 질문글 삭제
@@ -240,6 +255,65 @@ public class QnAController {
 			}
 		}
 		
+		// 비회원으로 답변 등록 시도 할때 뜨는 창
+		@RequestMapping( value="/nonUserAnswer.do" )
+		public String nonUserAnswer(Model model, AnswerDto dto) {
+			logger.info("nonUserAnswer");
+			
+			model.addAttribute("answer", dto);
+			
+			return "qna_nonUserAnswer";
+		}
+		
+		// 비회원 등록창
+		@RequestMapping( value="/addNonUser.do" )
+		public String addNonUser(Model model, AnswerDto dto) {
+			
+			logger.info("addNonUser");
+
+			model.addAttribute("answer", dto);
+			
+			return "qna_addNonUser";
+		}
+		
+		// 비회원으로 답변 등록하기
+		@RequestMapping( value="/nonUser.do" )
+		@ResponseBody
+		public String NonUser(String nuser_Id, AnswerDto dto) {
+			
+			logger.info("NonUser");
+			
+			AnswerDto adto = new AnswerDto();
+			adto.setUser_Id(nuser_Id);
+			adto.setQuestion_No(dto.getQuestion_No());
+			adto.setAnswer_Title(dto.getAnswer_Title());
+			adto.setAnswer_Content(dto.getAnswer_Content());
+			int res = a_biz.insert(adto);
+
+			
+			if(res>0) {
+				return "location.reload()";
+			} else {
+				return "redirect:qna_detail.do?question_No="+dto.getQuestion_No();
+			}
+		}
+		
+		//비회원 아이디 체크
+		@RequestMapping( value="/chkNonUser.do" )
+		@ResponseBody
+		public boolean chkNonUser(String nuser_Id) {
+				
+			UserDto dto = u_biz.idcheck(nuser_Id);
+			boolean check = true;
+			
+			if (dto == null) {
+				check =  false;
+			} 
+			
+			return check;
+		}
+		
+		
 	// ------------------------ 답변 등록/수정/삭제 END -------------------------
 	
 	// ------------------------ 댓글 등록/수정/삭제 START-------------------------
@@ -252,6 +326,8 @@ public class QnAController {
 			logger.info("insertComment");
 			
 			int res = c_biz.insert(dto);
+			
+			System.out.println("user_Pic: "+dto.getUser_Pic());
 			
 			if(res>0) {
 				return "redirect:qna_detail.do?question_No="+dto.getQuestion_No();
@@ -315,6 +391,22 @@ public class QnAController {
 		
 	// ------------------------ 답변 등록/수정/삭제 END -------------------------
 		
-		
+		// 메인에서 보여지는 답변 리스트
+		@RequestMapping(value = "/answer_detail.do")
+		public String answerList(AnswerDto dto) {
+			
+			logger.info("answerList");
+			
+			System.out.println("question_No : "+dto.getQuestion_No());
+			System.out.println("answert_NO: "+dto.getAnswer_No());
+			
+			
+			AnswerDto res = a_biz.selectOne(dto);
+			
+			return "redirect:qna_detail.do?question_No="+dto.getQuestion_No();
+			
+		}
+	
+	
 
 }

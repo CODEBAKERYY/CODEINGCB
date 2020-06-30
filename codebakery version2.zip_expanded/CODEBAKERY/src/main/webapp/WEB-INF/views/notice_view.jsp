@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!--
 Design by TEMPLATED
@@ -49,9 +50,7 @@ Released   : 20130811
 
 	
 	<div id="logo" class="container">
-		<h1>
-			<a class="icon icon-tasks"><span>공지사항</span></a>
-		</h1>
+		<h1>공지사항</h1>
 	</div>
 
  	<!--============== 공지사항 내용 START ==============-->
@@ -61,26 +60,26 @@ Released   : 20130811
                     <div>
                         <table style="margin: 0px auto;">
                             <tr>
-                                <th>제목</th>
+                                <th style="text-align: right;">제목</th>
                                 <td style="padding:10px;"><input style="width: 821px; height: 35px;" type="text" value="${detail.notice_Title }" readonly/></td>
                             </tr>
                             <tr>
-                                <th>작성자</th>
+                                <th style="text-align: right;">작성자</th>
                                 <td style="padding:10px;"><input style="width: 821px; height: 35px;" type="text" value="${detail.user_Id }" readonly/></td>
                             </tr>
                             <tr>
-                                <th style="display: table-cell; vertical-align: middle;">내용</th>
-                                <td style="padding:10px;"><textarea style="resize: none;" rows="15" cols="100" readonly>${detail.notice_Content }</textarea></td>
+                                <th style="display: table-cell; vertical-align: middle; text-align: right;">내용</th>
+                                <td style="padding:10px;"><textarea style="resize: none; width:821px;" rows="15" readonly>${detail.notice_Content }</textarea></td>
                             </tr>
                         </table>
                         
                         <div style="width: 850px; margin: 0 auto; text-align: right;" >
                         	<!-- 관리자일때만 수정삭제 보이게함 -->
                         	 <c:if test="${User.user_Grade == '관리자' && !empty User}">
-                            <button type="button" class="btn btn-light pull-right" id="btnUpdate" onclick="location.href='notice_edit.do?notice_No=${detail.notice_No}'">수정</button>
-                            <button type="button" class="btn btn-light pull-right" id="btnDelete" onclick="location.href='notice_delete.do?notice_No=${detail.notice_No}'">삭제</button>
+                            <button type="button" class="btn btn-secondary pull-right" id="btnUpdate" onclick="location.href='notice_edit.do?notice_No=${detail.notice_No}'" style="text-align: center;">수정</button>
+                            <button type="button" class="btn btn-secondary pull-right" id="btnDelete" onclick="location.href='notice_delete.do?notice_No=${detail.notice_No}'" style="text-align: center;">삭제</button>
                             </c:if>
-                            <button type="button" class="btn btn-light pull-right" id="btnList" onclick="location.href='notice.do?'">목록</button>
+                            <button type="button" class="btn btn-secondary pull-right" id="btnList" onclick="location.href='notice.do?'" style="text-align: center;">목록</button>
                         </div>
                     </div>
                 </div>
@@ -97,13 +96,14 @@ Released   : 20130811
                <div>
                    <div style="margin-top: 70px;">
                        <span style="font-weight: bold;">Comments</span>
+                       <hr></hr>
                    </div>
                    <div>
                        <table>                    
                            <tr>
                                <td>
-                                   <textarea style="resize: none;" rows="5" cols="140" placeholder="댓글을 입력하세요." name="comment_Content"></textarea>
-                                   <div style="text-align:right;"><input type="submit" class="btn btn-primary pull-right" style="width:70px; height:35px;" value="등록"/></div>
+                                   <textarea style="resize: none;" rows="3" cols="160" placeholder="댓글을 입력하세요." name="comment_Content"></textarea>
+                                   <div style="text-align:right;"><input type="submit" class="btn btn-primary pull-right" style="width:55px; height:35px; text-align: center;" value="등록"/></div>
                                </td>
                            </tr>
                        </table>
@@ -126,8 +126,11 @@ Released   : 20130811
                                
                                <c:forEach items="${c_list }" var="reply">
                                	<tr>
-                                   	<span style="font-size: 18px;">${reply.user_Id }</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <span style="color:grey; font-size: 14px;">%{reply.comment_Date}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                               		<td>
+                                   	<strong>${reply.user_Id }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
+                                   	<fmt:formatDate value="${reply.comment_Date}" pattern="yyyy.MM.dd HH:mm"/>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </td>
                                 </tr>
                                 <tr>
                                   <td>${reply.comment_Content }</td>
