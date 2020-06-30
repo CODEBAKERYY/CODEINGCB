@@ -12,4 +12,6 @@ public interface MentorReviewBiz {
 
 	public List<MentorReviewDto> review(int mentor_No);
 
+	public int insert(MentorReviewDto rdto);
+
 }

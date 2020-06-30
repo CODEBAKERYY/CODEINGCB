@@ -60,4 +60,16 @@ public class MentorReviewDaolmpl implements MentorReviewDao {
 		return list;
 	}
 
+	@Override
+	public int insert(MentorReviewDto rdto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.insert(NAMESPACE+"ReviewInsert",rdto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+
 }
