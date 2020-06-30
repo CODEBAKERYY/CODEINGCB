@@ -17,10 +17,10 @@
 			alias="UserDto" />
 		<typeAlias type="com.mvc.cb.model.dto.QuizDto"
 			alias="quizDto" />
-		<typeAlias type="com.mvc.cb.model.dto.QuizResultDto"
-			alias="quizResultDto" />
-		<typeAlias type="com.mvc.cb.model.dto.TryQuizDto"
-			alias="tryQuizDto" />
+		<typeAlias type="com.mvc.cb.model.dto.QuizResultDto" 
+			alias="quizResultDto"/>
+		<typeAlias type="com.mvc.cb.model.dto.TryQuizDto" 
+			alias="tryQuizDto"/>
 		<typeAlias type="com.mvc.cb.model.dto.NoticeDto"
 			alias="NoticeDto" />
 		<typeAlias type="com.mvc.cb.model.dto.NoticeCommentDto"
@@ -31,26 +31,28 @@
 			alias="AnswerDto" />
 		<typeAlias type="com.mvc.cb.model.dto.QnACommentDto"
 			alias="QnACommentDto" />
-		<!-- 포인트 내역 추가부분 -->
+	    
+	    <!-- 포인트 내역 추가부분 -->
 		<typeAlias type="com.mvc.cb.model.dto.PointDto"
 			alias="PointDto" />
+	    
 	</typeAliases>
 
 	<mappers>
 		<mapper resource="/mybatis/user-mapper.xml" />
 		<mapper resource="/mybatis/quiz-mapper.xml" />
 		<mapper resource="/mybatis/mentor-mapper.xml" />
-		<mapper resource="/mybatis/quizResult-mapper.xml" />
+		<mapper resource="/mybatis/quizResult-mapper.xml"/>
 		<mapper resource="/mybatis/question-mapper.xml" />
 		<mapper resource="/mybatis/answer-mapper.xml" />
 		<mapper resource="/mybatis/qcomment-mapper.xml" />
-		<mapper resource="/mybatis/mentorReview-mapper.xml" />
+	<!-- 	<mapper resource="/mybatis/mentorReview-mapper.xml" /> -->
 		<mapper resource="/mybatis/notice-mapper.xml" />
 		<mapper resource="/mybatis/notice_comment-mapper.xml" />
-
-
+		
+		
 		<!-- 포인트 내역 추가부분 -->
-		<mapper resource="/mybatis/point-mapper.xml" />
-
+		<mapper resource="/mybatis/point-mapper.xml" />	
+		
 	</mappers>
 </configuration>
