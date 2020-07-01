@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.mvc.cb.biz.MyPageBiz;
 import com.mvc.cb.biz.MyPointBiz;
 import com.mvc.cb.biz.UserBiz;
+import com.mvc.cb.model.dto.PointDto;
 import com.mvc.cb.model.dto.UserDto;
 
 @Controller
@@ -153,29 +154,73 @@ public class MypageController {
 		return "mypage_payment";
 	}
 
-	// map을 쓰는이유는 json와 비슷(k,v)하기 때문에
-	@RequestMapping(value = "charge.do", method = RequestMethod.POST)
+	@RequestMapping(value="charge_middle.do",method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Boolean> charge(HttpSession session, @RequestBody UserDto dto) {
+	public Map<String,Boolean> charge(HttpSession session,@RequestBody UserDto dto){
 		logger.info("CHARGE gogo");
-
-		int res = biz.updatePoint(dto);
-
-		session.removeAttribute("login");
-		UserDto relogin = biz.getInfo(dto);
-		UserDto reres = u_biz.login(relogin);
-
-		session.setAttribute("login", relogin);
-
-		System.out.println("뭐라고 받아질까" + res);
+		System.out.println("dto"+dto);
+		
+		String payid = dto.getUser_Id();
+		String sessionid = ((UserDto)session.getAttribute("User")).getUser_Id();
+		
+		System.out.println("결제 아이디 받기: "+payid+""+sessionid);
+		
 		boolean check = false;
-		if (res > 0) { // 업데이트이가정상적으로 될때
-
+		if( payid.equals(sessionid)) {		//업데이트이가정상적으로 될때
+			
 			check = true;
 		}
-		Map<String, Boolean> map = new HashMap<String, Boolean>();
-		map.put("check", check);
+		Map<String,Boolean> map = new HashMap<String,Boolean>();
+		map.put("check",check);
 		return map;
 	}
+	
+
+	 //map을 쓰는이유는 json와 비슷(k,v)하기 때문에
+	@RequestMapping(value="charge.do",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Boolean> charge(HttpSession session,@RequestBody Map<String, Object> param){
+		logger.info("CHARGE 업데이트 적용");
+		
+		String user_Id = (String) param.get("user_Id");
+		int user_Point = (Integer)(param.get("user_Point"));
+		String point_Charge = (String)param.get("point_Charge");
+		String point_Date =  (String)param.get("point_Date");
+		
+		UserDto dto = new UserDto();
+		dto.setUser_Id(user_Id);
+		dto.setUser_Point(user_Point);
+		
+		PointDto pointdto = new PointDto();
+		pointdto.setPoint_Charge(point_Charge);
+		pointdto.setPoint_Date(point_Date);
+		
+		System.out.println("point_Charge:"+point_Charge+""+point_Date);
+		logger.info("userid"+point_Charge+""+point_Date);
+		
+		logger.info("userid"+user_Id+ user_Point);
+		System.out.println("userid"+user_Id+""+ user_Point);
+		
+		int res = biz.updatePoint(dto);
+	    int charge = p_biz.insert(pointdto); 
+		
+		session.removeAttribute("User");
+		UserDto relogin = biz.getInfo(dto);
+		UserDto reres = u_biz.login( relogin);
+
+		
+		session.setAttribute("User", reres);
+		
+		System.out.println("뭐라고 받아질까"+reres);
+		boolean check = false;
+		if((res > 0)&&(charge>0)) {		//업데이트이가정상적으로 될때
+			
+			check = true;
+		}
+		Map<String,Boolean> map = new HashMap<String,Boolean>();
+		map.put("check",check);
+		return map;
+	}
+	
 
 }

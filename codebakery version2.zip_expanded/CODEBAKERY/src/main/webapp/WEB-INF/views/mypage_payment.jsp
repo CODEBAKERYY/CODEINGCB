@@ -59,112 +59,133 @@
 	
 </style>
  <script type="text/javascript">
-$(function(){
-    var IMP = window.IMP; // 생략가능
-    IMP.init('imp38792034'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
-    var msg;
-	$('#btn_step1').click(function(){
-		if($('input:radio[name=firstcharge]').is(':checked')){
-		$('#div_step1').addClass('hiddendiv');
-		$('#div_step2').removeClass('hiddendiv');
-		$('#stepslijs1').removeClass('on');
-		$('#stepslijs2').addClass('on');
-		}else{
-			alert('충전 포인트를을 선택해 주세요!');
-		}
-	});
-	
-	$('#btn_step2').click(function(){
-		
-		var pay_method_val = $('input[name=rdo_pay]:checked').val();
-        var member_id_val = '${User.user_Id}';
-        var price_val = $('input:radio[name=firstcharge]:checked').val();
-        var user_Point = '${User.user_Point}';
-        console.log(member_id_val+price_val);  //값 들어옴
-        var point_Sum = parseInt(price_val)+parseInt(user_Point);
-        console.log(point_Sum);
-        
-        var chargeVal={//키 값은 dto의 변수명과 같아야한다.
-              "user_Id":member_id_val,
-              "user_Point":point_Sum
-              
-        };
-			console.log(chargeVal); //값 들어옴
-			
-		$.ajax({
-			url: "charge.do" ,
-			type: 'POST',
-			dataType: "json",
-			contentType:"application/json",
-			data:  JSON.stringify(chargeVal),//기타 필요한 데이터가 있으면 추가 전달
-            
-			success:function(msg){
-				if(msg.check == true){
-					//사이트로 보내는 정보
-				    IMP.request_pay({
-				        pg : 'html5_inicis',
-				        pay_method : pay_method_val,
-				        merchant_uid : 'merchant_' + new Date().getTime(),
-				        name : '포인트 충전',
-				        amount : price_val,
-				        buyer_email : '${User.user_Mail}',
-				        buyer_name : '${User.user_Name}',
-				        buyer_tel : '${User.user_Phone}',
-				       /*  buyer_addr : '${User.user_Mail}', */
-				        buyer_postcode : '123-456',
-				        //m_redirect_url : 'http://www.naver.com'
-				    }, function(rsp) {
-				        if ( rsp.success ) {
-				            //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
-				            jQuery.ajax({
-				                url: "/payments/complete", //cross-domain error가 발생하지 않도록 주의해주세요
-				                type: 'POST',
-				                dataType: 'json',
-				                data: {
-				                    imp_uid : rsp.imp_uid
-				                    //기타 필요한 데이터가 있으면 추가 전달
-				                }
-				            }).done(function(data) {
-				                //[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
-				                if ( everythings_fine ) {
-				                    msg = '결제가 완료되었습니다.';
-				                    msg += '\n고유ID : ' + rsp.imp_uid;
-				                    msg += '\n상점 거래ID : ' + rsp.merchant_uid;
-				                    msg += '\결제 금액 : ' + rsp.paid_amount;
-				                    msg += '카드 승인번호 : ' + rsp.apply_num;
-				                    
-				                    alert(msg);
-				                } else {
-				                    
-				                	msg = '결제에 실패하였습니다.';
-    								msg+= 'REST API 조회 실패 또는 변조';
-    								alert(msg);
-				                }
-				            });
-				            //성공시 이동할 페이지
-				            location.href='mypoint.do';
-				        } else {
-				            msg = '결제에 실패하였습니다.';
-				            msg += '에러내용 : ' + rsp.error_msg;
-				            //실패시 이동할 페이지
-				            location.href="mypoint.do";
-				            alert(msg);
-				        }
-				    });
-				}else{
-					alert("ajax 연결에 실패하였습니다.");
-				}	
-			},
-			
-			error:function(){
-				msg = '결제에 실패하였습니다.';
-				msg += '에러내용 : AJAX 통신 연결 실패';
-				alert(msg);
+ $(function(){
+	    var IMP = window.IMP; // 생략가능
+	    IMP.init('imp38792034'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+	    var msg;
+		$('#btn_step1').click(function(){
+			if($('input:radio[name=firstcharge]').is(':checked')){
+			$('#div_step1').addClass('hiddendiv');
+			$('#div_step2').removeClass('hiddendiv');
+			$('#stepslijs1').removeClass('on');
+			$('#stepslijs2').addClass('on');
+			}else{
+				alert('충전 포인트를을 선택해 주세요!');
 			}
-		});//ajax1
+		});
+		
+		$('#btn_step2').click(function(){
+			
+			var pay_method_val = $('input[name=rdo_pay]:checked').val();
+	        var member_id_val = '${User.user_Id}';
+	        var price_val = $('input:radio[name=firstcharge]:checked').val();
+	        var user_Point = '${User.user_Point}';
+	        var point_Date = new Date();;
+	        
+	        console.log("멤버 아이디"+member_id_val+"가격"+price_val);  //값 들어옴
+	        
+	        
+	        var point_Sum = parseInt(price_val)+parseInt(user_Point);
+	        console.log(point_Sum);
+	        
+	        
+	        
+	        var chargeVal={//키 값은 dto의 변수명과 같아야한다.
+	                "user_Id":member_id_val
+	          };
+	          
+	        var chargeinfo={//키 값은 dto의 변수명과 같아야한다.
+	              "user_Id":member_id_val,
+	               "point_Charge":price_val,
+	              "point_Date":point_Date 
+	        };
+	        
+	        
+				console.log(chargeVal); //값 들어옴
+				
+			$.ajax({
+				url: "charge_middle.do" ,
+				type: 'POST',
+				dataType: "json",
+				contentType:"application/json",
+				data:  JSON.stringify(chargeVal),//기타 필요한 데이터가 있으면 추가 전달
+	            
+				success:function(msg){
+					if(msg.check == true){
+						//사이트로 보내는 정보
+					    IMP.request_pay({
+					        pg : 'html5_inicis',
+					        pay_method : pay_method_val,
+					        merchant_uid : 'merchant_' + new Date().getTime(),
+					        name : '포인트 충전',
+					        amount : price_val,
+					        buyer_email : '${User.user_Mail}',
+					        buyer_name : '${User.user_Name}',
+					        buyer_tel : '${User.user_Phone}',
+					       /*  buyer_addr : '${User.user_Mail}', */
+					        buyer_postcode : '123-456',
+					        //m_redirect_url : 'http://www.naver.com'
+					    }, function(rsp) {
+					        if ( rsp.success == true ) {
+					            //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+					                 $.ajax({
+					            			url: "charge.do" ,
+					            			type: 'POST',
+					            			dataType: "json",
+					            			contentType:"application/json",
+					            			data:  JSON.stringify(chargeinfo),//기타 필요한 데이터가 있으면 추가 전달
+					                        
+					            			success:function(msg){
+					            			    alert("결제 데이터 전송 성공");
+					            			},error:function(){
+					            				msg = '결제 데이터 전송 실패.';
+					            				msg += '에러내용 : AJAX charge.do 통신 연결 실패';
+					            				alert(msg);
+					            			}
+					                    }).done(function(data) {
+					                //[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
+						                if ( data.everythings_fine ) {
+						                    msg = '결제가 완료되었습니다.';
+						                    msg += '\n고유ID : ' + rsp.imp_uid;
+						                    msg += '\n상점 거래ID : ' + rsp.merchant_uid;
+						                    msg += '\결제 금액 : ' + rsp.paid_amount;
+						                    msg += '카드 승인번호 : ' + rsp.apply_num;
+						                    
+						                    alert(msg);
+						            
+					                 
+					                    
+					                } else {
+					                    
+					                	msg = '결제에 실패하였습니다.';
+	    								msg+= 'REST API 조회 실패 또는 변조';
+	    								alert(msg);
+					                }
+					            });
+					            //성공시 이동할 페이지
+					            location.href='mypoint.do';
+					        } else {
+					            msg = '결제에 실패하였습니다.';
+					            msg += '에러내용 : ' + rsp.error_msg;
+					            //실패시 이동할 페이지
+					            location.href="mypoint.do";
+					            alert(msg);
+					        }
+					    });
+					}else{
+						alert("ajax 연결에 실패하였습니다.");
+					}	
+				},
+				
+				error:function(){
+					msg = '결제에 실패하였습니다.결제창 안뜨는 오류';
+					msg += '에러내용 : AJAX 통신 연결 실패';
+					alert(msg);
+				}
+			});//ajax1
+		});
+		
 	});
-	
-});
 </script>
 </head>
 <body>
