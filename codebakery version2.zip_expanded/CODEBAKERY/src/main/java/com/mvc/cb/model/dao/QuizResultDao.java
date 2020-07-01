@@ -10,6 +10,6 @@ public interface QuizResultDao {
 
 	int insert(QuizResultDto dto);
 
-	List<QuizResultDto> selectList(String user_Id);
+	List<QuizResultDto> selectList();
 
 }

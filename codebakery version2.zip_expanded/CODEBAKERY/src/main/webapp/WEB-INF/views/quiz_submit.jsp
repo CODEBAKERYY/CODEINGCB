@@ -34,6 +34,8 @@
 			</div>
 			<div class="major">
 				<textarea rows="30" cols="80" name="quiz_answer" style="resize: none;"></textarea>
+				<h2>${list.quiz_No }</h2>
+				<h2>${User.user_Id }</h2>
 				<br>
 				<input type="submit" class="button" value="제출"/>
 			</div>

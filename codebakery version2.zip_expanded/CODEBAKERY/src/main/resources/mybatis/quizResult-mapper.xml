@@ -16,12 +16,11 @@
   	<select id="selectList" resultMap="quizResultMap">
   		SELECT *
   		FROM QUIZ_RESULT
-  		WHERE USER_ID = #{user_Id}
   		ORDER BY QUIZ_NO DESC
   	</select>
   	
   	<insert id="insert">
   		INSERT INTO QUIZ_RESULT
-  		VALUES(#{user_Id}, #{quiz_No}, #{code_Content}, #{ex_Result}, #{print_Result}, #{quiz_Result} )
+  		VALUES(#{quiz_No}, #{code_Content}, #{ex_Result}, #{print_Result}, #{quiz_Result}, #{user_Id})
   	</insert>
   </mapper>
