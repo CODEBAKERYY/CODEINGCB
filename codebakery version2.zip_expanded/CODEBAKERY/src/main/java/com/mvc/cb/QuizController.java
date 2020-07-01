@@ -123,6 +123,7 @@ public class QuizController {
 				
 				System.out.println("문제 답 : " + answer);
 				
+<<<<<<< HEAD
 				if(answer.equals(answerResult)) { //컴파일 성공시
 					System.out.println("컴파일 성공 : " + answerResult);
 					
@@ -143,11 +144,70 @@ public class QuizController {
 						quizDto.setTry_User(tryUser);
 						quizDto.setCorrect_User(correctUser);
 						quizDto.setCorrect_Rate(correctRate);
+=======
+				if(answerResult != null) {
+					if(answer.equals(answerResult)) { //컴파일 성공시
+						System.out.println("컴파일 성공 : " + answerResult);
+						
+						//quizResultDto에 값을 넣은 후 insert하여 테이블에 추가하기(성공일 때)
+						QuizResultDto quizResultDto = new QuizResultDto(quiz_No, quiz_answer, answer, answerResult, "성공", user_Id);
+						int res = quizResultBiz.insert(quizResultDto);
+						
+						if(res>0) {
+							System.out.println("성공입니다.");
+							
+							//제출, 정답자, 정답률 업데이트
+							tryUser = quizDto.getTry_User()+1;
+							correctUser = quizDto.getCorrect_User()+1;
+							//소수 3자리까지 보여줌
+							correctRate = Math.round(((correctUser/tryUser)*1000)/1000);
+							
+							//QuizDto에 넣어주고 DB에 업데이트
+							quizDto.setTry_User(tryUser);
+							quizDto.setCorrect_User(correctUser);
+							quizDto.setCorrect_Rate(correctRate);
+							
+							res = quizBiz.update(quizDto);
+							
+							if(res >0) {
+								System.out.println("Quiz correct_User, try_User, correct_Rate 수정 완료");
+							}else {
+								System.out.println("Quiz correct_User, try_User, correct_Rate 수정 실패");
+							}
+						}else {
+							System.out.println("성공.quizResultInsert 에러");
+						}
+					}else {	//컴파일 실패시(리턴값이 다를때)
+						System.out.println("컴파일 실패(리턴값이 다름) : " + answerResult);
+>>>>>>> parent of 0eb6467... 가즈아아아아아아아
 						
 						res = quizBiz.update(quizDto);
 						
+<<<<<<< HEAD
 						if(res >0) {
 							System.out.println("Quiz correct_User, try_User, correct_Rate 수정 완료");
+=======
+						if(res>0) {
+							System.out.println("실패입니다.");
+							
+							//제출, 정답률 업데이트
+							tryUser = quizDto.getTry_User()+1;
+							//소수 3자리까지 보여줌
+							correctRate = Math.round(((correctUser/tryUser)*1000)/1000);
+							
+							//QuizDto에 넣어주고 db에 업데이트
+							quizDto.setTry_User(tryUser);
+							quizDto.setCorrect_Rate(correctRate);
+							
+							
+							res = quizBiz.update(quizDto);
+							
+							if(res >0) {
+								System.out.println("Quiz try_User, correct_Rate 수정 완료");
+							}else {
+								System.out.println("Quiz try_User, correct_Rate 수정 실패");
+							}
+>>>>>>> parent of 0eb6467... 가즈아아아아아아아
 						}else {
 							System.out.println("Quiz correct_User, try_User, correct_Rate 수정 실패");
 						}
