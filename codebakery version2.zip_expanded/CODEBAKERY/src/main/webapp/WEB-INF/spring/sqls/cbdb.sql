@@ -151,7 +151,11 @@ CREATE TABLE QUIZ (
 );
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+SELECT * FROM QUIZ;
+>>>>>>> parent of 0eb6467... 가즈아아아아아아아
 =======
 SELECT * FROM QUIZ;
 >>>>>>> parent of 0eb6467... 가즈아아아아아아아

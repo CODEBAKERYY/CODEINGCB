@@ -125,6 +125,7 @@ public class QuizController {
 				
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 				if(answer.equals(answerResult)) { //컴파일 성공시
 					System.out.println("컴파일 성공 : " + answerResult);
 					
@@ -146,6 +147,8 @@ public class QuizController {
 						quizDto.setCorrect_User(correctUser);
 						quizDto.setCorrect_Rate(correctRate);
 =======
+=======
+>>>>>>> parent of 0eb6467... 가즈아아아아아아아
 =======
 >>>>>>> parent of 0eb6467... 가즈아아아아아아아
 				if(answerResult != null) {
