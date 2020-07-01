@@ -13,10 +13,6 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="js/bootstrap.js"></script>
 <script type="text/javascript">
-	function review_window() {
-		var target = "review.do?mentor_No=${mentor_No}";
-		window.open(target, "", 'width=350, height=400');
-	}
 </script>
 </head>
 <body>
@@ -39,7 +35,7 @@
 									</c:when>
 									<c:otherwise>
 										<button type="button" class="btn btn-default pull-right"
-											onclick="review_window()">종료</button>
+											onclick="location.href='review.do?mentor_No=${mentor_No}'">종료</button>
 									</c:otherwise>
 								</c:choose>
 							</div>
