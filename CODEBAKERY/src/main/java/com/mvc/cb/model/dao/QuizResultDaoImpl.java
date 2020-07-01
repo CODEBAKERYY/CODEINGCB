@@ -29,11 +29,11 @@ public class QuizResultDaoImpl implements QuizResultDao{
 	}
 
 	@Override
-	public List<QuizResultDto> selectList() {
+	public List<QuizResultDto> selectList(String user_Id) {
 		List<QuizResultDto> quizResultList = new ArrayList<QuizResultDto>();
 		
 		try {
-			quizResultList = sqlSession.selectList(NAMESPACE+"selectList");
+			quizResultList = sqlSession.selectList(NAMESPACE+"selectList", user_Id);
 		}catch(Exception e) {
 			System.out.println("[error] : QuizResult SelectList");
 			e.printStackTrace();

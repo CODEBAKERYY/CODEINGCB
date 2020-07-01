@@ -15,10 +15,10 @@
   	</resultMap>
 	
 	<select id="selectList" parameterType="PointDto" resultMap="PointMap">
-  		SELECT POINT_NO, POINT_DATE, POINT_CHARGE, POINT_USE, POINT_HISTORY FROM POINT_TB
-  		WHERE USER_ID = #{user_Id}
-  		ORDER BY POINT_NO
-  	</select>
+        SELECT ROWNUM, POINT_DATE, POINT_CHARGE, POINT_USE, POINT_HISTORY FROM POINT_TB
+        WHERE USER_ID = #{user_Id}
+        ORDER BY POINT_NO
+     </select>
   	<!-- 날짜를 SYSDATE으로 넘겨서 받아와야하나...고민 -->
   	<insert id="insert" parameterType="PointDto">
   		INSERT INTO POINT_TB

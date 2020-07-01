@@ -23,7 +23,6 @@ import com.mvc.cb.biz.QuizBiz;
 import com.mvc.cb.biz.QuizResultBiz;
 import com.mvc.cb.model.dto.QuizDto;
 import com.mvc.cb.model.dto.QuizResultDto;
-import com.mvc.cb.model.dto.TryQuizDto;
 
 @Controller
 public class QuizController {
@@ -37,10 +36,11 @@ public class QuizController {
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
 	@RequestMapping(value = "/quiz.do")
-	public String quizList(Model model) {
+	public String quizList(Model model, String user_Id) {
 		logger.info("QUIZ SELECT LIST");
+		System.out.println("user Id="+user_Id);
 		model.addAttribute("list", quizBiz.selectList());
-		model.addAttribute("resultList", quizResultBiz.selectList());
+		model.addAttribute("resultList", quizResultBiz.selectList(user_Id));
 		return "quiz";
 	}
 
@@ -77,7 +77,7 @@ public class QuizController {
 		return "quiz_submit";
 	}
 
-/*	@RequestMapping(value = "/quiz_Answer.do")
+	@RequestMapping(value = "/quiz_Answer.do")
 	public String quizAnswer(String quiz_answer, String quiz_type, int quiz_No, String user_Id, HttpServletRequest request, HttpServletResponse response) {
 		//quiz_No로 해당 문제 정보가져오기
 		QuizDto quizDto = quizBiz.selectOne(quiz_No);
@@ -103,8 +103,6 @@ public class QuizController {
 				}
 
 				OutputStream output = new FileOutputStream(newfile);
-//				File file = new File(path+"/test.java");
-//				OutputStream output = new FileOutputStream(file);
 
 				String str = quiz_answer;
 				byte[] by = str.getBytes();
@@ -120,43 +118,87 @@ public class QuizController {
 				String answerResult = IOUtils.toString(process.getInputStream(), "UTF-8");
 				answerResult = answerResult.trim(); //앞뒤 공백제거
 				String errorOutput = IOUtils.toString(process.getErrorStream());
+				errorOutput = errorOutput.trim();
 				
 				System.out.println("문제 답 : " + answer);
+				System.out.println("리턴 값 : " + answerResult);
+				System.out.println("컴파일 에러 로그 : " + errorOutput);
 				
-				if(answer.equals(answerResult)) { //컴파일 성공시
-					System.out.println("컴파일 성공 : " + answerResult);
-					
-					//quizResultDto에 값을 넣은 후 insert하여 테이블에 추가하기(성공일 때)
-					QuizResultDto quizResultDto = new QuizResultDto(quiz_No, quiz_answer, answer, answerResult, "성공", user_Id);
-					int res = quizResultBiz.insert(quizResultDto);
-					
-					if(res>0) {
-						System.out.println("성공입니다.");
+				if(!(answerResult.equals("")) && answerResult != null) {
+					if(answer.equals(answerResult)) { //컴파일 성공시
+						System.out.println("컴파일 성공 : " + answerResult);
 						
-						//제출, 정답자, 정답률 업데이트
-						tryUser = quizDto.getTry_User()+1;
-						correctUser = quizDto.getCorrect_User()+1;
-						//소수 3자리까지 보여줌
-						correctRate = Math.round(((correctUser/tryUser)*1000)/1000);
+						//quizResultDto에 값을 넣은 후 insert하여 테이블에 추가하기(성공일 때)
+						QuizResultDto quizResultDto = new QuizResultDto(quiz_No, quiz_answer, answer, answerResult, "성공", user_Id);
 						
-						//QuizDto에 넣어주고 DB에 업데이트
-						quizDto.setTry_User(tryUser);
-						quizDto.setCorrect_User(correctUser);
-						quizDto.setCorrect_Rate(correctRate);
+						int res = quizResultBiz.insert(quizResultDto);
 						
-						res = quizBiz.update(quizDto);
-						
-						if(res >0) {
-							System.out.println("Quiz correct_User, try_User, correct_Rate 수정 완료");
+						if(res>0) {
+							System.out.println("성공입니다.");
+							System.out.println("");
+							//제출, 정답자, 정답률 업데이트
+							tryUser = quizDto.getTry_User()+1;
+							System.out.println("제출 : " + tryUser);
+							correctUser = quizDto.getCorrect_User()+1;
+							System.out.println("정답자 : " + correctUser);
+							//소수 3자리까지 보여줌
+							correctRate = (double)correctUser/(double)tryUser;
+							correctRate = Math.round(correctRate*1000)/10.0;
+							System.out.println("정답률 : " + correctRate);
+							//QuizDto에 넣어주고 DB에 업데이트
+							quizDto.setTry_User(tryUser);
+							quizDto.setCorrect_User(correctUser);
+							quizDto.setCorrect_Rate(correctRate);
+							
+							res = quizBiz.update(quizDto);
+							
+							if(res >0) {
+								System.out.println("Quiz correct_User, try_User, correct_Rate 수정 완료");
+							}else {
+								System.out.println("Quiz correct_User, try_User, correct_Rate 수정 실패");
+							}
 						}else {
-							System.out.println("Quiz correct_User, try_User, correct_Rate 수정 실패");
+							System.out.println("성공.quizResultInsert 에러");
 						}
-					}else {
-						System.out.println("성공.quizResultInsert 에러");
+					}else {	//컴파일 실패시(리턴값이 다를때)
+						System.out.println("컴파일 실패(리턴값이 다름) : " + answerResult);
+						
+						//quizResultDto에 값을 넣은 후 insert하여 테이블에 추가하기(실패일 때)
+						QuizResultDto quizResultDto = new QuizResultDto(quiz_No, quiz_answer, answer, answerResult, "실패", user_Id);
+						int res = quizResultBiz.insert(quizResultDto);
+						
+						if(res>0) {
+							System.out.println("실패입니다.");
+							
+							//제출, 정답률 업데이트
+							//제출, 정답자, 정답률 업데이트
+							tryUser = quizDto.getTry_User()+1;
+							System.out.println("제출 : " + tryUser);
+							correctUser = quizDto.getCorrect_User();
+							System.out.println("정답자 : " + correctUser);
+							//소수 3자리까지 보여줌
+							correctRate = (double)correctUser/(double)tryUser;
+							correctRate = Math.round(correctRate*1000)/10.0;
+							System.out.println("정답률 : " + correctRate);
+							//QuizDto에 넣어주고 DB에 업데이트
+							quizDto.setTry_User(tryUser);
+							quizDto.setCorrect_User(correctUser);
+							quizDto.setCorrect_Rate(correctRate);
+							
+							
+							res = quizBiz.update(quizDto);
+							
+							if(res >0) {
+								System.out.println("Quiz try_User, correct_Rate 수정 완료");
+							}else {
+								System.out.println("Quiz try_User, correct_Rate 수정 실패");
+							}
+						}else {
+							System.out.println("실패.quizResultInsert 에러");
+						}
 					}
-					
-				}else {	//컴파일 실패시
-					System.out.println("컴파일 실패 : " + errorOutput);
+				}else {	//컴파일 실패(컴파일 에러)
+					System.out.println("컴파일 실패(컴파일 에러) : " + errorOutput);
 					
 					//quizResultDto에 값을 넣은 후 insert하여 테이블에 추가하기(실패일 때)
 					QuizResultDto quizResultDto = new QuizResultDto(quiz_No, quiz_answer, answer, errorOutput, "실패", user_Id);
@@ -167,11 +209,14 @@ public class QuizController {
 						
 						//제출, 정답자, 정답률 업데이트
 						tryUser = quizDto.getTry_User()+1;
+						System.out.println("제출 : " + tryUser);
 						correctUser = quizDto.getCorrect_User();
+						System.out.println("정답자 : " + correctUser);
 						//소수 3자리까지 보여줌
-						correctRate = Math.round(((correctUser/tryUser)*1000)/1000);
-						
-						//QuizDto에 넣어주고 db에 업데이트
+						correctRate = (double)correctUser/(double)tryUser;
+						correctRate = Math.round(correctRate*1000)/10.0;
+						System.out.println("정답률 : " + correctRate);
+						//QuizDto에 넣어주고 DB에 업데이트
 						quizDto.setTry_User(tryUser);
 						quizDto.setCorrect_User(correctUser);
 						quizDto.setCorrect_Rate(correctRate);
@@ -187,7 +232,6 @@ public class QuizController {
 						System.out.println("실패.quizResultInsert 에러");
 					}
 				}
-				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -196,5 +240,5 @@ public class QuizController {
 			System.out.println("자바가 아님");
 		}
 		return "redirect:quiz.do";
-	}*/
+	}
 }
