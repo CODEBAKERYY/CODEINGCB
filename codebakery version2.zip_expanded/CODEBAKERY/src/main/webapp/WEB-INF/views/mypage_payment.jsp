@@ -96,6 +96,7 @@
 	          
 	        var chargeinfo={//키 값은 dto의 변수명과 같아야한다.
 	              "user_Id":member_id_val,
+	              "user_Point": point_Sum,
 	               "point_Charge":price_val,
 	              "point_Date":point_Date 
 	        };
@@ -126,7 +127,8 @@
 					        buyer_postcode : '123-456',
 					        //m_redirect_url : 'http://www.naver.com'
 					    }, function(rsp) {
-					        if ( rsp.success == true ) {
+					        if ( rsp.success) {
+					        	alert("rufwptjdrhd");
 					            //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
 					                 $.ajax({
 					            			url: "charge.do" ,
@@ -134,36 +136,18 @@
 					            			dataType: "json",
 					            			contentType:"application/json",
 					            			data:  JSON.stringify(chargeinfo),//기타 필요한 데이터가 있으면 추가 전달
-					                        
 					            			success:function(msg){
-					            			    alert("결제 데이터 전송 성공");
+					            				if(msg.check==true){
+					            					
+					            					 location.href="mypoint.do?id="+member_id_val;
+					            				}
 					            			},error:function(){
 					            				msg = '결제 데이터 전송 실패.';
 					            				msg += '에러내용 : AJAX charge.do 통신 연결 실패';
 					            				alert(msg);
 					            			}
-					                    }).done(function(data) {
-					                //[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
-						                if ( data.everythings_fine ) {
-						                    msg = '결제가 완료되었습니다.';
-						                    msg += '\n고유ID : ' + rsp.imp_uid;
-						                    msg += '\n상점 거래ID : ' + rsp.merchant_uid;
-						                    msg += '\결제 금액 : ' + rsp.paid_amount;
-						                    msg += '카드 승인번호 : ' + rsp.apply_num;
-						                    
-						                    alert(msg);
-						            
-					                 
-					                    
-					                } else {
-					                    
-					                	msg = '결제에 실패하였습니다.';
-	    								msg+= 'REST API 조회 실패 또는 변조';
-	    								alert(msg);
-					                }
-					            });
-					            //성공시 이동할 페이지
-					            location.href='mypoint.do';
+					                    });
+					            
 					        } else {
 					            msg = '결제에 실패하였습니다.';
 					            msg += '에러내용 : ' + rsp.error_msg;

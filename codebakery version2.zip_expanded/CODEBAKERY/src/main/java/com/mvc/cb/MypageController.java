@@ -184,6 +184,7 @@ public class MypageController {
 		
 		String user_Id = (String) param.get("user_Id");
 		int user_Point = (Integer)(param.get("user_Point"));
+		logger.info("CHARGE 업데이트 적용"+user_Point);
 		String point_Charge = (String)param.get("point_Charge");
 		String point_Date =  (String)param.get("point_Date");
 		
@@ -194,14 +195,19 @@ public class MypageController {
 		PointDto pointdto = new PointDto();
 		pointdto.setPoint_Charge(point_Charge);
 		pointdto.setPoint_Date(point_Date);
+		pointdto.setUser_Id(user_Id);
 		
 		System.out.println("point_Charge:"+point_Charge+""+point_Date);
 		logger.info("userid"+point_Charge+""+point_Date);
 		
-		logger.info("userid"+user_Id+ user_Point);
+		logger.info("userid"+user_Id+"" +user_Point);
 		System.out.println("userid"+user_Id+""+ user_Point);
 		
+		//포인트 충전 update
 		int res = biz.updatePoint(dto);
+		System.out.println("pointdto:        "+pointdto);
+		//pointdto:        com.mvc.cb.model.dto.PointDto@47bbc232
+		//포인트 사용 내역 insert
 	    int charge = p_biz.insert(pointdto); 
 		
 		session.removeAttribute("User");
@@ -211,7 +217,7 @@ public class MypageController {
 		
 		session.setAttribute("User", reres);
 		
-		System.out.println("뭐라고 받아질까"+reres);
+		System.out.println("뭐라고 받아질까"+reres); //포인트 업데이트 되서 받아진다.
 		boolean check = false;
 		if((res > 0)&&(charge>0)) {		//업데이트이가정상적으로 될때
 			

@@ -17,7 +17,7 @@ public class MyPointDaoImpl implements MyPointDao{
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
-	public List<PointDto> selectAll(String id) {
+	public List<PointDto> selectAll(String user_Id) {
 		System.out.println("포인트 사용내역 가저오는 중");
 		
 		List<PointDto> list = new ArrayList<PointDto>();
@@ -30,9 +30,9 @@ public class MyPointDaoImpl implements MyPointDao{
 //		param.put("end", end);
 		try {
 //			list = sqlSession.selectList(NAMESPACE + "selectList", param);
-			list = sqlSession.selectList(NAMESPACE + "selectList");
+			list = sqlSession.selectList(NAMESPACE + "selectList",user_Id);
 		} catch (Exception e) {
-			System.out.println("[error] : select list");
+			System.out.println("[error]mypointdaoimpl : select list");
 			e.printStackTrace();
 		}
 
@@ -46,6 +46,7 @@ public class MyPointDaoImpl implements MyPointDao{
 		int res = 0;
 		try {
 			res = sqlSession.insert(NAMESPACE + "insert",dto);
+			
 		} catch(Exception e) {
 			System.out.println("[error] : insert");
 			e.printStackTrace();
