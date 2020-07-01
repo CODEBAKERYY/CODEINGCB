@@ -1,6 +1,7 @@
 <%@page import="com.mvc.cb.model.dto.UserDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%
 	UserDto user = (UserDto) session.getAttribute("User");
@@ -45,6 +46,11 @@
 	}); --%>
 
 	});
+	
+	function quiz(){
+		alert("로그인 후 이용가능합니다.");
+		location.href="login.do";
+	}
 </script>
 <style type="text/css">
 .alrimdiv {
@@ -109,7 +115,14 @@
 					title="">Home</a></li>
 				<li><a href="mentor_detailAll.do" accesskey="1" title="">멘토소개</a></li>
 				<li><a href="qna.do" accesskey="2" title="">질문답변</a></li>
-				<li><a href="quiz.do" accesskey="3" title="">퀴즈</a></li>
+				<c:choose>
+				<c:when test="${!empty User }">
+				<li><a href="quiz.do?user_Id=${User.user_Id }" accesskey="3" title="">퀴즈</a></li>
+				</c:when>
+				<c:otherwise>
+				<li><a onclick="quiz();" style="cursor: pointer;">퀴즈</a></li>
+				</c:otherwise>
+				</c:choose>
 				<li><a href="notice.do" accesskey="4" title="">공지사항</a></li>
 				<%
 					if(admin != null) {

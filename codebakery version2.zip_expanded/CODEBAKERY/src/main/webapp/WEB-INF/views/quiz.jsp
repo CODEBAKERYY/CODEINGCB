@@ -23,8 +23,8 @@
 	<div class="major">
 		<h2 style="padding-top: 10px">문제 게시판</h2>
 	</div>
-
-	<!-- SpringMVC01에서 boardlist 그대로 가져옴 기능구현할 때 변경해야함 -->
+	<input type="hidden" name="user_Id" value="${User.user_Id }"/>
+	
 	<div align="center">
 	<table border = "1" class="tableForm">
 		<colgroup>
@@ -42,13 +42,11 @@
 			<th>정답</th>
 			<th>제출</th>
 			<th>정답 비율</th>
-			
 		</tr>
 		<c:choose>
 			<c:when test="${empty list }">
 				<tr>
-					<td colspan="6" align="center">------------- 작성된 글이 없습니다.
-						-------------</td>
+					<td colspan="6" align="center">------------- 작성된 글이 없습니다.-------------</td>
 				</tr>
 			</c:when>
 			<c:otherwise>
@@ -56,20 +54,28 @@
 					<tr>
 						<td>${dto.quiz_No }</td>
 						<td><a href="quiz_detail.do?quiz_No=${dto.quiz_No}">${dto.quiz_Title }</a></td>
+						<td id="resultChange"></td>
 					<c:choose>
 						<c:when test="${empty resultList }">
 							<td></td>
 							<td>${dto.correct_User }</td>
 							<td>${dto.try_User }</td>
-							<td>${dto.correct_Rate }</td>
+							<td>${dto.correct_Rate }%</td>
 						</c:when>
 						<c:otherwise>
-							<c:if test="${dto.quiz_No eq resultList.quiz_No and dto.user_Id eq resultList.user_Id }">
-								<td>${resultList.quiz_Result }</td>
+							<c:forEach items="${resultList }" var="resultdto">
+								<c:choose>
+									<c:when test="${dto.quiz_No == resultdto.quiz_No }">
+										
+									</c:when>
+									<c:otherwise>
+										
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
 								<td>${dto.correct_User }</td>
 								<td>${dto.try_User }</td>
-								<td>${dto.correct_Rate }</td>
-							</c:if>
+								<td>${dto.correct_Rate }%</td>
 						</c:otherwise>
 					</c:choose>						
 					</tr>
@@ -86,7 +92,6 @@
 	<br>
 	<br>
 	<hr size="2px" color="#3f3f3f" width="93%">
-
 
 	<%@ include file="footer.jsp"%>
 

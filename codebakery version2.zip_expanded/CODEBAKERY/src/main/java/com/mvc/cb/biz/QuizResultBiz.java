@@ -8,6 +8,6 @@ public interface QuizResultBiz {
 
 	int insert(QuizResultDto dto);
 
-	List<QuizResultDto> selectList();
+	List<QuizResultDto> selectList(String user_Id);
 
 }
