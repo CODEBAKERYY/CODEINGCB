@@ -130,6 +130,9 @@ Released   : 20130811
                                    	<strong>${reply.user_Id }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
                                    	<fmt:formatDate value="${reply.comment_Date}" pattern="yyyy.MM.dd HH:mm"/>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <c:if test="${!empty User && (User.user_Id eq reply.user_Id) || (User.user_Id eq 'ADMIN')}">
+                                    <a href="comment_delete.do?notice_No=${reply.notice_No }&comment_No=${reply.comment_No}">삭제</a>
+                                    </c:if>
                                     </td>
                                 </tr>
                                 <tr>
