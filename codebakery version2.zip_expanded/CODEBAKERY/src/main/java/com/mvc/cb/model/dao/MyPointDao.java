@@ -8,4 +8,5 @@ public interface MyPointDao {
 	String NAMESPACE = "point.";
 	
 	public List<PointDto> selectAll(String id);
+	public int insert(PointDto dto);
 }

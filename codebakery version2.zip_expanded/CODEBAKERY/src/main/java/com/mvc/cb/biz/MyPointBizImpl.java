@@ -19,4 +19,8 @@ public class MyPointBizImpl implements MyPointBiz{
 		return dao.selectAll(id);
 	}
 
+	@Override
+	public int insert(PointDto dto) {
+		return dao.insert(dto);
+	}
 }
