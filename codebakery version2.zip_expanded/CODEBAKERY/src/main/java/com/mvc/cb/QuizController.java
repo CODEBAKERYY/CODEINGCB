@@ -36,10 +36,10 @@ public class QuizController {
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
 	@RequestMapping(value = "/quiz.do")
-	public String quizList(Model model) {
+	public String quizList(Model model, String user_Id) {
 		logger.info("QUIZ SELECT LIST");
 		model.addAttribute("list", quizBiz.selectList());
-		model.addAttribute("resultList", quizResultBiz.selectList());
+		model.addAttribute("resultList", quizResultBiz.selectList(user_Id));
 		return "quiz";
 	}
 
@@ -123,23 +123,27 @@ public class QuizController {
 				System.out.println("리턴 값 : " + answerResult);
 				System.out.println("컴파일 에러 로그 : " + errorOutput);
 				
-				if(answerResult != null) {
+				if(!(answerResult.equals("")) && answerResult != null) {
 					if(answer.equals(answerResult)) { //컴파일 성공시
 						System.out.println("컴파일 성공 : " + answerResult);
 						
 						//quizResultDto에 값을 넣은 후 insert하여 테이블에 추가하기(성공일 때)
 						QuizResultDto quizResultDto = new QuizResultDto(quiz_No, quiz_answer, answer, answerResult, "성공", user_Id);
+						
 						int res = quizResultBiz.insert(quizResultDto);
 						
 						if(res>0) {
 							System.out.println("성공입니다.");
-							
+							System.out.println("");
 							//제출, 정답자, 정답률 업데이트
 							tryUser = quizDto.getTry_User()+1;
+							System.out.println("제출 : " + tryUser);
 							correctUser = quizDto.getCorrect_User()+1;
+							System.out.println("정답자 : " + correctUser);
 							//소수 3자리까지 보여줌
-							correctRate = Math.round(((correctUser/tryUser)*1000)/1000);
-							
+							correctRate = (double)correctUser/(double)tryUser;
+							correctRate = Math.round(correctRate*1000)/10.0;
+							System.out.println("정답률 : " + correctRate);
 							//QuizDto에 넣어주고 DB에 업데이트
 							quizDto.setTry_User(tryUser);
 							quizDto.setCorrect_User(correctUser);
@@ -166,12 +170,18 @@ public class QuizController {
 							System.out.println("실패입니다.");
 							
 							//제출, 정답률 업데이트
+							//제출, 정답자, 정답률 업데이트
 							tryUser = quizDto.getTry_User()+1;
+							System.out.println("제출 : " + tryUser);
+							correctUser = quizDto.getCorrect_User();
+							System.out.println("정답자 : " + correctUser);
 							//소수 3자리까지 보여줌
-							correctRate = Math.round(((correctUser/tryUser)*1000)/1000);
-							
-							//QuizDto에 넣어주고 db에 업데이트
+							correctRate = (double)correctUser/(double)tryUser;
+							correctRate = Math.round(correctRate*1000)/10.0;
+							System.out.println("정답률 : " + correctRate);
+							//QuizDto에 넣어주고 DB에 업데이트
 							quizDto.setTry_User(tryUser);
+							quizDto.setCorrect_User(correctUser);
 							quizDto.setCorrect_Rate(correctRate);
 							
 							
@@ -198,11 +208,14 @@ public class QuizController {
 						
 						//제출, 정답자, 정답률 업데이트
 						tryUser = quizDto.getTry_User()+1;
+						System.out.println("제출 : " + tryUser);
 						correctUser = quizDto.getCorrect_User();
+						System.out.println("정답자 : " + correctUser);
 						//소수 3자리까지 보여줌
-						correctRate = Math.round(((correctUser/tryUser)*1000)/1000);
-						
-						//QuizDto에 넣어주고 db에 업데이트
+						correctRate = (double)correctUser/(double)tryUser;
+						correctRate = Math.round(correctRate*1000)/10.0;
+						System.out.println("정답률 : " + correctRate);
+						//QuizDto에 넣어주고 DB에 업데이트
 						quizDto.setTry_User(tryUser);
 						quizDto.setCorrect_User(correctUser);
 						quizDto.setCorrect_Rate(correctRate);

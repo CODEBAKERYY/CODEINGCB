@@ -20,8 +20,8 @@ public class QuizResultBizImpl implements QuizResultBiz{
 	}
 
 	@Override
-	public List<QuizResultDto> selectList() {
-		return quizResultDao.selectList();
+	public List<QuizResultDto> selectList(String user_Id) {
+		return quizResultDao.selectList(user_Id);
 	}
 	
 	

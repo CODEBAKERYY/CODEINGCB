@@ -26,6 +26,11 @@
   		ORDER BY QUIZ_NO DESC
   	</select>
   	
+  	<select id="selectList2" resultMap="quizMap">
+  		SELECT * FROM QUIZ JOIN QUIZ_RESULT ON QUIZ.QUIZ_NO = QUIZ_RESULT.QUIZ_NO
+  		ORDER BY QUIZ.QUIZ_NO DESC
+  	</select>
+  	
   	<select id="selectOne" resultType="quizDto">
   		SELECT * FROM QUIZ
   		WHERE QUIZ_NO = #{quiz_No}
@@ -46,6 +51,6 @@
   	</select>
   	
   	<update id="update">
-  		UPDATE QUIZ SET CORRECT_USER = #{correct_User}, TRY_USER = #{try_User}, CORRECT_RATE = #{correct_Rate}
+  		UPDATE QUIZ SET CORRECT_USER = #{correct_User}, TRY_USER = #{try_User}, CORRECT_RATE = #{correct_Rate} WHERE QUIZ_NO = #{quiz_No}
   	</update>
   </mapper>
