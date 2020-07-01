@@ -66,7 +66,7 @@
 							<c:forEach items="${resultList }" var="resultdto">
 								<c:choose>
 									<c:when test="${dto.quiz_No == resultdto.quiz_No }">
-
+										<td>${resultdto.quiz_Result }</td>
 									</c:when>
 									<c:otherwise>
 

@@ -128,7 +128,7 @@
 							<c:forEach items="${ list }" var="list">
 								<tbody class="tbody">
 									<tr>
-										<td>${ list.point_No }</td>
+										<td>${ list.rownum }</td>
 										<td>${ list.point_Date }</td>
 										<td>${ list.point_Charge }</td>
 										<td>${ list.point_Use }</td>

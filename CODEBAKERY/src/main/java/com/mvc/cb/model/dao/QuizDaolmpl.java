@@ -85,11 +85,11 @@ public class QuizDaolmpl implements QuizDao {
 	}
 
 	@Override
-	public int update() {
+	public int update(QuizDto quizDto) {
 		int res = 0;
 		
 		try {
-			res = sqlSession.update(NAMESPACE+"update");
+			res = sqlSession.update(NAMESPACE+"update", quizDto);
 		}catch(Exception e) {
 			System.out.println("[error] : Quiz Update");
 			e.printStackTrace();
