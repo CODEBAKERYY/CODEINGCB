@@ -85,6 +85,7 @@ public class MypageController {
 	@RequestMapping("/mypoint.do")
 	public String pointchk(Model model,String id) {
 		logger.info("APPLY PAGE");
+		
 		System.out.println(id);
 		model.addAttribute("list", p_biz.selectAll(id));
 		

@@ -55,7 +55,7 @@ CREATE SEQUENCE QUIZSEQ NOCACHE;          -- 문제게시판
 CREATE SEQUENCE NOTICESEQ NOCACHE;        -- 공지사항
 CREATE SEQUENCE NCOMMENTSEQ NOCACHE;      -- 공지사항 댓글
 CREATE SEQUENCE POINTSEQ NOCACHE;         -- 포인트 사용내역
-
+CREATE SEQUENCE POINTSUBSEQ NOCACHE;      -- 포인트 사용내역 출력 시퀀스
 
 -- 유저테이블 
 CREATE TABLE USER_TB (
@@ -197,7 +197,7 @@ CREATE TABLE NOTICE_COMMENT (
 
 -- 포인트 사용내역
 CREATE TABLE POINT_TB(
-   POINT_NO NUMBER CONSTRAINT PK_POINT_NO PRIMARY KEY,       -- 사용내역번호
+   POINT_NO NUMBER CONSTRAINT PK_POINT_NO PRIMARY KEY,       -- 사용내역번호 
    POINT_DATE DATE,                                          -- 날짜
    POINT_CHARGE VARCHAR2(50) DEFAULT 0,                      -- 충전금액
    POINT_USE VARCHAR2(50) DEFAULT 0,                         -- 사용금액
@@ -302,6 +302,14 @@ commit;
 
 SELECT * FROM POINT_TB;
 select user_point from user_tb where user_id='user1';
+
+SELECT P.POINT_NO, P.POINT_DATE, P.POINT_CHARGE, P.POINT_USE, P.POINT_HISTORY ,U.USER_ID
+FROM POINT_TB P JOIN USER_TB U ON P.USER_ID=U.USER_ID
+WHERE USER_ID = 'jusu2529'
+ORDER BY POINT_NO;
+
+
+
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 

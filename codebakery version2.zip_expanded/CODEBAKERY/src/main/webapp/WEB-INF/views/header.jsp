@@ -1,7 +1,7 @@
 <%@page import="com.mvc.cb.model.dto.UserDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
 	UserDto user = (UserDto) session.getAttribute("User");
 	UserDto admin = (UserDto) session.getAttribute("admin");
@@ -122,7 +122,7 @@
 				<li><div class="dropdown">
 						<button class="dropbtn">마이페이지</button>
 						<div class="dropdown-content">
-							<a href="mypoint.do">나의 포인트</a> 
+							<a href="mypoint.do?id=${User.user_Id}">나의 포인트</a> 
 							<a href="chkPw.do">회원정보</a>
 							<a href="apply.do">멘토 신청</a>
 						</div>

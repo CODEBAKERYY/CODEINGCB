@@ -1,4 +1,4 @@
-<!-- <?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
@@ -22,4 +22,4 @@
 	<insert id="ReviewInsert" parameterType="mentorReviewDto">
 	INSERT INTO MENTOR_REVIEW VALUES(REIVEWSEQ.NEXTVAL,#{review_Content},SYSDATE,#{user_Id},#{mentor_No})
 	</insert>
-</mapper> -->
+</mapper>
