@@ -150,7 +150,11 @@ CREATE TABLE QUIZ (
     CONSTRAINT FK_QUIZ_USER_ID FOREIGN KEY(USER_ID) REFERENCES USER_TB(USER_ID) ON DELETE CASCADE
 );
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+SELECT * FROM QUIZ;
+>>>>>>> parent of 0eb6467... 가즈아아아아아아아
 =======
 SELECT * FROM QUIZ;
 >>>>>>> parent of 0eb6467... 가즈아아아아아아아

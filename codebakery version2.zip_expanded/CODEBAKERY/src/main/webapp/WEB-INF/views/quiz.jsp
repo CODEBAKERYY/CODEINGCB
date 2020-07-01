@@ -48,8 +48,12 @@
 			<c:when test="${empty list }">
 				<tr>
 <<<<<<< HEAD
+<<<<<<< HEAD
 					<td colspan="6" align="center">------------- 작성된 글이 없습니다.
 						-------------</td>
+=======
+					<td colspan="6" align="center">------------- 작성된 글이 없습니다. -------------</td>
+>>>>>>> parent of 0eb6467... 가즈아아아아아아아
 =======
 					<td colspan="6" align="center">------------- 작성된 글이 없습니다. -------------</td>
 >>>>>>> parent of 0eb6467... 가즈아아아아아아아
