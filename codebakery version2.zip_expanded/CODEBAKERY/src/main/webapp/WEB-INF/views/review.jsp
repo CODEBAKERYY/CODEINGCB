@@ -20,7 +20,7 @@
 				</div>
 				<br> 현재 보유중인 포인트 : ${User.user_Point } point<br> <br>
 				<input type="hidden" name="mentor_No" value="${mentor_No }" id="mentor" /> 
-				<input type="submit" value="제출하기" />
+				<input type="submit" value="확인" />
 			</center>
 		</div>
 	</form>
