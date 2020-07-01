@@ -89,26 +89,18 @@ public class ChatController {
 		return pointmap;
 	}
 
-	@RequestMapping(value = "/reviewinsert.do")
-	public String insertReview(MentorReviewDto dto, HttpServletRequest request, HttpSession session) {
+	@RequestMapping("/reviewinsert.do")
+	public String insertReview(int mentor_No, HttpServletRequest request, HttpSession session) {
 		System.out.println("리뷰 인서트 들어왔다.");
-		System.out.println(dto.getMentor_No());
-		System.out.println(dto.toString());
+		System.out.println(mentor_No);
 		session = request.getSession(false);
 		UserDto user = (UserDto) session.getAttribute("User");
-//		MentorReviewDto rdto = new MentorReviewDto();
-//		rdto.setReview_Content(dto.getReview_Content());
-//		rdto.setMentor_No(dto.getMentor_No());
-		dto.setUser_Id(user.getUser_Id());
-		System.out.println(dto.toString());
-		int res = mr_biz.insert(dto);
-		System.out.println(res);
-		if (res > 0) {
-			return "redirect:main.do";
-		} else {
-			return "redirect:review.do";
-		}
-
+		String review = request.getParameter("review_Content");
+		MentorReviewDto rdto = new MentorReviewDto();
+		rdto.setReview_Content(review);
+		rdto.setMentor_No(mentor_No);
+		rdto.setUser_Id(user.getUser_Id());
+		int res = mr_biz.insert(rdto);
+		return "main";
 	}
-
 }
