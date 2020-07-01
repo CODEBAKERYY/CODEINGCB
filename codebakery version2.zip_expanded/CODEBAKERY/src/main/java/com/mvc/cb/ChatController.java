@@ -49,12 +49,6 @@ public class ChatController {
 		return "review";
 	}
 	
-//	@RequestMapping("/payPoint.do")
-//	public String payPoint(int mentor_No, Model model) {
-//		model.addAttribute("mentor_No", mentor_No);
-//		return "payPoint";
-//	}
-	
 	@RequestMapping(value = "payPoint.do", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Integer> payPoint(@RequestBody MentorDto mentor, HttpSession session) {
@@ -83,24 +77,30 @@ public class ChatController {
 		if(mres > 0 && ures > 0) {
 			logger.info("성공");
 		}
+		else {
+			logger.info("실패");
+		}
 		
 		Map<String, Integer> pointmap = new HashMap<String, Integer>();
 
 		return pointmap;
 	}
 
-	@RequestMapping("/reviewinsert.do")
-	public String insertReview(int mentor_No, HttpServletRequest request,HttpSession session) {
+	@RequestMapping(value = "/reviewinsert.do")
+	public String insertReview(MentorReviewDto dto, HttpServletRequest request, HttpSession session) {
 		System.out.println("리뷰 인서트 들어왔다.");
-		System.out.println(mentor_No);
+		System.out.println(dto.getMentor_No());
+		System.out.println(dto.toString());
 		session = request.getSession(false);
 		UserDto user = (UserDto) session.getAttribute("User");
-		String review = request.getParameter("review_Content");
-		MentorReviewDto rdto = new MentorReviewDto();
-		rdto.setReview_Content(review);
-		rdto.setMentor_No(mentor_No);
-		rdto.setUser_Id(user.getUser_Id());
-		int res  = mr_biz.insert(rdto);
-		return "main";
+		dto.setUser_Id(user.getUser_Id());
+		System.out.println(dto.toString());
+		int res = mr_biz.insert(dto);
+		System.out.println(res);
+		if (res > 0) {
+			return "redirect:main.do";
+		} else {
+			return "redirect:review.do";
+		}
 	}
 }

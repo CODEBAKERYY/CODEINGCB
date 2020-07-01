@@ -11,13 +11,6 @@
     <!-- <script src="http://localhost:82/socket.io/socket.io.js"></script> -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="js/bootstrap.js"></script>
-    <script type="text/javascript">
-    	function review_window(){
-    		var target = "review.do?mentor_No=${mentor_No}";
-    		window.open(target, "", 'width=350, height=400');
-    	}
-    
-    </script>
 </head>
 <body>
 	<div class="container">
@@ -32,15 +25,12 @@
 							<div>
 							<c:choose>
 							<c:when test="${User.user_Grade eq '멘토'}">
-								<button type="button" class="btn btn-default pull-right" onclick="location.href='main.do'">종료</button>
+								<button type="button" class="btn btn-default pull-right" onclick="location.href='main.do'">종료하기</button>
 							</c:when>
 							<c:otherwise>
-								<button type="button" class="btn btn-default pull-right" onclick="review_window()">종료</button>
+								<button type="button" class="btn btn-default pull-right" onclick="location.href='review.do?mentor_No=${mentor_No}'">종료하기</button>
 							</c:otherwise>
 							</c:choose>
-							</div>
-							<div>
-								<button type="button" class="btn btn-default pull-right" onclick="location.href='main.do'">호출</button>
 							</div>
 							<div class="clearfix"></div>
 						</div>
@@ -115,7 +105,7 @@
 				contentType : "application/json",
 				dataType : "json",
 				success : function() {
-					alert("지불해야 할 포인트 : " + point + "point");
+					alert("멘토님에게 지불해야 하는 포인트는 총 " + point + "point 입니다.");
 				},
 				error : function() {
 					alert("ajax 통신 실패!");
