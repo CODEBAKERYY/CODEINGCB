@@ -27,7 +27,7 @@ function adjust(user_Id){
     border-collapse: collapse;
 	}
 	
-	td {
+	tr, td {
     border: 1px solid #444444;
   	}
   	

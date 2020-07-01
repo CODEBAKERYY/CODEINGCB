@@ -61,7 +61,7 @@
 				<h2>${mentor.user_Name}</h2>
 				&nbsp;&nbsp;
 				<c:if test="${!empty User }">
-					<input type="button" onclick="location.href='chat.do'" class="button" style="float: right;" value="1:1채팅" />
+					<input type="button" onclick="location.href='chat.do?mentor_No=${mentor.mentor_No}'" class="button" style="float: right;" value="1:1채팅" />
 				</c:if>
 				<c:if test="${empty User }">
 					<input type="button" onclick="apply();" class="button" style="float: right;" value="1:1채팅" />
@@ -89,7 +89,7 @@
 				</tr>
 			</c:when>
 			<c:otherwise>
-				<c:forEach items="${review }" var="dto" begin="0" end="3"
+				<c:forEach items="${review }" var="dto" begin="0" end="10"
 					varStatus="i" step="1">
 					<table class='table'>
 						<tr>

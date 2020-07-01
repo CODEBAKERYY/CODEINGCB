@@ -8,8 +8,9 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
 	function check() {
-		/* opener.location.href = 'main.do'; */
+		opener.location.href = 'main.do';
 		window.close();
+
 	}
 </script>
 </head>
@@ -24,13 +25,9 @@
 					<textarea rows="10" cols="30" name="review_Content" id="review"
 						placeholder="내용을 입력해 주세요" style="resize: none;"></textarea>
 				</div>
-				<br> 현재 보유중인 포인트 : ${User.user_Point } point<br> 지불해야 할
-				포인트 : point<br>
-				<br>
-				<button type="button" class="btn btn-default pull-right"
-					onclick="check()">확인</button>
+				<br> 현재 보유중인 포인트 : ${User.user_Point } point<br> <br>
 				<input type="hidden" name="mentor_No" value="${mentor_No }" /> <input
-					type="submit" />
+					type="submit" value="제출하기" onclick="check()" />
 			</center>
 		</div>
 	</form>

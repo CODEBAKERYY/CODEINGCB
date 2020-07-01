@@ -99,15 +99,15 @@
 			</div>
 			<br />
 			<input type="button" value="Login" id="log"
-				class="btn btn-secondary btn-lg btn-block" />
+				class="btn btn-secondary btn-lg btn-block" style="margin-top: 15px;"/>
 			<br></br>
-			<div class="g-signin2 btn btn-secondary btn-lg btn-block"
-				data-onsuccess="onSignIn"></div>
+			<div class="g-signin2 btn"
+				data-onsuccess="onSignIn" style="margin-left: 80px; padding: 0px;"></div>
 			<div class="signup_link">
-				아이디 OR 비밀번호 ? <a href="findidpw.do">아이디 및 비밀번호 찾기</a>
+				<a href="findidpw.do">아이디 및 비밀번호 찾기</a>
 			</div>
 			<div class="signup_link">
-				회원이 아니세요? <a href="sign.do">회원가입</a>
+				회원이 아니세요? <a href="sign.do">회원가입하기</a>
 			</div>
 		</form>
 	</div>

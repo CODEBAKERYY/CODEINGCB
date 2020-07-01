@@ -11,7 +11,7 @@ public class MentorDto {
 	private String user_Name;
 	private String user_Phone;
 	private String user_Mail;
-	private String user_Point;
+	private int user_Point;
 	private String user_Pic;
 	private String user_Lang;
 
@@ -20,7 +20,7 @@ public class MentorDto {
 	}
 
 	public MentorDto(String user_Id, int mentor_No, String mentor_Career, String mentor_Content, String user_Pw,
-			String user_Grade, String user_Name, String user_Phone, String user_Mail, String user_Point,
+			String user_Grade, String user_Name, String user_Phone, String user_Mail, int user_Point,
 			String user_Pic, String user_Lang) {
 		super();
 		this.user_Id = user_Id;
@@ -109,11 +109,11 @@ public class MentorDto {
 		this.user_Mail = user_Mail;
 	}
 
-	public String getUser_Point() {
+	public int getUser_Point() {
 		return user_Point;
 	}
 
-	public void setUser_Point(String user_Point) {
+	public void setUser_Point(int user_Point) {
 		this.user_Point = user_Point;
 	}
 

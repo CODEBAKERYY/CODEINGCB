@@ -58,6 +58,12 @@
                   return false;
                }
                
+               if($("#phCheck").val()=='n'){
+					alert("인증번호를 다시 한번 확인해주세요.");
+					$("#noChk").focus();
+					return false;
+				}
+               
                 var userVal = {
                      'user_Name' : username,
                      'user_Phone' : userphone
@@ -65,6 +71,7 @@
                
                $.ajax({
                   type : "POST",
+                  async: false,
                   url : "search.do",
                   data : JSON.stringify(userVal),
                   contentType : "application/json",
@@ -73,7 +80,7 @@
                      if (msg.search != null) {
                         alert(msg.search.user_Name + "님의 ID:" + msg.search.user_Id + " Password:" + msg.search.user_Pw);
                      } else {
-                        alert("조회 실패");
+                        alert("입력하신 정보와 일치하는 계정이 없습니다.");
                      }
                   },
                   error : function() {
@@ -114,10 +121,12 @@
                      if(res == noChk){
                      
                         alert("휴대폰 인증이 정상적으로 완료되었습니다.");
+                        $("#phCheck").val("y")
                         $("#checkBtn").prop('disabled', true);
                          
                      }else{
                          alert("인증번호가 올바르지 않습니다!");
+                         $("#noChk").focus();
                          return false;
                      }
                  })
@@ -157,6 +166,7 @@
    <div class="center">
       <h1 style="padding: 20px;">Find ID Password</h1>
       <form:form method="post" id="searchform" action="login.do">
+      <input type="hidden" value="n" id="phCheck" />
          <div class="txt_field">
             <input type="text" name="user_Name" id="username"/><span></span> 
             <label>user name</label>

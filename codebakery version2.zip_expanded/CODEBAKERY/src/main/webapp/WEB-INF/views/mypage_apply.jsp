@@ -40,7 +40,7 @@
 		background-color: whitesmoke;
 		width: 60%;
 		margin: auto;
-		height: 100px;
+		height: 120px;
 		text-align: center;
 		
 	}

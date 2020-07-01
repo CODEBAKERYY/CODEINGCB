@@ -31,6 +31,7 @@ DROP TABLE NOTICE_COMMENT;
 DROP TABLE NOTICE;
 DROP TABLE USER_TB;
 DROP TABLE NON_USER;
+DROP TABLE POINT_TB;
 
 DROP SEQUENCE MENTORSEQ;
 DROP SEQUENCE REVIEWSEQ;
@@ -41,6 +42,7 @@ DROP SEQUENCE QCOMMENTGROUPSEQ;
 DROP SEQUENCE QUIZSEQ;
 DROP SEQUENCE NOTICESEQ;
 DROP SEQUENCE NCOMMENTSEQ;  
+DROP SEQUENCE POINTSEQ NOCACHE; 
 
 
 CREATE SEQUENCE MENTORSEQ NOCACHE;        -- 멘토게시판
@@ -52,6 +54,7 @@ CREATE SEQUENCE QCOMMENTGROUPSEQ NOCACHE; -- QnA 게시판 대댓글
 CREATE SEQUENCE QUIZSEQ NOCACHE;          -- 문제게시판
 CREATE SEQUENCE NOTICESEQ NOCACHE;        -- 공지사항
 CREATE SEQUENCE NCOMMENTSEQ NOCACHE;      -- 공지사항 댓글
+CREATE SEQUENCE POINTSEQ NOCACHE;         -- 포인트 사용내역
 
 
 -- 유저테이블 
@@ -157,9 +160,9 @@ CREATE TABLE QUIZ (
 --	USER_ID	VARCHAR2(20) NOT NULL,                             
 --    CONSTRAINT FK_TQUIZ_USER_ID FOREIGN KEY(USER_ID) REFERENCES USER_TB(USER_ID) ON DELETE CASCADE
 --);
-DROP TABLE QUIZ_RESULT;
+
 -- 채점결과
-SELECT * FROM QUIZ_RESULT;
+
 CREATE TABLE QUIZ_RESULT (
 	QUIZ_NO	NUMBER CONSTRAINT PK_QRESULT_NO PRIMARY KEY,        -- 문제번호
 	CODE_CONTENT VARCHAR2(4000)	NOT NULL,                       -- 작성코드내용
@@ -170,7 +173,6 @@ CREATE TABLE QUIZ_RESULT (
     CONSTRAINT FK_QRESULT_USER_ID FOREIGN KEY(USER_ID) REFERENCES USER_TB(USER_ID) ON DELETE CASCADE
 );
 
-DROP TABLE QUIZ_RESULT;
 
 -- 공지사항
 CREATE TABLE NOTICE (
@@ -193,26 +195,37 @@ CREATE TABLE NOTICE_COMMENT (
     CONSTRAINT FK_NCOMMENT_USER_ID FOREIGN KEY(USER_ID) REFERENCES USER_TB(USER_ID) ON DELETE CASCADE
 );
 
+-- 포인트 사용내역
+CREATE TABLE POINT_TB(
+   POINT_NO NUMBER CONSTRAINT PK_POINT_NO PRIMARY KEY,       -- 사용내역번호
+   POINT_DATE DATE,                                          -- 날짜
+   POINT_CHARGE VARCHAR2(50) DEFAULT 0,                      -- 충전금액
+   POINT_USE VARCHAR2(50) DEFAULT 0,                         -- 사용금액
+   POINT_HISTORY VARCHAR2(100),                              -- 사용내역
+   USER_ID   VARCHAR2(20),                                   -- 유저아이디 외래키
+    CONSTRAINT FK_POINT_USER_ID FOREIGN KEY(USER_ID) REFERENCES USER_TB(USER_ID) ON DELETE CASCADE
+);
 --------------------------------------------------------------------
 
 --------------------------- DATA INSERT ----------------------------
 
 -- USER_TB
-INSERT INTO USER_TB VALUES('ADMIN','1234','관리자', '관리자','010-2345-6767', 'admin@kh.or.kr', 0, NULL, 'java');
-INSERT INTO USER_TB VALUES('user1','1234','일반회원','김건영','010-2342-1234','kky@kh.or.kr', 0,'userpic','java');
-INSERT INTO USER_TB VALUES('user2','1234','일반회원','박주혁','010-6787-1234','pjyy@kh.or.kr', 0,'userpic','java');
-INSERT INTO USER_TB VALUES('user3','1234','일반회원','권민석','010-7942-1234','kms@kh.or.kr', 0,'userpic','java');
-INSERT INTO USER_TB VALUES('user4','1234','일반회원','정승연','010-3782-1234','jsy@kh.or.kr', 0,'userpic','java');
-INSERT INTO USER_TB VALUES('user5','1234','일반회원','주수현','010-1782-1234','jsh@kh.or.kr', 0,'userpic','java');
-INSERT INTO USER_TB VALUES('user6','1234','일반회원','이재익','010-94562-1234','ljl@kh.or.kr', 0,'userpic','java');
-INSERT INTO USER_TB VALUES('mentor','1234','멘토','멘토','010-94562-1234','멘토@kh.or.kr', 0,'NULL','java');
+INSERT INTO USER_TB VALUES('ADMIN','1234','관리자', '관리자','010-2345-6767', 'admin@kh.or.kr', 0, NULL, '1');
+INSERT INTO USER_TB VALUES('user1','1234','일반회원','김건영','010-2342-1234','kky@kh.or.kr', 0,'userpic','1,2');
+INSERT INTO USER_TB VALUES('user2','1234','일반회원','박주혁','010-6787-1234','pjyy@kh.or.kr', 0,'userpic','5,8');
+INSERT INTO USER_TB VALUES('user3','1234','일반회원','권민석','010-7942-1234','kms@kh.or.kr', 0,'userpic','3,7');
+INSERT INTO USER_TB VALUES('user4','1234','일반회원','정승연','010-3782-1234','jsy@kh.or.kr', 0,'userpic','1,5,6,7');
+INSERT INTO USER_TB VALUES('user5','1234','일반회원','주수현','010-1782-1234','jsh@kh.or.kr', 0,'userpic','1');
+INSERT INTO USER_TB VALUES('user6','1234','일반회원','이재익','010-9462-1234','ljl@kh.or.kr', 0,'userpic','4,5,6');
+INSERT INTO USER_TB VALUES('mentor','1234','멘토','멘토','010-9462-1234','mentor@kh.or.kr', 0,'NULL','2,4,5,7');
 
 SELECT * FROM USER_TB;
+
 -- MENTOR_INTRO
-INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'삼성 1위 입사자','모든것을 한번에 해결해드립니다.','mentor1');
-INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'구글 1년 경력','간지네가 코딩.','mentor2');
-INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'애플에서 냄새맡음','생활코딩 지리게','mentor3');
-INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'화웨이출신','코딩왕 정코딩.','mentor4');
+INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'삼성 1위 입사자','모든것을 한번에 해결해드립니다.','mentor');
+INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'구글 1년 경력','간지네가 코딩.','mentor');
+INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'애플에서 냄새맡음','생활코딩 지리게','mentor');
+INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'화웨이출신','코딩왕 정코딩.','mentor');
 
 -- MENTOR_REVIEW
 INSERT INTO MENTOR_REVIEW VALUES(REVIEWSEQ.NEXTVAL, '멘토리뷰내용01', SYSDATE, 'user1', 3);
@@ -220,12 +233,14 @@ INSERT INTO MENTOR_REVIEW VALUES(REVIEWSEQ.NEXTVAL, '멘토리뷰내용02', SYSD
 INSERT INTO MENTOR_REVIEW VALUES(REVIEWSEQ.NEXTVAL, '멘토리뷰내용03', SYSDATE, 'user3', 3);
 INSERT INTO MENTOR_REVIEW VALUES(REVIEWSEQ.NEXTVAL, '멘토리뷰내용02', SYSDATE, 'user2', 4);
 
-SELECT * FROM MENTOR_REVIEW WHERE MENTOR_NO = 3;
+
 -- QUESTION
 INSERT INTO QUESTION 
-VALUES(QUESTIONSEQ.NEXTVAL, '오라클 서버가 자꾸 오류납니다..', '이렇게 했는데 자꾸 에러가 뜨네요 어떻게 고칠까요?', SYSDATE, 0, NULL, 'user3');
+VALUES(QUESTIONSEQ.NEXTVAL, '오라클 서버가 자꾸 오류납니다..', '이렇게 했는데 자꾸 에러가 뜨네요 어떻게 고칠까요?', SYSDATE, 0, '#오라클, #서버오류', 'user3');
 INSERT INTO QUESTION 
-VALUES(QUESTIONSEQ.NEXTVAL, '경로를 못찾아요..', '경로를 잘 잡아준거 같은데 계속 404만 뜨네요 도와주세요..', SYSDATE, 0, NULL, 'user4');
+VALUES(QUESTIONSEQ.NEXTVAL, '경로를 못찾아요..', '경로를 잘 잡아준거 같은데 계속 404만 뜨네요 도와주세요..', SYSDATE, 0, '#java, #경로에러', 'user4');
+INSERT INTO QUESTION 
+VALUES(QUESTIONSEQ.NEXTVAL, '경로를 못찾아요..', '경로를 잘 잡아준거 같은데 계속 404만 뜨네요 도와주세요..', SYSDATE, 0, '#java, #경로에러', 'user5');
 
 -- ANSWER
 INSERT INTO ANSWER VALUES(ANSWERSEQ.NEXTVAL, '질문답변 답변 제목01', '질문답변 답변 제목01', SYSDATE, 1, 'user5');
@@ -233,23 +248,15 @@ INSERT INTO ANSWER VALUES(ANSWERSEQ.NEXTVAL, '질문답변 답변 제목02', '�
 
 -- QNA_COMMENT
 INSERT INTO QNA_COMMENT
-VALUES(QCOMMENTSEQ.NEXTVAL, 1 ,0, '질문답변 댓글 내용01', SYSDATE, 0, NULL, 'user1', NULL);
+VALUES(QCOMMENTSEQ.NEXTVAL, 1, '질문답변 댓글 내용01', SYSDATE, 0, 0, 0,'user1', NULL);
 INSERT INTO QNA_COMMENT
-VALUES(QCOMMENTSEQ.NEXTVAL, 2 ,0, '질문답변 댓글 내용02', SYSDATE, 0, NULL, 'user2', NULL);
+VALUES(QCOMMENTSEQ.NEXTVAL, 2, '질문답변 댓글 내용02', SYSDATE, 0, 0, 0,'user2', NULL);
 
 -- QUIZ
 INSERT INTO QUIZ
 VALUES(QUIZSEQ.NEXTVAL, '퀴즈 제목01', '퀴즈 내용01', SYSDATE, 0, 0, 0, 0,'인풋 설명01', '인풋 설명01', '인풋 샘플01', '아웃풋 샘플01','user3');
 INSERT INTO QUIZ
 VALUES(QUIZSEQ.NEXTVAL, '퀴즈 제목02', '퀴즈 내용02', SYSDATE, 0, 0, 0, 0,'인풋 설명02', '인풋 설명02' , '인풋 샘플02', '아웃풋 샘플02', 'user4');		
-
--- TRY_QUIZ
-INSERT INTO TRY_QUIZ
-VALUES(1, '문제풀기 내용01', '예시 결과01', '실제 결과01', 'user5');
-INSERT INTO TRY_QUIZ
-VALUES(3, '문제풀기 내용02', '예시 결과02', '실제 결과01', 'user6');
-
-SELECT * FROM TRY_QUIZ
 
 -- QUIZ_RESULT
 INSERT INTO QUIZ_RESULT VALUES(1, '퀴즈 결과01', 'user6');
@@ -266,31 +273,16 @@ VALUES(NOTICESEQ.NEXTVAL, '공지사항 제목02', '공지사항 내용02', SYSD
 INSERT INTO NOTICE_COMMENT VALUES(NCOMMENTSEQ.NEXTVAL, 1, '공지댓글내용01', SYSDATE, 'user2');
 INSERT INTO NOTICE_COMMENT VALUES(NCOMMENTSEQ.NEXTVAL, 2, '공지댓글내용02', SYSDATE, 'user3');
 
-
-
-
-SELECT * FROM MENTOR_INTRO
-		JOIN USER_TB USING(USER_ID);
-		
-		SELECT * FROM MENTOR_REVIEW
-		ORDER BY REVIEW_NO DESC;
-
-	SELECT * FROM MENTOR_REVIEW
-		ORDER BY REVIEW_NO DESC
-		
-	INSERT INTO MENTOR_REVIEW VALUES(
-	REIVEWSEQ.NEXTVAL,'별로에요',SYSDATE,'mentor2',1
-	);
-	INSERT INTO MENTOR_REVIEW VALUES(
-	REIVEWSEQ.NEXTVAL,'좋아요',SYSDATE,'mentor2',1
-	);
-	INSERT INTO MENTOR_REVIEW VALUES(
-	REIVEWSEQ.NEXTVAL,'굿이에요',SYSDATE,'mentor2',1
-	);
-	SELECT * FROM MENTOR_REVIEW WHERE MENTOR_NO = 1;
-		
+-- POINT_TB
+INSERT INTO POINT_TB VALUES(POINTSEQ.NEXTVAL,SYSDATE,'','200','떙떙맨토 채팅 1분20초','user1');
+INSERT INTO POINT_TB VALUES(POINTSEQ.NEXTVAL, SYSDATE,'300','','충전','user1');
 
 COMMIT;
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 SELECT COUNT(*) FROM QNA_COMMENT;
 SELECT * FROM
 		MENTOR_REVIEW
@@ -308,27 +300,7 @@ SELECT * FROM QUESTION;
 SELECT * FROM NOTICE_COMMENT;
 commit;
 
---------------------------------------------------------------------------------------------------------------------------------------------------------------------
-CREATE SEQUENCE POINTSEQ NOCACHE;        -- 포인트 사용내역
--- 포인트 테이블
-CREATE TABLE POINT_TB(
-	POINT_NO NUMBER CONSTRAINT PK_POINT_NO PRIMARY KEY,       -- 사용내역번호
-	POINT_DATE DATE,											-- 날짜
-	POINT_CHARGE VARCHAR2(50) DEFAULT 0,						-- 충전금액
-	POINT_USE VARCHAR2(50) DEFAULT 0,							-- 사용금액
-	POINT_HISTORY VARCHAR2(100),								-- 사용내역
-	USER_ID	VARCHAR2(20),										-- 유저아이디 외래키
-    CONSTRAINT FK_POINT_USER_ID FOREIGN KEY(USER_ID) REFERENCES USER_TB(USER_ID) ON DELETE CASCADE
-);
-
-DROP TABLE POINT_TB;
-DELETE FROM POINT_TB;
-
-INSERT INTO POINT_TB VALUES(POINTSEQ.NEXTVAL,SYSDATE,'','200','떙떙맨토 채팅 1분20초','user1');
-INSERT INTO POINT_TB VALUES(POINTSEQ.NEXTVAL, SYSDATE,'300','','충전','user1');
-
 SELECT * FROM POINT_TB;
-
 select user_point from user_tb where user_id='user1';
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
