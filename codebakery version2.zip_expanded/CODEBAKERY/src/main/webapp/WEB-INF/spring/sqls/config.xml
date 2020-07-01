@@ -2,7 +2,6 @@
 <!DOCTYPE configuration
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
-
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.mvc.cb.model.dto.UserDto"
@@ -31,11 +30,9 @@
 			alias="AnswerDto" />
 		<typeAlias type="com.mvc.cb.model.dto.QnACommentDto"
 			alias="QnACommentDto" />
-		<!-- 포인트 내역 추가부분 -->
 		<typeAlias type="com.mvc.cb.model.dto.PointDto"
 			alias="PointDto" />
 	</typeAliases>
-
 	<mappers>
 		<mapper resource="/mybatis/user-mapper.xml" />
 		<mapper resource="/mybatis/quiz-mapper.xml" />
@@ -47,10 +44,6 @@
 		<mapper resource="/mybatis/mentorReview-mapper.xml" />
 		<mapper resource="/mybatis/notice-mapper.xml" />
 		<mapper resource="/mybatis/notice_comment-mapper.xml" />
-
-
-		<!-- 포인트 내역 추가부분 -->
 		<mapper resource="/mybatis/point-mapper.xml" />
-
 	</mappers>
 </configuration>
