@@ -23,4 +23,9 @@ public class MyPointBizImpl implements MyPointBiz{
 	public int insert(PointDto dto) {
 		return dao.insert(dto);
 	}
+
+	@Override
+	public int insert_use(PointDto dto) {
+		return dao.insert_use(dto);
+	}
 }

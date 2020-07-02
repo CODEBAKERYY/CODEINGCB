@@ -19,10 +19,13 @@
         WHERE USER_ID = #{user_Id}
         ORDER BY POINT_NO
      </select>
-  	<!-- 날짜를 SYSDATE으로 넘겨서 받아와야하나...고민 -->
   	<insert id="insert" parameterType="PointDto">
   		INSERT INTO POINT_TB
   		VALUES(POINTSEQ.NEXTVAL, SYSDATE, #{point_Charge}, 0,'충전', #{user_Id})
   	</insert>
+  	<insert id="insert_use" parameterType="PointDto">
+        INSERT INTO POINT_TB
+        VALUES(POINTSEQ.NEXTVAL, SYSDATE, 0, #{point_Use}, #{point_History}, #{user_Id})
+     </insert>
 
 </mapper>

@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ page import="java.lang.String.*" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ page import="java.lang.String.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!--
 Design by TEMPLATED
@@ -22,54 +22,66 @@ Released   : 20130811
 <title>CODEBAKERY</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
-<link rel="shortcut icon" type="image/x-icon" href="resources/images/favicon.png" />
-<link rel="shortcut icon" type="image/x-icon" href="resources/images/favicon.png" />
+<link rel="shortcut icon" type="image/x-icon"
+	href="resources/images/favicon.png" />
+<link rel="shortcut icon" type="image/x-icon"
+	href="resources/images/favicon.png" />
 <link
 	href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900"
 	rel="stylesheet" />
-<link href="resources/css/default.css" rel="stylesheet" type="text/css" media="all" />
-<link href="resources/css/fonts.css" rel="stylesheet" type="text/css" media="all" />
+<link href="resources/css/default.css" rel="stylesheet" type="text/css"
+	media="all" />
+<link href="resources/css/fonts.css" rel="stylesheet" type="text/css"
+	media="all" />
 
 <!--waterboat css-->
 
-  <link href="https://fonts.googleapis.com/css?family=Oswald:400,700|Dancing+Script:400,700|Muli:300,400" rel="stylesheet"type="text/css" media="all"/>
-  <link  href="fonts/icomoon/style.css" rel="stylesheet" type="text/css" media="all"/>
+<link
+	href="https://fonts.googleapis.com/css?family=Oswald:400,700|Dancing+Script:400,700|Muli:300,400"
+	rel="stylesheet" type="text/css" media="all" />
+<link href="fonts/icomoon/style.css" rel="stylesheet" type="text/css"
+	media="all" />
 
-  <link href="resources/csss/bootstrap.min.css" rel="stylesheet"  type="text/css" media="all"/>
-  <link href="resources/csss/jquery-ui.css" rel="stylesheet" />
-  <link rel="stylesheet" href="resources/csss/owl.carousel.min.css"/>
-  <link rel="stylesheet" href="resources/csss/owl.theme.default.min.css"/>
-  <link rel="stylesheet" href="resources/csss/owl.theme.default.min.css"/>
+<link href="resources/csss/bootstrap.min.css" rel="stylesheet"
+	type="text/css" media="all" />
+<link href="resources/csss/jquery-ui.css" rel="stylesheet" />
+<link rel="stylesheet" href="resources/csss/owl.carousel.min.css" />
+<link rel="stylesheet" href="resources/csss/owl.theme.default.min.css" />
+<link rel="stylesheet" href="resources/csss/owl.theme.default.min.css" />
 
-  <link rel="stylesheet" href="resources/csss/jquery.fancybox.min.css"/>
+<link rel="stylesheet" href="resources/csss/jquery.fancybox.min.css" />
 
-  <link rel="stylesheet" href="resources/csss/bootstrap-datepicker.css"/>
+<link rel="stylesheet" href="resources/csss/bootstrap-datepicker.css" />
 
-  <link rel="stylesheet" href="resources/fonts/flaticon/font/flaticon.css"/>
+<link rel="stylesheet" href="resources/fonts/flaticon/font/flaticon.css" />
 
-  <link rel="stylesheet" href="csss/aos.css"/>
-  <link href="resources/csss/jquery.mb.YTPlayer.min.css" media="all" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" href="csss/aos.css" />
+<link href="resources/csss/jquery.mb.YTPlayer.min.css" media="all"
+	rel="stylesheet" type="text/css" />
 
-  <link href="resources/csss/style.css" rel="stylesheet" />
-  <link href="resources/csss/board-detail.css" rel="stylesheet" />
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-  
+<link href="resources/csss/style.css" rel="stylesheet" />
+<link href="resources/csss/board-detail.css" rel="stylesheet" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet" />
+
 <style type="text/css">
 
-	/* 댓글 목록 default -> 숨기기 */
-	.comment-list{
-		display: none;
-	}
-	
-	footer{
-		background: none;
-	}
-</style> 
-  
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+/* 댓글 목록 default -> 숨기기 */
+.comment-list {
+	display: none;
+}
+
+footer {
+	background: none;
+}
+</style>
+
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript">
 
 		//게시글에 태그를 눌렀을시 해당 태그가 달린 게시물 리스트를 보여줌
@@ -341,8 +353,9 @@ Released   : 20130811
 </script>
 
 </head>
-<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
-<%@ include file="header.jsp" %>  
+<body data-spy="scroll" data-target=".site-navbar-target"
+	data-offset="300">
+	<%@ include file="header.jsp"%>
 	<div id="logo" class="container">
 		<h1>질문 게시판</h1>
 	</div>
@@ -351,96 +364,121 @@ Released   : 20130811
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 blog-content">
-			
-			<!--------- 질문글 START ----------->
+
+				<!--------- 질문글 START ----------->
 				<span class="title" style="font-weight: bold; font-size: 30px;">${qlist.question_Title }</span>
 				<div class="post-meta">
-								<span class="author">${qlist.user_Id }</span>
-								<span class="date"><fmt:formatDate value="${qlist.question_Date }" pattern="yyyy.MM.dd"/></span>
+					<span class="author">${qlist.user_Id }</span> <span class="date"><fmt:formatDate
+							value="${qlist.question_Date }" pattern="yyyy.MM.dd" /></span>
 				</div>
 				<hr />
 				<p class="lead">${qlist.question_Content }</p>
-				<br></br><br></br><br></br>
+				<br></br> <br></br> <br></br>
 				<div class="pt-5">
-					<p> Tags:&nbsp;&nbsp; 
-						<c:forTokens items="${qlist.question_Tag }" delims="#" var="item" varStatus="i">
-							<span><a onclick="sendTag(${i.index },'${item }');" style="cursor: pointer;" id="oneTag">#${item }&nbsp;</a></span>
+					<p>
+						Tags:&nbsp;&nbsp;
+						<c:forTokens items="${qlist.question_Tag }" delims="#" var="item"
+							varStatus="i">
+							<span><a onclick="sendTag(${i.index },'${item }');"
+								style="cursor: pointer;" id="oneTag">#${item }&nbsp;</a></span>
 						</c:forTokens>
 					</p>
 				</div>
 				<div style="text-align: right;">
-					<c:if test="${!empty User && (User.user_Id eq qlist.user_Id) || (User.user_Id eq 'ADMIN')}">
-					<input type="button" class="btn btn-secondary" value="수정" onclick="location.href='qna_update.do?question_No=${qlist.question_No}'"/>
-					<input type="button" class="btn btn-secondary" value="삭제" onclick="deleteBoard(${qlist.question_No});"/>
+					<c:if
+						test="${!empty User && (User.user_Id eq qlist.user_Id) || (User.user_Id eq 'ADMIN')}">
+						<input type="button" class="btn btn-secondary" value="수정"
+							onclick="location.href='qna_update.do?question_No=${qlist.question_No}'" />
+						<input type="button" class="btn btn-secondary" value="삭제"
+							onclick="deleteBoard(${qlist.question_No});" />
 					</c:if>
-					<input type="button" class="btn btn-secondary" value="목록" onclick="location.href='qna.do'"/>
+					<input type="button" class="btn btn-secondary" value="목록"
+						onclick="location.href='qna.do'" />
 				</div>
-			<!--------- 질문글 End ----------->	
-			
-			
-					<br></br><br></br>
-					
-					
-			<!--------- 댓글 START ----------->
-					<form action="writeComment.do" id="commentForm" method="post">
-						<input type="hidden" name="user_Id" value="${User.user_Id }" />
-						<input type="hidden" name="question_No" value="${qlist.question_No }" />
-						<input type="hidden" name="user_Pic" value="${User.user_Pic }" />
-	                    <div>
-	                        <div>
-	                            <table class="table">                    
-	                       			 <tr>
-	                       			 	<td style="font-weight: bold; font-size: 20px; font-family: initial;" >${clist.size() } Comments</td>
-	                       			 	<td><input type="button" class="btn btn-outline-secondary" value="댓글 보기" onclick="showComment();" id="shwComm"/></td>
-	                       			 </tr>
-	                                <tr>
-										<c:choose>
-										<c:when test="${empty User}">                              
-	                                    <td>
-	                                        <textarea class="form-control" style="width: 1000px; resize: none;" rows="2" cols="30" id="inputComment" name="comment_Content" placeholder="댓글 작성은 회원만 이용 가능합니다." disabled></textarea>
-	                                    </td>
-                              	        <td style="text-align: right; mdisplay:table-cell; vertical-align:middle;">
-	                                    	<input type="submit" class="btn btn-primary" value="등록" style="width: 90px; height: 50px;" onclick="return false" id="noneId_Comm"/>
-	                                    </td>
-	                                    </c:when>
-	                                    <c:otherwise>
-	                                    <td>
-	                                        <textarea class="form-control" style="width: 1000px; resize: none;" rows="2" cols="30" id="inputComment" name="comment_Content" placeholder="댓글을 입력해주세요."></textarea>
-	                                    </td>
-	                                    <td style="text-align: right; mdisplay:table-cell; vertical-align:middle;">
-	                                    	<input type="button" class="btn btn-primary" value="등록" style="width: 90px; height: 50px;" onclick="sendComment();"/>
-	                                    </td>
-	                                    </c:otherwise>
-	                                    </c:choose>
-	                                </tr>
-	                            </table>
-	                        </div>
-	                    </div>  
-	                </form>
-	                <br></br>
-					<ul class="comment-list">
-						<c:choose>
-							<c:when test="${empty clist }">
-								<li>---------- 작성된 댓글이 없습니다. ----------</li>
-							</c:when>
-							<c:otherwise>
-								<c:forEach items="${clist }" var="dto" varStatus="i">
-								
+				<!--------- 질문글 End ----------->
+
+
+				<br></br> <br></br>
+
+
+				<!--------- 댓글 START ----------->
+				<form action="writeComment.do" id="commentForm" method="post">
+					<input type="hidden" name="user_Id" value="${User.user_Id }" />
+					<input type="hidden" name="question_No"
+						value="${qlist.question_No }" />
+					<input type="hidden" name="user_Pic" value="${User.user_Pic }" />
+					<div>
+						<div>
+							<table class="table">
+								<tr>
+									<td
+										style="font-weight: bold; font-size: 20px; font-family: initial;">${clist.size() }
+										Comments</td>
+									<td><input type="button" class="btn btn-outline-secondary"
+										value="댓글 보기" onclick="showComment();" id="shwComm" /></td>
+								</tr>
+								<tr>
+									<c:choose>
+										<c:when test="${empty User}">
+											<td><textarea class="form-control"
+													style="width: 1000px; resize: none;" rows="2" cols="30"
+													id="inputComment" name="comment_Content"
+													placeholder="댓글 작성은 회원만 이용 가능합니다." disabled></textarea></td>
+											<td
+												style="text-align: right; mdisplay: table-cell; vertical-align: middle;">
+												<input type="submit" class="btn btn-primary" value="등록"
+												style="width: 90px; height: 50px;" onclick="return false"
+												id="noneId_Comm" />
+											</td>
+										</c:when>
+										<c:otherwise>
+											<td><textarea class="form-control"
+													style="width: 1000px; resize: none;" rows="2" cols="30"
+													id="inputComment" name="comment_Content"
+													placeholder="댓글을 입력해주세요."></textarea></td>
+											<td
+												style="text-align: right; mdisplay: table-cell; vertical-align: middle;">
+												<input type="button" class="btn btn-primary" value="등록"
+												style="width: 90px; height: 50px;" onclick="sendComment();" />
+											</td>
+										</c:otherwise>
+									</c:choose>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</form>
+				<br></br>
+				<ul class="comment-list">
+					<c:choose>
+						<c:when test="${empty clist }">
+							<li>---------- 작성된 댓글이 없습니다. ----------</li>
+						</c:when>
+						<c:otherwise>
+							<c:forEach items="${clist }" var="dto" varStatus="i">
+
 								<c:choose>
 									<c:when test="${dto.parent_No eq 0 }">
 										<li class="comment" id="onecomm" style="margin-bottom: 0px;">
 											<div class="vcard bio">
-												<img src="${pageContext.request.contextPath}/upload${dto.user_Pic }" alt="Image" />
+												<img
+													src="${pageContext.request.contextPath}/upload${dto.user_Pic }"
+													alt="Image" />
 											</div>
 											<div class="comment-body">
-												<span style="font-size:20px; font-family: initial;">${dto.user_Id }</span>
+												<span style="font-size: 20px; font-family: initial;">${dto.user_Id }</span>
 												<c:if test="${!empty User }">
-													<button class="btn btn-link" onclick="Reply(${dto.comment_No}, ${dto.depth }, ${dto.group_Id }, ${i.index });">Reply</button>
+													<button class="btn btn-link"
+														onclick="Reply(${dto.comment_No}, ${dto.depth }, ${dto.group_Id }, ${i.index });">Reply</button>
 												</c:if>
-												<span class="meta"><fmt:formatDate value="${dto.comment_Date }" pattern="yyyy.MM.dd HH:mm"/></span>&nbsp;&nbsp;
-												<c:if test="${!empty User && (User.user_Id eq dto.user_Id) || (User.user_Id eq 'ADMIN')}">
-													<input type="button" class="btn btn-link" value="수정" onclick="modifyComment(${dto.comment_No}, '${dto.comment_Content }',${i.index });"/>
-													<input type="button" class="btn btn-link" value="삭제" onclick="deleteComment(${dto.comment_No}, ${qlist.question_No });"/>
+												<span class="meta"><fmt:formatDate
+														value="${dto.comment_Date }" pattern="yyyy.MM.dd HH:mm" /></span>&nbsp;&nbsp;
+												<c:if
+													test="${!empty User && (User.user_Id eq dto.user_Id) || (User.user_Id eq 'ADMIN')}">
+													<input type="button" class="btn btn-link" value="수정"
+														onclick="modifyComment(${dto.comment_No}, '${dto.comment_Content }',${i.index });" />
+													<input type="button" class="btn btn-link" value="삭제"
+														onclick="deleteComment(${dto.comment_No}, ${qlist.question_No });" />
 												</c:if>
 												<p class="result">${dto.comment_Content }</p>
 												<p class="reply_result"></p>
@@ -448,103 +486,122 @@ Released   : 20130811
 										</li>
 									</c:when>
 									<c:otherwise>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;							
-									<svg class="bi bi-arrow-down-right-circle" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-									  <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-									  <path fill-rule="evenodd" d="M10.5 11h-4a.5.5 0 0 1 0-1h2.793L5.146 5.854a.5.5 0 1 1 .708-.708L10 9.293V6.5a.5.5 0 0 1 1 0v4a.5.5 0 0 1-.5.5z"/>
-									</svg>
-										<div style="margin-left: 50px; margin-bottom: 0px;"> <span></span>
-										<li class="comment" id="onecomm">
-										<div class="vcard bio">
-											<img src="${pageContext.request.contextPath}/upload${dto.user_Pic }" alt="Image" />
+									<svg class="bi bi-arrow-down-right-circle" width="1em"
+											height="1em" viewBox="0 0 16 16" fill="currentColor"
+											xmlns="http://www.w3.org/2000/svg"> <path
+											fill-rule="evenodd"
+											d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+										<path fill-rule="evenodd"
+											d="M10.5 11h-4a.5.5 0 0 1 0-1h2.793L5.146 5.854a.5.5 0 1 1 .708-.708L10 9.293V6.5a.5.5 0 0 1 1 0v4a.5.5 0 0 1-.5.5z" />
+										</svg>
+										<div style="margin-left: 50px; margin-bottom: 0px;">
+											<span></span>
+											<li class="comment" id="onecomm">
+												<div class="vcard bio">
+													<img
+														src="${pageContext.request.contextPath}/upload${dto.user_Pic }"
+														alt="Image" />
+												</div>
+												<div class="comment-body">
+													<span style="font-size: 20px; font-family: initial;">${dto.user_Id }</span>
+													<button class="btn btn-link"
+														onclick="Reply(${dto.comment_No}, ${dto.depth }, ${dto.group_Id }, ${i.index });">Reply</button>
+													<span class="meta"><fmt:formatDate
+															value="${dto.comment_Date }"
+															pattern="yyyy.MM.dd HH:mm:ss" /></span>&nbsp;&nbsp;
+													<c:if
+														test="${!empty User && (User.user_Id eq dto.user_Id) || (User.user_Id eq 'ADMIN') }">
+														<input type="button" class="btn btn-link" value="수정"
+															onclick="modifyComment(${dto.comment_No}, '${dto.comment_Content }',${i.index });" />
+														<input type="button" class="btn btn-link" value="삭제"
+															onclick="deleteComment(${dto.comment_No}, ${qlist.question_No });" />
+													</c:if>
+													<p class="result">${dto.comment_Content }</p>
+													<p class="reply_result"></p>
+												</div>
+											</li>
 										</div>
-										<div class="comment-body">
-											<span style="font-size:20px; font-family: initial;">${dto.user_Id }</span>
-											<button class="btn btn-link" onclick="Reply(${dto.comment_No}, ${dto.depth }, ${dto.group_Id }, ${i.index });">Reply</button>
-											<span class="meta"><fmt:formatDate value="${dto.comment_Date }" pattern="yyyy.MM.dd HH:mm:ss"/></span>&nbsp;&nbsp;
-											<c:if test="${!empty User && (User.user_Id eq dto.user_Id) || (User.user_Id eq 'ADMIN') }">
-											<input type="button" class="btn btn-link" value="수정" onclick="modifyComment(${dto.comment_No}, '${dto.comment_Content }',${i.index });"/>
-											<input type="button" class="btn btn-link" value="삭제" onclick="deleteComment(${dto.comment_No}, ${qlist.question_No });"/>
-											</c:if>
-											<p class="result">${dto.comment_Content }</p>
-											<p class="reply_result"></p>
-										</div>
-										</li>
-										</div>
-								</c:otherwise>
+									</c:otherwise>
 								</c:choose>
-								
-								</c:forEach>
-							</c:otherwise>
-						</c:choose>
-					</ul>
-				</div>
-				<br />
-				<!--------- 댓글 END ----------->
-				
-				
-				
-				<!--------- 답글 START ----------->
-				<div class="pt-5" style="width: 100%; margin-bottom: 50px;">
-					<div><h3 class="mb-5">${alist.size()} Answers</h3></div>
-					<c:choose>
-						<c:when test="${empty alist }">
-							<p>------------------- 작성된 리뷰가 없습니다. -------------------</p>
-						</c:when>
-						<c:otherwise>
-							<c:forEach items="${alist }" var="dto">
-								<span class="title" style="font-size: 20px;">RE: ${dto.answer_Title }</span>
-								<div class="post-meta">
-									<span class="author">${dto.user_Id }</span>&nbsp;&nbsp;&nbsp;&nbsp;
-									<span class="date"><fmt:formatDate value="${dto.answer_Date }" pattern="yyyy.MM.dd HH:mm"/></span>
-									<c:if test="${!empty User && (User.user_Id eq dto.user_Id) || (User.user_Id eq 'ADMIN')}">
-									<input type="button" class="btn btn-link" value="수정" onclick="modifyAnswer(${qlist.question_No }, ${dto.answer_No}, '${dto.answer_Title }', '${dto.answer_Content }');"/>
-									<input type="button" class="btn btn-link" value="삭제" onclick="deleteAnswer(${dto.answer_No}, ${qlist.question_No });"/>
-									</c:if>
-								</div>
-								<hr />
-								<p class="lead" id="comm">${dto.answer_Content }</p>
-								<div class="container">
-									<div class="commentContent" ></div>
-								</div>
-								<br></br>
+
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
-				</div>
-				<!--------- 답글 END ----------->
-				
-				
-				<!--------- 답글작성칸 START ----------->
-				<div class="pt-5">
-					<h3 class="mb-5">Your Answer</h3>
-						<table>
-							<tr>
-								<th style="text-align: center">TITLE</th>
-								<td><input type="text" id="answer_Title" style="width:400px; height:40px;"/></td>
-							</tr>
-							<tr>
-								<th style="text-align: center">CONTENT&nbsp;&nbsp;&nbsp;</th>
-								<td><textarea class="answer" id="answer_Content" style="width:600px; height:150px; resize:none;" ></textarea></td>
-							</tr>
-							<tr>
-								<td></td>
-								<td>
-									<input type="button" class="btn btn-secondary btn-sm" value="Post Your Answer" onclick="writeAnswer();"/>	
-								</td>
-							</tr>
-						</table>
-					</div>
-				<hr />
-				<!--------- 답글작성칸 END ----------->
-				
-				
-				</div>
+				</ul>
 			</div>
+			<br />
+			<!--------- 댓글 END ----------->
+
+
+
+			<!--------- 답글 START ----------->
+			<div class="pt-5" style="width: 100%; margin-bottom: 50px;">
+				<div>
+					<h3 class="mb-5">${alist.size()}Answers</h3>
+				</div>
+				<c:choose>
+					<c:when test="${empty alist }">
+					</c:when>
+					<c:otherwise>
+						<c:forEach items="${alist }" var="dto">
+							<span class="title" style="font-size: 20px;">RE:
+								${dto.answer_Title }</span>
+							<div class="post-meta">
+								<span class="author">${dto.user_Id }</span>&nbsp;&nbsp;&nbsp;&nbsp;
+								<span class="date"><fmt:formatDate
+										value="${dto.answer_Date }" pattern="yyyy.MM.dd HH:mm" /></span>
+								<c:if
+									test="${!empty User && (User.user_Id eq dto.user_Id) || (User.user_Id eq 'ADMIN')}">
+									<input type="button" class="btn btn-link" value="수정"
+										onclick="modifyAnswer(${qlist.question_No }, ${dto.answer_No}, '${dto.answer_Title }', '${dto.answer_Content }');" />
+									<input type="button" class="btn btn-link" value="삭제"
+										onclick="deleteAnswer(${dto.answer_No}, ${qlist.question_No });" />
+								</c:if>
+							</div>
+							<hr />
+							<p class="lead" id="comm">${dto.answer_Content }</p>
+							<div class="container">
+								<div class="commentContent"></div>
+							</div>
+							<br></br>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
+			</div>
+			<!--------- 답글 END ----------->
+
+
+			<!--------- 답글작성칸 START ----------->
+			<div class="pt-5">
+				<h3 class="mb-5">Your Answer</h3>
+				<table>
+					<tr>
+						<th style="text-align: center">TITLE</th>
+						<td><input type="text" id="answer_Title"
+							style="width: 400px; height: 40px;" /></td>
+					</tr>
+					<tr>
+						<th style="text-align: center">CONTENT&nbsp;&nbsp;&nbsp;</th>
+						<td><textarea class="answer" id="answer_Content"
+								style="width: 600px; height: 150px; resize: none;"></textarea></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><input type="button" class="btn btn-secondary btn-sm"
+							value="Post Your Answer" onclick="writeAnswer();" /></td>
+					</tr>
+				</table>
+			</div>
+			<hr />
+			<!--------- 답글작성칸 END ----------->
+
+
 		</div>
+	</div>
 	</section>
 
 
 
 </body>
-	<%@ include file="footer.jsp" %>  
+<%@ include file="footer.jsp"%>
 </html>

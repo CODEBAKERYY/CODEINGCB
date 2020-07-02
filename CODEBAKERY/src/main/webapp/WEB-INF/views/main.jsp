@@ -44,6 +44,7 @@
 	font-size: 30pt;
 	margin-top: 130px;
 }
+<<<<<<< HEAD
 .mainlogo{
   -webkit-animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
 	        animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
@@ -57,6 +58,17 @@
 .bounce-bottom {
 	-webkit-animation: bounce-bottom 0.9s both;
 	        animation: bounce-bottom 0.9s both;
+=======
+
+.mainlogo{
+  -webkit-animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+           animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+}
+
+.major {
+   -webkit-animation: tracking-in-contract-bck 1s cubic-bezier(1.000, 1.000, 1.000, 1.000) both;
+           animation: tracking-in-contract-bck 1s cubic-bezier(1.000, 1.000, 1.000, 1.000) both;
+>>>>>>> master
 }
 
 @-webkit-keyframes text-focus-in {
@@ -116,6 +128,7 @@
             transform: translateZ(0);
     opacity: 1;
   }
+<<<<<<< HEAD
 @-webkit-keyframes bounce-bottom {
   0% {
     -webkit-transform: translateY(45px);
@@ -220,6 +233,8 @@
     opacity: 1;
   }
 }
+=======
+>>>>>>> master
 
 </style>
 
@@ -252,7 +267,7 @@
 					if (this.count < this.target_count) {
 						this.timer = setTimeout(function() {
 							self.counter();
-						}, 20);
+						}, 70);
 					} else {
 						clearTimeout(this.timer);
 					}
@@ -261,7 +276,7 @@
 				new numberCounter("counter1", ${answer});
 				new numberCounter("counter2", ${quiz});
 				new numberCounter("counter3", ${question});
-				new numberCounter("counter4", 5);
+				new numberCounter("counter4", 10);
 			});
 </script>
 </head>

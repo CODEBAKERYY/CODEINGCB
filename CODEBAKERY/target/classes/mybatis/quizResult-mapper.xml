@@ -20,8 +20,16 @@
   		ORDER BY QUIZ_NO DESC
   	</select>
   	
+  	<select id="selectOne" resultType="quizResultDto">
+  		SELECT * FROM QUIZ_RESULT WHERE USER_ID = #{user_Id} AND QUIZ_NO = #{quiz_No}
+  	</select>
+  	
   	<insert id="insert">
   		INSERT INTO QUIZ_RESULT
   		VALUES(#{user_Id}, #{quiz_No}, #{code_Content}, #{ex_Result}, #{print_Result}, #{quiz_Result} )
   	</insert>
+  	
+  	<update id="update">
+  		UPDATE QUIZ_RESULT SET CODE_CONTENT = #{code_Content}, PRINT_RESULT = #{print_Result}, QUIZ_RESULT = #{quiz_Result} WHERE QUIZ_NO = #{quiz_No} AND USER_ID = #{user_Id} 
+  	</update>
   </mapper>

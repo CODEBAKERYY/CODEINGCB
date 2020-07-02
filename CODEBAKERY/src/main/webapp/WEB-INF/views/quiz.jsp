@@ -19,7 +19,7 @@
 </head>
 <body>
 	<%@ include file="header.jsp"%>
-
+	<%int i  = 0; %>
 	<div class="major">
 		<h2 style="padding-top: 10px">문제 게시판</h2>
 	</div>
@@ -30,18 +30,18 @@
 		<colgroup>
 			<col width="70" />
 			<col width="400" />
-			<col width="70" />
+			<col width="100" />
 			<col width="100" />
 			<col width="100"/>
-			<col width="100"/>
+			<col width="70"/>
 		</colgroup>
 		<tr>
 			<th>문제 번호</th>
 			<th>제목</th>
-			<th>결과</th>
 			<th>정답</th>
 			<th>제출</th>
 			<th>정답 비율</th>
+			<th>결과</th>
 		</tr>
 		<c:choose>
 			<c:when test="${empty list }">
@@ -54,7 +54,6 @@
 					<tr>
 						<td>${dto.quiz_No }</td>
 						<td><a href="quiz_detail.do?quiz_No=${dto.quiz_No}">${dto.quiz_Title }</a></td>
-						<td id="resultChange"></td>
 					<c:choose>
 						<c:when test="${empty resultList }">
 							<td></td>
@@ -63,19 +62,45 @@
 							<td>${dto.correct_Rate }%</td>
 						</c:when>
 						<c:otherwise>
-							<c:forEach items="${resultList }" var="resultdto">
-								<c:choose>
-									<c:when test="${dto.quiz_No == resultdto.quiz_No }">
-										<td>${resultdto.quiz_Result }</td>
-									</c:when>
-									<c:otherwise>
-
-									</c:otherwise>
-								</c:choose>
-							</c:forEach>
+							
 								<td>${dto.correct_User }</td>
 								<td>${dto.try_User }</td>
 								<td>${dto.correct_Rate }%</td>
+								
+								<c:forEach items="${resultList }" var="resultdto">
+								<c:choose>
+									<c:when test="${(dto.quiz_No == resultdto.quiz_No) and (resultdto.quiz_Result eq '성공')}">
+										<td><label class="successResult">${resultdto.quiz_Result }</label></td>
+										<%i = 1 ;%>
+									</c:when>
+									<c:when test="${(dto.quiz_No == resultdto.quiz_No) and (resultdto.quiz_Result eq '실패')}">
+										<td><label class="failResult">${resultdto.quiz_Result }</label></td>
+										<%i = 1 ;%>
+									</c:when>
+									<c:otherwise>
+										<%i = 0; %>
+										<c:forEach items="${resultList }" var="resultdto2">
+											<c:choose>
+												<c:when test="${dto.quiz_No == resultdto2.quiz_No }">
+													<% i = 1; %>
+												</c:when>
+											</c:choose>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+								<%
+										if(i == 1){
+												System.out.println("i : "+i);
+										%>
+										<%
+											}else if(i == 0){
+												System.out.println("i : "+i);
+										%>
+											<td></td>		
+										<%		
+											}
+									%>
 						</c:otherwise>
 					</c:choose>						
 					</tr>
@@ -83,7 +108,7 @@
 			</c:otherwise>
 		</c:choose>
 	</table>
-	<!— 작성 버튼은 등급이 멘토일때만 보이게 구현 c:if사용—>
+	<!-- 작성 버튼은 등급이 멘토일때만 보이게 구현 c:if사용-->
 		<div class="major">
 			<input type="button"
 				value="문제 작성" class="button" onclick="location.href='quiz_write.do'" />

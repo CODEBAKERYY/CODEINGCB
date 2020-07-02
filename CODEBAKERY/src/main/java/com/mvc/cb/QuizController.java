@@ -9,6 +9,7 @@ import java.io.OutputStream;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -23,6 +24,7 @@ import com.mvc.cb.biz.QuizBiz;
 import com.mvc.cb.biz.QuizResultBiz;
 import com.mvc.cb.model.dto.QuizDto;
 import com.mvc.cb.model.dto.QuizResultDto;
+import com.mvc.cb.model.dto.UserDto;
 
 @Controller
 public class QuizController {
@@ -36,9 +38,11 @@ public class QuizController {
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
 	@RequestMapping(value = "/quiz.do")
-	public String quizList(Model model, String user_Id) {
+	public String quizList(Model model, HttpSession session) {
 		logger.info("QUIZ SELECT LIST");
-		System.out.println("user Id="+user_Id);
+		UserDto userDto = (UserDto) session.getAttribute("User");
+		String user_Id = userDto.getUser_Id();
+		System.out.println("user_Id : "+user_Id);
 		model.addAttribute("list", quizBiz.selectList());
 		model.addAttribute("resultList", quizResultBiz.selectList(user_Id));
 		return "quiz";
@@ -90,14 +94,14 @@ public class QuizController {
 		
 		if (quiz_type.equals("java")) {
 			try {
-				String path = WebUtils.getRealPath(request.getSession().getServletContext(), "/test");
-				
+				String path = WebUtils.getRealPath(request.getSession().getServletContext(), "/Main");
+				System.out.println("디렉토리 경로 : " +path);
 				File storage = new File(path);
 				if (!storage.exists()) { // 경로 존재 여부
 					storage.mkdirs(); // 디렉토리 생성
 				}
 				
-				File newfile = new File(path + "/test.java");
+				File newfile = new File(path + "/Main.java");
 				if (!newfile.exists()) {
 					newfile.createNewFile();
 				}
@@ -111,7 +115,8 @@ public class QuizController {
 
 				File dir = new File(path);
 				Runtime runtime = Runtime.getRuntime();
-				Process process = runtime.exec("java test.java", null, dir);
+				Process process = runtime.exec("javac Main.java", null, dir);
+				process = runtime.exec("java Main", null, dir);
 				process.waitFor();
 				
 				//컴파일 출력값을 toString으로 변환하여 answer와 비교한다.
@@ -131,7 +136,15 @@ public class QuizController {
 						//quizResultDto에 값을 넣은 후 insert하여 테이블에 추가하기(성공일 때)
 						QuizResultDto quizResultDto = new QuizResultDto(quiz_No, quiz_answer, answer, answerResult, "성공", user_Id);
 						
-						int res = quizResultBiz.insert(quizResultDto);
+						QuizResultDto quizResultDto2 = quizResultBiz.selectOne(quizResultDto); 
+						
+						int res = 0; 
+						
+						if(quizResultDto2 != null) {
+							res = quizResultBiz.update(quizResultDto);
+						}else {
+							res = quizResultBiz.insert(quizResultDto);
+						}
 						
 						if(res>0) {
 							System.out.println("성공입니다.");
@@ -165,7 +178,16 @@ public class QuizController {
 						
 						//quizResultDto에 값을 넣은 후 insert하여 테이블에 추가하기(실패일 때)
 						QuizResultDto quizResultDto = new QuizResultDto(quiz_No, quiz_answer, answer, answerResult, "실패", user_Id);
-						int res = quizResultBiz.insert(quizResultDto);
+						
+						QuizResultDto quizResultDto2 = quizResultBiz.selectOne(quizResultDto); 
+						
+						int res = 0; 
+						
+						if(quizResultDto2 != null) {
+							res = quizResultBiz.update(quizResultDto);
+						}else {
+							res = quizResultBiz.insert(quizResultDto);
+						}
 						
 						if(res>0) {
 							System.out.println("실패입니다.");
@@ -202,7 +224,16 @@ public class QuizController {
 					
 					//quizResultDto에 값을 넣은 후 insert하여 테이블에 추가하기(실패일 때)
 					QuizResultDto quizResultDto = new QuizResultDto(quiz_No, quiz_answer, answer, errorOutput, "실패", user_Id);
-					int res = quizResultBiz.insert(quizResultDto);
+					
+					QuizResultDto quizResultDto2 = quizResultBiz.selectOne(quizResultDto); 
+					
+					int res = 0; 
+					
+					if(quizResultDto2 != null) {
+						res = quizResultBiz.update(quizResultDto);
+					}else {
+						res = quizResultBiz.insert(quizResultDto);
+					}
 					
 					if(res>0) {
 						System.out.println("실패입니다.");

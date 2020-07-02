@@ -227,54 +227,36 @@ public class UserController {
 	// 아이디 찾기 폼으로 이동
 	@RequestMapping(value = "/findId.do")
 	public String findId() {
-		
-		logger.info("findId");
+		logger.info("아이디 찾기 폼 이동");
 		return "find_Id";
 	}
-	
+
 	// 비밀번호 찾기 폼으로 이동
 	@RequestMapping("/findPw.do")
 	public String findidpw() {
+		logger.info("비밀번호 찾기 폼 이동");
 		return "find_Pw";
 	}
-	
-	
+
 	// 아이디 찾기
-	@RequestMapping(value = "/searchId.do", method=RequestMethod.POST)
+	@RequestMapping(value = "/searchId.do", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, UserDto> searchId(@RequestBody UserDto dto) {
-		
-		logger.info("searchId");
-		
+		logger.info("아이디 찾기 AJAX");
 		UserDto res = u_biz.findId(dto);
-		
 		Map<String, UserDto> search = new HashMap<String, UserDto>();
-		search.put("search", res );
-		logger.info("search : "+search);
-		
+		search.put("search", res);
 		return search;
 	}
-	
 
 	// 비밀번호 찾기
 	@RequestMapping("/searchPw.do")
 	@ResponseBody
 	public Map<String, UserDto> search(@RequestBody UserDto dto) {
-
-		logger.info("search");
-		
-		System.out.println("user_Id: "+dto.getUser_Id());
-		System.out.println("user_email: "+dto.getUser_Mail());
-		System.out.println("user_phone: "+dto.getUser_Phone());
-		
+		logger.info("비밀번호 찾기 AJAX");
 		UserDto res = u_biz.selectOne(dto);
-		
-		System.out.println(res);
-		
-		
 		Map<String, UserDto> searchres = new HashMap<String, UserDto>();
 		searchres.put("search", res);
-		
 		return searchres;
 	}
 
@@ -283,6 +265,7 @@ public class UserController {
 	@RequestMapping(value = "googleLogin.do", method = RequestMethod.POST)
 	public void memberRegi(String userName, UserDto dto, HttpServletRequest request, HttpSession session) {
 
+		logger.info("구글 로그인 처리");
 		String user_Id = (request.getParameter("user_Id"));
 		String user_Name = (request.getParameter("user_Name"));
 		String user_Pic = (request.getParameter("user_Pic"));
@@ -296,11 +279,8 @@ public class UserController {
 	@RequestMapping(value = "/chkIdPw.do")
 	@ResponseBody
 	public UserDto chkIdPw(UserDto dto) {
-
-		logger.info("chkIdPw");
-
+		logger.info("회원 비회원 확인");
 		UserDto res = u_biz.chkIdPw(dto);
-
 		return res;
 	}
 

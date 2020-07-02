@@ -41,4 +41,30 @@ public class QuizResultDaoImpl implements QuizResultDao{
 		return quizResultList;
 	}
 
+	@Override
+	public QuizResultDto selectOne(QuizResultDto dto) {
+		QuizResultDto quizResultOne = new QuizResultDto();
+		
+		try {
+			quizResultOne = sqlSession.selectOne(NAMESPACE+"selectOne", dto);
+		}catch(Exception e) {
+			System.out.println("[error] : QuizResult SelectOne" );
+			e.printStackTrace();
+		}
+		return quizResultOne;
+	}
+
+	@Override
+	public int update(QuizResultDto quizResultDto) {
+		int res = 0;
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"update", quizResultDto);
+		}catch(Exception e) {
+			System.out.println("[error] : QuizResultDto Update");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
 }

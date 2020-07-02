@@ -20,16 +20,14 @@ public class NoticeCommentBizlmpl implements NoticeCommentBiz{
    }
 
    @Override
-   public NoticeCommentDto selectOne(int comment_No) {
-      return dao.selectOne(comment_No);
-   }
-
-   @Override
    public int insert(NoticeCommentDto dto) {
       return dao.insert(dto);
    }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
    @Override
    public int delete(int comment_No) {
       return dao.delete(comment_No);
