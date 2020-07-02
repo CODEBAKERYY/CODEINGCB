@@ -59,9 +59,6 @@ Released   : 20130811
 <style type="text/css">
 
 	/* 댓글 목록 default -> 숨기기 */
-	.comment-list{
-		display: none;
-	}
 	
 	footer{
 		background: none;
@@ -391,7 +388,7 @@ Released   : 20130811
 	                            <table class="table">                    
 	                       			 <tr>
 	                       			 	<td style="font-weight: bold; font-size: 20px; font-family: initial;" >${clist.size() } Comments</td>
-	                       			 	<td><input type="button" class="btn btn-outline-secondary" value="댓글 보기" onclick="showComment();" id="shwComm"/></td>
+	                       			 	<td><input type="button" class="btn btn-outline-secondary" value="댓글 숨기기" onclick="showComment();" id="shwComm"/></td>
 	                       			 </tr>
 	                                <tr>
 										<c:choose>
