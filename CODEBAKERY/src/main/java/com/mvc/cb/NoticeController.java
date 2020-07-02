@@ -141,10 +141,14 @@ public class NoticeController {
       
    }
    
+   
    //공지사항 댓글삭제
    @RequestMapping(value = "/comment_delete.do")
-   public String commentDelete(NoticeCommentDto dto) {
-	   return null;
+   public String commentDelete(int comment_No, int notice_No) {
+	   logger.info("COMMENT DELETE");
+	   int res = c_biz.delete(comment_No);
+	   
+	   return "redirect:notice_view.do?notice_No="+notice_No;
    }
    
    

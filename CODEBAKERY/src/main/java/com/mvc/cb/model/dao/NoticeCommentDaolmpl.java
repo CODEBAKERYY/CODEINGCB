@@ -53,16 +53,18 @@ public class NoticeCommentDaolmpl implements NoticeCommentDao{
       
    }
 
-   @Override
-   public int update(NoticeCommentDto dto) {
-      // TODO Auto-generated method stub
-      return 0;
-   }
 
    @Override
    public int delete(int comment_No) {
-      // TODO Auto-generated method stub
-      return 0;
+	   int res = 0;
+		try {
+			res = sqlSession.delete(NAMESPACE + "delete", comment_No);
+		} catch (Exception e) {
+			System.out.println("[error] : comment delete");
+			e.printStackTrace();
+		}
+
+		return res;
    }
 
 }

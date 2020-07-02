@@ -29,10 +29,6 @@ public class NoticeCommentBizlmpl implements NoticeCommentBiz{
       return dao.insert(dto);
    }
 
-   @Override
-   public int update(NoticeCommentDto dto) {
-      return dao.update(dto);
-   }
 
    @Override
    public int delete(int comment_No) {

@@ -22,5 +22,11 @@
         INSERT INTO NOTICE_COMMENT 
         VALUES(NCOMMENTSEQ.NEXTVAL, #{notice_No}, #{comment_Content}, SYSDATE, #{user_Id})
      </insert>
+	
+	 <delete id="delete" parameterType="int">
+	 	DELETE FROM NOTICE_COMMENT
+		WHERE
+		NCOMMNET_NO = #{comment_No}
+	 </delete>
 
 </mapper>
