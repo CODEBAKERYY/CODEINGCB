@@ -128,7 +128,6 @@
 					        //m_redirect_url : 'http://www.naver.com'
 					    }, function(rsp) {
 					        if ( rsp.success) {
-					        	alert("rufwptjdrhd");
 					            //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
 					                 $.ajax({
 					            			url: "charge.do" ,

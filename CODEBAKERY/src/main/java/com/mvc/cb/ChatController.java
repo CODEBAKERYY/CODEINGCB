@@ -39,12 +39,14 @@ public class ChatController {
 
 	@RequestMapping(value = "/chat.do")
 	public String chat(int mentor_No, Model model) {
+		logger.info("채팅 페이지 이동");
 		model.addAttribute("mentor_No", mentor_No);
 		return "chat";
 	}
 
 	@RequestMapping("/review.do")
 	public String review(int mentor_No, Model model) {
+		logger.info("리뷰작성 페이지 이동");
 		model.addAttribute("mentor_No", mentor_No);
 		return "review";
 	}
@@ -52,8 +54,7 @@ public class ChatController {
 	@RequestMapping(value = "payPoint.do", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Integer> payPoint(@RequestBody MentorDto mentor, HttpSession session) {
-		logger.info("PAYPOINT.");
-		System.out.println(mentor);
+		logger.info("포인트 결제 AJAX");
 		int mentor_No = mentor.getMentor_No();
 		int user_Point = mentor.getUser_Point();
 		
@@ -75,10 +76,10 @@ public class ChatController {
 		int ures = mp_biz.updatePoint(user);
 		
 		if(mres > 0 && ures > 0) {
-			logger.info("성공");
+			logger.info("포인트 처리 성공");
 		}
 		else {
-			logger.info("실패");
+			logger.info("포인트 처리 실패");
 		}
 		
 		Map<String, Integer> pointmap = new HashMap<String, Integer>();
@@ -88,15 +89,12 @@ public class ChatController {
 
 	@RequestMapping(value = "/reviewinsert.do")
 	public String insertReview(MentorReviewDto dto, HttpServletRequest request, HttpSession session) {
-		System.out.println("리뷰 인서트 들어왔다.");
-		System.out.println(dto.getMentor_No());
-		System.out.println(dto.toString());
+		logger.info("리뷰 인서트 컨트롤러");
 		session = request.getSession(false);
 		UserDto user = (UserDto) session.getAttribute("User");
 		dto.setUser_Id(user.getUser_Id());
 		System.out.println(dto.toString());
 		int res = mr_biz.insert(dto);
-		System.out.println(res);
 		if (res > 0) {
 			return "redirect:main.do";
 		} else {

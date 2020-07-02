@@ -35,20 +35,21 @@ public class MypageController {
 
 	@Autowired
 	private MyPageBiz biz;
-	
+
 	@Autowired
 	private MyPointBiz p_biz;
 
 	@RequestMapping(value = "/chkPw.do")
 	public String chkPw() {
 
-		logger.info("chkPw");
+		logger.info("비밀번호 확인 폼 이동");
 
 		return "mypage_chkPw";
 	}
 
 	@RequestMapping(value = "/mypage_modify.do")
 	public String mypage_modify() {
+		logger.info("마이페이지 수정 화면 이동");
 		return "mypage_modify";
 	}
 
@@ -83,151 +84,118 @@ public class MypageController {
 
 //	포인트 내역 페이지로 인해 수정---------------------------------------------------------
 	@RequestMapping("/mypoint.do")
-	public String pointchk(Model model,String id) {
-		logger.info("APPLY PAGE");
-		
-		System.out.println(id);
+	public String pointchk(Model model, String id) {
+		logger.info("포인트 페이지 이동");
 		model.addAttribute("list", p_biz.selectAll(id));
-		
 		return "mypage_point";
 	}
 //----------------------------------------------------------------------------------	
 
 	@RequestMapping("apply.do")
 	public String applyMentor() {
+		logger.info("멘토 신청페이지 이동");
 		return "mypage_apply";
 	}
 
 	@RequestMapping("/modify.do")
 	public String memberUpdate(UserDto dto, HttpSession session) {
 
-		logger.info("memberUpdate");
-
+		logger.info("마이페이지 정보 수정");
 		int res = biz.updateMember(dto);
-
 		if (res > 0) {
 			session.removeAttribute("User");
 			session.setAttribute("User", dto);
-
 		} else {
 			System.out.println("회원 정보 수정 실패!");
 		}
-
 		return "redirect:mypage_modify.do";
 	}
 
 	@RequestMapping("deactivatepopup.do")
 	public String deactivatePopup() {
+		logger.info("회원 탈퇴 페이지 이동");
 		return "mypage_deactivate";
 	}
 
 	@RequestMapping("deactivate.do")
 	public String deactivate(UserDto dto, HttpSession session, HttpServletResponse response) throws IOException {
-		response.setContentType("text/html; charset=UTF-8");
+//		response.setContentType("text/html; charset=UTF-8");
+		logger.info("회원 탈퇴 실행");
 		PrintWriter out = response.getWriter();
-
 		UserDto res = biz.getInfo(dto);
-		System.out.println(dto.getUser_Pw() + "/" + res.getUser_Pw());
-
 		if (!dto.getUser_Pw().equals(res.getUser_Pw())) {
 
 			out.println("<script>alert('비밀번호가 일치하지 않습니다.');</script>");
 			out.flush();
+			logger.info("회원탈퇴 실패");
 			return "mypage_modify";
 
 		} else if (dto.getUser_Pw().equals(res.getUser_Pw())) {
 			biz.member_delete(dto);
-			System.out.println("탈퇴 진행 마무리 메인으로 이동");
-
+			logger.info("회원탈퇴 완료");
 			session.removeAttribute("User");
-
 			out.println("<script>alert('계정이 삭제되었습니다.'); window.close();</script>");
-
 		}
-
 		out.flush();
 		return "main";
-
 	}
 
 	@RequestMapping(value = "/payment.do")
 	public String payment() {
+		logger.info("포인트 충전페이지 이동");
 		return "mypage_payment";
 	}
 
-	@RequestMapping(value="charge_middle.do",method=RequestMethod.POST)
+	@RequestMapping(value = "charge_middle.do", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String,Boolean> charge(HttpSession session,@RequestBody UserDto dto){
-		logger.info("CHARGE gogo");
-		System.out.println("dto"+dto);
-		
+	public Map<String, Boolean> charge(HttpSession session, @RequestBody UserDto dto) {
+		logger.info("결제페이지 AJAX");
 		String payid = dto.getUser_Id();
-		String sessionid = ((UserDto)session.getAttribute("User")).getUser_Id();
-		
-		System.out.println("결제 아이디 받기: "+payid+""+sessionid);
-		
+		String sessionid = ((UserDto) session.getAttribute("User")).getUser_Id();
+
 		boolean check = false;
-		if( payid.equals(sessionid)) {		//업데이트이가정상적으로 될때
-			
+		if (payid.equals(sessionid)) { // 업데이트이가정상적으로 될때
 			check = true;
 		}
-		Map<String,Boolean> map = new HashMap<String,Boolean>();
-		map.put("check",check);
+		Map<String, Boolean> map = new HashMap<String, Boolean>();
+		map.put("check", check);
 		return map;
 	}
-	
 
-	 //map을 쓰는이유는 json와 비슷(k,v)하기 때문에
-	@RequestMapping(value="charge.do",method=RequestMethod.POST)
+	// map을 쓰는이유는 json와 비슷(k,v)하기 때문에
+	@RequestMapping(value = "charge.do", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String,Boolean> charge(HttpSession session,@RequestBody Map<String, Object> param){
-		logger.info("CHARGE 업데이트 적용");
-		
+	public Map<String, Boolean> charge(HttpSession session, @RequestBody Map<String, Object> param) {
+		logger.info("포인트 사용내역 기능 들어옴");
+
 		String user_Id = (String) param.get("user_Id");
-		int user_Point = (Integer)(param.get("user_Point"));
-		logger.info("CHARGE 업데이트 적용"+user_Point);
-		String point_Charge = (String)param.get("point_Charge");
-		String point_Date =  (String)param.get("point_Date");
-		
+		int user_Point = (Integer) (param.get("user_Point"));
+		String point_Charge = (String) param.get("point_Charge");
+		String point_Date = (String) param.get("point_Date");
 		UserDto dto = new UserDto();
 		dto.setUser_Id(user_Id);
 		dto.setUser_Point(user_Point);
-		
 		PointDto pointdto = new PointDto();
 		pointdto.setPoint_Charge(point_Charge);
 		pointdto.setPoint_Date(point_Date);
 		pointdto.setUser_Id(user_Id);
-		
-		System.out.println("point_Charge:"+point_Charge+""+point_Date);
-		logger.info("userid"+point_Charge+""+point_Date);
-		
-		logger.info("userid"+user_Id+"" +user_Point);
-		System.out.println("userid"+user_Id+""+ user_Point);
-		
-		//포인트 충전 update
+		// 포인트 충전 update
 		int res = biz.updatePoint(dto);
-		System.out.println("pointdto:        "+pointdto);
-		//pointdto:        com.mvc.cb.model.dto.PointDto@47bbc232
-		//포인트 사용 내역 insert
-	    int charge = p_biz.insert(pointdto); 
-		
+		logger.info("포인트 충전 UPDATE");
+		// 포인트 사용 내역 insert
+		int charge = p_biz.insert(pointdto);
+		logger.info("포인트 사용내역 INSERT");
 		session.removeAttribute("User");
 		UserDto relogin = biz.getInfo(dto);
-		UserDto reres = u_biz.login( relogin);
-
-		
+		UserDto reres = u_biz.login(relogin);
 		session.setAttribute("User", reres);
-		
-		System.out.println("뭐라고 받아질까"+reres); //포인트 업데이트 되서 받아진다.
 		boolean check = false;
-		if((res > 0)&&(charge>0)) {		//업데이트이가정상적으로 될때
-			
+		if ((res > 0) && (charge > 0)) { // 업데이트이가정상적으로 될때
 			check = true;
 		}
-		Map<String,Boolean> map = new HashMap<String,Boolean>();
-		map.put("check",check);
+		Map<String, Boolean> map = new HashMap<String, Boolean>();
+		map.put("check", check);
 		return map;
 	}
-	
 
 }
