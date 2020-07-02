@@ -43,4 +43,8 @@ public class UserBizlmpl implements UserBiz {
 		return dao.chkIdPw(dto);
 	}
 
+	@Override
+	public UserDto findId(UserDto dto) {
+		return dao.findId(dto);
+	}
 }

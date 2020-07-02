@@ -18,4 +18,7 @@ public interface UserDao {
 	public UserDto selectOne(UserDto dto);
 	
 	public UserDto chkIdPw(UserDto dto);
+	
+	//아이디 찾기
+	public UserDto findId(UserDto dto);
 }

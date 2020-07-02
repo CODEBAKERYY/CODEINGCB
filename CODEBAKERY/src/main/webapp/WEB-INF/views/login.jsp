@@ -104,7 +104,8 @@
 			<div class="g-signin2 btn"
 				data-onsuccess="onSignIn" style="margin-left: 80px; padding: 0px;"></div>
 			<div class="signup_link">
-				<a href="findidpw.do">아이디 및 비밀번호 찾기</a>
+				<a href="findId.do">아이디 찾기</a> &nbsp;/&nbsp;
+				<a href="findPw.do">비밀번호 찾기</a>
 			</div>
 			<div class="signup_link">
 				회원이 아니세요? <a href="sign.do">회원가입하기</a>

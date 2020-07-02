@@ -161,7 +161,7 @@
 			</div>
 			<div class="column1">
 				<div class="box">
-					<p>새로운 질문</p>
+					<p style="font-weight: bold">새로운 질문</p>
 					<c:choose>
 						<c:when test="${empty questionlist }">
 							<p>새글이 없습니다</p>
@@ -177,7 +177,7 @@
 			</div>
 			<div class="column2">
 				<div class="box">
-					<p>새로운 답변</p>
+					<p style="font-weight: bold">새로운 답변</p>
 					<c:choose>
 						<c:when test="${empty answerlist }">
 							<p>새 답변이 없습니다</p>
@@ -193,7 +193,7 @@
 			</div>
 			<div class="column3">
 				<div class="box">
-					<p>새로운 문제</p>
+					<p style="font-weight: bold">새로운 문제</p>
 					<c:choose>
 						<c:when test="${empty quizlist }">
 							<p>새 퀴즈가 없습니다</p>
@@ -209,7 +209,7 @@
 			</div>
 			<div class="column4">
 				<div class="box">
-					<p>공지사항</p>
+					<p style="font-weight: bold">공지사항</p>
 					<c:choose>
 						<c:when test="${empty noticelist }">
 							<p>새 공지사항이 없습니다</p>

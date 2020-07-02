@@ -434,11 +434,13 @@ Released   : 20130811
 											</div>
 											<div class="comment-body">
 												<span style="font-size:20px; font-family: initial;">${dto.user_Id }</span>
-												<button class="btn btn-link" onclick="Reply(${dto.comment_No}, ${dto.depth }, ${dto.group_Id }, ${i.index });">Reply</button>
+												<c:if test="${!empty User }">
+													<button class="btn btn-link" onclick="Reply(${dto.comment_No}, ${dto.depth }, ${dto.group_Id }, ${i.index });">Reply</button>
+												</c:if>
 												<span class="meta"><fmt:formatDate value="${dto.comment_Date }" pattern="yyyy.MM.dd HH:mm"/></span>&nbsp;&nbsp;
 												<c:if test="${!empty User && (User.user_Id eq dto.user_Id) || (User.user_Id eq 'ADMIN')}">
-												<input type="button" class="btn btn-link" value="수정" onclick="modifyComment(${dto.comment_No}, '${dto.comment_Content }',${i.index });"/>
-												<input type="button" class="btn btn-link" value="삭제" onclick="deleteComment(${dto.comment_No}, ${qlist.question_No });"/>
+													<input type="button" class="btn btn-link" value="수정" onclick="modifyComment(${dto.comment_No}, '${dto.comment_Content }',${i.index });"/>
+													<input type="button" class="btn btn-link" value="삭제" onclick="deleteComment(${dto.comment_No}, ${qlist.question_No });"/>
 												</c:if>
 												<p class="result">${dto.comment_Content }</p>
 												<p class="reply_result"></p>
