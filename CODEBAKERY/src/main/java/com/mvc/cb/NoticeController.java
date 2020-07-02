@@ -141,4 +141,11 @@ public class NoticeController {
       
    }
    
+   //공지사항 댓글삭제
+   @RequestMapping(value = "/comment_delete.do")
+   public String commentDelete(NoticeCommentDto dto) {
+	   return null;
+   }
+   
+   
 }
