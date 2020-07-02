@@ -24,10 +24,6 @@ public class NoticeCommentBizlmpl implements NoticeCommentBiz{
       return dao.insert(dto);
    }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> master
    @Override
    public int delete(int comment_No) {
       return dao.delete(comment_No);

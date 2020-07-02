@@ -46,7 +46,6 @@ public class NoticeCommentDaolmpl implements NoticeCommentDao{
       return res;
       
    }
-<<<<<<< HEAD
 
 
    @Override
@@ -60,20 +59,7 @@ public class NoticeCommentDaolmpl implements NoticeCommentDao{
 		}
 
 		return res;
-=======
    
-   @Override
-   public int delete(int comment_No) {
-      int res = 0;
-      try {
-         res = sqlSession.delete(NAMESPACE + "delete", comment_No);
-      } catch (Exception e) {
-         System.out.println("[error] : comment delete");
-         e.printStackTrace();
-      }
-
-      return res;
->>>>>>> master
    }
 
 }
