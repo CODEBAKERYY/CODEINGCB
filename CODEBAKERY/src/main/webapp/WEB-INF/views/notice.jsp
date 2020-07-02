@@ -21,6 +21,23 @@
 <!------- 페이징 효과때문에 추가 ------>
 
 <!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+<script type="text/javascript">
+	
+	jQuery(function($) {
+	    $("body").css("display", "none");
+	    $("body").fadeIn(1000);
+	    $("a.transition").click(function(event){
+	        event.preventDefault();
+	        linkLocation = this.href;
+	        $("body").fadeOut(1000, redirectPage);
+	    });
+	    function redirectPage() {
+	    window.location = linkLocation;
+	    }
+	});
+	
+</script>
 <style type="text/css">
 	
 	#notice>table>thead>tr { text-align: center; }
