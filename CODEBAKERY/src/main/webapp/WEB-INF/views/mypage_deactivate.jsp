@@ -73,14 +73,15 @@ function deactClosing(){
    </div>
    
    <form action="deactivate.do" name="popupForm" method="post">
-      <table style="margin:auto;">
+      <table style="margin:auto; padding:20px">
          <input type="hidden" id="user_Id" name="user_Id" value="${User.user_Id}"/>
          <div id="goodbye">
-            <textarea id="ment" readonly>탈퇴를 원하시면 비밀번호를 입력해주세요 잔여 포인트 :${User.user_Point}</textarea>
+            <textarea id="ment" readonly style="width:350px; height: 40px; font-size: 15px;"> 탈퇴를 원하시면 비밀번호를 입력해주세요. &#10;잔여 포인트 :${User.user_Point}
+            </textarea>
            
          </div>
          <input type="password" id="user_Pw" name="user_Pw" placeholder="Enter Password" 
-         style="display : block; margin: auto; height: 35px; width: 70%; margin-top: 20px; text-align:center;">
+         style="display : block; margin: auto; height: 35px; width: 70%; margin-top: 35px; text-align:center;" />
          <tr>
             <td>
             <div id="first">
