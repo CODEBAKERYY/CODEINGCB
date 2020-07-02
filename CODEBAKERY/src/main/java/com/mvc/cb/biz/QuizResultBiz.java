@@ -10,4 +10,8 @@ public interface QuizResultBiz {
 
 	List<QuizResultDto> selectList(String user_Id);
 
+	QuizResultDto selectOne(QuizResultDto dto);
+
+	int update(QuizResultDto quizResultDto);
+
 }

@@ -19,8 +19,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.mvc.cb.biz.MentorBiz;
 import com.mvc.cb.biz.MentorReviewBiz;
 import com.mvc.cb.biz.MyPageBiz;
+import com.mvc.cb.biz.MyPointBiz;
 import com.mvc.cb.model.dto.MentorDto;
 import com.mvc.cb.model.dto.MentorReviewDto;
+import com.mvc.cb.model.dto.PointDto;
 import com.mvc.cb.model.dto.UserDto;
 
 @Controller
@@ -36,17 +38,18 @@ public class ChatController {
 	
 	@Autowired
 	private MyPageBiz mp_biz;
+	
+	@Autowired
+	private MyPointBiz p_biz;
 
 	@RequestMapping(value = "/chat.do")
 	public String chat(int mentor_No, Model model) {
-		logger.info("채팅 페이지 이동");
 		model.addAttribute("mentor_No", mentor_No);
 		return "chat";
 	}
 
 	@RequestMapping("/review.do")
 	public String review(int mentor_No, Model model) {
-		logger.info("리뷰작성 페이지 이동");
 		model.addAttribute("mentor_No", mentor_No);
 		return "review";
 	}
@@ -54,7 +57,8 @@ public class ChatController {
 	@RequestMapping(value = "payPoint.do", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Integer> payPoint(@RequestBody MentorDto mentor, HttpSession session) {
-		logger.info("포인트 결제 AJAX");
+		logger.info("PAYPOINT.");
+		System.out.println(mentor);
 		int mentor_No = mentor.getMentor_No();
 		int user_Point = mentor.getUser_Point();
 		
@@ -76,25 +80,48 @@ public class ChatController {
 		int ures = mp_biz.updatePoint(user);
 		
 		if(mres > 0 && ures > 0) {
-			logger.info("포인트 처리 성공");
+			logger.info("성공");
 		}
-		else {
-			logger.info("포인트 처리 실패");
+		
+		// 포인트 사용 내역 부분
+		
+		String suser_Point = Integer.toString(user_Point);
+		String share_Point = Integer.toString(((user_Point/10)/60));
+		String mod_Point = Integer.toString((user_Point/10)%60);
+		PointDto mpDto = new PointDto();
+		mpDto.setUser_Id(m_biz.selectOne(mentor_No).getUser_Id());
+		mpDto.setPoint_Charge(suser_Point);
+		
+		int charge = p_biz.insert(mpDto);
+		if(charge > 0 ) {
+			logger.info("charge insert success");
+		}
+		
+		PointDto upDto = new PointDto();
+		upDto.setUser_Id(user.getUser_Id());
+		upDto.setPoint_Use(suser_Point);
+		upDto.setPoint_History(m_biz.selectOne(mentor_No).getUser_Id() + "멘토와 " + share_Point + "분 " + mod_Point + "초 채팅");
+		
+		int use = p_biz.insert_use(upDto);
+		if(use > 0) {
+			logger.info("use insert success");
 		}
 		
 		Map<String, Integer> pointmap = new HashMap<String, Integer>();
-
 		return pointmap;
 	}
 
 	@RequestMapping(value = "/reviewinsert.do")
 	public String insertReview(MentorReviewDto dto, HttpServletRequest request, HttpSession session) {
-		logger.info("리뷰 인서트 컨트롤러");
+		System.out.println("리뷰 인서트 들어왔다.");
+		System.out.println(dto.getMentor_No());
+		System.out.println(dto.toString());
 		session = request.getSession(false);
 		UserDto user = (UserDto) session.getAttribute("User");
 		dto.setUser_Id(user.getUser_Id());
 		System.out.println(dto.toString());
 		int res = mr_biz.insert(dto);
+		System.out.println(res);
 		if (res > 0) {
 			return "redirect:main.do";
 		} else {

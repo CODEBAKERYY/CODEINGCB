@@ -9,4 +9,5 @@ public interface MyPointDao {
 	
 	public List<PointDto> selectAll(String id);
 	public int insert(PointDto dto);
+	public int insert_use(PointDto dto);
 }

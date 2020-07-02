@@ -23,6 +23,16 @@ public class QuizResultBizImpl implements QuizResultBiz{
 	public List<QuizResultDto> selectList(String user_Id) {
 		return quizResultDao.selectList(user_Id);
 	}
+
+	@Override
+	public QuizResultDto selectOne(QuizResultDto dto) {
+		return quizResultDao.selectOne(dto);
+	}
+
+	@Override
+	public int update(QuizResultDto quizResultDto) {
+		return quizResultDao.update(quizResultDto);
+	}
 	
 	
 }

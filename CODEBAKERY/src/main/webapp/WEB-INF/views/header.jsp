@@ -23,10 +23,6 @@ UserDto admin = (UserDto) session.getAttribute("admin");
 	media="all" />
 <link href="resources/css/fonts.css" rel="stylesheet" type="text/css"
 	media="all" />
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-	crossorigin="anonymous" />
 
 
 <!-- Toastr -->
@@ -143,7 +139,14 @@ UserDto admin = (UserDto) session.getAttribute("admin");
 						<button class="dropbtn">마이페이지</button>
 						<div class="dropdown-content">
 							<a href="mypoint.do?id=${User.user_Id}">나의 포인트</a> <a
-								href="chkPw.do">회원정보</a> <a href="apply.do">멘토 신청</a>
+								href="chkPw.do">회원정보</a>
+							<%
+								if (!user.getUser_Grade().equals("멘토")) {
+							%>
+							<a href="apply.do">멘토 신청</a>
+							<%
+								}
+							%>
 						</div>
 					</div></li>
 				<li><a href="logout.do">로그아웃</a></li>
@@ -154,7 +157,6 @@ UserDto admin = (UserDto) session.getAttribute("admin");
 				<%
 					}
 				%>
-				<li class="alram"><img src="resources/images/dd.png"></li>
 			</ul>
 		</div>
 	</div>

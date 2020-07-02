@@ -41,9 +41,7 @@ public class MypageController {
 
 	@RequestMapping(value = "/chkPw.do")
 	public String chkPw() {
-
 		logger.info("비밀번호 확인 폼 이동");
-
 		return "mypage_chkPw";
 	}
 
@@ -56,6 +54,7 @@ public class MypageController {
 	// 관리자 회원관리 페이지 이동
 	@RequestMapping("/admin.do")
 	public String Admin(Model model) {
+		logger.info("관리자 회원관리 페이지 이동");
 		List<UserDto> userlist = biz.userList();
 		model.addAttribute("userlist", userlist);
 		return "admin_mypage";
@@ -64,7 +63,7 @@ public class MypageController {
 	// 관리자 등급조정 페이지 띄움
 	@RequestMapping("/adjust_rating.do")
 	public String adjust(Model model, String user_Id) {
-		logger.info("adjust_rating");
+		logger.info("회원 등급 조정 팝업 페이지");
 		model.addAttribute("userone", biz.selectOne(user_Id));
 		return "adjust_rating";
 	}
@@ -73,12 +72,10 @@ public class MypageController {
 	@RequestMapping("/adjustres.do")
 	@ResponseBody
 	public Map<String, Integer> adjustres(@RequestBody UserDto dto) {
-		logger.info("adjustres");
+		logger.info("회원 등급 조정 AJAX");
 		int res = u_biz.adjust(dto);
-
 		Map<String, Integer> adjustres = new HashMap<String, Integer>();
 		adjustres.put("adjust", res);
-
 		return adjustres;
 	}
 

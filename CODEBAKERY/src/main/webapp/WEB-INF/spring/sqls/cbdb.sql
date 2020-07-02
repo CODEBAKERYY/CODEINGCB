@@ -150,17 +150,6 @@ CREATE TABLE QUIZ (
     CONSTRAINT FK_QUIZ_USER_ID FOREIGN KEY(USER_ID) REFERENCES USER_TB(USER_ID) ON DELETE CASCADE
 );
 
---테이블 삭제
----- 문제풀기
---CREATE TABLE TRY_QUIZ (
---	QUIZ_NO	NUMBER CONSTRAINT PK_TQUIZ_NO PRIMARY KEY,          -- 문제번호
---	CODE_CONTENT VARCHAR2(4000)	NOT NULL,                       -- 작성코드내용
---	EX_RESULT VARCHAR2(300)	NOT NULL,                           -- 출력예시
---    PRINT_REULT VARCHAR2(300) NOT NULL,                         -- 출력결과
---	USER_ID	VARCHAR2(20) NOT NULL,                             
---    CONSTRAINT FK_TQUIZ_USER_ID FOREIGN KEY(USER_ID) REFERENCES USER_TB(USER_ID) ON DELETE CASCADE
---);
-
 -- 채점결과
 
 CREATE TABLE QUIZ_RESULT (
@@ -211,28 +200,18 @@ CREATE TABLE POINT_TB(
 --------------------------- DATA INSERT ----------------------------
 
 -- USER_TB
-INSERT INTO USER_TB VALUES('ADMIN','1234','관리자', '관리자','010-2345-6767', 'admin@kh.or.kr', 0, NULL, '1');
-INSERT INTO USER_TB VALUES('user1','1234','일반회원','김건영','010-2342-1234','kky@kh.or.kr', 0,'userpic','1,2');
-INSERT INTO USER_TB VALUES('user2','1234','일반회원','박주혁','010-6787-1234','pjyy@kh.or.kr', 0,'userpic','5,8');
-INSERT INTO USER_TB VALUES('user3','1234','일반회원','권민석','010-7942-1234','kms@kh.or.kr', 0,'userpic','3,7');
-INSERT INTO USER_TB VALUES('user4','1234','일반회원','정승연','010-3782-1234','jsy@kh.or.kr', 0,'userpic','1,5,6,7');
-INSERT INTO USER_TB VALUES('user5','1234','일반회원','주수현','010-1782-1234','jsh@kh.or.kr', 0,'userpic','1');
-INSERT INTO USER_TB VALUES('user6','1234','일반회원','이재익','010-9462-1234','ljl@kh.or.kr', 0,'userpic','4,5,6');
-INSERT INTO USER_TB VALUES('mentor','1234','멘토','멘토','010-9462-1234','mentor@kh.or.kr', 0,'NULL','2,4,5,7');
 
 SELECT * FROM USER_TB;
 
+SELECT * FROM MENTOR_INTRO;
 -- MENTOR_INTRO
-INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'삼성 1위 입사자','모든것을 한번에 해결해드립니다.','mentor');
-INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'구글 1년 경력','간지네가 코딩.','mentor');
-INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'애플에서 냄새맡음','생활코딩 지리게','mentor');
-INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'화웨이출신','코딩왕 정코딩.','mentor');
+INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'삼성 1위 입사자','모든것을 한번에 해결해드립니다.','mentor1');
+INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'구글 1년 경력','간지네가 코딩.','mentor2');
+INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'애플에서 냄새맡음','생활코딩 지리게','mentor3');
+INSERT INTO MENTOR_INTRO VALUES(MENTORSEQ.NEXTVAL,'화웨이출신','코딩왕 정코딩.','mentor4');
 
+UPDATE MENTOR_INTRO SET MENTOR_CONTENT ='모든것을 한번에 우라랄라라라랄ㄹ우라라라라우라라' WHERE MENTOR_NO=1;
 -- MENTOR_REVIEW
-INSERT INTO MENTOR_REVIEW VALUES(REVIEWSEQ.NEXTVAL, '멘토리뷰내용01', SYSDATE, 'user1', 3);
-INSERT INTO MENTOR_REVIEW VALUES(REVIEWSEQ.NEXTVAL, '멘토리뷰내용02', SYSDATE, 'user2', 3);
-INSERT INTO MENTOR_REVIEW VALUES(REVIEWSEQ.NEXTVAL, '멘토리뷰내용03', SYSDATE, 'user3', 3);
-INSERT INTO MENTOR_REVIEW VALUES(REVIEWSEQ.NEXTVAL, '멘토리뷰내용02', SYSDATE, 'user2', 4);
 
 
 -- QUESTION
