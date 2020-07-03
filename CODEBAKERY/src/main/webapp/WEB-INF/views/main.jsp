@@ -45,6 +45,7 @@
 	margin-top: 130px;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 .mainlogo{
   -webkit-animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
 	        animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
@@ -60,6 +61,9 @@
 	        animation: bounce-bottom 0.9s both;
 =======
 
+=======
+/* 
+>>>>>>> master
 .mainlogo{
   -webkit-animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
            animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
@@ -127,6 +131,7 @@
     -webkit-transform: translateZ(0);
             transform: translateZ(0);
     opacity: 1;
+<<<<<<< HEAD
   }
 <<<<<<< HEAD
 @-webkit-keyframes bounce-bottom {
@@ -234,6 +239,9 @@
   }
 }
 =======
+>>>>>>> master
+=======
+  } */
 >>>>>>> master
 
 </style>

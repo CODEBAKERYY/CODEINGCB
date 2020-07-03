@@ -9,4 +9,6 @@ public interface MentorBiz {
 	public List<MentorDto> selectList();
 
 	public MentorDto selectOne(int mentor_No);
+
+	public int insert(MentorDto dto);
 }

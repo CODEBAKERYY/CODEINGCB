@@ -272,6 +272,7 @@ public class UserController {
 		dto.setUser_Name(user_Name);
 		dto.setUser_Pic(user_Pic);
 		dto.setUser_Id(user_Id);
+		dto.setUser_Grade("일반회원");
 		session.setAttribute("User", dto);
 	}
 

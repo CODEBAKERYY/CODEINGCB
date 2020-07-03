@@ -24,4 +24,9 @@ public class MentorBizlmpl implements MentorBiz {
 		return dao.selectOne(mentor_No);
 	}
 
+	@Override
+	public int insert(MentorDto dto) {
+		return dao.insert(dto);
+	}
+
 }

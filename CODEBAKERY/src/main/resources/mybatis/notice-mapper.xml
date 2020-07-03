@@ -31,7 +31,7 @@
 
 	<insert id="insert" parameterType="NoticeDto">
 		INSERT INTO NOTICE
-		VALUES(NOTICESEQ.NEXTVAL, #{notice_Title}, #{notice_Content}, SYSDATE,
+		VALUES(NOTICESEQ.NEXTVAL, #{notice_Title}, #{notice_Content}, CURRENT_TIMESTAMP,
 		0, '시스템관리자')
 	</insert>
 

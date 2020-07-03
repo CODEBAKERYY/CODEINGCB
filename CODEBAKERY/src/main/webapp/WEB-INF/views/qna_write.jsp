@@ -51,6 +51,12 @@ Released   : 20130811
 	function addTag(){
 		var tag = $("#tag").val();
 		
+		
+		if(tag.trim() == "#"){
+			alert("태그를 추가해 주세요.");
+			return false;
+		}
+		
 		// 글쓰기 내에 태그 추가해주기
 		var a = '<span>'+tag+'</span>&nbsp;&nbsp;';
 		$(".one_tag").append(a);
