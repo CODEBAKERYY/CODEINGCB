@@ -20,6 +20,6 @@
 	</select>
 	
 	<insert id="ReviewInsert" parameterType="mentorReviewDto">
-	INSERT INTO MENTOR_REVIEW VALUES(REIVEWSEQ.NEXTVAL,#{review_Content},SYSDATE,#{user_Id},#{mentor_No})
+	INSERT INTO MENTOR_REVIEW VALUES(REIVEWSEQ.NEXTVAL,#{review_Content},CURRENT_TIMESTAMP,#{user_Id},#{mentor_No})
 	</insert>
 </mapper>

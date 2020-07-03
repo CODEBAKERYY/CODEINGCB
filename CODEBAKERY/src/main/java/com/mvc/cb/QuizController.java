@@ -114,16 +114,27 @@ public class QuizController {
 				output.close();
 
 				File dir = new File(path);
+				
+				System.out.println("dir : " + dir);
+				
 				Runtime runtime = Runtime.getRuntime();
-				Process process = runtime.exec("javac Main.java", null, dir);
-				process = runtime.exec("java Main", null, dir);
+				
+				Process process = runtime.exec("javac "+"Main.java", null, dir);
+				
 				process.waitFor();
+				
+				process = runtime.exec("java Main", null, dir);
 				
 				//컴파일 출력값을 toString으로 변환하여 answer와 비교한다.
 				String answerResult = IOUtils.toString(process.getInputStream(), "UTF-8");
 				answerResult = answerResult.trim(); //앞뒤 공백제거
 				String errorOutput = IOUtils.toString(process.getErrorStream());
 				errorOutput = errorOutput.trim();
+				
+				process.getInputStream().close();
+				process.getOutputStream().close();
+				process.getErrorStream().close();
+				process.destroy();
 				
 				System.out.println("문제 답 : " + answer);
 				System.out.println("리턴 값 : " + answerResult);
@@ -262,6 +273,7 @@ public class QuizController {
 					}else {
 						System.out.println("실패.quizResultInsert 에러");
 					}
+					process.destroy();
 				}
 			} catch (Exception e) {
 				e.printStackTrace();

@@ -28,7 +28,11 @@
 
 	<select id="selectOne" parameterType="int"
 		resultType="MentorDto">
-		SELECT * FROM MENTOR_INTRO JOIN USER_TB USING(USER_ID) WHERE MENTOR_NO = #{mentor_no}
+		SELECT * FROM MENTOR_INTRO JOIN USER_TB USING(USER_ID)
+		WHERE MENTOR_NO = #{mentor_no}
 	</select>
-
+	<insert id="insert" parameterType="MentorDto">
+		INSERT INTO MENTOR_INTRO
+		VALUES(MENTORSEQ.NEXTVAL,#{mentor_Career},#{mentor_Content},#{user_Id})
+	</insert>
 </mapper>

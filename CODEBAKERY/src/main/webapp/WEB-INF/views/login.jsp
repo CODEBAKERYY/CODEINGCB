@@ -26,19 +26,20 @@
 <link href="resources/csss/bootstrap.min.css" rel="stylesheet"
 	type="text/css" media="all" />
 <script type="text/javascript">
+	$(function() {
 
-	$(function(){
-		
-		$("#log").click(function(){
-			
+		$("#log").click(function() {
+
 			var id = $('#userId').val();
 			var pw = $("#userPwS").val();
-			
-			
+
 			$.ajax({
 				type : "POST",
 				url : "chkIdPw.do",
-				data : {"user_Id": id, "user_Pw":pw},
+				data : {
+					"user_Id" : id,
+					"user_Pw" : pw
+				},
 				success : function(data) {
 					if (data == 0 || data == null) {
 						alert("아이디 및 비밀번호를 확인해주세요");
@@ -50,13 +51,11 @@
 				error : function() {
 					alert("ajax 통신 실패!");
 				}
-	
+
 			});
-			
-				
-				
+
 		});
-		
+
 	});
 
 	function onSignIn(googleUser) {
@@ -71,14 +70,18 @@
 		var user_Pic = profile.getImageUrl();
 		$.ajax({
 			url : "googleLogin.do",
-			data : {"user_Id" : user_Id, "user_Name" : user_Name, "user_Pic" : user_Pic},
+			data : {
+				"user_Id" : user_Id,
+				"user_Name" : user_Name,
+				"user_Pic" : user_Pic
+			},
 			type : "POST",
 			success : function(data) {
 				alert("구글 로그인 성공")
-				window.location.replace("http://localhost:8787/cb/main.do");
+				window.location.href = "main.do";
 			},
 			error : function() {
-				alert("에러")
+				alert("에러");
 			}
 		});
 
@@ -99,13 +102,13 @@
 			</div>
 			<br />
 			<input type="button" value="Login" id="log"
-				class="btn btn-secondary btn-lg btn-block" style="margin-top: 15px;"/>
+				class="btn btn-secondary btn-lg btn-block" style="margin-top: 15px;" />
 			<br></br>
-			<div class="g-signin2 btn"
-				data-onsuccess="onSignIn" style="margin-left: 80px; padding: 0px;"></div>
+			<div class="g-signin2 btn" data-onsuccess="onSignIn"
+				style="margin-left: 80px; padding: 0px;"></div>
 			<div class="signup_link">
-				<a href="findId.do">아이디 찾기</a> &nbsp;/&nbsp;
-				<a href="findPw.do">비밀번호 찾기</a>
+				<a href="findId.do">아이디 찾기</a> &nbsp;/&nbsp; <a href="findPw.do">비밀번호
+					찾기</a>
 			</div>
 			<div class="signup_link">
 				회원이 아니세요? <a href="sign.do">회원가입하기</a>

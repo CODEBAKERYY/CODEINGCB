@@ -12,4 +12,6 @@ public interface MentorDao {
 
 	MentorDto selectOne(int mentor_No);
 
+	int insert(MentorDto dto);
+
 }
