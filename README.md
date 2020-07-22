@@ -1,4 +1,4 @@
-# CODEINGCB
+# CODE BAKERY
 💻 IT 개발자들의 정보 교류 커뮤니티
 
 * * *
