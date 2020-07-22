@@ -1,4 +1,4 @@
-# CODE BAKERY
+# CODE BAKERY (코드베이커리)
 💻 IT 개발자들의 정보 교류 커뮤니티
 
 * * *
@@ -13,3 +13,4 @@
   - IDE: Eclipse, Visual Studio Code
   
 * * *
+🙋🏻‍♀️ 
